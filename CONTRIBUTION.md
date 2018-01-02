@@ -54,9 +54,9 @@ class Javadoc_Test
        * @see ~Javadoc_Test()
        * @see testMeToo()
        * @see publicVar()
-       * @return long int The test results
+       * @return int The test results
        */
-       long int testMe(long int a,const char *s);
+       int testMe(int a,const char *s);
        
       /**
        * A pure virtual member.
@@ -72,13 +72,13 @@ class Javadoc_Test
        * a public variable.
        * Details.
        */
-       long int publicVar;
+       int publicVar;
        
       /**
        * a function variable.
        * Details.
        */
-       long int (*handler)(long int a,long int b);
+       int (*handler)(int a,int b);
 };
 
 ```
@@ -99,13 +99,13 @@ TEST(General, distribution_sort) {
 
 ##### SHOULD
 ```c
-long int array_length = 10;
+int array_length = 10;
 // Put loop variable in register to optimize performance
 // but only for Linux platform
 #ifdef __linux_
 register
 #elif
-long int index = 0;
+int index = 0;
 for (index = 0; index < array_length; index++) {
     // doSomething()
 }
@@ -115,7 +115,7 @@ for (index = 0; index < array_length; index++) {
 - C99 mode - Declaring variable inside loop parameters can not be allowed here
 - Use calculation in loop parameters
 ```c
-for (long int index = 0; index < lengthPointerChar(array); index++) {
+for (int index = 0; index < lengthPointerChar(array); index++) {
     // doSomething()
 }
 ```

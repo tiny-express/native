@@ -47,7 +47,7 @@ namespace Java {
                 /**
                  * Create a semaphore with the given number of permits.
                  */
-                Semaphore(long int permits);
+                Semaphore(int permits);
 
                 /**
                  * Destructor
@@ -60,7 +60,7 @@ namespace Java {
                  *
                  * @return the number of permits available in this semaphore
                  */
-                long int availablePermits();
+                int availablePermits();
 
                 /**
                  * Returns a string identifying this semaphore (the state, in
@@ -83,7 +83,7 @@ namespace Java {
                  *
                  * @param permits the number of permits to acquire
                  */
-                void acquire(long int permits);
+                void acquire(int permits);
 
                 /**
                  * Releases a permit, returning it to the semaphore.
@@ -94,7 +94,7 @@ namespace Java {
                  * Releases the given number of permits, returning them to the
                  * semaphore.
                  */
-                void release(long int permits);
+                void release(int permits);
 
                 /**
                  * Acquires a permit, only if one is available at the time of
@@ -112,7 +112,7 @@ namespace Java {
                  * @return true if the permits were acquired and false otherwise
                  * acquired.
                  */
-                boolean tryAcquire(long int permits);
+                boolean tryAcquire(int permits);
 
                 /**
                  * Acquires the given number of permits from this semaphore, if
@@ -124,13 +124,13 @@ namespace Java {
                  * @return true if all permits were acquired and false if the
                  * waiting time elapsed before all permits were acquired
                  */
-                boolean tryAcquire(long int permits, long long timeout);
+                boolean tryAcquire(int permits, long timeout);
 
             private:
                 std::mutex permitMutexObject;
                 std::mutex conditionMutexObject;
                 std::condition_variable conditionObject;
-                long int permitCounter;
+                int permitCounter;
             };
         } // namespace Concurrent
     } // namespace Util

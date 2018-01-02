@@ -34,8 +34,8 @@ using namespace Java::Lang;
  * @param original
  */
 Short::Short() {
-    this->original = 0;
-    this->originalString = stringFromShort(this->original);
+	this->original = 0;
+	this->originalString = stringFromShort(this->original);
 }
 
 /**
@@ -43,9 +43,9 @@ Short::Short() {
  *
  * @param original
  */
-Short::Short(int original) {
-    this->original = original;
-    this->originalString = stringFromShort(this->original);
+Short::Short(short original) {
+	this->original = original;
+	this->originalString = stringFromShort(this->original);
 }
 
 /**
@@ -54,14 +54,14 @@ Short::Short(int original) {
  * @param original
  */
 Short::Short(const Short &shortNumber) {
-    this->original = shortNumber.original;
-    this->originalString = stringFromShort(this->original);
+	this->original = shortNumber.original;
+	this->originalString = stringFromShort(this->original);
 }
 
 Short::~Short() {
-    if (this->originalString != NULL) {
-        free(this->originalString);
-    }
+	if (this->originalString != NULL) {
+		free(this->originalString);
+	}
 }
 
 /**
@@ -71,7 +71,7 @@ Short::~Short() {
  * @return short
  */
 Short Short::parseShort(String target) {
-    return Short(stringToShort(target.toCharPointer()));
+	return Short(stringToShort(target.toCharPointer()));
 }
 
 /**
@@ -80,7 +80,7 @@ Short Short::parseShort(String target) {
  * @return String
  */
 String Short::toString() const {
-    return this->originalString;
+	return this->originalString;
 }
 
 /**
@@ -89,7 +89,7 @@ String Short::toString() const {
  * @return char
  */
 char Short::charValue() const {
-    return stringToChar(stringFromShort(this->original));
+	return stringToChar(stringFromShort(this->original));
 }
 
 /**
@@ -97,8 +97,8 @@ char Short::charValue() const {
  *
  * @return short
  */
-int Short::shortValue() const {
-    return this->original;
+short Short::shortValue() const {
+	return this->original;
 }
 
 /**
@@ -106,8 +106,8 @@ int Short::shortValue() const {
  *
  * @return int
  */
-long int Short::intValue() const {
-    return this->original;
+int Short::intValue() const {
+	return this->original;
 }
 
 /**
@@ -115,8 +115,8 @@ long int Short::intValue() const {
  *
  * @return int
  */
-long long Short::longValue() const {
-    return this->original;
+long Short::longValue() const {
+	return this->original;
 }
 
 /**
@@ -125,7 +125,7 @@ long long Short::longValue() const {
  * @return int
  */
 float Short::floatValue() const {
-    return (float) this->original;
+	return (float) this->original;
 }
 
 /**
@@ -134,7 +134,7 @@ float Short::floatValue() const {
  * @return int
  */
 double Short::doubleValue() const {
-    return (double) this->original;
+	return (double) this->original;
 }
 
 /**
@@ -144,10 +144,10 @@ double Short::doubleValue() const {
  * @return Short
  */
 Short Short::operator=(const Short &target) {
-    this->original = target.original;
-    free(this->originalString);
-    this->originalString = stringFromShort(this->original);
-    return *this;
+	this->original = target.original;
+	free(this->originalString);
+	this->originalString = stringFromShort(this->original);
+	return *this;
 }
 
 /**
@@ -156,7 +156,7 @@ Short Short::operator=(const Short &target) {
  * @return Integer
  */
 Short Short::operator+(const Short &target) {
-    return this->original + target.original;
+	return this->original + target.original;
 }
 
 /**
@@ -165,7 +165,7 @@ Short Short::operator+(const Short &target) {
  * @return Short
  */
 Short Short::operator-(const Short &target) {
-    return this->original - target.original;
+	return this->original - target.original;
 }
 
 /**
@@ -174,7 +174,7 @@ Short Short::operator-(const Short &target) {
  * @return Short
  */
 Short Short::operator*(const Short &target) {
-    return (this->original * target.original);
+	return ( this->original * target.original );
 }
 
 /**
@@ -183,7 +183,7 @@ Short Short::operator*(const Short &target) {
  * @return Short
  */
 Short Short::operator/(const Short &target) {
-    return (this->original / target.original);
+	return ( this->original / target.original );
 }
 
 /**
@@ -192,7 +192,7 @@ Short Short::operator/(const Short &target) {
  * @return Short
  */
 Short Short::operator%(const Short &target) {
-    return (this->original % target.original);
+	return ( this->original % target.original );
 }
 
 /**
@@ -201,7 +201,7 @@ Short Short::operator%(const Short &target) {
  * @return bool
  */
 boolean Short::operator==(const Short &target) const {
-    return this->original == target.original;
+	return this->original == target.original;
 }
 
 /**
@@ -210,7 +210,7 @@ boolean Short::operator==(const Short &target) const {
  * @return bool
  */
 boolean Short::operator!=(const Short &target) const {
-    return !this->operator==(target);
+	return !this->operator==(target);
 }
 
 /**
@@ -219,7 +219,7 @@ boolean Short::operator!=(const Short &target) const {
  * @return bool
  */
 boolean Short::operator<(const Short &target) const {
-    return this->original < target.original;
+	return this->original < target.original;
 }
 
 /**
@@ -228,7 +228,7 @@ boolean Short::operator<(const Short &target) const {
  * @return bool
  */
 boolean Short::operator>(const Short &target) const {
-    return this->original > target.original;
+	return this->original > target.original;
 }
 
 /**
@@ -237,7 +237,7 @@ boolean Short::operator>(const Short &target) const {
  * @return bool
  */
 boolean Short::operator<=(const Short &target) const {
-    return this->original <= target.original;
+	return this->original <= target.original;
 }
 
 /**
@@ -246,6 +246,6 @@ boolean Short::operator<=(const Short &target) const {
  * @return bool
  */
 boolean Short::operator>=(const Short &target) const {
-    return this->original >= target.original;
+	return this->original >= target.original;
 }
 

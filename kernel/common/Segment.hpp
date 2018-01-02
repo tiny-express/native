@@ -38,16 +38,16 @@
  * @param to
  * @return char*
  */
-inline char *segmentPointerChar(char *targetParam, long int from, long int to) {
+inline char *segmentPointerChar(char *targetParam, int from, int to) {
 	if (targetParam == nullptr) {
 		return stringCopy("");
 	}
-	long int lengthTarget = lengthPointerChar(targetParam);
+	int lengthTarget = lengthPointerChar(targetParam);
 	if (from > to || from < 0 || from > lengthTarget || to < 0) {
 		return stringCopy("");
 	}
 	char *target = stringCopy(targetParam);
-	long int length = to - from + 1;
+	int length = to - from + 1;
 	if (to >= lengthTarget) {
 		length = lengthTarget - from + 1;
 	}
@@ -67,8 +67,8 @@ inline char *segmentPointerChar(char *targetParam, long int from, long int to) {
  * @param to
  * @return char**
  */
-inline char **segmentPointerPointerChar(char **target, long int from, long int to) {
-	long int lengthTarget = lengthPointerPointerChar(target);
+inline char **segmentPointerPointerChar(char **target, int from, int to) {
+	int lengthTarget = lengthPointerPointerChar(target);
 	if (from > to || from < 0 || from > lengthTarget || to < 0 || to > lengthTarget) {
 		return nullptr;
 	}

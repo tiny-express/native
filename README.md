@@ -4,7 +4,7 @@
 
 **Native Library** brings productivity and maintainability for your C/C++ application as a Java program.
 
-* Blazing fast, small footprlong int with no dependency required
+* Blazing fast, small footprint with no dependency required
 * Provide rich Java Core classes beside C++ Standard Library
 * Prevents nearly all memory leak and  segfaults via automatic storage
 * Support bindings for NodeJS addon and Python module development (experimental)
@@ -42,7 +42,7 @@ class MainApplication {
 public:
     static void main(Array<String> arguments) {
         HashMap<String, String> hashMap;
-        long int counter = 0;
+        int counter = 0;
         for (String argument : arguments) {
             hashMap.put("argument " + String::valueOf(counter), argument);
             counter++;
@@ -59,7 +59,7 @@ public:
     }
 };
 
-long int main(long int argc, char **argv) {
+int main(int argc, char **argv) {
     return Application(MainApplication::main, argc, argv);
 }
 ```
@@ -115,13 +115,14 @@ Array<byte> bytes = {};
 ```
 
 #### Data Types
-Java data types equivalent with range in Native Library
+All data types are implemented and ready to use in C++ Application
 - [x] char - Java.Lang.Character
-- [x] string - Java.Lang.String
 - [x] byte - Java.Lang.Byte
-- [x] int - Java.Lang.Short
-- [x] long int - Java.Lang.Integer
-- [x] long long - Java.Lang.Long
+- [x] string - Java.Lang.String
+- [x] unicode - java.lang.Character
+- [x] short - Java.Lang.Short
+- [x] int - Java.Lang.Integer
+- [x] long - Java.Lang.Long
 - [x] float - Java.Lang.Float
 - [x] double - Java.Lang.Double
 - [x] boolean - Java.Lang.Boolean

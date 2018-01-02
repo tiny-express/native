@@ -31,20 +31,18 @@ using namespace Java::Lang;
 
 TEST (JavaLangNegativeArraySizeException, Constructor) {
 // Constructs a new NegativeArraySizeException with null as its detail message.
-    NegativeArraySizeException negativeArraySizeExceptionWithNullMessage;
-    assertEquals("", negativeArraySizeExceptionWithNullMessage.getMessage());
+	NegativeArraySizeException negativeArraySizeExceptionWithNullMessage;
+	assertEquals("", negativeArraySizeExceptionWithNullMessage.getMessage());
 
 // Constructs a new NegativeArraySizeException with the specified detail message.
-    NegativeArraySizeException negativeArraySizeExceptionWithMessage = NegativeArraySizeException(
-            "NegativeArraySizeException with the specified message");
-    assertEquals("NegativeArraySizeException with the specified message",
-                 negativeArraySizeExceptionWithMessage.getMessage());
+	NegativeArraySizeException negativeArraySizeExceptionWithMessage = NegativeArraySizeException("NegativeArraySizeException with the specified message");
+	assertEquals("NegativeArraySizeException with the specified message", negativeArraySizeExceptionWithMessage.getMessage());
 }
 
 TEST (JavaLangNegativeArraySizeException, TryCatch) {
-    try {
-        throw RuntimeException("Throw NegativeArraySizeException");
-    } catch (Exception &e) {
-        assertEquals("Throw NegativeArraySizeException", e.getMessage());
-    }
+	try {
+		throw RuntimeException("Throw NegativeArraySizeException");
+	} catch (Exception e) {
+		assertEquals("Throw NegativeArraySizeException", e.getMessage());
+	}
 }

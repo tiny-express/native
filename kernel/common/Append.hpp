@@ -43,7 +43,7 @@
  * @return char pointer pointer
  */
 inline char **appendPointerChar(char **target, char *append) {
-	long int targetLength = lengthPointerPointerChar(target);
+	int targetLength = lengthPointerPointerChar(target);
 	auto **pointer = (char **) allocateMemory((targetLength + 2)* sizeof(char *));
 	memcpy(pointer, target, targetLength * sizeof(char *));
 	*( pointer + targetLength ) = append;

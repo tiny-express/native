@@ -40,7 +40,6 @@ UnsupportedOperationException::UnsupportedOperationException(Throwable *cause) :
 
 }
 
-UnsupportedOperationException::UnsupportedOperationException(String message, Throwable *cause) : RuntimeException(
-        message, cause) {
+UnsupportedOperationException::UnsupportedOperationException(String message, Throwable *cause) : RuntimeException(message, cause) {
 
 }

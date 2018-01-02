@@ -49,7 +49,7 @@ TEST (JavaNet, URLConstructor) {
 }
 
 TEST (JavaNet, URLToString) {
-    // Full URL with protocol, host, port, path and query
+	// Full URL with protocol, host, port, path and query
 //	URL url = URL("http://test.com:80/file/test?param=1");
 //	assertEquals("test.com", url.getHost().toString());
 //	assertEquals("/file/test", url.getPath().toString());

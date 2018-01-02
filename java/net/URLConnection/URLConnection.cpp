@@ -29,78 +29,78 @@
 using namespace Java::Net;
 
 URLConnection::URLConnection() {
-    String urlString = "";
-    URL url(urlString);
-    this->url = url;
+	String urlString = "";
+	URL url(urlString);
+	this->url = url;
 }
 
 URLConnection::URLConnection(URL url) {
-    this->url = url;
+	this->url = url;
 }
 
 URLConnection::~URLConnection() {
 }
 
 URL URLConnection::getURL() {
-    return this->url;
+	return this->url;
 }
 
 void URLConnection::setDoInput(boolean doInput) {
-    this->doInput = doInput;
+	this->doInput = doInput;
 }
 
 boolean URLConnection::getDoInput() {
-    return this->doInput;
+	return this->doInput;
 }
 
 void URLConnection::setDoOutput(boolean doOutput) {
-    this->doOutput = doOutput;
+	this->doOutput = doOutput;
 }
 
 boolean URLConnection::getDoOutput() {
-    return this->doOutput;
+	return this->doOutput;
 }
 
 void URLConnection::setUseCaches(boolean useCaches) {
-    this->useCaches = useCaches;
+	this->useCaches = useCaches;
 }
 
 boolean URLConnection::getUseCaches() {
-    return this->useCaches;
+	return this->useCaches;
 }
 
-void URLConnection::setIfModifiedSince(long long ifModifiedSince) {
-    this->ifModifiedSince = ifModifiedSince;
+void URLConnection::setIfModifiedSince(long ifModifiedSince) {
+	this->ifModifiedSince = ifModifiedSince;
 }
 
-long long URLConnection::getIfModifiedSince() {
-    return this->ifModifiedSince;
+long URLConnection::getIfModifiedSince() {
+	return this->ifModifiedSince;
 }
 
-void URLConnection::setReadTimeout(long int timeout) {
-    this->readTimeout = timeout;
+void URLConnection::setReadTimeout(int timeout) {
+	this->readTimeout = timeout;
 }
 
-long int URLConnection::getReadTimeout() {
-    return this->readTimeout;
+int URLConnection::getReadTimeout() {
+	return this->readTimeout;
 }
 
 void URLConnection::setAllowUserInteraction(boolean allowUserInteraction) {
-    this->allowUserInteraction = allowUserInteraction;
+	this->allowUserInteraction = allowUserInteraction;
 }
 
 boolean URLConnection::getAllowUserInteraction() {
-    return this->allowUserInteraction;
+	return this->allowUserInteraction;
 }
 
-void URLConnection::setConnectTimeout(long int timeout) {
-    this->connectTimeout = timeout;
+void URLConnection::setConnectTimeout(int timeout) {
+	this->connectTimeout = timeout;
 }
 
-long int URLConnection::getConnectTimeout() {
-    return this->connectTimeout;
+int URLConnection::getConnectTimeout() {
+	return this->connectTimeout;
 }
 
 String URLConnection::toString() const {
-    return this->url.toString();
+	return this->url.toString();
 }

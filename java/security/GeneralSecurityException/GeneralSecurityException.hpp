@@ -36,11 +36,8 @@ namespace Java {
         class GeneralSecurityException : public Exception {
         public:
             GeneralSecurityException();
-
             GeneralSecurityException(String message);
-
             GeneralSecurityException(Throwable *cause);
-
             GeneralSecurityException(String message, Throwable *cause);
         };
     } // namespace Security

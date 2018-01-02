@@ -40,7 +40,6 @@ IndexOutOfBoundsException::IndexOutOfBoundsException(Throwable *cause) : Runtime
 
 }
 
-IndexOutOfBoundsException::IndexOutOfBoundsException(String message, Throwable *cause) : RuntimeException(message,
-                                                                                                          cause) {
+IndexOutOfBoundsException::IndexOutOfBoundsException(String message, Throwable *cause) : RuntimeException(message, cause) {
 
 }

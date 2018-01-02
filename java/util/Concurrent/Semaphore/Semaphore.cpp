@@ -32,7 +32,7 @@ Concurrent::Semaphore::Semaphore() {
     permitCounter = 0;
 }
 
-Concurrent::Semaphore::Semaphore(long int permits) {
+Concurrent::Semaphore::Semaphore(int permits) {
     permitCounter = permits;
 }
 
@@ -40,7 +40,7 @@ Concurrent::Semaphore::~Semaphore() {
     conditionObject.notify_one();
 }
 
-long int Concurrent::Semaphore::availablePermits() {
+int Concurrent::Semaphore::availablePermits() {
     std::unique_lock<std::mutex> locker(permitMutexObject);
     return permitCounter;
 }
@@ -49,7 +49,7 @@ String Concurrent::Semaphore::toString() {
     String result;
     try {
         result = String::format("[Permits = %d]", availablePermits());
-    } catch (InterruptedException &e) {
+    } catch (InterruptedException& e) {
 
     }
     return result;
@@ -59,7 +59,7 @@ void Concurrent::Semaphore::acquire() {
     acquire(1);
 }
 
-void Concurrent::Semaphore::acquire(long int permits) {
+void Concurrent::Semaphore::acquire(int permits) {
     tryAcquire(permits, -1);
 }
 
@@ -67,7 +67,7 @@ void Concurrent::Semaphore::release() {
     release(1);
 }
 
-void Concurrent::Semaphore::release(long int permits) {
+void Concurrent::Semaphore::release(int permits) {
     std::unique_lock<std::mutex> locker(conditionMutexObject);
     permitMutexObject.lock();
     permitCounter += permits;
@@ -79,14 +79,14 @@ boolean Concurrent::Semaphore::tryAcquire() {
     return tryAcquire(1);
 }
 
-boolean Concurrent::Semaphore::tryAcquire(long int permits) {
+boolean Concurrent::Semaphore::tryAcquire(int permits) {
     return tryAcquire(permits, 0);
 }
 
-boolean Concurrent::Semaphore::tryAcquire(long int permits, long long timeout) {
-    long int currentPermits = 0;
+boolean Concurrent::Semaphore::tryAcquire(int permits, long timeout) {
+    int currentPermits = 0;
     if (timeout < 0) {
-        for (long int i = 0; i < permits; ++i) {
+        for (int i = 0; i < permits; ++i) {
             permitMutexObject.lock();
             currentPermits = permitCounter;
             permitMutexObject.unlock();
@@ -110,10 +110,10 @@ boolean Concurrent::Semaphore::tryAcquire(long int permits, long long timeout) {
             }
         }
 
-        long long waitTime = timeout;
+        long waitTime = timeout;
         while (true) {
             std::unique_lock<std::mutex> conditionLocker(conditionMutexObject);
-            const long long startTime = duration_cast<milliseconds>(
+            const long startTime = duration_cast<milliseconds>(
                     steady_clock::now().time_since_epoch()).count();
             std::cv_status waitStatus = conditionObject.wait_for(
                     conditionLocker, std::chrono::milliseconds(waitTime));
@@ -121,7 +121,7 @@ boolean Concurrent::Semaphore::tryAcquire(long int permits, long long timeout) {
                 return false;
             }
 
-            const long long elapsedTime = duration_cast<milliseconds>(
+            const long elapsedTime = duration_cast<milliseconds>(
                     steady_clock::now().time_since_epoch()).count() - startTime;
             waitTime -= elapsedTime;
 

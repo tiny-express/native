@@ -31,18 +31,15 @@
 #include "../RuntimeException/RuntimeException.hpp"
 
 namespace Java {
-    namespace Lang {
-        class InterruptedException : public RuntimeException {
-        public:
-            InterruptedException();
-
-            InterruptedException(String message);
-
-            InterruptedException(String message, Throwable *cause);
-
-            InterruptedException(Throwable *cause);
-        };
-    }
+		namespace Lang {
+				class InterruptedException : public RuntimeException {
+				public:
+						InterruptedException();
+						InterruptedException(String message);
+						InterruptedException(String message, Throwable *cause);
+						InterruptedException(Throwable *cause);
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_LANG_INTERRUPTED_EXCEPTION_HPP

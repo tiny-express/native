@@ -29,23 +29,23 @@
 using namespace Java::Net;
 
 URL::URL() {
-    this->protocol = "";
-    this->host = "";
-    this->port = -1;
-    this->query = "";
-    this->path = "";
+	this->protocol = "";
+	this->host = "";
+	this->port = -1;
+	this->query = "";
+	this->path = "";
 }
 
 URL::URL(const URL &target) {
-    this->protocol = target.protocol;
-    this->port = target.port;
-    this->host = target.host;
-    this->path = target.path;
-    this->query = target.query;
+	this->protocol = target.protocol;
+	this->port = target.port;
+	this->host = target.host;
+	this->path = target.path;
+	this->query = target.query;
 }
 
 URL::URL(String spec) {
-    String url = spec.toString();
+	String url = spec.toString();
 
 //    string _protocol = http_protocol(url.toString());
 //	this->protocol = stringDefault(_protocol);
@@ -71,48 +71,48 @@ URL::~URL() {
 }
 
 String URL::getHost() {
-    return this->host;
+	return this->host;
 }
 
 String URL::getPath() {
-    return this->path;
+	return this->path;
 }
 
-long int URL::getPort() {
-    return this->port;
+int URL::getPort() {
+	return this->port;
 }
 
 String URL::getProtocol() {
-    return this->protocol;
+	return this->protocol;
 }
 
 String URL::getQuery() {
-    return this->query;
+	return this->query;
 }
 
 String URL::toString() const {
-    String protocol = this->protocol;
-    String host = this->host;
-    long int port = this->port;
-    String path = this->path;
-    String query = this->query;
+	String protocol = this->protocol;
+	String host = this->host;
+	int port = this->port;
+	String path = this->path;
+	String query = this->query;
+	
+	String url = protocol + (string) "://" + host;
+	
+	if (port > -1) {
+		url = url + (string) ":" + String::valueOf(port);
+	}
+	
+	if (path != "/") {
+		url += path;
+	}
+	
+	if (!query.isEmpty()) {
+		url += "?";
+	}
+	
+	url += query;
 
-    String url = protocol + (string) "://" + host;
-
-    if (port > -1) {
-        url = url + (string) ":" + String::valueOf(port);
-    }
-
-    if (path != "/") {
-        url += path;
-    }
-
-    if (!query.isEmpty()) {
-        url += "?";
-    }
-
-    url += query;
-
-    return stringCopy(url.toCharPointer());
+	return stringCopy(url.toCharPointer());
 }
 

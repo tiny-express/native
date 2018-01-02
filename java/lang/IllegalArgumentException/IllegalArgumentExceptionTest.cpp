@@ -30,38 +30,30 @@
 using namespace Java::Lang;
 
 TEST (JavaLangIllegalArgumentException, Constructor) {
-    // Constructs a new IllegalArgumentException with null as its detail message.
-    IllegalArgumentException illegalArgumentExceptionWithNullMessage;
-    assertEquals("", illegalArgumentExceptionWithNullMessage.getMessage());
-
-    // Constructs a new IllegalArgumentException with the specified detail message.
-    IllegalArgumentException illegalArgumentExceptionWithMessage = IllegalArgumentException(
-            "IllegalArgumentException with the specified message");
-    assertEquals("IllegalArgumentException with the specified message",
-                 illegalArgumentExceptionWithMessage.getMessage());
-
-    // Constructs a new IllegalArgumentException with the specified detail message and cause.
-    IllegalArgumentException illegalArgumentExceptionWithMessageAndCause = IllegalArgumentException(
-            "IllegalArgumentException with the specified message and cause", &illegalArgumentExceptionWithMessage);
-    assertEquals("IllegalArgumentException with the specified message and cause",
-                 illegalArgumentExceptionWithMessageAndCause.getMessage());
-    assertEquals("IllegalArgumentException with the specified message",
-                 illegalArgumentExceptionWithMessageAndCause.getCause()->getMessage());
-
-    // Constructs a new IllegalArgumentException with the specified cause.
-    IllegalArgumentException illegalArgumentExceptionWithCause = IllegalArgumentException(
-            &illegalArgumentExceptionWithMessageAndCause);
-    assertEquals("IllegalArgumentException with the specified message and cause",
-                 illegalArgumentExceptionWithCause.getCause()->getMessage());
-    assertEquals("IllegalArgumentException with the specified message",
-                 illegalArgumentExceptionWithCause.getCause()->getCause()->getMessage());
+	// Constructs a new IllegalArgumentException with null as its detail message.
+	InterruptedException illegalArgumentExceptionWithNullMessage;
+	assertEquals("", illegalArgumentExceptionWithNullMessage.getMessage());
+	
+	// Constructs a new IllegalArgumentException with the specified detail message.
+	InterruptedException illegalArgumentExceptionWithMessage = InterruptedException("IllegalArgumentException with the specified message");
+	assertEquals("IllegalArgumentException with the specified message", illegalArgumentExceptionWithMessage.getMessage());
+	
+	// Constructs a new IllegalArgumentException with the specified detail message and cause.
+	InterruptedException illegalArgumentExceptionWithMessageAndCause = InterruptedException("IllegalArgumentException with the specified message and cause", &illegalArgumentExceptionWithMessage);
+	assertEquals("IllegalArgumentException with the specified message and cause", illegalArgumentExceptionWithMessageAndCause.getMessage());
+	assertEquals("IllegalArgumentException with the specified message", illegalArgumentExceptionWithMessageAndCause.getCause()->getMessage());
+	
+	// Constructs a new IllegalArgumentException with the specified cause.
+	InterruptedException illegalArgumentExceptionWithCause = InterruptedException(&illegalArgumentExceptionWithMessageAndCause);
+	assertEquals("IllegalArgumentException with the specified message and cause", illegalArgumentExceptionWithCause.getCause()->getMessage());
+	assertEquals("IllegalArgumentException with the specified message", illegalArgumentExceptionWithCause.getCause()->getCause()->getMessage());
 }
 
 TEST (JavaLangIllegalArgumentException, TryCatch) {
-    try {
-        throw IllegalArgumentException("Throw IllegalArgumentException");
-    }
-    catch (IllegalArgumentException &e) {
-        assertEquals("Throw IllegalArgumentException", e.getMessage());
-    }
+	try {
+		throw InterruptedException("Throw IllegalArgumentException");
+	}
+	catch (InterruptedException e) {
+		assertEquals("Throw IllegalArgumentException", e.getMessage());
+	}
 }

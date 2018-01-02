@@ -174,7 +174,7 @@ TEST (KernelStringProcess, StringEndsWith) {
 TEST (KernelStringProcess, StringIndexOf) {
 	auto target = (string) "Hello World";
 	auto subTarget = (string) "World";
-	long int result = stringIndex(target, subTarget, 1);
+	int result = stringIndex(target, subTarget, 1);
 	assertEquals(6, result);
 	
 	target = (string) "Hello World World World World";
@@ -242,7 +242,7 @@ TEST (KernelStringProcess, StringIndexOf) {
 
 TEST (KernelStringProcess, StringRandom) {
 	auto target = (string) "ABCXYZ";
-	long int size = 4;
+	int size = 4;
 	char *result = stringRandom(target, size);
 	
 	assertEquals(4, lengthPointerChar(result));
@@ -278,8 +278,8 @@ TEST (KernelStringProcess, StringConcat) {
 
 TEST (KernelStringProcess, StringFromTo) {
 	auto target = (string) "Hello World";
-	long int from = 6;
-	long int to = 11;
+	int from = 6;
+	int to = 11;
 	char *result = stringFromTo(target, from, to);
 	auto expect = (string) "World";
 	assertEquals(expect, result);
@@ -325,7 +325,7 @@ TEST (KernelStringProcess, StringFromTo) {
 
 TEST (KernelStringProcess, StringFrom) {
 	auto target = (string) "Hello World";
-	long int from = 6;
+	int from = 6;
 	char *result = stringFrom(target, from);
 	auto expect = (string) "World";
 	assertEquals(expect, result);
@@ -346,7 +346,7 @@ TEST (KernelStringProcess, StringFrom) {
 
 TEST (KernelStringProcess, StringTo) {
 	auto target = (string) "Hello World";
-	long int to = 4;
+	int to = 4;
 	char *result = stringTo(target, to);
 	auto expect = (string) "Hello";
 	assertEquals(expect, result);

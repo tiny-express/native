@@ -33,8 +33,8 @@ using namespace Java::Lang;
 TEST (JavaLangByte, Constructor) {
     // Given empty value for Bytes constructor and assign value - Return Byte
     Bytes defaultConstructorBytes;
-    long int expectResult = 0;
-    long int actualByteValue = defaultConstructorBytes.intValue();
+    int expectResult = 0;
+    int actualByteValue = defaultConstructorBytes.intValue();
     assertEquals(expectResult, actualByteValue);
     assertEquals("0", defaultConstructorBytes.toString());
 
@@ -191,24 +191,24 @@ TEST (JavaLangByte, FloatValue) {
 
 TEST (JavaLangByte, HashCode) {
     Bytes byteToGetValue = 5;
-    long long expectResult = 5;
-    long long actualResult = byteToGetValue.hashCode();
+    long expectResult = 5;
+    long actualResult = byteToGetValue.hashCode();
     assertEquals(expectResult, actualResult);
 }
 
 TEST (JavaLangByte, IntValue) {
-    // Given a long int and a Bytes with the same value
+    // Given a int and a Bytes with the same value
     Bytes byteToGetValue = 5;
-    long int expectResult = 5;
-    long int actualResult = byteToGetValue.intValue();
+    int expectResult = 5;
+    int actualResult = byteToGetValue.intValue();
     assertEquals(expectResult, actualResult);
 }
 
 TEST (JavaLangByte, LongValue) {
-    // Given a long int and a Bytes with the same value
+    // Given a int and a Bytes with the same value
     Bytes byteToGetValue = 5;
-    long long expectResult = 5;
-    long long actualResult = byteToGetValue.longValue();
+    long expectResult = 5;
+    long actualResult = byteToGetValue.longValue();
     assertEquals(expectResult, actualResult);
 }
 
@@ -297,10 +297,10 @@ TEST (JavaLangByte, ParseByteWithRadix) {
 }
 
 TEST (JavaLangByte, ShortValue) {
-    // Given a int and a Bytes with the same value
+    // Given a short and a Bytes with the same value
     Bytes byteToGetValue = 5;
-    int expectResult = 5;
-    int actualResult = byteToGetValue.shortValue();
+    short expectResult = 5;
+    short actualResult = byteToGetValue.shortValue();
     assertEquals(expectResult, actualResult);
 }
 
@@ -400,8 +400,8 @@ TEST (JavaLangByte, ValueOfStringWithRadix) {
 
 TEST (JavaLangByte, HashCodeWithBytes) {
     byte byteToGetValue = 5;
-    long int expectResult = 5;
-    long int actualResult = Bytes::hashCode(byteToGetValue);
+    int expectResult = 5;
+    int actualResult = Bytes::hashCode(byteToGetValue);
     assertEquals(expectResult, actualResult);
 }
 
@@ -419,15 +419,15 @@ TEST (JavaLangByte, Compare) {
 
 TEST (JavaLangByte, ToUnsignedInt) {
     auto byteToGetValue = static_cast<byte>(-5);
-    long int expectResult = 251;
-    long int actualResult = Bytes::toUnsignedInt(byteToGetValue);
+    int expectResult = 251;
+    int actualResult = Bytes::toUnsignedInt(byteToGetValue);
     assertEquals(expectResult, actualResult);
 }
 
 TEST (JavaLangByte, ToUnsignedLong) {
     auto byteToGetValue = static_cast<byte>(-5);
-    long long expectResult = 251;
-    long long actualResult = Bytes::toUnsignedLong(byteToGetValue);
+    long expectResult = 251;
+    long actualResult = Bytes::toUnsignedLong(byteToGetValue);
     assertEquals(expectResult, actualResult);
 }
 

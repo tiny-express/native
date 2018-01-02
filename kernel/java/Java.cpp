@@ -28,7 +28,7 @@
 
 using namespace Java::Lang;
 
-Java::Lang::String IntegerToHexString(long int inputInt) {
+Java::Lang::String IntegerToHexString(int inputInt) {
 	return  Java::Lang::Integer::toHexString(inputInt);
 }
 
@@ -40,10 +40,10 @@ Java::Lang::String IntegerToHexString(long int inputInt) {
  * @param argument
  * @return int
  */
-long int Application(void (*program)(Array <String>), long int argc, char **argument) {
+int Application(void (*program)(Array <String>), int argc, char **argument) {
 	try {
 		Array <String> args;
-		long int argumentIndex;
+		int argumentIndex;
 		for (argumentIndex = 0; argumentIndex < argc; argumentIndex++) {
 			args.push(argument[ argumentIndex ]);
 		}

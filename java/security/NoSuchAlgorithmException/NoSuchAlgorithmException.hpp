@@ -37,11 +37,8 @@ namespace Java {
         class NoSuchAlgorithmException : public GeneralSecurityException {
         public:
             NoSuchAlgorithmException();
-
             NoSuchAlgorithmException(String message);
-
             NoSuchAlgorithmException(Throwable *cause);
-
             NoSuchAlgorithmException(String message, Throwable *cause);
         };
     } // namespace Security

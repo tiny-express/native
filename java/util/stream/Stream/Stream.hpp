@@ -28,13 +28,13 @@
 #define NATIVE_JAVA_UTIL_STREAM_STREAM_HPP
 
 namespace Java {
-    namespace Util {
-        namespace Stream {
-            template<typename E>
-            class Stream {
-            };
-        }
-    }
+		namespace Util {
+				namespace Stream {
+						template <typename E>
+						class Stream {
+						};
+				}
+		}
 }
 
 #endif // NATIVE_JAVA_UTIL_STREAM_STREAM_HPP

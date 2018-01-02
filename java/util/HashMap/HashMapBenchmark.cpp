@@ -30,38 +30,34 @@
 
 using namespace Java::Lang;
 
-void JavaUtilHashMapConstructor(benchmark::State &state) {
+void JavaUtilHashMapConstructor(benchmark::State& state) {
     while (state.KeepRunning()) {
         HashMap<String, String> hashMap;
     }
 }
 
-void StdUnorderedMapConstructor(benchmark::State &state) {
+void StdUnorderedMapConstructor(benchmark::State& state) {
     while (state.KeepRunning()) {
         std::unordered_map<String, String> hashMap;
     }
 }
 
-BENCHMARK(JavaUtilHashMapConstructor)
-->Range(RANGE, RANGE);
-BENCHMARK(StdUnorderedMapConstructor)
-->Range(RANGE, RANGE);
+BENCHMARK(JavaUtilHashMapConstructor)->Range(RANGE, RANGE);
+BENCHMARK(StdUnorderedMapConstructor)->Range(RANGE, RANGE);
 
-void JavaUtilHashMapPut(benchmark::State &state) {
+void JavaUtilHashMapPut(benchmark::State& state) {
     HashMap<String, String> hashMap;
     while (state.KeepRunning()) {
         hashMap.put("test", "test");
     }
 }
 
-void StdUnorderedMapPut(benchmark::State &state) {
+void StdUnorderedMapPut(benchmark::State& state) {
     std::unordered_map<String, String> map;
     while (state.KeepRunning()) {
         map.insert(std::make_pair("test", "test"));
     }
 }
 
-BENCHMARK(JavaUtilHashMapPut)
-->Range(RANGE, RANGE);
-BENCHMARK(StdUnorderedMapPut)
-->Range(RANGE, RANGE);
+BENCHMARK(JavaUtilHashMapPut)->Range(RANGE, RANGE);
+BENCHMARK(StdUnorderedMapPut)->Range(RANGE, RANGE);

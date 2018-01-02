@@ -34,8 +34,7 @@ CloneNotSupportedException::CloneNotSupportedException() : RuntimeException::Run
 CloneNotSupportedException::CloneNotSupportedException(String message) : RuntimeException::RuntimeException(message) {
 }
 
-CloneNotSupportedException::CloneNotSupportedException(String message, Throwable *cause)
-        : RuntimeException::RuntimeException(message, cause) {
+CloneNotSupportedException::CloneNotSupportedException(String message, Throwable *cause) : RuntimeException::RuntimeException(message, cause) {
 }
 
 CloneNotSupportedException::CloneNotSupportedException(Throwable *cause) : RuntimeException::RuntimeException(cause) {

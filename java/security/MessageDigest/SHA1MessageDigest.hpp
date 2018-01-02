@@ -37,13 +37,13 @@ namespace Java {
 
             ~SHA1MessageDigest();
 
-            long int engineDigest(byte *buffer, long int len) override;
+            int engineDigest(byte *buffer, int len) override;
 
-            long int engineGetDigestLength() override;
+            int engineGetDigestLength() override;
 
             void engineReset() override;
 
-            void engineUpdate(const byte *input, long int len) override;
+            void engineUpdate(const byte *input, int len) override;
 
         private:
             byte hash[20];
