@@ -25,6 +25,7 @@
  */
 
 #include <algorithm>
+#include <cstring>
 #include "String.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../StringBuilder/StringBuilder.hpp"
@@ -334,29 +335,30 @@ int String::lastIndexOf(String subString) const {
 }
 
 int String::lastIndexOf(String subString, int fromIndex) const {
-    // if (fromIndex < 0) {
-    //     return -1;
-    // }
-    // if (fromIndex > this->original.size() - 1) {
-    //     return this->lastIndexOf(subString);
-    // }
-    // string thisStringReversed = stringReverse((char*)this->original.c_str());
-    // string subStringFromIndex = &(thisStringReversed)[this->original.size() - fromIndex - subString.length()];
-    // string reversedString = stringReverse(subString.toCharPointer());
-    // // string currentReversedString = stringReverse(subStringFromIndex);
-    // int result = stringIndex(subStringFromIndex, reversedString, 1);
-    // free(reversedString);
-    // free(thisStringReversed);
-    // if (result == NOT_FOUND) {
-    //     return result;
-    // }
-    // // Re-calculate first character of str
-    // result = fromIndex - result;
-    // // return result;
+    if (fromIndex < 0) {
+        return -1;
+    }
 
-    String subStringFromIndex = String::subString(fromIndex);
-    int result = subStringFromIndex.original.find_last_of(subString.toCharPointer());
+    if (fromIndex > this->original.size() - 1) {
+        return this->lastIndexOf(subString);
+    }
 
+    std::string thisStringReversed = this->original;
+    std::reverse(thisStringReversed.begin(), thisStringReversed.end());
+    string subStringFromIndex = &(thisStringReversed)[this->original.size() - fromIndex - subString.length()];
+
+    string reversedString = stringReverse(subString.toCharPointer());
+    int result = stringIndex(subStringFromIndex, reversedString, 1);
+
+    free(reversedString);
+
+    if (result == NOT_FOUND) {
+        return result;
+    }
+
+    // Re-calculate first character of str
+    result = fromIndex - result;
+    
     return result;
 }
 
