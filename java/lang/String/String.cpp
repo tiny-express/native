@@ -348,7 +348,9 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 
     std::string thisStringReversed = this->original;
     std::reverse(thisStringReversed.begin(), thisStringReversed.end());
-    std::string subStringFromIndex = &(thisStringReversed)[this->original.size() - fromIndex - subString.length()];
+    string holdSubStringFromIndex = &(thisStringReversed)[this->original.size() - fromIndex - subString.length()];
+    
+    std::string subStringFromIndex = holdSubStringFromIndex;
 
     std::string reversedString = subString.toCharPointer();
     std::reverse(reversedString.begin(), reversedString.end());
