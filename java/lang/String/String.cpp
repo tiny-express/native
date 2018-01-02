@@ -321,11 +321,14 @@ int String::lastIndexOf(int character, int fromIndex) {
 }
 
 int String::lastIndexOf(String subString) const {
-    string reversedString = stringReverse(subString.toCharPointer());
-    string currentReversedString = stringReverse(this->toCharPointer());
-    int result = stringIndex(currentReversedString, reversedString, 1);
-    free(reversedString);
-    free(currentReversedString);
+    std::string reversedString = subString.toCharPointer();
+    std::reverse(reversedString.begin(), reversedString.end()); 
+
+    std::string currentReversedString = this->toCharPointer();
+    std::reverse(currentReversedString.begin(), currentReversedString.end());
+    
+    int result = stringIndex(currentReversedString.c_str(), reversedString.c_str(), 1);
+
     if (result == NOT_FOUND) {
         return result;
     }
@@ -358,7 +361,7 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 
     // Re-calculate first character of str
     result = fromIndex - result;
-    
+
     return result;
 }
 
