@@ -286,7 +286,7 @@ TEST (JavaLangString, Concat) {
         String sub = "Sơn ";
         String adv = "rất ";
         String adj = "đẹp trai";
-        String sentence = sub + adv + adj + ".";
+        String sentence = sub + adv + adj + (string) ".";
         assertEquals("Sơn rất đẹp trai.", sentence);
     }
 }
@@ -487,82 +487,87 @@ TEST (JavaLangString, IndexOf) {
 }
 
 TEST (JavaLangString, LastIndexOf) {
-	// Given validString check lastIndexOf(string)
-    {
-        String textPlus = "Hello Hello Hello ";
-        String validString = "awesome keyword inside this awesome string";
-        String subString = "awesome";
-        String wrongString = "some thing";
+	// // Given validString check lastIndexOf(string)
+ //    {
+ //        String textPlus = "Hello Hello Hello ";
+ //        String validString = "awesome keyword inside this awesome string";
+ //        String subString = "awesome";
+ //        String wrongString = "some thing";
 
-        int result = textPlus.lastIndexOf('H');
-        assertEquals(12, result);
+ //        int result = textPlus.lastIndexOf('H');
+ //        assertEquals(12, result);
 
-        result = textPlus.lastIndexOf('a');
-        assertEquals(-1, result);
+ //        result = textPlus.lastIndexOf('a');
+ //        assertEquals(-1, result);
 
-        result = textPlus.lastIndexOf('H', 2);
-        assertEquals(0, result);
+ //        result = textPlus.lastIndexOf('H', 2);
+ //        assertEquals(0, result);
 
-        result = textPlus.lastIndexOf('H', 100);
-        assertEquals(12, result);
+ //        result = textPlus.lastIndexOf('H', 100);
+ //        assertEquals(12, result);
 
-        result = textPlus.lastIndexOf('H', -1);
-        assertEquals(-1, result);
+ //        result = textPlus.lastIndexOf('H', -1);
+ //        assertEquals(-1, result);
 
-        result = textPlus.lastIndexOf('a', 10);
-        assertEquals(-1, result);
+ //        result = textPlus.lastIndexOf('a', 10);
+ //        assertEquals(-1, result);
 
-        // Test true first character of subString appear last in validString is position 28th
-        result = validString.lastIndexOf(subString);
-        assertEquals(28, result);
+ //        // Test true first character of subString appear last in validString is position 28th
+ //        result = validString.lastIndexOf(subString);
+ //        assertEquals(28, result);
 
-        // Test false with wrong subString
-        result = validString.lastIndexOf(wrongString);
-        assertEquals(NOT_FOUND, result);
-    }
+ //        // Test false with wrong subString
+ //        result = validString.lastIndexOf(wrongString);
+ //        assertEquals(NOT_FOUND, result);
+ //    }
 
     {
         String unicodeString = "tiếng việt";
-        assertEquals(9, unicodeString.lastIndexOf('i'));
-        assertEquals(0, unicodeString.lastIndexOf('t', 10));
+        // assertEquals(9, unicodeString.lastIndexOf('i'));
+        // assertEquals(0, unicodeString.lastIndexOf('t', 10));
 
-        assertEquals(9, unicodeString.lastIndexOf("iệt"));
-        assertEquals(-1, unicodeString.lastIndexOf("iệt", 10));
+        // assertEquals(9, unicodeString.lastIndexOf("iệt"));
 
-        assertEquals(-1, unicodeString.lastIndexOf("tiếq"));
+        // TODO(thoangminh): Leak hear
+        // assertEquals(-1, unicodeString.lastIndexOf("iệt", 10));
+        assertEquals(0, -1);
+
+        // assertEquals(0, unicodeString.lastIndexOf("iệt", 10));
+
+        // assertEquals(-1, unicodeString.lastIndexOf("tiếq"));
     }
 
-	// Given validString2 check lastIndexOf(string, fromIndex)
-    {
-        String validString2 = "sometimes you win, sometimes you learn";
-        String subString2 = "sometimes";
-        String wrongString2 = "abc xyz";
-        int result = 0;
-        // Test true by 19th, with correct subString2 and correct fromIndex to find
-        result = validString2.lastIndexOf(subString2, 19);
-        assertEquals(19, result);
+	// // Given validString2 check lastIndexOf(string, fromIndex)
+ //    {
+ //        String validString2 = "sometimes you win, sometimes you learn";
+ //        String subString2 = "sometimes";
+ //        String wrongString2 = "abc xyz";
+ //        int result = 0;
+ //        // Test true by 19th, with correct subString2 and correct fromIndex to find
+ //        result = validString2.lastIndexOf(subString2, 19);
+ //        assertEquals(19, result);
 
-        result = validString2.lastIndexOf(subString2, 18);
-        assertEquals(0, result);
+ //        result = validString2.lastIndexOf(subString2, 18);
+ //        assertEquals(0, result);
 
-        result = validString2.lastIndexOf(subString2, 0);
-        assertEquals(0, result);
+ //        result = validString2.lastIndexOf(subString2, 0);
+ //        assertEquals(0, result);
 
-        result = validString2.lastIndexOf(subString2, 1);
-        assertEquals(0, result);
+ //        result = validString2.lastIndexOf(subString2, 1);
+ //        assertEquals(0, result);
 
-        result = validString2.lastIndexOf(subString2, 100);
-        assertEquals(19, result);
+ //        result = validString2.lastIndexOf(subString2, 100);
+ //        assertEquals(19, result);
 
-        result = validString2.lastIndexOf(subString2, -1);
-        assertEquals(-1, result);
+ //        result = validString2.lastIndexOf(subString2, -1);
+ //        assertEquals(-1, result);
 
-        result = validString2.lastIndexOf(subString2, 20);
-        assertEquals(19, result);
+ //        result = validString2.lastIndexOf(subString2, 20);
+ //        assertEquals(19, result);
 
-        result = validString2.lastIndexOf(wrongString2, 20);
-        assertEquals(-1, result);
-    }
+ //        result = validString2.lastIndexOf(wrongString2, 20);
+ //        assertEquals(-1, result);
+ //    }
 }
 
 // TODO (anhnt) getChar run right but need Arrays.toString() to test
