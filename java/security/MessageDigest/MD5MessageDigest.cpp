@@ -33,24 +33,24 @@ MD5MessageDigest::MD5MessageDigest() {
 }
 
 MD5MessageDigest::~MD5MessageDigest() {
-
 }
 
-int MD5MessageDigest::engineDigest(byte *buffer, int len) {
+long int MD5MessageDigest::engineDigest(byte *buffer, long int len) {
     if (len < engineGetDigestLength()) {
         return 0;
     }
 
     if (!this->isFinished) {
         md5_finish(&this->state, this->hash);
+        this->isFinished = true;
     }
 
     memcpy(buffer, this->hash, sizeof(this->hash));
     return engineGetDigestLength();
 }
 
-int MD5MessageDigest::engineGetDigestLength() {
-    return (int)sizeof(this->hash);
+long int MD5MessageDigest::engineGetDigestLength() {
+    return (int) sizeof(this->hash);
 }
 
 void MD5MessageDigest::engineReset() {
@@ -59,6 +59,6 @@ void MD5MessageDigest::engineReset() {
     this->isFinished = false;
 }
 
-void MD5MessageDigest::engineUpdate(const byte *input, int len) {
-    md5_append(&this->state, (const md5_byte_t*)input, len);
+void MD5MessageDigest::engineUpdate(const byte *input, long int len) {
+    md5_append(&this->state, (const md5_byte_t *) input, len);
 }

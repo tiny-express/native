@@ -35,6 +35,7 @@ namespace Java {
         class UnsupportedEncodingException : public IOException {
         public:
             UnsupportedEncodingException();
+
             UnsupportedEncodingException(String message);
         };
     }

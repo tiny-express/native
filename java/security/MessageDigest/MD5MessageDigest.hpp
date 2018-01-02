@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_SECURITY_MD5MESSAGEDIGEST_HPP_
-#define NATIVE_JAVA_SECURITY_MD5MESSAGEDIGEST_HPP_
+#ifndef NATIVE_JAVA_SECURITY_MD5_MESSAGE_DIGEST_HPP
+#define NATIVE_JAVA_SECURITY_MD5_MESSAGE_DIGEST_HPP
 
 #include "md5.hpp"
 #include "MessageDigestSpi.hpp"
@@ -38,13 +38,13 @@ namespace Java {
 
             ~MD5MessageDigest();
 
-            int engineDigest(byte *buffer, int len) override;
+            long int engineDigest(byte *buffer, long int len) override;
 
-            int engineGetDigestLength() override;
+            long int engineGetDigestLength() override;
 
             void engineReset() override;
 
-            void engineUpdate(const byte *input, int len) override;
+            void engineUpdate(const byte *input, long int len) override;
 
         private:
             byte hash[16];
@@ -55,4 +55,4 @@ namespace Java {
 } // namespace Java
 
 
-#endif // NATIVE_JAVA_SECURITY_MD5MESSAGEDIGEST_HPP_
+#endif // NATIVE_JAVA_SECURITY_MD5_MESSAGE_DIGEST_HPP

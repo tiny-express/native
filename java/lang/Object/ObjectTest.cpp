@@ -29,143 +29,180 @@
 using namespace Java::Lang;
 
 TEST (JavaLang, InstanceOf) {
-	// Given a String instance - Return it should be an instance of String
-	String stringInstanceWithSameClass = "test";
-	String string2 = "abcd";
-	assertTrue(instanceof<String>(stringInstanceWithSameClass));
-	assertFalse(stringInstanceWithSameClass.equals(string2));
-	
-	// Given a String instance - Return it should be an instance of Object
-	// String stringInstanceWithSameBaseClass;
-	// assertTrue(instanceof<Object>(stringInstanceWithSameBaseClass));
-	
-	// Given a Integer instance - Return it should not be an instance of String
-	Integer integer = 1;
-	assertFalse(instanceof<String>(integer));
-	
-	// Given a Long instance but casted with Object - Return it should be an instance of Long
-	Long longNumber = 1;
-	Object objectLongNumber = longNumber;
-	assertFalse(instanceof<Long>(objectLongNumber));
+    // Given a String instance - Return it should be an instance of String
+    String stringInstanceWithSameClass = "test";
+    String string2 = "abcd";
+    assertTrue(instanceof<String>(stringInstanceWithSameClass));
+    assertFalse(stringInstanceWithSameClass.equals(string2));
+
+    // Given a String instance - Return it should be an instance of Object
+    // String stringInstanceWithSameBaseClass;
+    // assertTrue(instanceof<Object>(stringInstanceWithSameBaseClass));
+
+    // Given a Integer instance - Return it should not be an instance of String
+    Integer integer = 1;
+    assertFalse(instanceof<String>(integer));
+
+    // Given a Long instance but casted with Object - Return it should be an instance of Long
+    Long longNumber = 1;
+    Object objectLongNumber = longNumber;
+    assertFalse(instanceof<Long>(objectLongNumber));
 }
 
 TEST (JavaLang, DataTypeBoolean) {
-	// Verify syntax of boolean
-	boolean a = true;
-	assertTrue(a);
+    // Verify syntax of boolean
+    boolean a = true;
+    assertTrue(a);
 }
 
 TEST (JavaLang, DataTypeByte) {
-	// Verify syntax of byte
-	byte a = 65;
-	char A = (char) a;
-	assertTrue(A == 'A');
+    // Verify syntax of byte
+    byte a = 65;
+    char A = (char) a;
+    assertTrue(A == 'A');
 }
 
 TEST (JavaLang, DataTypeArray) {
-	// Array empty initialization
-	Array<String> emptyStrings;
-	emptyStrings.push("Food Tiny");
-	emptyStrings.push("Hello World");
-	assertEquals(2, emptyStrings.length);
-	
-	// Array from initialize list and length property
-	Array<byte> bytes = { 64, 65, 66 };
-	assertEquals(3, bytes.length);
-	
-	// Push new element and loop in array
-	bytes.push(67);
-	bytes.push(68);
-	int length = 0;
-	for (byte byte : bytes) {
-		length++;
-	}
-	assertEquals(5, length);
-	
-	// Modify an element in array
-	bytes[ 0 ] = 63;
-	assertEquals(63, bytes[ 0 ]);
-	
-	// Merge two arrays with appendable
-	Array<String> initializedStrings = { "Food", "Tiny" };
-	initializedStrings += { "Hello", "World" };
-	assertEquals(4, initializedStrings.length);
-	
-	// Loop in string array
-	int totalCharacters = 0;
-	for (String element : initializedStrings) {
-		totalCharacters += element.length();
-	}
-	assertEquals(18, totalCharacters);
-	
-	// Retrieve  elements from an existing array
-	assertEquals("Food", initializedStrings.get(0).toString());
-	assertEquals("Tiny", initializedStrings.get(1).toString());
+    // Array empty initialization
+    Array<String> emptyStrings;
+    emptyStrings.push("Food Tiny");
+    emptyStrings.push("Hello World");
+    assertEquals(2, emptyStrings.length);
+
+    // Array from initialize list and length property
+    Array<byte> bytes = {64, 65, 66};
+    assertEquals(3, bytes.length);
+
+    // Push new element and loop in array
+    bytes.push(67);
+    bytes.push(68);
+    long int length = 0;
+    for (byte byte : bytes) {
+        length++;
+    }
+    assertEquals(5, length);
+
+    // Modify an element in array
+    bytes[0] = 63;
+    assertEquals(63, bytes[0]);
+
+    // Merge two arrays with appendable
+    Array<String> initializedStrings = {"Food", "Tiny"};
+    initializedStrings += {"Hello", "World"};
+    assertEquals(4, initializedStrings.length);
+
+    // Loop in string array
+    long int totalCharacters = 0;
+    for (String element : initializedStrings) {
+        totalCharacters += element.length();
+    }
+    assertEquals(18, totalCharacters);
+
+    // Retrieve  elements from an existing array
+    assertEquals("Food", initializedStrings.get(0).toString());
+    assertEquals("Tiny", initializedStrings.get(1).toString());
 }
 
 TEST (JavaLang, ArrayConstructorWithSize) {
-	// Give an Array use constructor with contain size then assert size - Should equal
-	Array<int> validArray(10);
-	int expect = 10;
-	int result = validArray.length;
-	assertEquals(expect, result);
-	
-	int index;
-	for (index = 10; index < 20; index++) {
-		validArray.push(index);
-		expect = index + 1;
-		result = validArray.length;
-		assertEquals(expect, result);
-	}
+    // Give an Array use constructor with contain size then assert size - Should equal
+    Array<int> validArray(10);
+    long int expect = 10;
+    long int result = validArray.length;
+    assertEquals(expect, result);
+
+    long int index;
+    for (index = 10; index < 20; index++) {
+        validArray.push(index);
+        expect = index + 1;
+        result = validArray.length;
+        assertEquals(expect, result);
+    }
 }
 
 TEST (JavaLang, ArrayConstructor) {
-	// Give an Array use constructor with contain size then assert size - Should equal
-	char *stringArray[3] = {
-		(char *) "hello",
-		(char *) "world",
-		nullptr
-	};
-	char **stringList = (char **) stringArray;
-	Array<String> arrayString = stringList;
-	assertEquals(2, arrayString.length);
+    // Give an Array use constructor with contain size then assert size - Should equal
+    char *stringArray[3] = {
+            (char *) "hello",
+            (char *) "world",
+            nullptr
+    };
+    char **stringList = (char **) stringArray;
+    Array<String> arrayString = stringList;
+    assertEquals(2, arrayString.length);
 }
 
 TEST (JavaLangObject, Constructor) {
-	// Normal declaration
-	Object objectNormalDeclaration;
-	objectNormalDeclaration.hashCode();
-	
-	// New object with pointer declaration
-	Object *objectPointerDeclaration = new Object();
-	objectPointerDeclaration->hashCode();
-	delete objectPointerDeclaration;
+    // Normal declaration
+    Object objectNormalDeclaration;
+    objectNormalDeclaration.hashCode();
+
+    // New object with pointer declaration
+    Object *objectPointerDeclaration = new Object();
+    objectPointerDeclaration->hashCode();
+    delete objectPointerDeclaration;
 }
 
 TEST (JavaLangObject, Equals) {
-	// Given two difference instances of Object - Return instances are not equal
-	Object object1;
-	Object object2;
-	assertFalse(object1.equals(object2));
-	// Supported for == & != operator
-	assertFalse(object1 == object2);
-	assertTrue(object1 != object2);
-	
-	// Given one instance of Object - Return equal with itself
-	Object object3;
-	assertTrue(object3.equals(object3));
-	// Supported for == & != operator
-	assertTrue(object3 == object3);
-	assertFalse(object3 != object3);
+    // Given two difference instances of Object - Return instances are not equal
+    Object object1;
+    Object object2;
+    assertFalse(object1.equals(object2));
+    // Supported for == & != operator
+    assertFalse(object1 == object2);
+    assertTrue(object1 != object2);
+
+    // Given one instance of Object - Return equal with itself
+    Object object3;
+    assertTrue(object3.equals(object3));
+    // Supported for == & != operator
+    assertTrue(object3 == object3);
+    assertFalse(object3 != object3);
 }
 
 TEST (JavaLangObject, HashCode) {
-	// Given two difference instances of Object - Return memory addresses are not equal
-	Object object;
-	Object object2;
-	assertNotEquals(object.hashCode(), object2.hashCode());
-	
-	// Given one instance of Object - Return it and itself is the same
-	Object object3;
-	assertEquals(object3.hashCode(), object3.hashCode());
+    // Given two difference instances of Object - Return memory addresses are not equal
+    Object object;
+    Object object2;
+    assertNotEquals(object.hashCode(), object2.hashCode());
+
+    // Given one instance of Object - Return it and itself is the same
+    Object object3;
+    assertEquals(object3.hashCode(), object3.hashCode());
+}
+
+TEST (JavaLangObject, Notify) {
+    Object object;
+    object.notify();
+}
+
+TEST (JavaLangObject, NotifyAll) {
+    Object object;
+    object.notifyAll();
+}
+
+TEST (JavaLangObject, Wait) {
+    Object object;
+    try {
+        object.wait();
+    } catch (InterruptedException &exception) {
+        assertEquals("", exception.getMessage());
+    }
+}
+
+TEST (JavaLangObject, WaitWithTimeout) {
+    Object object;
+    try {
+        object.wait(1000);
+    } catch (InterruptedException &exception) {
+        assertEquals("", exception.getMessage());
+    }
+}
+
+TEST (JavaLangObject, WaitWithTimeoutNanoSecond) {
+    Object object;
+    try {
+        object.wait(1000, 5);
+    } catch (InterruptedException &exception) {
+        assertEquals("", exception.getMessage());
+    }
 }

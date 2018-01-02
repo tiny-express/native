@@ -57,12 +57,12 @@ namespace Java {
             /**
              * The number of bits used to represent a byte value in two's complement binary form.
              */
-            static const int SIZE = 8;
+            static const long int SIZE = 8;
 
             /**
              * The number of bytes used to represent a byte value in two's complement binary form.
              */
-            static constexpr int BYTES = 1;
+            static constexpr long int BYTES = 1;
 
         public:
             /**
@@ -121,7 +121,7 @@ namespace Java {
              * @return the value 0 if byteA == byteB; a value less than 0 if byteA < byteB;
              * and a value greater than 0 if byteA > byteB
              */
-            static int compare(byte byteA, byte byteB);
+            static long int compare(byte byteA, byte byteB);
 
             /**
              * Compares two Byte objects numerically
@@ -131,7 +131,7 @@ namespace Java {
              * a value less than 0 if this Byte is numerically less than other;
              * and a value greater than 0 if this Byte is numerically greater than other
              */
-            int compareTo(const Bytes &other) const override;
+            long int compareTo(const Bytes &other) const override;
 
             /**
              * Decodes a String into a Byte. Accepts decimal, hexadecimal, and octal numbers
@@ -170,7 +170,7 @@ namespace Java {
              *
              * @return long
              */
-            int hashCode() const;
+            long int hashCode() const;
 
             /**
              * Returns a hash code for this Byte
@@ -178,21 +178,21 @@ namespace Java {
              * @param byteValue
              * @return int
              */
-            static int hashCode(byte byteValue);
+            static long int hashCode(byte byteValue);
 
             /**
              * Returns the value of this Byte as an int.
              *
              * @return int
              */
-            int intValue() const override;
+            long int intValue() const override;
 
             /**
              * Returns the value of this Byte as an long.
              *
              * @return long
              */
-            long longValue() const override;
+            long long longValue() const override;
 
             /**
              * Parse the parameter string as a byte with radix =10
@@ -211,14 +211,14 @@ namespace Java {
              * @throw NumberFormatException If the string does not contain a parsable byte.
              * @return the byte value represented by the string argument in the specified radix
              */
-            static byte parseBytes(String stringToParse, int radix);
+            static byte parseBytes(String stringToParse, long int radix);
 
             /**
              * Returns the value of this Byte as an short.
              *
              * @return short
              */
-            short shortValue() const override;
+            int shortValue() const override;
 
             /**
              * Returns a string representing this Byte's value
@@ -236,20 +236,20 @@ namespace Java {
             static String toString(byte byteValue);
 
             /**
-             * Converts the argument to an int by an unsigned conversion.
+             * Converts the argument to an long int by an unsigned conversion.
              *
              * @param byteValue
              * @return int
              */
-            static int toUnsignedInt(byte byteValue);
+            static long int toUnsignedInt(byte byteValue);
 
             /**
-             * Converts the argument to an int by an unsigned conversion.
+             * Converts the argument to an long int by an unsigned conversion.
              *
              * @param byteValue
              * @return long
              */
-            static long toUnsignedLong(byte byteValue);
+            static long long toUnsignedLong(byte byteValue);
 
             /**
              * Returns a Byte instance representing the specified byte value.
@@ -274,7 +274,7 @@ namespace Java {
              * @param radix
              * @return Byte
              */
-            static Bytes valueOf(String stringValue, int radix);
+            static Bytes valueOf(String stringValue, long int radix);
 
         public:
             /**
@@ -439,7 +439,7 @@ namespace Java {
 
             Array<Bytes> cacheInit() {
                 Array<Bytes> cacheArray;
-                int index;
+                long int index;
                 for (index = 0; index < 256; index++) {
                     cacheArray.push(Bytes(static_cast<byte>(index)));
                 }
@@ -454,7 +454,7 @@ namespace Java {
                 return instance;
             }
 
-            Bytes getByteAtIndex(int index) {
+            Bytes getByteAtIndex(long int index) {
                 return cache[index];
             }
         };

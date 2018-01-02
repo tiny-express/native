@@ -30,7 +30,7 @@
 
 using namespace Java::Security;
 
-TEST(JavaLang, GeneralSecurityExceptionConstructor) {
+TEST (JavaLang, GeneralSecurityExceptionConstructor) {
 
     GeneralSecurityException generalSecurityExceptionWithNullMessage;
     assertEquals(
@@ -60,18 +60,18 @@ TEST(JavaLang, GeneralSecurityExceptionConstructor) {
     GeneralSecurityException generalSecurityExceptionWithCause =
             GeneralSecurityException(&generalSecurityExceptionWithMessageAndCause);
     assertEquals("GeneralSecurityException with the specified message and cause",
-               generalSecurityExceptionWithCause.getCause()
-                       ->getMessage());
+                 generalSecurityExceptionWithCause.getCause()
+                         ->getMessage());
     assertEquals("GeneralSecurityException with the specified message",
-               generalSecurityExceptionWithCause.getCause()
-                       ->getCause()
-                       ->getMessage());
+                 generalSecurityExceptionWithCause.getCause()
+                         ->getCause()
+                         ->getMessage());
 }
 
-TEST(JavaLang, GeneralSecurityExceptionTryCatch) {
+TEST (JavaLang, GeneralSecurityExceptionTryCatch) {
     try {
         throw GeneralSecurityException("Throw GeneralException");
-    } catch (Exception e) {
+    } catch (Exception &e) {
         assertEquals("Throw GeneralException", e.getMessage());
     }
 }

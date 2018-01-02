@@ -30,11 +30,11 @@
 #include "../Object/Object.hpp"
 
 namespace Java {
-		namespace Lang {
-				class Process : public Object {
-						String toString() const;
-				};
-		}
+    namespace Lang {
+        class Process : public Object {
+            String toString() const;
+        };
+    }
 }
 
 #endif // NATIVE_JAVA_LANG_PROCESS_HPP

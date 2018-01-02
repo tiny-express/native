@@ -30,49 +30,50 @@
 using namespace Java::Lang;
 
 TEST (JavaLangAssertionError, Constructor) {
-	// Constructs a new AssertionError with null as its detail message.
-	AssertionError assertionErrorWithNullMessage;
-	assertEquals("", assertionErrorWithNullMessage.getMessage());
-	
-	// Constructs a new AssertionError with double
-	AssertionError assertionErrorWithDouble = AssertionError(10000.0);
-	assertEquals("10000.000000000000000", assertionErrorWithDouble.getMessage());
-	
-	// Constructs a new AssertionError with float
-	AssertionError assertionErrorWithFloat = AssertionError(10000.0f);
-	assertEquals("10000", assertionErrorWithFloat.getMessage());
-	
-	// Constructs a new AssertionError with long
-	AssertionError assertionErrorWithLong = AssertionError(100000000000);
-	assertEquals("100000000000", assertionErrorWithLong.getMessage());
-	
-	// Constructs a new AssertionError with int
-	AssertionError assertionErrorWithInt = AssertionError(10000);
-	assertEquals("10000", assertionErrorWithInt.getMessage());
-	
-	// Constructs a new AssertionError with char
-	AssertionError assertionErrorWithChar = AssertionError('A');
-	assertEquals("A", assertionErrorWithChar.getMessage());
-	
-	// Constructs a new AssertionError with bool true
-	AssertionError assertionErrorWithBoolTrue = AssertionError(true);
-	assertEquals("true", assertionErrorWithBoolTrue.getMessage());
-	
-	// Constructs a new AssertionError with bool false
-	AssertionError assertionErrorWithBoolFalse = AssertionError(false);
-	assertEquals("false", assertionErrorWithBoolFalse.getMessage());
-	
-	// Constructs a new AssertionError with the specified detail message and cause.
-	AssertionError assertionErrorWithMessageAndCause = AssertionError("AssertionError with the specified message and cause", &assertionErrorWithDouble);
-	assertEquals("AssertionError with the specified message and cause", assertionErrorWithMessageAndCause.getMessage());
-	assertEquals("10000.000000000000000", assertionErrorWithMessageAndCause.getCause()->getMessage());
+    // Constructs a new AssertionError with null as its detail message.
+    AssertionError assertionErrorWithNullMessage;
+    assertEquals("", assertionErrorWithNullMessage.getMessage());
+
+    // Constructs a new AssertionError with double
+    AssertionError assertionErrorWithDouble = AssertionError(10000.0);
+    assertEquals("10000.000000", assertionErrorWithDouble.getMessage());
+
+    // Constructs a new AssertionError with float
+    AssertionError assertionErrorWithFloat = AssertionError(10000.0f);
+    assertEquals("10000", assertionErrorWithFloat.getMessage());
+
+    // Constructs a new AssertionError with long
+    AssertionError assertionErrorWithLong = AssertionError((long long) 100000000000000);
+    assertEquals("100000000000000", assertionErrorWithLong.getMessage());
+
+    // Constructs a new AssertionError with int
+    AssertionError assertionErrorWithInt = AssertionError(10000);
+    assertEquals("10000", assertionErrorWithInt.getMessage());
+
+    // Constructs a new AssertionError with char
+    AssertionError assertionErrorWithChar = AssertionError('A');
+    assertEquals("A", assertionErrorWithChar.getMessage());
+
+    // Constructs a new AssertionError with bool true
+    AssertionError assertionErrorWithBoolTrue = AssertionError(true);
+    assertEquals("true", assertionErrorWithBoolTrue.getMessage());
+
+    // Constructs a new AssertionError with bool false
+    AssertionError assertionErrorWithBoolFalse = AssertionError(false);
+    assertEquals("false", assertionErrorWithBoolFalse.getMessage());
+
+    // Constructs a new AssertionError with the specified detail message and cause.
+    AssertionError assertionErrorWithMessageAndCause = AssertionError(
+            "AssertionError with the specified message and cause", &assertionErrorWithDouble);
+    assertEquals("AssertionError with the specified message and cause", assertionErrorWithMessageAndCause.getMessage());
+    assertEquals("10000.000000", assertionErrorWithMessageAndCause.getCause()->getMessage());
 }
 
 TEST (JavaLangAssertionError, TryCatch) {
-	try {
-		throw AssertionError(10000);
-	} catch (AssertionError &e) {
-		assertEquals("10000", e.getMessage());
-	}
+    try {
+        throw AssertionError(10000);
+    } catch (AssertionError &e) {
+        assertEquals("10000", e.getMessage());
+    }
 }
 

@@ -319,30 +319,30 @@ TEST (JavaLangFloat, AssignmentOperator) {
 TEST (JavaLangFloat, ShortValue) {
 // Create variable to test
     Float variableTestShortValue;
-    short expectedResultShortValue;
-    short actualResultShortValue;
+    int expectedResultShortValue;
+    int actualResultShortValue;
 
     // Test Float::POSITIVE_INFINITY
     variableTestShortValue = Float::POSITIVE_INFINITY;
-    expectedResultShortValue = 0;
+    expectedResultShortValue = -2147483648;
     actualResultShortValue = variableTestShortValue.shortValue();
     assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::NEGATIVE_INFINITY
     variableTestShortValue = Float::NEGATIVE_INFINITY;
-    expectedResultShortValue = 0;
+    expectedResultShortValue = -2147483648;
     actualResultShortValue = variableTestShortValue.shortValue();
     assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::NaN
     variableTestShortValue = Float::NaN;
-    expectedResultShortValue = 0;
+    expectedResultShortValue = -2147483648;
     actualResultShortValue = variableTestShortValue.shortValue();
     assertEquals(expectedResultShortValue, actualResultShortValue);
 
     // Test Float::MAX_VALUE
     variableTestShortValue = Float::MAX_VALUE;
-    expectedResultShortValue = 0;
+    expectedResultShortValue = -2147483648;
     actualResultShortValue = variableTestShortValue.shortValue();
     assertEquals(expectedResultShortValue, actualResultShortValue);
 
@@ -374,8 +374,8 @@ TEST (JavaLangFloat, ShortValue) {
 TEST (JavaLangFloat, IntValue) {
 // Create variable to test
     Float variableTestIntValue;
-    int expectedResultIntValue;
-    int actualResultIntValue;
+    long int expectedResultIntValue;
+    long int actualResultIntValue;
 
     // Test Float::POSITIVE_INFINITY
     variableTestIntValue = Float::POSITIVE_INFINITY;
@@ -429,8 +429,8 @@ TEST (JavaLangFloat, IntValue) {
 TEST (JavaLangFloat, LongValue) {
 // Create variable to test
     Float variableTestLongValue;
-    long expectedResultLongValue;
-    long actualResultLongValue;
+    long long expectedResultLongValue;
+    long long actualResultLongValue;
 
     // Test Float::POSITIVE_INFINITY
     variableTestLongValue = Float::POSITIVE_INFINITY;
@@ -671,8 +671,8 @@ TEST (JavaLangFloat, ValueOfParamFloat) {
 TEST (JavaLangFloat, ToIntBits) {
     // Create variable to test
     float input;
-    int expectedResult;
-    int actualResult;
+    long int expectedResult;
+    long int actualResult;
 
     // Input 0.0
     input = 0.0;
@@ -1079,8 +1079,8 @@ TEST (JavaLangFloat, IsInfiniteNoneParam) {
 TEST (JavaLangFloat, HashCodeNoneParam) {
     // Create variable to test
     Float input;
-    int expectedResult;
-    int actualResult;
+    long int expectedResult;
+    long int actualResult;
 
     // Input 0.0
     input = 0.0;
@@ -1164,8 +1164,8 @@ TEST (JavaLangFloat, HashCodeNoneParam) {
 TEST (JavaLangFloat, HashCodeParamFloat) {
     // Create variable to test
     float input;
-    int expectedResult;
-    int actualResult;
+    long int expectedResult;
+    long int actualResult;
 
     // Input 0.0
     input = 0.0;
@@ -1267,7 +1267,7 @@ TEST (JavaLangFloat, Min) {
 
 TEST (JavaLangFloat, IntBitsToFloat) {
     // Create variable to test
-    int intBitsInput;
+    long int intBitsInput;
     float expectedResult;
     float actualResult;
 
