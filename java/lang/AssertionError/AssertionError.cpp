@@ -40,13 +40,10 @@ AssertionError::AssertionError(double doubleValue) : AssertionError(String::valu
 AssertionError::AssertionError(float floatValue) : AssertionError(String::valueOf(floatValue)) {
 }
 
-AssertionError::AssertionError(int floatValue) : AssertionError(String::valueOf(floatValue)) {
+AssertionError::AssertionError(long longValue) : AssertionError(String::valueOf(longValue)) {
 }
 
-AssertionError::AssertionError(long long longValue) : AssertionError(String::valueOf(longValue)) {
-}
-
-AssertionError::AssertionError(long int intValue) : AssertionError(String::valueOf(intValue)) {
+AssertionError::AssertionError(int intValue) : AssertionError(String::valueOf(intValue)) {
 }
 
 AssertionError::AssertionError(char charValue) : AssertionError(String::valueOf(charValue)) {

@@ -38,43 +38,12 @@
  */
 #define STR_FROM(NAME, TYPE, FORMAT); \
 inline string stringFrom##NAME(TYPE target) {\
-    string convert;\
-    long int length = asprintf(&convert, FORMAT, target);\
-    if (length <= 0) {\
-        return (string) "";\
-    }\
-    return convert;\
-}
-
-
-/**
- * Convert long int number to string
- *
- * @param target
- * @return string
- */
-inline string stringFromInt(long int target) {
-    string convert;
-    int length = asprintf(&convert, "%ld", target);
-    if (length <= 0) {
-        return (string) "";
-    }
-    return convert;
-}
-
-/**
- * Convert long long number to string
- *
- * @param target
- * @return string
- */
-inline string stringFromLong(long long target) {
-    string convert;
-    int length = asprintf(&convert, "%lld", target);
-    if (length <= 0) {
-        return (string) "";
-    }
-    return convert;
+        string convert;\
+        int length = asprintf(&convert, FORMAT, target);\
+		if (length <= 0) {\
+			return (string) "";\
+		}\
+        return convert;\
 }
 
 /**
@@ -91,14 +60,13 @@ inline TYPE stringTo##NAME(string target) {\
     return result;\
 }
 
-inline double stringToDouble(string target) {
-    return atof(target);
-}
-
-STR_FROM(Short, int, "%d");
+STR_FROM(Short, short, "%d");
+STR_FROM(Int, int, "%d");
+STR_FROM(Long, long, "%ld");
 STR_FROM(Float, float, "%g");
 STR_TO(Short, short, "%hi");
 STR_TO(Float, float, "%g");
+STR_TO(Double, double, "%lg");
 
 /**
  * String from char
@@ -107,13 +75,13 @@ STR_TO(Float, float, "%g");
  * @return string
  */
 inline string stringFromChar(char target) {
-    if (target == '\0') {
-        return stringCopy("");
-    }
-    auto *result = (char *) calloc(2, sizeof(char));
-    result[0] = target;
-    result[1] = '\0';
-    return result;
+	if (target == '\0') {
+		return stringCopy("");
+	}
+	auto *result = (char *) calloc(2, sizeof(char));
+	result[ 0 ] = target;
+	result[ 1 ] = '\0';
+	return result;
 }
 
 /**
@@ -123,10 +91,10 @@ inline string stringFromChar(char target) {
  * @return string
  */
 inline char stringToChar(string target) {
-    if (isEmptyString(target)) {
-        return '\0';
-    }
-    return target[0];
+	if (isEmptyString(target)) {
+		return '\0';
+	}
+	return target[ 0 ];
 }
 
 /**
@@ -135,11 +103,11 @@ inline char stringToChar(string target) {
  * @param target
  * @return string
  */
-inline long int stringToInt(string target) {
-    if (target == nullptr) {
-        return 0;
-    }
-    return atoi(target);
+inline int stringToInt(string target) {
+	if (target == nullptr) {
+		return 0;
+	}
+	return atoi(target);
 }
 
 /**
@@ -148,25 +116,12 @@ inline long int stringToInt(string target) {
  * @param target
  * @return string
  */
-inline long long stringToLong(string target) {
-    if (target == nullptr) {
-        return 0;
-    }
-    return atol(target);
+inline long stringToLong(string target) {
+	if (target == nullptr) {
+		return 0;
+	}
+	return atol(target);
 }
-
-///**
-// * String to float
-// *
-// * @param target
-// * @return string
-// */
-//inline float stringToFloat(string target) {
-//    if (target == nullptr) {
-//        return 0;
-//    }
-//    return (float) atof(target);
-//}
 
 /**
  * String to boolean
@@ -175,20 +130,20 @@ inline long long stringToLong(string target) {
  * @return true | false
  */
 inline boolean stringToBoolean(string target) {
-    if (lengthPointerChar(target) == 0) {
-        return false;
-    }
-    string booleanValue = stringLower(target);
-    if (stringEquals(booleanValue, (string) "true")) {
-        free(booleanValue);
-        return true;
-    }
-    if (stringToInt(booleanValue) == 0) {
-        free(booleanValue);
-        return false;
-    }
-    free(booleanValue);
-    return true;
+	if (lengthPointerChar(target) == 0) {
+		return false;
+	}
+	string booleanValue = stringLower(target);
+	if (stringEquals(booleanValue, (string) "true")) {
+		free(booleanValue);
+		return true;
+	}
+	if (stringToInt(booleanValue) == 0) {
+		free(booleanValue);
+		return false;
+	}
+	free(booleanValue);
+	return true;
 }
 
 /**
@@ -197,18 +152,28 @@ inline boolean stringToBoolean(string target) {
  * @param target
  * @return string
  */
-inline string stringFromBoolean(long int target) {
-    if (!target) {
-        return stringCopy("false");
-    }
+inline string stringFromBoolean(int target) {
+	if (!target) {
+		return stringCopy("false");
+	}
 
-    return stringCopy("true");
+	return stringCopy("true");
 }
 
 inline string stringFromDouble(double target) {
-    string result = stringCopy(std::to_string(target).c_str());
+	int precision = 15;
 
-    return result;
+	// max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
+	string result = (string) calloc(1079, sizeof(char));
+
+	// Get string type of input number
+	if (target == 0.0f && target < 0) {
+		sprintf(result, "-%.*f", precision, target);
+	} else {
+		sprintf(result, "%.*f", precision, target);
+	}
+
+	return result;
 }
 
 #endif//NATIVE_KERNEL_STRING_CONVERT_HPP

@@ -28,13 +28,13 @@
 #define NATIVE_JAVA_LANG_COMPARABLE_HPP
 
 namespace Java {
-    namespace Lang {
-        template<typename T>
-        class Comparable {
-        public:
-            virtual long int compareTo(const T &o) const = 0;
-        };
-    }
+		namespace Lang {
+				template <typename T>
+				class Comparable {
+				public:
+						virtual int compareTo(const T &o) const = 0;
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_LANG_COMPARABLE_HPP

@@ -32,11 +32,11 @@
 using namespace Java::Lang;
 
 namespace Java {
-    namespace IO {
-        class Writer : public Object {
-
-        };
-    }
+		namespace IO {
+				class Writer : public Object {
+				
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_IO_WRITER_HPP

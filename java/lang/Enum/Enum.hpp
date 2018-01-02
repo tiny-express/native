@@ -33,21 +33,21 @@ namespace Java {
     namespace Lang {
         template<typename E>
         class Enum : public Object,
-                //public virtual Comparable<E>,
-                     public virtual Serializable {
+                    //public virtual Comparable<E>,
+                    public virtual Serializable {
         private:
             string name;
-            long int ordinal;
+            int ordinal;
             string ordinalString;
 
         public:
-            Enum(const_string name, long int ordinal) {
+            Enum(const_string name, int ordinal) {
                 this->name = stringCopy(name);
                 this->ordinal = ordinal;
                 this->ordinalString = stringCopy("");
             }
 
-            Enum(string name, long int ordinal) {
+            Enum(string name, int ordinal) {
                 this->name = stringCopy(name);
                 this->ordinal = ordinal;
                 this->ordinalString = stringCopy("");
@@ -72,7 +72,7 @@ namespace Java {
              * @param e
              * @return int
              */
-            long int compareTo(const Enum<E> &e) {
+            int compareTo(const Enum<E> &e) {
                 return this->ordinal - e.ordinal;
             }
 
@@ -89,7 +89,7 @@ namespace Java {
              * (its position in its enum declaration, where the initial constant is assigned an ordinal of zero).
              * @return int
              */
-            long int getOrdinal() {
+            int getOrdinal() {
                 return this->ordinal;
             }
 

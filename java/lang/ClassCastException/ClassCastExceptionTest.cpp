@@ -31,17 +31,17 @@ using namespace Java::Lang;
 
 TEST (JavaLangClassCastException, Constructor) {
     // Constructs a new ClassCastException with null as its detail message.
-    ClassCastException classCastExceptionWithNullMessage;
+    InterruptedException classCastExceptionWithNullMessage;
     assertEquals("", classCastExceptionWithNullMessage.getMessage());
 
     // Constructs a new ClassCastException with the specified detail message.
-    ClassCastException classCastExceptionWithMessage = ClassCastException(
+    InterruptedException classCastExceptionWithMessage = InterruptedException(
             "ClassCastException with the specified message");
     assertEquals("ClassCastException with the specified message",
                  classCastExceptionWithMessage.getMessage());
 
     // Constructs a new ClassCastException with the specified detail message and cause.
-    ClassCastException classCastExceptionWithMessageAndCause = ClassCastException(
+    InterruptedException classCastExceptionWithMessageAndCause = InterruptedException(
             "ClassCastException with the specified message and cause",
             &classCastExceptionWithMessage);
     assertEquals("ClassCastException with the specified message and cause",
@@ -50,7 +50,7 @@ TEST (JavaLangClassCastException, Constructor) {
                  classCastExceptionWithMessageAndCause.getCause()->getMessage());
 
     // Constructs a new ClassCastException with the specified cause.
-    ClassCastException classCastExceptionWithCause = ClassCastException(
+    InterruptedException classCastExceptionWithCause = InterruptedException(
             &classCastExceptionWithMessageAndCause);
     assertEquals("ClassCastException with the specified message and cause",
                  classCastExceptionWithCause.getCause()->getMessage());
@@ -60,9 +60,9 @@ TEST (JavaLangClassCastException, Constructor) {
 
 TEST (JavaLangClassCastException, TryCatch) {
     try {
-        throw ClassCastException("Throw ClassCastException");
+        throw InterruptedException("Throw ClassCastException");
     }
-    catch (ClassCastException &e) {
+    catch (InterruptedException e) {
         assertEquals("Throw ClassCastException", e.getMessage());
     }
 }

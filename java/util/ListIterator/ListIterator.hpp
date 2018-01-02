@@ -28,11 +28,11 @@
 #define NATIVE_JAVA_UTIL_ARRAY_LIST_ITERATOR_HPP
 
 namespace Java {
-    namespace Util {
-        template<typename E>
-        class ListIterator {
-        };
-    }
+		namespace Util {
+				template <typename E>
+				class ListIterator {
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_UTIL_ARRAY_LIST_ITERATOR_HPP

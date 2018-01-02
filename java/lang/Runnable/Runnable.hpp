@@ -28,12 +28,12 @@
 #define NATIVE_JAVA_LANG_RUNNABLE_HPP
 
 namespace Java {
-    namespace Lang {
-        class Runnable {
-        public:
-            virtual void run() const = 0;
-        };
-    }
+		namespace Lang {
+				class Runnable {
+				public:
+						virtual void run() const = 0;
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_LANG_RUNNABLE_HPP

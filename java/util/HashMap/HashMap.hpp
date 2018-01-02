@@ -152,9 +152,9 @@ namespace Java {
              * Map.Entry hashCode() on each element (entry) in the
              * set, and adding up the results.
              *
-             * @return 	long int the hash code value for this map
+             * @return 	int the hash code value for this map
              */
-            long int hashCode();
+            int hashCode();
 
             /**
              * Returns a Set view of the keys contained in this map.
@@ -247,7 +247,7 @@ namespace Java {
 //			}
 //
 //			final class Values extends AbstractCollection<Value> {
-//				public final long int size() {
+//				public final int size() {
 //					return size;
 //				}
 
@@ -265,19 +265,19 @@ namespace Java {
              *
              * @return HashMap<Key, Value>
              */
-            /***
-             * Returns a shallow copy of this HashMap instance:
-             * the keys and values themselves are not cloned.
-             *
-             * @return HashMap<Key, Value>
-             */
-            HashMap<Key, Value> clone() const {
-                HashMap<Key, Value> result;
-                for (auto const &element : this->original) {
-                    result.put(element.first, element.second);
+                /***
+				 * Returns a shallow copy of this HashMap instance:
+				 * the keys and values themselves are not cloned.
+				 *
+				 * @return HashMap<Key, Value>
+				 */
+                HashMap<Key, Value> clone() const {
+                    HashMap<Key, Value> result;
+                    for (auto const &element : this->original) {
+                        result.put(element.first, element.second);
+                    }
+                    return result;
                 }
-                return result;
-            }
 
             /**
              * Attempts to compute a mapping for the specified key and
@@ -660,7 +660,7 @@ namespace Java {
              *
              * @return int
              */
-            long int size() const {
+            int size() const {
                 return this->original.size();
             }
 
@@ -727,12 +727,12 @@ namespace Java {
 //             * @return a String with add escape sequence replaced
 //             */
 //            String replaceEscapeSequence(const String stringToReplace) {
-//                long int index = 0;
+//                int index = 0;
 //                String replacementString;
 //                String result;
 //
 //                while (index < stringToReplace.length()) {
-//                    long int charAtIndex = stringToReplace.charAt(index);
+//                    int charAtIndex = stringToReplace.charAt(index);
 //
 //                    switch (charAtIndex) {
 //                        case '\"':

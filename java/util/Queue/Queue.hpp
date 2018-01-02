@@ -33,25 +33,22 @@
 using namespace Java::Util;
 
 namespace Java {
-    namespace Util {
-
-        template<typename E>
-        class Queue : public Collection<E> {
-        private:
-            Queue();
-
-            ~Queue();
-
-        protected:
-            virtual boolean add(E &e) = 0; ///Inserts the specified element into this queue
-            virtual boolean offer(E &e) = 0; ///Inserts the specified element into this queue
-            virtual E
-            peek() const = 0; ///Retrieves, but does not remove, the head of this queue, or returns NULL if this queue is empty.
-            virtual E
-            poll() = 0; ///Retrieves and removes the head of this queue, or returns NULL if this queue is empty.
-            virtual E remove() = 0; ///Retrieves and removes the head of this queue
-        };
-    }
+		namespace Util {
+				
+				template <typename E>
+				class Queue : public Collection<E> {
+				private:
+						Queue();
+						~Queue();
+				
+				protected:
+						virtual boolean add(E &e) = 0; ///Inserts the specified element into this queue
+						virtual boolean offer(E &e) = 0; ///Inserts the specified element into this queue
+						virtual E peek() const = 0; ///Retrieves, but does not remove, the head of this queue, or returns NULL if this queue is empty.
+						virtual E poll() = 0; ///Retrieves and removes the head of this queue, or returns NULL if this queue is empty.
+						virtual E remove() = 0; ///Retrieves and removes the head of this queue
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_UTIL_QUEUE_HPP

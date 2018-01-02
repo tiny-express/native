@@ -40,8 +40,7 @@ TEST (JavaIoIOException, Constructor) {
     assertEquals("IOException with the specified message", ioExceptionWithMessage.getMessage());
 
     // Constructs a new IOException with the specified detail message and cause.
-    IOException ioExceptionWithMessageAndCause = IOException("IOException with the specified message and cause",
-                                                             &ioExceptionWithMessage);
+    IOException ioExceptionWithMessageAndCause = IOException("IOException with the specified message and cause", &ioExceptionWithMessage);
     assertEquals("IOException with the specified message and cause", ioExceptionWithMessageAndCause.getMessage());
     assertEquals("IOException with the specified message", ioExceptionWithMessageAndCause.getCause()->getMessage());
 

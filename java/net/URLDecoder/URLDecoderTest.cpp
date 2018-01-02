@@ -31,14 +31,14 @@
 using namespace Java::Net;
 using namespace Java::Lang;
 
-TEST (JavaNet, URLDecoderDecode) {
+TEST(JavaNet, URLDecoderDecode) {
     String target = "Qu%c3%a1n+%c4%83n";
     String result = URLDecoder::decode(target);
     String expect = u8"Quán ăn";
     assertEquals(expect.toString(), result.toString());
 }
 
-TEST (JavaNet, URLDecoderDecodeUsingSpecificEncodingScheme) {
+TEST(JavaNet, URLDecoderDecodeUsingSpecificEncodingScheme) {
     String target = "Qu%c3%a1n+%c4%83n";
     String result = URLDecoder::decode(target, "UTF-8");
     String expect = u8"Quán ăn";

@@ -61,16 +61,16 @@ byte Bytes::byteValue() const {
     return this->original;
 }
 
-long int Bytes::compare(byte byteA, byte byteB) {
+int Bytes::compare(byte byteA, byte byteB) {
     return byteA - byteB;
 }
 
-long int Bytes::compareTo(const Bytes &other) const {
+int Bytes::compareTo(const Bytes &other) const {
     return this->original - other.original;
 }
 
 Bytes Bytes::decode(String stringToDecode) {
-    long int value = Integer::decode(stringToDecode).intValue();
+    int value = Integer::decode(stringToDecode).intValue();
     if (value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
         throw NumberFormatException("out of byte range");
     }
@@ -95,36 +95,36 @@ float Bytes::floatValue() const {
     return (float) this->original;
 }
 
-long int Bytes::hashCode() const {
+int Bytes::hashCode() const {
     return (int) this->original;
 }
 
-long int Bytes::hashCode(byte value) {
-    return value;
+int Bytes::hashCode(byte value) {
+    return (int) value;
 }
 
-long int Bytes::intValue() const {
+int Bytes::intValue() const {
     return (int) this->original;
 }
 
-long long Bytes::longValue() const {
-    return this->original;
+long Bytes::longValue() const {
+    return (long) this->original;
 }
 
 byte Bytes::parseBytes(String stringToParse) {
     return parseBytes(stringToParse, 10);
 }
 
-byte Bytes::parseBytes(String stringToParse, long int radix) {
-    long int value = Integer::parseInt(stringToParse, radix);
+byte Bytes::parseBytes(String stringToParse, int radix) {
+    int value = Integer::parseInt(stringToParse, radix);
     if (value < Bytes::MIN_VALUE || value > Bytes::MAX_VALUE) {
         throw NumberFormatException("out of byte range");
     }
     return (byte) value;
 }
 
-int Bytes::shortValue() const {
-    return (int) this->original;
+short Bytes::shortValue() const {
+    return (short) this->original;
 }
 
 String Bytes::toString() const {
@@ -135,11 +135,11 @@ String Bytes::toString(byte byteValue) {
     return Integer::toString((int) byteValue, 10);
 }
 
-long int Bytes::toUnsignedInt(byte byteValue) {
+int Bytes::toUnsignedInt(byte byteValue) {
     return ((int) byteValue) & 0xff;
 }
 
-long long Bytes::toUnsignedLong(byte byteValue) {
+long Bytes::toUnsignedLong(byte byteValue) {
     return ((long) byteValue) & 0xffL;
 }
 
@@ -151,7 +151,7 @@ Bytes Bytes::valueOf(String stringValue) {
     return Bytes(parseBytes(stringValue));
 }
 
-Bytes Bytes::valueOf(String stringValue, long int radix) {
+Bytes Bytes::valueOf(String stringValue, int radix) {
     return Bytes(parseBytes(stringValue, radix));
 }
 

@@ -29,7 +29,7 @@
 
 using namespace Java::Security;
 
-TEST (JavaLang, NoSuchAlgorithmExceptionConstructor) {
+TEST(JavaLang, NoSuchAlgorithmExceptionConstructor) {
 
     NoSuchAlgorithmException noSuchAlgorithmExceptionWithNullMessage;
     assertEquals(
@@ -59,18 +59,18 @@ TEST (JavaLang, NoSuchAlgorithmExceptionConstructor) {
     NoSuchAlgorithmException noSuchAlgorithmExceptionWithCause =
             NoSuchAlgorithmException(&noSuchAlgorithmExceptionWithMessageAndCause);
     assertEquals("NoSuchAlgorithmException with the specified message and cause",
-                 noSuchAlgorithmExceptionWithCause.getCause()
-                         ->getMessage());
+               noSuchAlgorithmExceptionWithCause.getCause()
+                       ->getMessage());
     assertEquals("NoSuchAlgorithmException with the specified message",
-                 noSuchAlgorithmExceptionWithCause.getCause()
-                         ->getCause()
-                         ->getMessage());
+               noSuchAlgorithmExceptionWithCause.getCause()
+                       ->getCause()
+                       ->getMessage());
 }
 
-TEST (JavaLang, NoSuchAlgorithmExceptionTryCatch) {
+TEST(JavaLang, NoSuchAlgorithmExceptionTryCatch) {
     try {
         throw NoSuchAlgorithmException("Throw NoSuchAlgorithmException");
-    } catch (Exception &e) {
+    } catch (Exception e) {
         assertEquals("Throw NoSuchAlgorithmException", e.getMessage());
     }
 }

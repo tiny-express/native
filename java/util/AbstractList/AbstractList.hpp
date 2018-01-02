@@ -33,17 +33,16 @@
 #include "../List/List.hpp"
 
 namespace Java {
-    namespace Util {
-        template<class E>
-        class AbstractList : public virtual AbstractCollection<E>, public virtual List<E> {
-        protected:
-            AbstractList() {
-            }
-
-            virtual ~AbstractList() {
-            }
-        };
-    }
+		namespace Util {
+				template <class E>
+				class AbstractList : public virtual AbstractCollection<E>, public virtual List<E> {
+				protected:
+						AbstractList() {
+						}
+						virtual ~AbstractList() {
+						}
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_UTIL_ABSTRACT_LIST_HPP

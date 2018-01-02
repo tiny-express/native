@@ -32,13 +32,13 @@
 using namespace Java::Util;
 
 namespace Java {
-    namespace Lang {
-        template<class T>
-        class Iterable {
-        public:
-            // virtual Iterator<T> &iterator() const = 0;
-        };
-    }
+		namespace Lang {
+				template <class T>
+				class Iterable {
+				public:
+						// virtual Iterator<T> &iterator() const = 0;
+				};
+		}
 }
 
 #endif // NATIVE_JAVA_LANG_ITERABLE_HPP

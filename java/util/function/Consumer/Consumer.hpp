@@ -28,13 +28,13 @@
 #define NATIVE_JAVA_UTIL_FUNCTION_CONSUMER_HPP
 
 namespace Java {
-    namespace Util {
-        namespace Function {
-            template<typename E>
-            class Consumer {
-            };
-        }
-    }
+		namespace Util {
+				namespace Function {
+						template <typename E>
+						class Consumer {
+						};
+				}
+		}
 }
 
 #endif // NATIVE_JAVA_UTIL_FUNCTION_CONSUMER_HPP

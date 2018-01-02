@@ -34,8 +34,7 @@ IllegalArgumentException::IllegalArgumentException() : RuntimeException::Runtime
 IllegalArgumentException::IllegalArgumentException(String message) : RuntimeException::RuntimeException(message) {
 }
 
-IllegalArgumentException::IllegalArgumentException(String message, Throwable *cause)
-        : RuntimeException::RuntimeException(message, cause) {
+IllegalArgumentException::IllegalArgumentException(String message, Throwable *cause) : RuntimeException::RuntimeException(message, cause) {
 }
 
 IllegalArgumentException::IllegalArgumentException(Throwable *cause) : RuntimeException::RuntimeException(cause) {

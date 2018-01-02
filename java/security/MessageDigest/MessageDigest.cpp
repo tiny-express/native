@@ -34,10 +34,10 @@ using namespace Java::Security;
 
 MessageDigest MessageDigest::getInstance(String algorithm) {
     if (algorithm == "MD5") {
-        MessageDigestSpi *spi = new MD5MessageDigest();
+        MessageDigestSpi* spi = new MD5MessageDigest();
         return MessageDigest(spi, algorithm);
     } else if (algorithm == "SHA1") {
-        MessageDigestSpi *spi = new SHA1MessageDigest();
+        MessageDigestSpi* spi = new SHA1MessageDigest();
         return MessageDigest(spi, algorithm);
     } else {
         throw NoSuchAlgorithmException(algorithm + (string) " not found");
@@ -54,11 +54,11 @@ String MessageDigest::getAlgorithm() {
     return algorithm;
 }
 
-long int MessageDigest::getDigestLength() {
+int MessageDigest::getDigestLength() {
     return engineGetDigestLength();
 }
 
-long int MessageDigest::digest(byte buf[], long int len) {
+int MessageDigest::digest(byte buf[], int len) {
     if (buf == nullptr)
         throw InterruptedException("No output buffer given");
     if (len < engineGetDigestLength())
@@ -70,7 +70,7 @@ void MessageDigest::reset() {
     engineReset();
 }
 
-void MessageDigest::update(const byte input[], long int len) {
+void MessageDigest::update(const byte input[], int len) {
     if (input == nullptr || len == 0)
         throw InterruptedException("No input buffer given");
     engineUpdate(input, len);
@@ -81,14 +81,14 @@ MessageDigest::MessageDigest(MessageDigestSpi *spi, String algorithm) {
     this->algorithm = algorithm;
 }
 
-long int MessageDigest::engineDigest(byte buffer[], long int len) {
+int MessageDigest::engineDigest(byte buffer[], int len) {
     if (spi) {
         return spi->engineDigest(buffer, len);
     }
     return 0;
 }
 
-long int MessageDigest::engineGetDigestLength() {
+int MessageDigest::engineGetDigestLength() {
     if (spi) {
         return spi->engineGetDigestLength();
     }
@@ -101,7 +101,7 @@ void MessageDigest::engineReset() {
     }
 }
 
-void MessageDigest::engineUpdate(const byte input[], long int len) {
+void MessageDigest::engineUpdate(const byte input[], int len) {
     if (spi) {
         spi->engineUpdate(input, len);
     }

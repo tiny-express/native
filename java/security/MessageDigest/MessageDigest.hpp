@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_SECURITY_MESSAGE_DIGEST_HPP
-#define NATIVE_JAVA_SECURITY_MESSAGE_DIGEST_HPP
+#ifndef NATIVE_JAVA_SECURITY_MESSAGEDIGEST_HPP_
+#define NATIVE_JAVA_SECURITY_MESSAGEDIGEST_HPP_
 
 #include "../../../kernel/Type.hpp"
 #include "../../Lang.hpp"
@@ -43,30 +43,30 @@ namespace Java {
 
             String getAlgorithm();
 
-            long int getDigestLength();
+            int getDigestLength();
 
-            long int digest(byte buf[], long int len);
+            int digest(byte buf[], int len);
 
             void reset();
 
-            void update(const byte input[], long int len);
+            void update(const byte input[], int len);
 
         private:
-            MessageDigestSpi *spi;
+            MessageDigestSpi* spi;
             String algorithm;
 
-            MessageDigest(MessageDigestSpi *spi, String algorithm);
+            MessageDigest(MessageDigestSpi* spi, String algorithm);
 
-            long int engineDigest(byte buffer[], long int len) override;
+            int engineDigest(byte buffer[], int len) override;
 
-            long int engineGetDigestLength() override;
+            int engineGetDigestLength() override;
 
             void engineReset() override;
 
-            void engineUpdate(const byte input[], long int len) override;
+            void engineUpdate(const byte input[], int len) override;
 
         };
     } // namespace Security
 } // namespace Java
 
-#endif // NATIVE_JAVA_SECURITY_MESSAGE_DIGEST_HPP
+#endif // NATIVE_JAVA_SECURITY_MESSAGEDIGEST_HPP_

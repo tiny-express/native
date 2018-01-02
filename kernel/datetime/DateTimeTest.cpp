@@ -29,14 +29,14 @@
 
 TEST (KernelDateTime, TimestampForWindows) {
 #ifdef WIN
-	unsigned long int millisecond = 123;
-	unsigned long int second = 3;
-	unsigned long int minute = 20;
-	unsigned long int hour = 17;
-	unsigned long int day  = 16;
-	unsigned long int month = 7;
-	unsigned long int year = 2017;
-	unsigned long long  timestamp = unixTimeInMilliseconds(
+	unsigned int millisecond = 123;
+	unsigned int second = 3;
+	unsigned int minute = 20;
+	unsigned int hour = 17;
+	unsigned int day  = 16;
+	unsigned int month = 7;
+	unsigned int year = 2017;
+	unsigned long timestamp = unixTimeInMilliseconds(
 			millisecond,
 			second,
 			minute,
@@ -45,7 +45,7 @@ TEST (KernelDateTime, TimestampForWindows) {
 			month,
 			year
 	);
-	assertEquals(1500225603123, (long long) timestamp);
+	assertEquals(1500225603123, (long) timestamp);
 #endif
 }
 
@@ -54,13 +54,13 @@ TEST (KernelDateTime, Timestamp) {
     // but nano seconds we need multiply with 1,000,000,000
     // so it will be look likes this 1506237734000000000
     // length of timestamp in nano seconds is 19 digits
-	long long  timestamps = timestamp();
+	long timestamps = timestamp();
 	assertTrue(timestamps > 1506237163070843650);
     assertTrue(timestamps < 2506237163070843650);
 }
 
 TEST (KernelDateTime, Date) {
-	long long  timestamp = 1473765499;
+	long timestamp = 1473765499;
 	auto format = (string) "d/m/y";
 	string result1 = date(timestamp, format);
 	assertEquals("13/09/2016", result1);

@@ -28,13 +28,13 @@
 #define NATIVE_JAVA_UTIL_FUNCTION_UNARY_OPERATOR_HPP
 
 namespace Java {
-    namespace Util {
-        namespace Function {
-            template<typename E>
-            class UnaryOperator {
-            };
-        }
-    }
+		namespace Util {
+				namespace Function {
+						template <typename E>
+						class UnaryOperator {
+						};
+				}
+		}
 }
 
 #endif // NATIVE_JAVA_UTIL_FUNCTION_UNARY_OPERATOR_HPP

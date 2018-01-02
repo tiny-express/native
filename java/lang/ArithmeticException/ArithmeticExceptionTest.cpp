@@ -31,17 +31,17 @@ using namespace Java::Lang;
 
 TEST (JavaLangArithmeticException, Constructor) {
     // Constructs a new ArithmeticException with null as its detail message.
-    ArithmeticException arithmeticExceptionWithNullMessage;
+    InterruptedException arithmeticExceptionWithNullMessage;
     assertEquals("", arithmeticExceptionWithNullMessage.getMessage());
 
     // Constructs a new ArithmeticException with the specified detail message.
-    ArithmeticException arithmeticExceptionWithMessage = ArithmeticException(
+    InterruptedException arithmeticExceptionWithMessage = InterruptedException(
             "ArithmeticException with the specified message");
     assertEquals("ArithmeticException with the specified message",
                  arithmeticExceptionWithMessage.getMessage());
 
     // Constructs a new ArithmeticException with the specified detail message and cause.
-    ArithmeticException arithmeticExceptionWithMessageAndCause = ArithmeticException(
+    InterruptedException arithmeticExceptionWithMessageAndCause = InterruptedException(
             "ArithmeticException with the specified message and cause",
             &arithmeticExceptionWithMessage);
     assertEquals("ArithmeticException with the specified message and cause",
@@ -50,7 +50,7 @@ TEST (JavaLangArithmeticException, Constructor) {
                  arithmeticExceptionWithMessageAndCause.getCause()->getMessage());
 
     // Constructs a new ArithmeticException with the specified cause.
-    ArithmeticException arithmeticExceptionWithCause = ArithmeticException(
+    InterruptedException arithmeticExceptionWithCause = InterruptedException(
             &arithmeticExceptionWithMessageAndCause);
     assertEquals("ArithmeticException with the specified message and cause",
                  arithmeticExceptionWithCause.getCause()->getMessage());
@@ -60,8 +60,9 @@ TEST (JavaLangArithmeticException, Constructor) {
 
 TEST (JavaLangArithmeticException, TryCatch) {
     try {
-        throw ArithmeticException("Throw ArithmeticException");
-    } catch (ArithmeticException &e) {
+        throw InterruptedException("Throw ArithmeticException");
+    }
+    catch (InterruptedException e) {
         assertEquals("Throw ArithmeticException", e.getMessage());
     }
 }

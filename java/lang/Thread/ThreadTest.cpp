@@ -41,8 +41,8 @@
 //class RunnableTarget2 : public virtual Runnable {
 //public:
 //	void run() const {
-//	long int index = 0;
-//	long int limit = 51;
+//		int index = 0;
+//		int limit = 51;
 //		for (; index <= limit; index++) {
 //			// printf("Index [%d] must not equal to %d to test Thread.stop()\n", index, limit);
 //			usleep(1);

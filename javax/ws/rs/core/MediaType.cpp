@@ -127,8 +127,8 @@ boolean MediaType::isCompatible(MediaType other) {
 
     // wildcard with suffix? e.g. application/*+xml
     if (this->isWildcardSubtype() || other.isWildcardSubtype()) {
-        long int thisPlusIndex = this->subtype.indexOf('+');
-        long int otherPlusIndex = other.getSubtype().indexOf('+');
+        int thisPlusIndex = this->subtype.indexOf('+');
+        int otherPlusIndex = other.getSubtype().indexOf('+');
         if (thisPlusIndex == CHAR_NOT_FOUND && otherPlusIndex == CHAR_NOT_FOUND) {
             return true;
         }
@@ -169,7 +169,7 @@ MediaType MediaType::valueOf(String type) {
         throw MediaTypeException("`type` must not be empty");
     }
 
-    long int indexOfSemicolon = type.indexOf(";");
+    int indexOfSemicolon = type.indexOf(";");
     String fullType = (indexOfSemicolon >= 0 ? type.subString(0, indexOfSemicolon) : type).trim();
     if (fullType.isEmpty()) {
         throw MediaTypeException("`type` must not be empty");
@@ -179,7 +179,7 @@ MediaType MediaType::valueOf(String type) {
         fullType = WILDCARD;
     }
 
-    long int splashIndex = fullType.indexOf('/');
+    int splashIndex = fullType.indexOf('/');
 
     if (splashIndex == CHAR_NOT_FOUND) {
         String exceptionMessage = type + (String) " does not contains '/'";

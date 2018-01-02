@@ -58,7 +58,7 @@ namespace Java {
         throw StringIndexOutOfBoundsException(offset + length);\
     }\
     this->original = (string) allocateMemory((length + 1) * sizeof(char));\
-    long int index;\
+    int index;\
     for (index = 0; index < length; offset++, index++) {\
         this->original [index] = array.get(offset);\
     }\
@@ -74,21 +74,21 @@ namespace Java {
         memcpy(&this->original[this->size], targetValue, targetLength);\
         this->original[newLength] = '\0';\
         this->size = newLength;
-
+        
         class StringBuilder;
 
         class StringBuffer;
 
         class Short;
-
-        class Integer;
+				
+		class Integer;
 
         class Long;
 
         class Float;
 
         class Double;
-
+				
         class String :
                 public virtual Serializable,
                 public virtual Comparable<String>,
@@ -96,9 +96,9 @@ namespace Java {
 
         private:
             string original;
-            long int size;
-            long int capacity;
-            mutable long int hash = 0;
+            int size;
+            int capacity;
+            mutable int hash = 0;
 
         public:
             /**
@@ -128,7 +128,7 @@ namespace Java {
              *
              * @param stringBuilder
              */
-            String(const StringBuilder &stringBuilder);
+             String(const StringBuilder &stringBuilder);
 
             /**
              * Allocates a new String so that it represents the sequence
@@ -136,7 +136,7 @@ namespace Java {
              *
              * @param charArray
              */
-            String(Array<char> &charArray);
+             String(Array<char> &charArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -144,7 +144,7 @@ namespace Java {
              *
              * @param stringBuffer
              */
-            String(const StringBuffer &stringBuffer);
+             String(const StringBuffer &stringBuffer);
 
             /**
              * Constructs a new String by decoding the specified array of bytes
@@ -176,22 +176,22 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-            String(Array<char> &charArray, long int offset, long int count);
+             String(Array<char> &charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
-             * from a subarray of the Unicode code polong int array argument.
+             * from a subarray of the Unicode code point array argument.
              *
              * @param codePoints
              * @param offset
              * @param count
              * @throw IllegalArgumentException If any invalid Unicode
-             * code polong int is found in codePoints
+             * code point is found in codePoints
              * @throw IndexOutOfBoundsException If the offset and count
              * arguments index characters outside the bounds of the codePoints array
              */
             // TODO (anhnt) need CharSet
-            // String(Array<int> codePoints, long int offset, long int count);
+            // String(Array<int> codePoints, int offset, int count);
 
             /**
              * Constructs a new String by decoding the specified
@@ -203,7 +203,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-            String(Array<byte> &byteArray, long int offset, long int length);
+             String(Array<byte> &byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -217,7 +217,7 @@ namespace Java {
              * characters outside the bounds of the bytes array
              */
             // TODO (anhnt) need CharSet
-            // String(Array<byte> &byteArray, long int offset, long int length, Charset charset);
+            // String(Array<byte> &byteArray, int offset, int length, Charset charset);
 
             /**
              * Constructs a new String by decoding the specified
@@ -232,7 +232,7 @@ namespace Java {
              * characters outside the bounds of the bytes array
              */
             // TODO (anhnt) need CharSet
-            // String(Array<byte> &byteArray, long int offset, long int length, String charsetName);
+            // String(Array<byte> &byteArray, int offset, int length, String charsetName);
 
             /**
              * Construct a new String from specific string
@@ -271,7 +271,7 @@ namespace Java {
              * @param original
              * @param length
              */
-            String(string target, long int length);
+            String(string target, int length);
 
             /**
              * Destructor
@@ -286,7 +286,7 @@ namespace Java {
             * @param index
             * @return char
             */
-            inline char &operator[](const long int index) {
+            inline char &operator[](const int index) {
                 return this->original[index];
             }
 
@@ -295,7 +295,7 @@ namespace Java {
              *
              * @return int
              */
-            long int getSize() const;
+            int getSize() const;
 
             /**
              * String character at index
@@ -303,7 +303,7 @@ namespace Java {
              * @param index
              * @return String
              */
-            char charAt(long int index) const override;
+            char charAt(int index) const override;
 
             /**
              * Returns the character (Unicode code point) at the specified index.
@@ -312,7 +312,7 @@ namespace Java {
              * @return int
              */
             // TODO (anhnt) need Character
-            // long int codePointAt(long int index);
+            // int codePointAt(int index);
 
             /**
              * Returns the character (Unicode code point) before the specified index.
@@ -321,7 +321,7 @@ namespace Java {
              * @return int
              */
             // TODO (anhnt) need Character
-            // long int codePointBefore(long int index);
+            // int codePointBefore(int index);
 
             /**
              * Returns the number of Unicode code points
@@ -332,7 +332,7 @@ namespace Java {
              * @return int
              */
             // TODO (anhnt) need Character
-            // long int codePointCount(long int beginIndex, long int endIndex);
+            // int codePointCount(int beginIndex, int endIndex);
 
             /**
              * Clone to new object
@@ -351,7 +351,7 @@ namespace Java {
              * and a value greater than 0 if this String is lexicographically
              * greater than the String argument.
              */
-            long int compareTo(const String &anotherString) const override;
+            int compareTo(const String &anotherString) const override;
 
             /**
              * String compare with another String but ignore case
@@ -364,7 +364,7 @@ namespace Java {
              * and a value greater than 0 if this String is lexicographically
              * greater than the String argument ignoring case considerations..
              */
-            long int compareToIgnoreCase(const String &targetString) const;
+            int compareToIgnoreCase(const String &targetString) const;
 
 
             /**
@@ -414,7 +414,7 @@ namespace Java {
              * @return a String that contains the characters of the
              * specified subarray of charArray.
              */
-            static String copyValueOf(Array<char> &charArray, long int offset, long int count);
+            static String copyValueOf(Array<char> &charArray, int offset, int count);
 
             /**
              * String endswith a suffix
@@ -456,7 +456,7 @@ namespace Java {
              *
              * @return long
              */
-            long long hashCode() const;
+            long hashCode() const;
 
             /**
              * String from character array
@@ -505,8 +505,8 @@ namespace Java {
              * destinationBegin is negative
              * destinationBegin + (srcEnd - srcBegin) is larger than destination.length
              */
-            void getChars(long int sourceBegin, long int sourceEnd,
-                          Array<char> &destination, long int destinationBegin);
+            void getChars(int sourceBegin, int sourceEnd,
+                          Array<char> &destination, int destinationBegin);
 
             /**
              * Get char to String
@@ -515,7 +515,7 @@ namespace Java {
              * @param index
              * @return String
              */
-            String getStringFromIndex(long int index) const;
+            String getStringFromIndex(int index) const;
 
             /**
              * Returns the index within this String
@@ -525,7 +525,7 @@ namespace Java {
              * @return index of the first occurrence of character,
              * or -1 if there is no such occurrence.
              */
-            long int indexOf(long int character) const;
+            int indexOf(int character) const;
 
             /**
              * Returns the index within this String
@@ -535,7 +535,7 @@ namespace Java {
              * @return index of the first occurrence of the specified substring,
              * or -1 if there is no such occurrence.
              */
-            long int indexOf(String subString) const;
+            int indexOf(String subString) const;
 
             /**
              * Returns the index within this String
@@ -547,7 +547,7 @@ namespace Java {
              * @return index of the first occurrence of the specified character,
              * or -1 if there is no such occurrence.
              */
-            long int indexOf(long int character, long int fromIndex) const;
+            int indexOf(int character, int fromIndex) const;
 
             /**
              * Returns the index within this string
@@ -559,7 +559,7 @@ namespace Java {
              * @return index of the first occurrence of the specified substring,
              * start from fromIndex or -1 if there is no such occurrence.
              */
-            long int indexOf(String subString, long int fromIndex) const;
+            int indexOf(String subString, int fromIndex) const;
 
             /**
              * Determine if this String is empty
@@ -596,7 +596,7 @@ namespace Java {
              * @return index of the last occurrence of the specified character,
              * or -1 if the character does not occur.
              */
-            long int lastIndexOf(long int character);
+            int lastIndexOf(int character);
 
             /**
              * Returns the index within this string of the last occurrence
@@ -608,7 +608,7 @@ namespace Java {
              * @return index of the last occurrence of the specified character,
              * or -1 if the character does not occur.
              */
-            long int lastIndexOf(long int character, long int fromIndex);
+            int lastIndexOf(int character, int fromIndex);
 
             /**
              * Returns the index within this string of the last occurrence
@@ -618,7 +618,7 @@ namespace Java {
              * @return index of the last occurrence of the specified substring,
              * or -1 if the substring does not occur.
              */
-            long int lastIndexOf(String subString) const;
+            int lastIndexOf(String subString) const;
 
             /**
              * Returns the index within this string of the last occurrence
@@ -630,14 +630,14 @@ namespace Java {
              * @return index of the last occurrence of the specified substring,
              * or -1 if the substring does not occur.
              */
-            long int lastIndexOf(String subString, long int fromIndex) const;
+            int lastIndexOf(String subString, int fromIndex) const;
 
             /**
              * Returns the length of this string
              *
              * @return int
              */
-            inline long int length() const override {
+            inline int length() const override {
                 return this->size;
             }
 
@@ -668,7 +668,7 @@ namespace Java {
              * @return the index within this String
              */
             // TODO (anhnt) need Character
-            // long int offsetByCodePoints(long int index, long int codePointOffset);
+            // int offsetByCodePoints(int index, int codePointOffset);
 
             /**
              * Tests if two string regions are equal.
@@ -680,8 +680,8 @@ namespace Java {
              * @return true if the specified subregion of this String exactly
              * matches the specified subregion of the String argument; false otherwise.
              */
-            boolean regionMatches(long int thisOffset,
-                                  String otherString, long int otherOffset, long int len);
+            boolean regionMatches(int thisOffset,
+                                  String otherString, int otherOffset, int len);
 
             /**
              * Tests if two string regions are equal.
@@ -695,8 +695,8 @@ namespace Java {
              * subregion of the String argument; false otherwise.
              * Whether the matching is exact or case insensitive depends on the ignoreCase argument.
              */
-            boolean regionMatches(boolean ignoreCase, long int thisOffset,
-                                  String otherString, long int otherOffset, long int len);
+            boolean regionMatches(boolean ignoreCase, int thisOffset,
+                                  String otherString, int otherOffset, int len);
 
             /**
              * Returns a string resulting from replacing all occurrences
@@ -765,7 +765,7 @@ namespace Java {
              * @return array of Strings computed by splitting this String
              * around matches of the given regular expression
              */
-            Array<String> split(String regex, long int limit) const;
+            Array<String> split(String regex, int limit) const;
 
             /**
              * Tests if this string starts with the specified prefix.
@@ -787,7 +787,7 @@ namespace Java {
              * The result is false if thisOffset is negative or greater than the length
              * of this String object;
              */
-            boolean startsWith(String prefix, long int thisOffset) const;
+            boolean startsWith(String prefix, int thisOffset) const;
 
             /**
              * Returns a character sequence that is a subsequence of this sequence.
@@ -798,7 +798,7 @@ namespace Java {
              * if endIndex is greater than length(), or if beginIndex is greater than endIndex
              * @return the specified subsequence.
              */
-            // CharSequence subSequence(long int beginIndex, long int endIndex);
+            // CharSequence subSequence(int beginIndex, int endIndex);
 
             /**
              * Returns a String that is a substring of this String.
@@ -810,7 +810,7 @@ namespace Java {
              * or larger than the length of this String object.
              * @return the specified substring as a String.
              */
-            String subString(long int beginIndex) const;
+            String subString(int beginIndex) const;
 
             /**
              * Returns a string that is a substring of this string.
@@ -824,7 +824,7 @@ namespace Java {
              * or beginIndex is larger than endIndex.
              * @return the specified substring as a String.
              */
-            String subString(long int beginIndex, long int endIndex) const;
+            String subString(int beginIndex, int endIndex) const;
 
             /**
              * Converts this string to a new character array.
@@ -933,28 +933,28 @@ namespace Java {
             static String valueOf(const_string constStringValue);
 
             /**
-             * Returns the String representation of the int argument.
+             * Returns the String representation of the short argument.
              *
              * @param shortValue
-             * @return a String representation of the int argument.
+             * @return a String representation of the short argument.
              */
-            static String valueOf(int shortValue);
+            static String valueOf(short shortValue);
 
             /**
-             * Returns the String representation of the long int argument.
+             * Returns the String representation of the int argument.
              *
              * @param intValue
-             * @return a String representation of the long int argument.
+             * @return a String representation of the int argument.
              */
-            static String valueOf(long int intValue);
+            static String valueOf(int intValue);
 
             /**
-             * Returns the String representation of the long long argument.
+             * Returns the String representation of the long argument.
              *
              * @param longValue
-             * @return a String representation of the long long argument.
+             * @return a String representation of the long argument.
              */
-            static String valueOf(long long longValue);
+            static String valueOf(long longValue);
 
             /**
              * Returns the String representation of the float argument.
@@ -981,8 +981,8 @@ namespace Java {
              */
             inline String operator+(const string &target) {
                 auto targetValue = (string) target;
-                long int targetLength = lengthPointerChar((string) target);
-                long int newLength = this->size + targetLength;
+                int targetLength = lengthPointerChar((string) target);
+                int newLength = this->size + targetLength;
                 STRING_OPERATOR_PLUS
                 return this->original;
             }
@@ -995,8 +995,8 @@ namespace Java {
              */
             inline String operator+(const String &target) {
                 string targetValue = target.original;
-                long int targetLength = target.size;
-                long int newLength = this->size + target.size;
+                int targetLength = target.size;
+                int newLength = this->size + target.size;
                 STRING_OPERATOR_PLUS
                 return this->original;
             }
@@ -1009,8 +1009,8 @@ namespace Java {
              */
             inline String &operator+=(const String &target) {
                 string targetValue = target.original;
-                long int targetLength = target.size;
-                long int newLength = this->size + target.size;
+                int targetLength = target.size;
+                int newLength = this->size + target.size;
                 STRING_OPERATOR_PLUS
                 return *this;
             }
@@ -1023,8 +1023,8 @@ namespace Java {
              */
             inline String &operator+=(const_string target) {
                 auto targetValue = target;
-                long int targetLength = lengthPointerChar(target);
-                long int newLength = this->size + targetLength;
+                int targetLength = lengthPointerChar(target);
+                int newLength = this->size + targetLength;
                 STRING_OPERATOR_PLUS
                 return *this;
             }
@@ -1124,14 +1124,13 @@ namespace Java {
              * @param index
              * @return char
              */
-            const char &operator[](const long int index) const {
+            const char &operator[](const int index) const {
                 return this->original[index];
             }
-
+        
             inline size_t operator()(const String &target) const {
                 return std::hash<std::string>{}(target.toCharPointer());
             }
-
         public:
             /**
              * Format string
@@ -1139,25 +1138,66 @@ namespace Java {
              * @param format
              * @throw IllegalArgumentException - if not enough arguments
              */
-            template<typename... Args>
-            static String format(const String &format, const Args&... args) {
+            template<typename T, typename... Args>
+            static String format(const String &format, T value, Args... args) {
+                const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
+                        "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
                 String result;
-                String pattern = "%([-+ #0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?(l)"
-                        "{0,2}([diuoxXfFeEgGaAcspn%])";
-                regex_t regex = { 0 };
-                regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
-                try {
-                    result = String::formatInternal(regex,
-                                                    format.toCharPointer(),
-                                                    format.length(),
-                                                    args...);
-                } catch (...) {
-                    regfree(&regex);
-                    throw;
+                string inputStringPtr = format.toCharPointer();
+                int inputStringLength = format.getSize();
+                int inputStringOffset = 0;
+                int errorCode = 0;
+                regex_t regex;
+
+                errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
+                while (errorCode == 0 && inputStringOffset < format.getSize()) {
+                    regmatch_t matchedResult[16] = {0}; // max 16 groups
+                    errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
+                    if (errorCode != 0) {
+                        result += String(inputStringPtr, inputStringLength);
+                        break;
+                    }
+
+                    int unmatchedStringLength = matchedResult[0].rm_so;
+                    int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+
+                    if (unmatchedStringLength > 0) {
+                        result += String(inputStringPtr, unmatchedStringLength);
+                    }
+
+                    if (matchedStringLength > 0) {
+                        String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
+                        result += printObject(matchedString, value);
+
+                        if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
+                            String remainString(inputStringPtr + matchedResult[0].rm_eo,
+                                                inputStringLength - matchedResult[0].rm_eo);
+                            try {
+                                result += String::format(remainString, args...);
+                            } catch (...) {
+                                regfree(&regex);
+                                throw;
+                            }
+                            break;
+                        }
+                    }
+
+                    inputStringPtr += matchedResult[0].rm_eo;
+                    inputStringOffset += matchedResult[0].rm_eo;
+                    inputStringLength -= matchedResult[0].rm_eo;
                 }
+
                 regfree(&regex);
                 return result;
             }
+
+            /**
+             * Format string
+             *
+             * @param format
+             * @throw IllegalArgumentException - if not enough arguments
+             */
+            static String format(const String &format);
 
         public:
 
@@ -1187,78 +1227,6 @@ namespace Java {
             }
 
         private:
-            /**
-             * Format string
-             *
-             * @param format
-             * @throw IllegalArgumentException - if not enough arguments
-             */
-            template<typename T, typename... Args>
-            static String formatInternal(regex_t& regex,
-                                              const char* format,
-                                              int size,
-                                              const T &value,
-                                              const Args&... args) {
-                String result;
-                string input_ptr = (string)format;
-                int input_length = size;
-                int input_offset = 0;
-                int error_code = 0;
-
-                while (input_offset < size)
-                {
-                    regmatch_t matched_result[16] = {0}; // max 16 groups
-                    error_code = regexec(&regex, input_ptr, 16, matched_result, 0);
-                    if (error_code != 0)
-                    {
-                        result += String(input_ptr, input_length);
-                        break;
-                    }
-
-                    const int unmatched_length = matched_result[0].rm_so;
-                    if (unmatched_length > 0)
-                        result += String(input_ptr, unmatched_length);
-
-                    const int matched_length = matched_result[0].rm_eo - matched_result[0].rm_so;
-                    if (matched_length > 0)
-                    {
-                        String matched(input_ptr + unmatched_length, matched_length);
-                        result += printObject(matched, value);
-
-                        if (input_ptr[unmatched_length + matched_length - 1] != '%')
-                        {
-                            try
-                            {
-                                result += formatInternal(regex,
-                                                         input_ptr + matched_result[0].rm_eo,
-                                                         input_length - matched_result[0].rm_eo,
-                                                         args...);
-                            }
-                            catch (...)
-                            {
-                                regfree(&regex);
-                                throw;
-                            }
-                            break;
-                        }
-                    }
-
-                    input_ptr += matched_result[0].rm_eo;
-                    input_offset += matched_result[0].rm_eo;
-                    input_length -= matched_result[0].rm_eo;
-                }
-
-                return result;
-            }
-
-            /**
-             * Format string
-             *
-             * @param format
-             * @throw IllegalArgumentException - if not enough arguments
-             */
-            static String formatInternal(regex_t& regex, const char* format, int size);
-
             template<typename T>
             static String printObject(const String &format, T value) {
                 String result;
@@ -1279,17 +1247,17 @@ namespace Java {
                 return result;
             }
 
+            static String print(const String &format, short value);
+
             static String print(const String &format, int value);
 
-            static String print(const String &format, long int value);
+            static String print(const String &format, long value);
 
-            static String print(const String &format, long long value);
+            static String print(const String &format, unsigned short value);
 
             static String print(const String &format, unsigned int value);
 
-            static String print(const String &format, unsigned long int value);
-
-            static String print(const String &format, unsigned long long value);
+            static String print(const String &format, unsigned long value);
 
             static String print(const String &format, double value);
 
@@ -1297,17 +1265,17 @@ namespace Java {
 
             static String print(const String &format, string value);
 
-            static String print(const String &format, const Short &value);
+            static String print(const String &format, Short value);
 
-            static String print(const String &format, const Integer &value);
+            static String print(const String &format, Integer value);
 
-            static String print(const String &format, const Long &value);
+            static String print(const String &format, Long value);
 
-            static String print(const String &format, const Float &value);
+            static String print(const String &format, Float value);
 
-            static String print(const String &format, const Double &value);
+            static String print(const String &format, Double value);
 
-            static String print(const String &format, const String &value);
+            static String print(const String &format, String value);
         };
     } // namespace Lang
 } // namespace Java
@@ -1315,12 +1283,11 @@ namespace Java {
 using namespace Java::Lang;
 
 namespace std {
-    template<>
-    struct hash<String> {
-        std::size_t operator()(const String &k) const {
-            return String()(k);
-        }
-    };
+        template <> struct hash<String> {
+                std::size_t operator()(const String& k) const {
+                    return String()(k);
+                }
+        };
 }
 
 #endif // NATIVE_JAVA_LANG_STRING_STRING_HPP

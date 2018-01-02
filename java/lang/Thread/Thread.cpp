@@ -98,7 +98,7 @@
 ///**
 // * Waits at most millis milliseconds for this thread to die if it's running
 // */
-//void Thread::join(unsigned long int millis) {
+//void Thread::join(unsigned int millis) {
 //	if (!this->isThreadRunning) {
 //		return;
 //	}
