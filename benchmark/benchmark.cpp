@@ -26,4 +26,4 @@
 
 #include "benchmark.hpp"
 
-BENCHMARK_MAIN()
+BENCHMARK_MAIN();
