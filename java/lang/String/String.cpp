@@ -348,12 +348,11 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 
     std::string thisStringReversed = this->original;
     std::reverse(thisStringReversed.begin(), thisStringReversed.end());
-    string subStringFromIndex = &(thisStringReversed)[this->original.size() - fromIndex - subString.length()];
+    std::string subStringFromIndex = &(thisStringReversed)[this->original.size() - fromIndex - subString.length()];
 
-    string reversedString = stringReverse(subString.toCharPointer());
-    int result = stringIndex(subStringFromIndex, reversedString, 1);
-
-    free(reversedString);
+    std::string reversedString = subString.toCharPointer();
+    std::reverse(reversedString.begin(), reversedString.end());
+    int result = subStringFromIndex.find(reversedString);
 
     if (result == NOT_FOUND) {
         return result;
