@@ -156,18 +156,18 @@ enable_testing()
 
 # Add make installation - install to Unix system
 set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY true)
-install(TARGETS ${PROJECT_NAME} DESTINATION lib OPTIONAL)
-install(TARGETS ${PROJECT_NAME}_static DESTINATION lib OPTIONAL)
-install(FILES library.hpp DESTINATION include/native)
-install(DIRECTORY java DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
-install(DIRECTORY javax DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
-install(DIRECTORY kernel DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
+install(TARGETS ${PROJECT_NAME} DESTINATION ../lib OPTIONAL)
+install(TARGETS ${PROJECT_NAME}_static DESTINATION ../lib OPTIONAL)
+install(FILES library.hpp DESTINATION ../include/native)
+install(DIRECTORY java DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY javax DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY kernel DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 
 # Add uninstall
 add_custom_target(
         uninstall
-        COMMAND rm -rf /usr/local/include/native
-        COMMAND rm -rf /usr/local/lib/libnative*
+        COMMAND rm -rf /usr/include/native
+        COMMAND rm -rf /usr/lib/libnative*
 )
 
 # Link library for OSX and other platform
