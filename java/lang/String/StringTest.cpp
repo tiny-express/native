@@ -526,7 +526,7 @@ TEST (JavaLangString, LastIndexOf) {
         assertEquals(9, unicodeString.lastIndexOf('i'));
         assertEquals(0, unicodeString.lastIndexOf('t', 10));
         assertEquals(9, unicodeString.lastIndexOf("iệt"));
-        // assertEquals(-1, unicodeString.lastIndexOf("iệt", 10));
+        assertEquals(-1, unicodeString.lastIndexOf("iệt", 10));
         assertEquals(-1, unicodeString.lastIndexOf("tiếq"));
     }
 
