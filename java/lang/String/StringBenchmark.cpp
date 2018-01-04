@@ -117,3 +117,58 @@ void StdStringFind(benchmark::State& state) {
 
 BENCHMARK(JavaLangStringContains)->Range(RANGE, RANGE);
 BENCHMARK(StdStringFind)->Range(RANGE, RANGE);
+
+void JavaLangStringFormat(benchmark::State& state) {
+    int intValue = -123;
+    long longValue = 123;
+    float floatValue = 123.456;
+    double doubleValue = 123.456789;
+    auto stringValue = (string) "string";
+    String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
+
+    while (state.KeepRunning()) {
+        String result = String::format(format,
+                                       intValue,
+                                       longValue,
+                                       intValue,
+                                       longValue,
+                                       floatValue,
+                                       doubleValue,
+                                       floatValue,
+                                       doubleValue,
+                                       stringValue,
+                                       stringValue);
+        benchmark::DoNotOptimize(result);
+    }
+}
+
+void Asprintf(benchmark::State& state) {
+    int intValue = -123;
+    long longValue = 123;
+    float floatValue = 123.456;
+    double doubleValue = 123.456789;
+    auto stringValue = (string) "string";
+    auto format = (string)"%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy "
+            "%%%% %s dog %s %%d";
+
+    while (state.KeepRunning()) {
+        char* result = nullptr;
+        asprintf(&result,
+                 format,
+                 intValue,
+                 longValue,
+                 intValue,
+                 longValue,
+                 floatValue,
+                 doubleValue,
+                 floatValue,
+                 doubleValue,
+                 stringValue,
+                 stringValue);
+        free(result);
+        benchmark::DoNotOptimize(result);
+    }
+}
+
+BENCHMARK(JavaLangStringFormat);
+BENCHMARK(Asprintf);

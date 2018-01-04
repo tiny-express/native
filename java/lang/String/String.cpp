@@ -788,18 +788,14 @@ String String::print(const String &format, String value) {
     return String::print(format, value.toCharPointer());
 }
 
-String String::format(const String &format) {
-    const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\" \
-            ".[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
+String String::formatInternal(regex_t& regex, const char* format, int size) {
     String result;
-    string inputStringPtr = format.toCharPointer();
-    int inputStringLength = format.getSize();
+    string inputStringPtr = (string)format;
+    int inputStringLength = size;
     int inputStringOffset = 0;
     int errorCode = 0;
-    regex_t regex;
 
-    errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
-    while (errorCode == 0 && inputStringOffset < format.getSize()) {
+    while (inputStringOffset < size) {
         regmatch_t matchedResult[16] = {0}; // max 16 groups
         errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
         if (errorCode != 0) {
@@ -807,17 +803,15 @@ String String::format(const String &format) {
             break;
         }
 
-        int unmatchedStringLength = matchedResult[0].rm_so;
-        int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
-
+        const int unmatchedStringLength = matchedResult[0].rm_so;
         if (unmatchedStringLength > 0) {
             result += String(inputStringPtr, unmatchedStringLength);
         }
 
+        const int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
         if (matchedStringLength > 0) {
             String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
             if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
-                regfree(&regex);
                 throw InterruptedException("Missing arguments.");
             } else {
                 result += "%";
@@ -829,7 +823,6 @@ String String::format(const String &format) {
         inputStringLength -= matchedResult[0].rm_eo;
     }
 
-    regfree(&regex);
     return result;
 }
 
