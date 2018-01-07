@@ -80,9 +80,9 @@ namespace Java {
 
 			string getName();
 
-			void sleep(long millis);
+			static void sleep(long millis);
 
-			void sleep(long millis, int nanos);
+			static void sleep(long millis, int nanos);
 
 			void setName(string target);
 

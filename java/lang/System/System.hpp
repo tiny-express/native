@@ -48,7 +48,7 @@ namespace Java {
 								
 								template <typename T>
 								static void println(T target) {
-									std::cout << target << std::endl;
+									std::cout << target << std::endl << std::flush;
 								}
 						};
 						
