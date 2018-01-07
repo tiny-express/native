@@ -58,7 +58,7 @@ namespace Java {
 						static long currentTimeMillis();
 						static void exit(int status);
 						static void gc();
-						static String getenv(string name);
+						static String getenv(String name);
 				};
 		}
 }

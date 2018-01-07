@@ -39,3 +39,7 @@ void System::exit(int status) {
 
 void System::gc() {
 }
+
+String System::getenv(String name) {
+	return std::getenv(name.toCharPointer());
+}
