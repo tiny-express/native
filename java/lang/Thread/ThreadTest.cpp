@@ -30,5 +30,5 @@
 using namespace Java::Lang;
 
 TEST (JavaLangThread, Sleep) {
-	//Thread::sleep(1);
+	Thread::sleep(1);
 }

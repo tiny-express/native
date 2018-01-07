@@ -1117,7 +1117,7 @@ namespace Java {
              * @throw IllegalArgumentException - if not enough arguments
              */
             template<typename... Args>
-            static String format(const String &format, const Args... args) {
+            static String format(String format, const Args... args) {
                 String result;
                 String pattern = "%([-+ #0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?(l)"
                         "{0,2}([diuoxXfFeEgGaAcspn%])";
@@ -1135,7 +1135,6 @@ namespace Java {
                 regfree(&regex);
                 return result;
             }
-
 
         public:
 
