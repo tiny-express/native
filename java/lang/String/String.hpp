@@ -1116,66 +1116,26 @@ namespace Java {
              * @param format
              * @throw IllegalArgumentException - if not enough arguments
              */
-            template<typename T, typename... Args>
-            static String format(const String &format, T value, Args... args) {
-                const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
-                        "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
+            template<typename... Args>
+            static String format(const String &format, const Args... args) {
                 String result;
-                string inputStringPtr = format.toCharPointer();
-                int inputStringLength = format.getSize();
-                int inputStringOffset = 0;
-                int errorCode = 0;
-                regex_t regex;
-
-                errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
-                while (errorCode == 0 && inputStringOffset < format.getSize()) {
-                    regmatch_t matchedResult[16] = {0}; // max 16 groups
-                    errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
-                    if (errorCode != 0) {
-                        result += String(inputStringPtr, inputStringLength);
-                        break;
-                    }
-
-                    int unmatchedStringLength = matchedResult[0].rm_so;
-                    int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
-
-                    if (unmatchedStringLength > 0) {
-                        result += String(inputStringPtr, unmatchedStringLength);
-                    }
-
-                    if (matchedStringLength > 0) {
-                        String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
-                        result += printObject(matchedString, value);
-
-                        if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
-                            String remainString(inputStringPtr + matchedResult[0].rm_eo,
-                                                inputStringLength - matchedResult[0].rm_eo);
-                            try {
-                                result += String::format(remainString, args...);
-                            } catch (...) {
-                                regfree(&regex);
-                                throw;
-                            }
-                            break;
-                        }
-                    }
-
-                    inputStringPtr += matchedResult[0].rm_eo;
-                    inputStringOffset += matchedResult[0].rm_eo;
-                    inputStringLength -= matchedResult[0].rm_eo;
+                String pattern = "%([-+ #0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?(l)"
+                        "{0,2}([diuoxXfFeEgGaAcspn%])";
+                regex_t regex = { 0 };
+                regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
+                try {
+                    result = String::formatInternal(regex,
+                                                    format.toCharPointer(),
+                                                    format.length(),
+                                                    args...);
+                } catch (...) {
+                    regfree(&regex);
+                    throw;
                 }
-
                 regfree(&regex);
                 return result;
             }
 
-            /**
-             * Format string
-             *
-             * @param format
-             * @throw IllegalArgumentException - if not enough arguments
-             */
-            static String format(const String &format);
 
         public:
 
@@ -1205,6 +1165,73 @@ namespace Java {
             }
 
         private:
+            /**
+             * Format string
+             *
+             * @param format
+             * @throw IllegalArgumentException - if not enough arguments
+             */
+            template<typename T, typename... Args>
+            static String formatInternal(regex_t& regex,
+                                         const char* format,
+                                         int size,
+                                         const T &value,
+                                         const Args&... args) {
+                String result;
+                string inputString = (string) format;
+                int inputLength = size;
+                int inputOffset = 0;
+                int errorCode = 0;
+
+                while (inputOffset < size) {
+                    regmatch_t matchedResult[16] = {0}; // max 16 groups
+                    errorCode = regexec(&regex, inputString, 16, matchedResult, 0);
+                    if (errorCode != 0) {
+                        result += String(inputString, inputLength);
+                        break;
+                    }
+
+                    const int unmatchedLength = matchedResult[0].rm_so;
+                    if (unmatchedLength > 0)
+                        result += String(inputString, unmatchedLength);
+
+                    const int matchedLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+                    if (matchedLength > 0) {
+                        String matched(inputString + unmatchedLength, matchedLength);
+                        result += printObject(matched, value);
+
+                        if (inputString[unmatchedLength + matchedLength - 1] != '%') {
+                            try {
+                                result += formatInternal(regex,
+                                                         inputString + matchedResult[0].rm_eo,
+                                                         inputLength - matchedResult[0].rm_eo,
+                                                         args...);
+                            }
+                            catch (...) {
+                                regfree(&regex);
+                                throw;
+                            }
+                            break;
+                        }
+                    }
+
+                    inputString += matchedResult[0].rm_eo;
+                    inputOffset += matchedResult[0].rm_eo;
+                    inputLength -= matchedResult[0].rm_eo;
+                }
+
+                return result;
+            }
+
+
+            /**
+             * Format string
+             *
+             * @param format
+             * @throw IllegalArgumentException - if not enough arguments
+             */
+            static String formatInternal(regex_t& regex, const char* format, int size);
+
             template<typename T>
             static String printObject(const String &format, T value) {
                 String result;
