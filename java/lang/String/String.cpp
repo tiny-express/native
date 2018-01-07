@@ -24,6 +24,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <algorithm>
+#include <cstring>
+#include <locale.h>
 #include "String.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../StringBuilder/StringBuilder.hpp"
@@ -32,156 +35,215 @@
 
 using namespace Java::Lang;
 
+std::string wideStringToMultiByteString(const std::wstring& input) {
+    char* buffer = new char[DEFAULT_BUFFER_LENGTH]();
+    size_t len = wcstombs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
+    std::string result;
+
+    if (len != static_cast<std::size_t>(-1)) {
+        if (len > DEFAULT_BUFFER_LENGTH) {
+            delete[] buffer;
+            buffer = new char[len]();
+            len = wcstombs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
+        }
+        result = std::string(buffer, buffer + len);
+    }
+
+    delete[] buffer;
+    return result;
+}
+
+std::wstring multiByteStringToWideString(const std::string& input) {
+    wchar_t* buffer = new wchar_t[DEFAULT_BUFFER_LENGTH]();
+    std::size_t len = mbstowcs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH * sizeof(wchar_t));
+    std::wstring result;
+
+    if (len != static_cast<std::size_t>(-1)) {
+        if (len > DEFAULT_BUFFER_LENGTH) {
+            delete[] buffer;
+            buffer = new wchar_t[len]();
+            len = mbstowcs(buffer, input.c_str(), len * sizeof(wchar_t));
+        }
+
+        result = std::wstring(buffer, buffer + len);
+    }
+
+    delete[] buffer;
+    return result;
+}
+
+std::string toUpper(const std::string& input) {
+    std::locale::global(std::locale("en_US.UTF-8"));
+    std::wstring wideString = multiByteStringToWideString(input);
+    auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
+    std::transform(wideString.begin(), wideString.end(), wideString.begin(), towupper);
+    return wideStringToMultiByteString(wideString);
+}
+
+std::string toLower(const std::string& input) {
+    std::locale::global(std::locale("en_US.UTF-8"));
+    std::wstring wideString = multiByteStringToWideString(input);
+    auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
+    std::transform(wideString.begin(), wideString.end(), wideString.begin(), towlower);
+    return wideStringToMultiByteString(wideString);
+}
+
 String::String() {
-    this->original = (string) allocateMemory(DEFAULT_CAPACITY * sizeof(char));
-    this->original[0] = '\0';
-    this->size = 0;
-    this->capacity = DEFAULT_CAPACITY;
 }
 
 String::String(string original, int length) {
-    this->original = strndup(original, (size_t) length);
-    this->size = length;
-    this->capacity = this->size == 0 ? -1 : this->size;
+    this->original = std::string(original, original +  (size_t) length);
 }
 
 String::String(Array<char> &charArray) {
-    this->original = (string) malloc(charArray.length + 1);
+    this->original.clear();
+    this->original.shrink_to_fit();
 #ifdef LINUX
     register
 #endif
     int i;
     for (i = 0; i<charArray.length; i++) {
-        this->original[i] = charArray[i];
+        this->original += charArray[i];
     }
-    this->original[charArray.length] = '\0';
-    this->size = charArray.length;
-    this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(Array<byte> &byteArray) {
-    Array<char> chars;
-    for (byte byte : byteArray) {
-        chars.push((char) byte);
+    this->original.clear();
+    this->original.shrink_to_fit();
+#ifdef LINUX
+    register
+#endif
+    int i;
+    for (i = 0; i < byteArray.length; i++) {
+        this->original += byteArray[i];
     }
-    this->original = stringCopy(String::fromCharArray(chars).toCharPointer());
-    this->size = chars.length;
-    this->capacity = this->size == 0 ? -1 : this->size;
 }
 
 String::String(const String &target) {
-    this->original = stringCopy(target.original);
-    this->size = target.size;
-    this->capacity = this->size == 0 ? -1 : this->size;
+    this->original = target.original;
     this->hash = target.hash;
 }
 
 String::String(const StringBuilder &stringBuilder) {
-    this->original = stringCopy(stringBuilder.toString().toCharPointer());
-    this->size = stringBuilder.length();
-    this->capacity = this->size == 0 ? -1 : this->size;
+    this->original = std::string(stringBuilder.toString().toCharPointer());
 }
 
 String::String(const StringBuffer &stringBuffer) {
-    this->original = stringCopy(stringBuffer.getValue().toCharPointer());
-    this->size = stringBuffer.length();
-    this->capacity = this->size == 0 ? -1 : this->size;
+    this->original = std::string(stringBuffer.getValue().toCharPointer());
 }
 
 String::String(Array<char> &array, int offset, int length) {
-    STRING_CONSTRUCTOR_ARRAY
+    if (offset < 0) {
+        throw StringIndexOutOfBoundsException(offset);
+    }
+    if (length < 0) {
+        throw StringIndexOutOfBoundsException(length);
+    }
+    if (offset > array.length - length) {
+        throw StringIndexOutOfBoundsException(offset + length);
+    }
+
+    this->original.clear();
+    this->original.shrink_to_fit();
+#ifdef LINUX
+    register
+#endif
+    int i;
+    for (i = offset; i < offset + length; ++i) {
+        this->original.push_back(array[i]);
+    }
 }
 
 String::String(Array<byte> &array, int offset, int length) {
-    STRING_CONSTRUCTOR_ARRAY
+    if (offset < 0) {
+        throw StringIndexOutOfBoundsException(offset);
+    }
+    if (length < 0) {
+        throw StringIndexOutOfBoundsException(length);
+    }
+    if (offset > array.length - length) {
+        throw StringIndexOutOfBoundsException(offset + length);
+    }
+
+    this->original.clear();
+    this->original.shrink_to_fit();
+#ifdef LINUX
+    register
+#endif
+    int i;
+    for (i = offset; i < offset + length; i++) {
+        this->original.push_back((char)array[i]);
+    }
 }
 
 String::~String() {
-    free(original);
+
 }
 
 int String::getSize() const {
-    return this->size;
+    return this->original.size();
 }
 
 String String::clone() {
-    string pointerHolder = stringCopy(this->original);
-    String result = pointerHolder;
-    free(pointerHolder);
-    return result;
+    return this->original;
 }
 
 char String::charAt(int index) const {
-    if (index < 0 || index > this->size - 1) {
+    if (index < 0 || index > this->original.size() - 1) {
         throw StringIndexOutOfBoundsException("String index out of range");
     }
     return (this->original[index]);
 }
 
 int String::compareTo(const String &anotherString) const {
-    return strcmp(this->original, anotherString.original);
+    return strcmp(this->original.c_str(), anotherString.original.c_str());
 }
 
 int String::compareToIgnoreCase(const String &anotherString) const {
-    return strcasecmp(this->original, anotherString.original);
+    return strcasecmp(this->original.c_str(), anotherString.original.c_str());
 }
 
 String String::concat(String target) {
-    string targetValue = target.original;
-    long targetLength = target.size;
-    long newLength = this->size + target.size;
-    STRING_OPERATOR_PLUS
+    this->original += target.original;
     return *this;
 }
 
 boolean String::contains(const CharSequence &charSequence) {
-    return (stringIndex(this->original, charSequence.toString().toCharPointer(), 1) != NOT_FOUND);
+    return (stringIndex(this->original.c_str(), charSequence.toString().toCharPointer(), 1) != NOT_FOUND);
 }
 
 Array<byte> String::getBytes() const {
     Array<byte> bytes;
-    String originalString = this->original;
-    for (char character : originalString.toCharArray()) {
-        bytes.push((byte) character);
+    for (int i = 0; i < this->original.size(); ++i) {
+        bytes.push((byte)this->original.c_str()[i]);
     }
     return bytes;
 }
 
 String String::getStringFromIndex(int index) const {
-    if (index < 0 || index > this->size - 1) {
+    if (index < 0 || index > this->original.size() - 1) {
         throw StringIndexOutOfBoundsException(index);
     }
-    return &(this->original[index]);
+    return this->original.substr(index);
 }
 
 boolean String::endsWith(const String &suffixString) const {
-    return (bool) stringEndswith(this->original, suffixString.original);
+    return (bool) stringEndswith(this->original.c_str(), suffixString.original.c_str());
 }
 
 String String::fromCharArray(Array<char> &charArray) {
-    string str = (string) allocateMemory((charArray.length + 1) * sizeof(char));
-#ifdef LINUX
-    register
-#endif
-    int index = 0;
-    for (char character : charArray) {
-        str[index++] = character;
-    }
-    str[index] = '\0';
-    String result = str;
-    free(str);
-    return result;
+    return String(charArray);
 }
 
 int String::indexOf(int character) const {
     string pointerHolder = stringFromChar((char) character);
-    int result = stringIndex(this->original, pointerHolder, 1);
+    int result = stringIndex(this->original.c_str(), pointerHolder, 1);
     free(pointerHolder);
     return result;
 }
 
 int String::indexOf(int character, int fromIndex) const {
-    if (fromIndex > this->size) {
+    if (fromIndex > (int)this->original.size()) {
         return -1;
     }
     if (fromIndex < 0) {
@@ -193,7 +255,7 @@ int String::indexOf(int character, int fromIndex) const {
 #endif
     int index = 0;
 
-    for (index = fromIndex; index < this->size; index++) {
+    for (index = fromIndex; index < this->original.size(); index++) {
         if (this->original[index] == (char) character) {
             return index;
         }
@@ -202,18 +264,18 @@ int String::indexOf(int character, int fromIndex) const {
 }
 
 int String::indexOf(String subString) const {
-    return stringIndex(this->original, subString.original, 1);
+    return stringIndex(this->original.c_str(), subString.original.c_str(), 1);
 }
 
 int String::indexOf(String subString, int fromIndex) const {
     if (fromIndex < 0) {
         return this->indexOf(subString);
     }
-    if (fromIndex > this->size - 1) {
+    if (fromIndex > this->original.size() - 1) {
         return -1;
     }
-    string stringFromIndex = stringFrom(this->original, fromIndex);
-    int result = stringIndex(stringFromIndex, subString.original, 1);
+    string stringFromIndex = stringFrom((char*)this->original.c_str(), fromIndex);
+    int result = stringIndex(stringFromIndex, subString.original.c_str(), 1);
     free(stringFromIndex);
     if (result == -1) {
         return result;
@@ -223,7 +285,7 @@ int String::indexOf(String subString, int fromIndex) const {
 }
 
 boolean String::isEmpty() const {
-    return (boolean) isEmptyString(this->original);
+    return (boolean)this->original.empty();
 }
 
 int String::lastIndexOf(int character) {
@@ -231,8 +293,7 @@ int String::lastIndexOf(int character) {
     register
 #endif
     int index = 0;
-
-    for (index = this->size - 1; index >= 0; index--) {
+    for (index = (int)this->original.size() - 1; index >= 0; index--) {
         if (this->charAt(index) == (char) character) {
             return index;
         }
@@ -244,7 +305,7 @@ int String::lastIndexOf(int character, int fromIndex) {
     if (fromIndex < 0) {
         return -1;
     }
-    if (fromIndex > this->size - 1) {
+    if (fromIndex > this->original.size() - 1) {
         return this->lastIndexOf(character);
     }
 #ifdef LINUX
@@ -261,45 +322,60 @@ int String::lastIndexOf(int character, int fromIndex) {
 }
 
 int String::lastIndexOf(String subString) const {
-    string reversedString = stringReverse(subString.toCharPointer());
-    string currentReversedString = stringReverse(this->toCharPointer());
-    int result = stringIndex(currentReversedString, reversedString, 1);
-    free(reversedString);
-    free(currentReversedString);
+    std::string reversedString = subString.toCharPointer();
+    std::reverse(reversedString.begin(), reversedString.end()); 
+
+    std::string currentReversedString = this->toCharPointer();
+    std::reverse(currentReversedString.begin(), currentReversedString.end());
+    
+    int result = stringIndex(currentReversedString.c_str(), reversedString.c_str(), 1);
+
     if (result == NOT_FOUND) {
         return result;
     }
     // Re-calculate first character of subString
-    result = this->size - (result + subString.size);
+    result = (int)this->original.size() - (int)(result + subString.original.size());
     return result;
 }
 
 int String::lastIndexOf(String subString, int fromIndex) const {
+    int indexToCreatSubString = this->original.size() - fromIndex - subString.length();
+
     if (fromIndex < 0) {
         return -1;
     }
-    if (fromIndex > this->size - 1) {
+
+    if (fromIndex > this->original.size() - 1) {
         return this->lastIndexOf(subString);
     }
-    string thisStringReversed = stringReverse(this->original);
-    string subStringFromIndex = &(thisStringReversed)[ this->size - fromIndex - subString.size];
-    string reversedString = stringReverse(subString.toCharPointer());
-    // string currentReversedString = stringReverse(subStringFromIndex);
-    int result = stringIndex(subStringFromIndex, reversedString, 1);
-    free(reversedString);
-    free(thisStringReversed);
+
+    std::string thisStringReversed = this->original;
+    std::reverse(thisStringReversed.begin(), thisStringReversed.end());
+
+    if (indexToCreatSubString > this->original.size()) {
+        return -1;
+    }
+
+    std::string subStringFromIndex = thisStringReversed.substr(indexToCreatSubString);
+
+    std::string reversedString = subString.toCharPointer();
+    std::reverse(reversedString.begin(), reversedString.end());
+    int result = subStringFromIndex.find(reversedString);
+
     if (result == NOT_FOUND) {
         return result;
     }
+
     // Re-calculate first character of str
     result = fromIndex - result;
+
     return result;
 }
 
 String String::replace(char oldChar, char newChar) const {
     string oldString = stringFromChar(oldChar);
     string newString = stringFromChar(newChar);
-    string pointerHolder = stringReplace(this->original, oldString, newString);
+    string pointerHolder = stringReplace((char*)this->original.c_str(), oldString, newString);
     String result = pointerHolder;
     free(pointerHolder);
     free(oldString);
@@ -314,7 +390,7 @@ String String::replaceAll(String regex, String replacement) const {
 
 Array<String> String::split(String regex) const {
     // TODO (anhnt) fix this later, temporary use replace, need Pattern
-    string *splitStrings = stringSplit(this->original, regex.toCharPointer());
+    string *splitStrings = stringSplit(this->original.c_str(), regex.toCharPointer());
     Array<String> strings;
 
 #ifdef LINUX
@@ -332,18 +408,16 @@ Array<String> String::split(String regex) const {
 }
 
 boolean String::startsWith(String prefix) const {
-    return (bool) stringStartswith(this->original, prefix.original);
+    return (bool) stringStartswith(this->original.c_str(), prefix.original.c_str());
 }
 
 boolean String::startsWith(String prefix, int thisOffset) const {
-    if (this->original == nullptr ||
-        prefix.original == nullptr || thisOffset < 0) {
+    if (thisOffset < 0) {
         return false;
     }
-    int originalLength = lengthPointerChar(this->original);
-    int prefixLength = lengthPointerChar(prefix.original);
-    if (originalLength < prefixLength ||
-        thisOffset > (originalLength - prefixLength)) {
+    int originalLength = lengthPointerChar(this->original.c_str());
+    int prefixLength = lengthPointerChar(prefix.original.c_str());
+    if (originalLength < prefixLength || thisOffset > (originalLength - prefixLength)) {
         return false;
     }
 #ifdef LINUX
@@ -366,42 +440,30 @@ boolean String::startsWith(String prefix, int thisOffset) const {
 
 Array<char> String::toCharArray() const {
     Array<char> chars;
-
-#ifdef LINUX
-    register
-#endif
-    int index = 0;
-
-    while (this->original[index] != '\0') {
-        chars.push(this->original[index++]);
+    for(char c : this->original) {
+        chars.push(c);
     }
     return chars;
 }
 
 string String::toCharPointer() const {
-    return this->original;
+    return (char*)this->original.c_str();
 }
 
 String String::toString() const {
     return *this;
 }
 
-String String::toLowerCase() const {
-    string holdPointer = stringLower(this->original);
-    String result = holdPointer;
-    free(holdPointer);
-    return result;
+String String::toLowerCase() {
+    return toLower(this->original);
 }
 
 String String::toUpperCase() {
-    string holdPointer = stringUpper(this->original);
-    String result = holdPointer;
-    free(holdPointer);
-    return result;
+    return toUpper(this->original);
 }
 
 String String::trim() {
-    string holdPointer = stringTrim(this->original);
+    string holdPointer = stringTrim(this->original.c_str());
     String result = holdPointer;
     free(holdPointer);
     return result;
@@ -464,11 +526,11 @@ String String::valueOf(double doubleValue) {
 }
 
 String String::subString(int beginIndex) const {
-    return this->subString(beginIndex, this->size);
+    return this->subString(beginIndex, (int)this->original.size());
 }
 
 String String::subString(int beginIndex, int endIndex) const {
-    string holder = stringFromTo(this->original, beginIndex, endIndex - 1);
+    string holder = stringFromTo((char*)this->original.c_str(), beginIndex, endIndex - 1);
     String result = holder;
     free(holder);
     return result;
@@ -481,7 +543,7 @@ boolean String::contentEquals(const CharSequence &charSequence) {
         std::lock_guard<std::mutex> guard(mutex);
         return strcmp(this->original, charSequence.toString()) == 0;
     }*/
-    return strcmp(this->original, charSequence.toString().toCharPointer()) == 0;
+    return strcmp(this->original.c_str(), charSequence.toString().toCharPointer()) == 0;
 }
 
 String String::copyValueOf(Array<char> &charArray) {
@@ -498,8 +560,8 @@ boolean String::equalsIgnoreCase(String anotherString) {
 
 long String::hashCode() const {
     int hashCode = this->hash;
-    if (hashCode == 0 && this->size > 0) {
-        for (int i = 0; i < this->size; i++) {
+    if (hashCode == 0 && this->original.size() > 0) {
+        for (int i = 0; i < this->original.size(); i++) {
             hashCode = 31 * hashCode + this->original[i];
         }
         this->hash = hashCode;
@@ -534,7 +596,7 @@ void String::getChars(int sourceBegin, int sourceEnd,
         throw StringIndexOutOfBoundsException(sourceEnd - sourceBegin);
     }
 
-    if (sourceEnd > this->size) {
+    if (sourceEnd > this->length()) {
         throw StringIndexOutOfBoundsException(sourceEnd);
     }
 
@@ -561,7 +623,7 @@ void String::getChars(int sourceBegin, int sourceEnd,
 
 String String::replace(CharSequence &target, CharSequence &replacement) const {
     string pointerHolder = stringReplace(
-            this->original,
+            (char*)this->original.c_str(),
             target.toString().toCharPointer(),
             replacement.toString().toCharPointer()
     );
@@ -588,7 +650,7 @@ Array<String> String::split(String regex, int limit) const {
     if (limit > stringArrayNoLimit.length || limit <= 0) {
         return stringArrayNoLimit;
     }
-    int indexOfRegexBelowLimit = stringIndex(this->original, regex.toCharPointer(), limit - 1);
+    int indexOfRegexBelowLimit = stringIndex(this->original.c_str(), regex.toCharPointer(), limit - 1);
     int remainStringLength = indexOfRegexBelowLimit + regex.length();
     String remainString = this->getStringFromIndex(remainStringLength);
     Array<String> stringArrayLimit;
@@ -726,18 +788,14 @@ String String::print(const String &format, String value) {
     return String::print(format, value.toCharPointer());
 }
 
-String String::format(const String &format) {
-    const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\" \
-            ".[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
+String String::formatInternal(regex_t& regex, const char* format, int size) {
     String result;
-    string inputStringPtr = format.toCharPointer();
-    int inputStringLength = format.getSize();
+    string inputStringPtr = (string)format;
+    int inputStringLength = size;
     int inputStringOffset = 0;
     int errorCode = 0;
-    regex_t regex;
 
-    errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
-    while (errorCode == 0 && inputStringOffset < format.getSize()) {
+    while (inputStringOffset < size) {
         regmatch_t matchedResult[16] = {0}; // max 16 groups
         errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
         if (errorCode != 0) {
@@ -745,17 +803,15 @@ String String::format(const String &format) {
             break;
         }
 
-        int unmatchedStringLength = matchedResult[0].rm_so;
-        int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
-
+        const int unmatchedStringLength = matchedResult[0].rm_so;
         if (unmatchedStringLength > 0) {
             result += String(inputStringPtr, unmatchedStringLength);
         }
 
+        const int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
         if (matchedStringLength > 0) {
             String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
             if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
-                regfree(&regex);
                 throw InterruptedException("Missing arguments.");
             } else {
                 result += "%";
@@ -767,7 +823,6 @@ String String::format(const String &format) {
         inputStringLength -= matchedResult[0].rm_eo;
     }
 
-    regfree(&regex);
     return result;
 }
 
@@ -781,4 +836,3 @@ String String::valueOf(const_string constStringValue) {
 String String::valueOf(String stringValue) {
     return stringValue;
 }
-
