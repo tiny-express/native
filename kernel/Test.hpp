@@ -17,10 +17,10 @@
 #define NATIVE_KERNEL_TEST_HPP
 
 #include "Type.hpp"
-#include "../java/lang/String/String.hpp"
-#include "../java/lang/Integer/Integer.hpp"
-#include "../java/lang/Double/Double.hpp"
-#include "../java/util/ArrayList/ArrayList.hpp"
+#include "../library/Java/Lang/String/String.hpp"
+#include "../library/Java/Lang/Integer/Integer.hpp"
+#include "../library/Java/Lang/Double/Double.hpp"
+#include "../library/Java/Util/ArrayList/ArrayList.hpp"
 
 using namespace Java::Lang;
 

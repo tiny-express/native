@@ -92,18 +92,14 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
         kernel/**/*.cpp
-        java/Java.cpp
-        java/**/*.cpp
-        java/**/**/*.cpp
-        javax/**/*.cpp
+        library/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
         kernel/**/*Test.cpp
-        java/**/*Test.cpp
-        java/**/**/*Test.cpp
-        javax/**/*Test.cpp
+        library/**/**/*Test.cpp
+        library/**/**/**/*Test.cpp
         )
 
 # Only C++ unit benchmark files

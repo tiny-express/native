@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../java/Lang.hpp"
+#include "../../library/Java/Lang.hpp"
 
 using namespace Java::Lang;
 

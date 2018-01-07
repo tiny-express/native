@@ -1,8 +1,7 @@
 # git rm --cached `git ls-files -i --exclude-from=.gitignore`
 .DS_Store
 bin
-a.out
-/.idea
+.idea
 CMakeFiles
 cmake-build-debug
 cmake_install.cmake
@@ -13,15 +12,13 @@ DartConfiguration.tcl
 Testing
 /Makefile
 /native*
-/native
 /libnative*
-/test*
-main.o
-main
 /cygnative.dll
 /native_benchmark
 native_test.exe
 build
 libbenchmark.gcno
-/remove_old_build.sh
-/unit_test.sh
+.gradle
+gradle
+gradlew
+gradlew.bat
