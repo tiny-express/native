@@ -1178,33 +1178,33 @@ namespace Java {
                                          const T &value,
                                          const Args&... args) {
                 String result;
-                string input_ptr = (string)format;
-                int input_length = size;
-                int input_offset = 0;
-                int error_code = 0;
+                string inputString = (string) format;
+                int inputLength = size;
+                int inputOffset = 0;
+                int errorCode = 0;
 
-                while (input_offset < size) {
-                    regmatch_t matched_result[16] = {0}; // max 16 groups
-                    error_code = regexec(&regex, input_ptr, 16, matched_result, 0);
-                    if (error_code != 0) {
-                        result += String(input_ptr, input_length);
+                while (inputOffset < size) {
+                    regmatch_t matchedResult[16] = {0}; // max 16 groups
+                    errorCode = regexec(&regex, inputString, 16, matchedResult, 0);
+                    if (errorCode != 0) {
+                        result += String(inputString, inputLength);
                         break;
                     }
 
-                    const int unmatched_length = matched_result[0].rm_so;
-                    if (unmatched_length > 0)
-                        result += String(input_ptr, unmatched_length);
+                    const int unmatchedLength = matchedResult[0].rm_so;
+                    if (unmatchedLength > 0)
+                        result += String(inputString, unmatchedLength);
 
-                    const int matched_length = matched_result[0].rm_eo - matched_result[0].rm_so;
-                    if (matched_length > 0) {
-                        String matched(input_ptr + unmatched_length, matched_length);
+                    const int matchedLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+                    if (matchedLength > 0) {
+                        String matched(inputString + unmatchedLength, matchedLength);
                         result += printObject(matched, value);
 
-                        if (input_ptr[unmatched_length + matched_length - 1] != '%') {
+                        if (inputString[unmatchedLength + matchedLength - 1] != '%') {
                             try {
                                 result += formatInternal(regex,
-                                                         input_ptr + matched_result[0].rm_eo,
-                                                         input_length - matched_result[0].rm_eo,
+                                                         inputString + matchedResult[0].rm_eo,
+                                                         inputLength - matchedResult[0].rm_eo,
                                                          args...);
                             }
                             catch (...) {
@@ -1215,9 +1215,9 @@ namespace Java {
                         }
                     }
 
-                    input_ptr += matched_result[0].rm_eo;
-                    input_offset += matched_result[0].rm_eo;
-                    input_length -= matched_result[0].rm_eo;
+                    inputString += matchedResult[0].rm_eo;
+                    inputOffset += matchedResult[0].rm_eo;
+                    inputLength -= matchedResult[0].rm_eo;
                 }
 
                 return result;
