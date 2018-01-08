@@ -10,6 +10,7 @@ install_manifest.txt
 CMakeCache.txt
 DartConfiguration.tcl
 Testing
+/src
 /Makefile
 /native*
 /libnative*

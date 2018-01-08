@@ -105,9 +105,8 @@ file(GLOB_RECURSE TESTS_CPP
 # Only C++ unit benchmark files
 file(GLOB_RECURSE BENCHMARK_CPP
         kernel/**/*Benchmark.cpp
-        java/**/*Benchmark.cpp
-        java/**/**/*Benchmark.cpp
-        javax/**/*Benchmark.cpp
+        library/**/**/*Benchmark.cpp
+        library/**/**/**/*Benchmark.cpp
         )
 
 # Remove all test files within cpp files
