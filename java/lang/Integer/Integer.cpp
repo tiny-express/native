@@ -545,15 +545,18 @@ String Integer::toUnsignedString(int inputInt, int radix) {
 			return result;
 		case 8:
 			stream << std::oct << Integer::toUnsignedLong(inputInt);
-			result = stream.str();
+			result = stream.str();			
+			result.replace(',', '\0');
 			return result;
 		case 16:
 			stream << std::hex << Integer::toUnsignedLong(inputInt);
 			result = stream.str();
+			result.replace(',', '\0');
 			return result;;
 		case 10:
 			stream << std::dec << Integer::toUnsignedLong(inputInt);
 			result = stream.str();
+			result.replace(',', '\0');
 			return result;
 		default:
 			throw UnsupportedOperationException("Haven't support this radix yet");

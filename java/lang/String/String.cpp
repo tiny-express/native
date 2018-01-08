@@ -44,7 +44,7 @@ std::string wideStringToMultiByteString(const std::wstring& input) {
         if (len > DEFAULT_BUFFER_LENGTH) {
             delete[] buffer;
             buffer = new char[len]();
-            len = wcstombs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
+            len = wcstombs(buffer, input.c_str(), len);
         }
         result = std::string(buffer, buffer + len);
     }
@@ -55,14 +55,14 @@ std::string wideStringToMultiByteString(const std::wstring& input) {
 
 std::wstring multiByteStringToWideString(const std::string& input) {
     wchar_t* buffer = new wchar_t[DEFAULT_BUFFER_LENGTH]();
-    std::size_t len = mbstowcs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH * sizeof(wchar_t));
+    std::size_t len = mbstowcs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
     std::wstring result;
 
     if (len != static_cast<std::size_t>(-1)) {
         if (len > DEFAULT_BUFFER_LENGTH) {
             delete[] buffer;
             buffer = new wchar_t[len]();
-            len = mbstowcs(buffer, input.c_str(), len * sizeof(wchar_t));
+            len = mbstowcs(buffer, input.c_str(), len);
         }
 
         result = std::wstring(buffer, buffer + len);
