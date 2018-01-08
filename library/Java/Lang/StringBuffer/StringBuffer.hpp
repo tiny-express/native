@@ -26,7 +26,7 @@
 #ifndef NATIVE_STRING_BUFFER_HPP
 #define NATIVE_STRING_BUFFER_HPP
 
-#include "../../../../../../kernel/String.hpp"
+#include "../../../../kernel/String.hpp"
 #include <mutex>
 #include "../StringBuilder/StringBuilder.hpp"
 

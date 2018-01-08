@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_EXCEPTION_HPP
 #define NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_EXCEPTION_HPP
 
-#include "../../../../../library/Java/Lang/Exception/Exception.hpp"
+#include "../../../../../../library/Java/Lang/Exception/Exception.hpp"
 
 using namespace Java::Lang;
 

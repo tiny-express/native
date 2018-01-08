@@ -25,7 +25,7 @@
 */
 
 #include "WebApplicationException.hpp"
-#include "../../../../../../kernel/Test.hpp"
+#include "../../../../../kernel/Test.hpp"
 
 using namespace Javax::Ws::Rs;
 

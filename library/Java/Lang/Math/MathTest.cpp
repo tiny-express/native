@@ -25,7 +25,7 @@
  */
 
 
-#include "../../../../../../kernel/Test.hpp"
+#include "../../../../kernel/Test.hpp"
 #include "Math.hpp"
 #include "../ArithmeticException/ArithmeticException.hpp"
 

@@ -26,7 +26,7 @@
 
 #include "MediaType.hpp"
 #include "MediaTypeException/MediaTypeException.hpp"
-#include "../../../../../../kernel/Test.hpp"
+#include "../../../../../kernel/Test.hpp"
 
 using namespace Javax::Ws::Rs::Core;
 

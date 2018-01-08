@@ -28,7 +28,7 @@
 #define NATIVE_JAVA_NET_URL_ENCODER_HPP
 
 #include "../../Lang/Object/Object.hpp"
-#include "../../../../../../kernel/String.hpp"
+#include "../../../../kernel/String.hpp"
 #include "../../Lang/String/String.hpp"
 
 using namespace Java::Lang;

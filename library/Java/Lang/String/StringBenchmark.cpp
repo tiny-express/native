@@ -24,7 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../benchmark/benchmark.hpp"
+#include "../../../../benchmark/benchmark.hpp"
+
 #include "String.hpp"
 #include <string>
 

@@ -27,8 +27,8 @@
 #ifndef NATIVE_JAVA_LANG_CQL_EXCEPTION_HPP
 #define NATIVE_JAVA_LANG_CQL_EXCEPTION_HPP
 
-#include "../../../library/Java/Lang/Exception/Exception.hpp"
-#include "../../../library/Java/Lang.hpp"
+#include "../../../../library/Java/Lang/Exception/Exception.hpp"
+#include "../../../../library/Java/Lang.hpp"
 
 namespace Javax {
     namespace Cql {

@@ -28,7 +28,7 @@
 #define NATIVE_JAVA_UTIL_SET_HPP
 
 #include "../../Lang.hpp"
-#include "../../util/Collection/Collection.hpp"
+#include "../../../../library/Java/Util/Collection/Collection.hpp"
 
 using namespace Java::Lang;
 

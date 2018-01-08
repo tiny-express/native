@@ -25,7 +25,7 @@
  */
 
 #include "MediaType.hpp"
-#include "../../../../library/Java/Lang/StringBuilder/StringBuilder.hpp"
+#include "../../../../../library/Java/Lang/StringBuilder/StringBuilder.hpp"
 #include "MediaTypeException/MediaTypeException.hpp"
 
 using namespace Javax::Ws::Rs::Core;

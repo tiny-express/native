@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../../../kernel/Test.hpp"
+#include "../../../../kernel/Test.hpp"
 #include "Arrays.hpp"
 
 using namespace Java::Util;

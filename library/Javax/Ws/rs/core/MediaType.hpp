@@ -27,8 +27,8 @@
 #ifndef NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP
 #define NATIVE_JAVAX_WS_RS_CORE_MEDIA_TYPE_HPP
 
-#include "../../../../library/Java/Lang.hpp"
-#include "../../../../library/Java/util/HashMap/HashMap.hpp"
+#include "../../../../../library/Java/Lang.hpp"
+#include "../../../../../library/Java/Util/HashMap/HashMap.hpp"
 
 namespace Javax {
     namespace Ws {

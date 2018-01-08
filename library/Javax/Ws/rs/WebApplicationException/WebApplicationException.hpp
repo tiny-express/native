@@ -27,7 +27,7 @@
 #ifndef JAVAX_WS_RS_WEB_APPLICATION_EXCEPTION_WEB_APPLICATION_EXCEPTION_HPP
 #define JAVAX_WS_RS_WEB_APPLICATION_EXCEPTION_WEB_APPLICATION_EXCEPTION_HPP
 
-#include "../../../../library/Java/Lang/RuntimeException/RuntimeException.hpp"
+#include "../../../../../library/Java/Lang/RuntimeException/RuntimeException.hpp"
 
 using namespace Java::Lang;
 

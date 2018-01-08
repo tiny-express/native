@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_SECURITY_MESSAGEDIGEST_HPP_
 #define NATIVE_JAVA_SECURITY_MESSAGEDIGEST_HPP_
 
-#include "../../../../../../kernel/Type.hpp"
+#include "../../../../kernel/Type.hpp"
 #include "../../Lang.hpp"
 #include "MessageDigestSpi.hpp"
 

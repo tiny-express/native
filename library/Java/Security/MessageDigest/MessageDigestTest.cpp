@@ -27,7 +27,7 @@
 #include <chrono>
 #include "MessageDigest.hpp"
 #include "../NoSuchAlgorithmException/NoSuchAlgorithmException.hpp"
-#include "../../../../../../kernel/Test.hpp"
+#include "../../../../kernel/Test.hpp"
 
 using namespace Java::Lang;
 using namespace Java::Security;

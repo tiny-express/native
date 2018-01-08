@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../../../kernel/Test.hpp"
+#include "../../../../kernel/Test.hpp"
 #include "../BitSet/BitSet.hpp"
 #include "../../Lang/IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../../Lang/NegativeArraySizeException/NegativeArraySizeException.hpp"

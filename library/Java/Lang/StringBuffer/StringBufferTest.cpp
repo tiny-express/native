@@ -29,7 +29,7 @@
 #include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../NegativeArraySizeException/NegativeArraySizeException.hpp"
-#include "../../../../../../kernel/Test.hpp"
+#include "../../../../kernel/Test.hpp"
 
 using namespace Java::Lang;
 

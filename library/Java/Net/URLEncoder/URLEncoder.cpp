@@ -25,7 +25,7 @@
  */
 
 #include "URLEncoder.hpp"
-#include "../../io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
+#include "../../../../library/Java/Io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
 
 using namespace Java::Net;
 

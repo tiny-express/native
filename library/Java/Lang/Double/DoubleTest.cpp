@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../../../kernel/Test.hpp"
-#include "../../../../../../kernel/Platform.hpp"
+#include "../../../../kernel/Test.hpp"
+#include "../../../../kernel/Platform.hpp"
 #include "Double.hpp"
 
 using namespace Java::Lang;

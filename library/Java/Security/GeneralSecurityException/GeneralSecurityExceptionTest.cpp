@@ -25,7 +25,7 @@
  */
 
 
-#include "../../../../../../kernel/Test.hpp"
+#include "../../../../kernel/Test.hpp"
 #include "GeneralSecurityException.hpp"
 
 using namespace Java::Security;

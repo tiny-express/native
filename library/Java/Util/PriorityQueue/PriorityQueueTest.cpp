@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../../../kernel/Test.hpp"
+#include "../../../../kernel/Test.hpp"
 #include "../../Lang.hpp"
 #include "../PriorityQueue/PriorityQueue.hpp"
 #include "../Vector/Vector.hpp"
