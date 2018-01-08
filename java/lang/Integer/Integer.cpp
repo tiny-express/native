@@ -545,14 +545,17 @@ String Integer::toUnsignedString(int inputInt, int radix) {
 			return result;
 		case 8:
 			stream << std::oct << Integer::toUnsignedLong(inputInt);
+			result.replace(',', '\0');
 			result = stream.str();
 			return result;
 		case 16:
 			stream << std::hex << Integer::toUnsignedLong(inputInt);
+			result.replace(',', '\0');
 			result = stream.str();
 			return result;;
 		case 10:
 			stream << std::dec << Integer::toUnsignedLong(inputInt);
+			result.replace(',', '\0');
 			result = stream.str();
 			return result;
 		default:
