@@ -7,7 +7,8 @@ public class StringTest {
 
     @Test
     public void testToString() {
-        assertEquals("abc","xyz");
+    	String actual = "abc";
+        assertEquals("abc",actual.toString());
     }
 
 }
