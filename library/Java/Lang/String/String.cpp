@@ -43,8 +43,9 @@ std::string wideStringToMultiByteString(const std::wstring& input) {
     if (len != static_cast<std::size_t>(-1)) {
         if (len > DEFAULT_BUFFER_LENGTH) {
             delete[] buffer;
+            ++len;
             buffer = new char[len]();
-            len = wcstombs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
+            len = wcstombs(buffer, input.c_str(), len);
         }
         result = std::string(buffer, buffer + len);
     }
@@ -55,14 +56,15 @@ std::string wideStringToMultiByteString(const std::wstring& input) {
 
 std::wstring multiByteStringToWideString(const std::string& input) {
     wchar_t* buffer = new wchar_t[DEFAULT_BUFFER_LENGTH]();
-    std::size_t len = mbstowcs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH * sizeof(wchar_t));
+    std::size_t len = mbstowcs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
     std::wstring result;
 
     if (len != static_cast<std::size_t>(-1)) {
         if (len > DEFAULT_BUFFER_LENGTH) {
             delete[] buffer;
+            ++len;
             buffer = new wchar_t[len]();
-            len = mbstowcs(buffer, input.c_str(), len * sizeof(wchar_t));
+            len = mbstowcs(buffer, input.c_str(), len);
         }
 
         result = std::wstring(buffer, buffer + len);
@@ -73,7 +75,7 @@ std::wstring multiByteStringToWideString(const std::string& input) {
 }
 
 std::string toUpper(const std::string& input) {
-    std::locale::global(std::locale("en_US.UTF-8"));
+    std::setlocale(LC_CTYPE, "en_US.UTF-8");
     std::wstring wideString = multiByteStringToWideString(input);
     auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
     std::transform(wideString.begin(), wideString.end(), wideString.begin(), towupper);
@@ -81,7 +83,7 @@ std::string toUpper(const std::string& input) {
 }
 
 std::string toLower(const std::string& input) {
-    std::locale::global(std::locale("en_US.UTF-8"));
+    std::setlocale(LC_CTYPE, "en_US.UTF-8");
     std::wstring wideString = multiByteStringToWideString(input);
     auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
     std::transform(wideString.begin(), wideString.end(), wideString.begin(), towlower);
@@ -788,14 +790,18 @@ String String::print(const String &format, String value) {
     return String::print(format, value.toCharPointer());
 }
 
-String String::formatInternal(regex_t& regex, const char* format, int size) {
+String String::format(const String &format) {
+    const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\" \
+            ".[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
     String result;
-    string inputStringPtr = (string)format;
-    int inputStringLength = size;
+    string inputStringPtr = format.toCharPointer();
+    int inputStringLength = format.getSize();
     int inputStringOffset = 0;
     int errorCode = 0;
+    regex_t regex;
 
-    while (inputStringOffset < size) {
+    errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
+    while (errorCode == 0 && inputStringOffset < format.getSize()) {
         regmatch_t matchedResult[16] = {0}; // max 16 groups
         errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
         if (errorCode != 0) {
@@ -803,15 +809,17 @@ String String::formatInternal(regex_t& regex, const char* format, int size) {
             break;
         }
 
-        const int unmatchedStringLength = matchedResult[0].rm_so;
+        int unmatchedStringLength = matchedResult[0].rm_so;
+        int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+
         if (unmatchedStringLength > 0) {
             result += String(inputStringPtr, unmatchedStringLength);
         }
 
-        const int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
         if (matchedStringLength > 0) {
             String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
             if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
+                regfree(&regex);
                 throw InterruptedException("Missing arguments.");
             } else {
                 result += "%";
@@ -823,6 +831,7 @@ String String::formatInternal(regex_t& regex, const char* format, int size) {
         inputStringLength -= matchedResult[0].rm_eo;
     }
 
+    regfree(&regex);
     return result;
 }
 
