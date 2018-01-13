@@ -75,18 +75,20 @@ std::wstring multiByteStringToWideString(const std::string& input) {
 }
 
 std::string toUpper(const std::string& input) {
-    std::locale::global(std::locale(std::locale(), "en_US.UTF-8", std::locale::ctype));
+    std::locale::global(std::locale("en_US.UTF-8"));
     std::wstring wideString = multiByteStringToWideString(input);
     auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
     std::transform(wideString.begin(), wideString.end(), wideString.begin(), towupper);
+    std::locale::global(std::locale());
     return wideStringToMultiByteString(wideString);
 }
 
 std::string toLower(const std::string& input) {
-    std::locale::global(std::locale(std::locale(), "en_US.UTF-8", std::locale::ctype));
+    std::locale::global(std::locale("en_US.UTF-8"));
     std::wstring wideString = multiByteStringToWideString(input);
     auto& f = std::use_facet<std::ctype<wchar_t>>(std::locale());
     std::transform(wideString.begin(), wideString.end(), wideString.begin(), towlower);
+    std::locale::global(std::locale());
     return wideStringToMultiByteString(wideString);
 }
 
