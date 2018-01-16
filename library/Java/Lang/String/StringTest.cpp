@@ -987,6 +987,37 @@ TEST (JavaLangString, OperatorPlusConstantStringDataType) {
 	assertTrue(expected2.equals(result2));
 }
 
+TEST(JavaLangString, OperatorPlusConstantString) {
+
+    {
+        String input01 = "84";
+        String input02 = "0909015425";
+        String result = input01 + input02;
+        assertEquals("84", input01);
+        assertEquals("0909015425", input02);
+        assertEquals("840909015425", result);
+    }
+
+    {
+        String input01 = "84";
+        String input02 = "0909015425";
+        String result = "|-" + input01 + "-|-" + input02 + "-|";
+        assertEquals("84", input01);
+        assertEquals("0909015425", input02);
+        assertEquals("|-84-|-0909015425-|", result);
+    }
+
+    {
+        String input01 = "Nguyen Phuc";
+        String input02 = "Loi";
+        String result = "|-" + input01 + "-|-" + input02 + "-|";
+        assertEquals("Nguyen Phuc", input01);
+        assertEquals("Loi", input02);
+        assertEquals("|-Nguyen Phuc-|-Loi-|", result);
+    }
+}
+
+
 TEST (JavaLangString, OperatorEquals) {
 	// Given two string and compare equal them - Return comparable
 	String textCompare1 = "Hello";
