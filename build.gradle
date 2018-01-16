@@ -5,14 +5,14 @@ repositories {
 }
 
 task(generate, dependsOn: jar, type: JavaExec ) {
-    main = 'com.foodtiny.Transpiler'
+    main = 'com.foodtiny.Converter'
     classpath(sourceSets.main.runtimeClasspath, sourceSets  .main.compileClasspath)
 }
 
 sourceSets {
     main {
         java {
-            srcDir 'misc/transplier/src'
+            srcDir 'misc/transpiler/src/main/java'
             buildDir 'misc/transpiler/build'
         }
     }
