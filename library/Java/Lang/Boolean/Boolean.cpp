@@ -34,7 +34,6 @@
  */
 Boolean::Boolean(const boolean &target) {
 	this->original = target;
-	this->originalString = stringFromBoolean(this->original);
 }
 
 /**
@@ -52,16 +51,13 @@ Boolean::Boolean(const_string target) {
 	} else {
 		this->original = false;
 	}
-	this->originalString = stringFromBoolean(this->original);
 }
 
 /**
  * Boolean Destructor
  */
 Boolean::~Boolean() {
-	if (this->originalString != NULL) {
-		free(this->originalString);
-	}
+
 }
 
 /**
@@ -146,7 +142,7 @@ boolean Boolean::parseBoolean(const_string target) {
  * @return string
  */
 String Boolean::toString() const {
-	return this->originalString;
+	return stringFromBoolean(this->original);
 }
 
 /**
@@ -191,8 +187,4 @@ boolean Boolean::valueOf(const_string target) {
  */
 Boolean Boolean::operator=(const Boolean &target) {
 	this->original = target.original;
-	if (this->originalString != NULL) {
-		free(this->originalString);
-	}
-	this->originalString = stringFromBoolean(this->original);
 }

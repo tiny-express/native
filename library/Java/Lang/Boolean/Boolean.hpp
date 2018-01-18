@@ -44,7 +44,6 @@ namespace Java {
 					public Serializable {
 				private:
 						bool original;
-						string originalString;
 				
 				public:
 						const static boolean True = true;

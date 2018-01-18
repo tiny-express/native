@@ -75,7 +75,9 @@ namespace Java {
         memcpy(&this->original[this->size], targetValue, targetLength);\
         this->original[newLength] = '\0';\
         this->size = newLength;
-        
+
+        class Boolean;
+
         class StringBuilder;
 
         class StringBuffer;
@@ -1119,7 +1121,7 @@ namespace Java {
             template<typename T, typename... Args>
             static String format(const String &format, T value, Args... args) {
                 const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
-                        "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
+                        "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspnbB%])";
                 String result;
                 string inputStringPtr = format.toCharPointer();
                 int inputStringLength = format.getSize();
@@ -1225,6 +1227,8 @@ namespace Java {
                 return result;
             }
 
+            static String print(const String &format, bool value);
+
             static String print(const String &format, short value);
 
             static String print(const String &format, int value);
@@ -1241,7 +1245,11 @@ namespace Java {
 
             static String print(const String &format, float value);
 
-            static String print(const String &format, string value);
+            static String print(const String &format, char* value);
+
+            static String print(const String &format, const char* value);
+
+            static String print(const String &format, Boolean value);
 
             static String print(const String &format, Short value);
 

@@ -667,6 +667,16 @@ Array<String> String::split(String regex, int limit) const {
     return stringArrayLimit;
 }
 
+String String::print(const String &format, bool value) {
+    if (format.original == "%b") {
+        return (value ? "true" : "false");
+    }
+    if (format.original == "%B") {
+        return (value ? "TRUE" : "FALSE");
+    }
+    return "";
+}
+
 String String::print(const String &format, short value) {
     String result;
     char buffer[DEFAULT_BUFFER_LENGTH] = {0};
@@ -747,7 +757,7 @@ String String::print(const String &format, float value) {
     return result;
 }
 
-String String::print(const String &format, string value) {
+String String::print(const String &format, char* value) {
     String result;
     auto buffer = (string)calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
     int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toCharPointer(), value);
@@ -764,6 +774,29 @@ String String::print(const String &format, string value) {
 
     free(buffer);
     return result;
+}
+
+String String::print(const String &format, const char* value) {
+    String result;
+    auto buffer = (string)calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
+    int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toCharPointer(), value);
+
+    if (length > DEFAULT_BUFFER_LENGTH) {
+        free(buffer);
+        buffer = (string) calloc(++length, sizeof(char));
+        length = snprintf(buffer, (size_t)length, format.toCharPointer(), value);
+    }
+
+    if (length > 0) {
+        result = String(buffer, length);
+    }
+
+    free(buffer);
+    return result;
+}
+
+String String::print(const String &format, Boolean value) {
+    return print(format, value.booleanValue());
 }
 
 String String::print(const String &format, Short value) {
@@ -792,7 +825,7 @@ String String::print(const String &format, String value) {
 
 String String::format(const String &format) {
     const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?([[:digit:]]+)?(\\" \
-            ".[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
+            ".[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspnbB%])";
     String result;
     string inputStringPtr = format.toCharPointer();
     int inputStringLength = format.getSize();
