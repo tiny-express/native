@@ -990,22 +990,29 @@ TEST (JavaLangString, OperatorPlusConstantStringDataType) {
 TEST(JavaLangString, OperatorPlusConstantString) {
     {
         String input1 = "84";
-        String input2 = "0909015425";
-        String result = input1 + input2;        
-        assertEquals("840909015425", result);
+        String input2 = "01285689999";
+        String result = input1 + input2;
+
+        assertEquals("84", input1);
+        assertEquals("01285689999", input2);        
+        assertEquals("8401285689999", result);
     }
 
     {
         String input1 = "84";
-        String input2 = "0909015425";
+        String input2 = "01285689999";
         String result = (string) "|-" + input1 + (string) "-|-" + input2 + (string) "-|";
-        assertEquals("|-84-|-0909015425-|", result);
+        assertEquals("84", input1);
+        assertEquals("01285689999", input2);
+        assertEquals("|-84-|-01285689999-|", result);
     }
 
     {
         String input1 = "Food";
         String input2 = "ny";
         String result = (string) "|" + input1 + (string) "ti" + input2 + (string) "|";
+        assertEquals("Food", input1);
+        assertEquals("ny", input2);
         assertEquals("|Foodtiny|", result);
     }
 }
