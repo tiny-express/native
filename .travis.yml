@@ -17,13 +17,16 @@ addons:
     - libgtest-dev
     - valgrind
     - lcov
+    - gradle
 before_script:
 - export CC=gcc
 - export CXX=g++
 - ./misc/benchmark.sh
+script:
+- gradle test
+- gradle generate
 - cmake . -DCMAKE_BUILD_TYPE=Debug && make native_test -j8
 - cmake . -DCMAKE_BUILD_TYPE=Release && make native_benchmark
-script:
 - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then valgrind --error-exitcode=42 --leak-check=full ./native_test; else ./native_test; fi
 - ./native_benchmark
 after_success:
