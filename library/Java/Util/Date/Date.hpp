@@ -223,7 +223,7 @@ namespace Java {
 						 *
 						 * @return int
 						 */
-						int compareTo(const Date &anotherDate) const;
+						int compareTo(const Date &anotherDate) const override;
 						
 						/**
 						 * Compares two dates for equality.

@@ -170,7 +170,7 @@ namespace Java {
              *
              * @return long
              */
-            int hashCode() const;
+            int hashCode() const override;
 
             /**
              * Returns a hash code for this Byte
