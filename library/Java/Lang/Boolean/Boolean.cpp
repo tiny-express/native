@@ -142,7 +142,10 @@ boolean Boolean::parseBoolean(const_string target) {
  * @return string
  */
 String Boolean::toString() const {
-	return stringFromBoolean(this->original);
+	if (this->original) {
+        return "true";
+    }
+    return "false";
 }
 
 /**
