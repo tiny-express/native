@@ -27,10 +27,10 @@
 #ifndef NATIVE_JAVA_SECURITY_HPP
 #define NATIVE_JAVA_SECURITY_HPP
 
-#include "security/Certificate/Certificate.hpp"
-#include "security/KeyFactory/KeyFactory.hpp"
-#include "security/KeyFactory/KeyFactory.hpp"
-#include "security/KeyStore/KeyStore.hpp"
-#include "security/MessageDigest/MessageDigest.hpp"
+#include "Security/Certificate/Certificate.hpp"
+#include "Security/KeyFactory/KeyFactory.hpp"
+#include "Security/KeyFactory/KeyFactory.hpp"
+#include "Security/KeyStore/KeyStore.hpp"
+#include "Security/MessageDigest/MessageDigest.hpp"
 
 #endif // NATIVE_JAVA_SECURITY_HPP
