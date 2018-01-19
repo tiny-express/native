@@ -88,7 +88,7 @@ inline char **stringSplit(const char *target, const char *delimiter) {
 	strncpy(const_target, target, (size_t) targetLength);
 	const_target[ targetLength ] = '\0';
 	char *item = strtok(const_target, delimiter);
-	register int count = 0;
+	int count = 0;
 	while (item != nullptr) {
 		data[ count++ ] = stringCopy(item);
 		item = strtok(nullptr, delimiter);
@@ -110,7 +110,7 @@ inline void freePointerPointerChar(char **charArray) {
 		return;
 	}
 	int length = lengthPointerPointerChar(charArray);
-	register int index;
+	int index;
 	for (index = length - 1; index >= 0; index--) {
 		free(charArray[ index ]);
 	}
@@ -131,9 +131,6 @@ inline char *stringJoin(char *target[], const char *delimiter) {
 	int num = lengthPointerPointerChar(target) - 1;
 	int len = 0, wlen = 0;
 	auto *tmp = (char*) calloc(MAX_STRING_LENGTH, sizeof(char));
-#ifdef LINUX
-	register
-#endif
     int index;
 	for (index = 0; index < num; index++) {
 		// Copy memory segment
@@ -197,7 +194,7 @@ inline boolean stringStartswith(const char *target, const char *prefix) {
 	if (targetLength < prefix_length) {
 		return false;
 	}
-	register int i;
+	int i;
 	for (i = 0; i < prefix_length; i++) {
 		if (prefix[ i ] != target[ i ]) {
 			return false;
@@ -222,7 +219,7 @@ inline boolean stringEndswith(const char *target, const char *suffix) {
 	if (targetLength < suffix_length) {
 		return false;
 	}
-	register int i;
+	int i;
 	for (i = suffix_length - 1; i >= 0; i--) {
 		if (suffix[ i ] != target[ targetLength - suffix_length + i ]) {
 			return false;
@@ -251,9 +248,6 @@ inline int stringIndex(const char *target, const char *subTarget, int times) {
 		return NOT_FOUND;
 	}
 
-#ifdef LINUX
-	register
-#endif
     int indexTarget, indexSubTarget, countTimes = 0, positionResult;
 	for (indexTarget = 0; indexTarget <= ( targetLength - subTargetLength ); indexTarget++) {
 		if (target[ indexTarget ] != subTarget[ 0 ]) {
@@ -288,10 +282,7 @@ inline char *stringRandom(char *target, int size) {
 	}
 	int targetLength = lengthPointerChar(target);
 	auto *result = (char *)calloc((size_t) size + 1, sizeof(char));
-#ifdef LINUX
-    register
-#endif
-	  int i;
+	int i;
 	for (i = 0; i < size; i++) {
 		result[ i ] = target[ rand() % targetLength ];
 	}
@@ -383,7 +374,7 @@ inline char *stringUpper(char *target) {
 		return nullptr;
 	}
 	char *result = stringCopy(target);
-    register char *index = result;
+    char *index = result;
     for (; *index; index++) {
         if (( 'a' <= *index ) && ( *index <= 'z' )) {
             *index = *index - 32;
@@ -403,7 +394,7 @@ inline char *stringLower(char *target) {
 		return nullptr;
 	}
 	char *result = stringCopy(target);
-    register char *index = result;
+    char *index = result;
     for (; *index; index++) {
         if (( 'A' <= *index ) && ( *index <= 'Z' )) {
             *index = *index + 32;
@@ -423,7 +414,7 @@ inline char *stringTitle(char *target) {
 		return nullptr;
 	}
 	char *result = stringCopy(target);
-	register char *index = result;
+	char *index = result;
 	if (lengthPointerChar(index) > 0 && 'a' <= *index && *index <= 'z') {
 		*index -= 32;
 	}
@@ -481,9 +472,6 @@ inline boolean stringEquals(const char *target1, const char *target2) {
 inline char *stringReverse(char *target) {
 	int targetLength = lengthPointerChar(target);
 	auto *result = (char *) calloc((size_t) targetLength + 1, sizeof(char));
-#ifdef LINUX
-	register
-#endif
 	int index;
 	for (index = 0; index < targetLength; index++) {
 		result[ index ] = target[ targetLength - index - 1 ];

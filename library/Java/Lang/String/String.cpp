@@ -100,9 +100,6 @@ String::String(string original, int length) {
 String::String(Array<char> &charArray) {
     this->original.clear();
     this->original.shrink_to_fit();
-#ifdef LINUX
-    register
-#endif
     int i;
     for (i = 0; i<charArray.length; i++) {
         this->original += charArray[i];
@@ -112,9 +109,6 @@ String::String(Array<char> &charArray) {
 String::String(Array<byte> &byteArray) {
     this->original.clear();
     this->original.shrink_to_fit();
-#ifdef LINUX
-    register
-#endif
     int i;
     for (i = 0; i < byteArray.length; i++) {
         this->original += byteArray[i];
@@ -147,9 +141,6 @@ String::String(Array<char> &array, int offset, int length) {
 
     this->original.clear();
     this->original.shrink_to_fit();
-#ifdef LINUX
-    register
-#endif
     int i;
     for (i = offset; i < offset + length; ++i) {
         this->original.push_back(array[i]);
@@ -169,9 +160,6 @@ String::String(Array<byte> &array, int offset, int length) {
 
     this->original.clear();
     this->original.shrink_to_fit();
-#ifdef LINUX
-    register
-#endif
     int i;
     for (i = offset; i < offset + length; i++) {
         this->original.push_back((char)array[i]);
@@ -252,11 +240,7 @@ int String::indexOf(int character, int fromIndex) const {
         return this->indexOf(character);
     }
 
-#ifdef LINUX
-    register
-#endif
     int index = 0;
-
     for (index = fromIndex; index < this->original.size(); index++) {
         if (this->original[index] == (char) character) {
             return index;
@@ -291,9 +275,6 @@ boolean String::isEmpty() const {
 }
 
 int String::lastIndexOf(int character) {
-#ifdef LINUX
-    register
-#endif
     int index = 0;
     for (index = (int)this->original.size() - 1; index >= 0; index--) {
         if (this->charAt(index) == (char) character) {
@@ -310,11 +291,8 @@ int String::lastIndexOf(int character, int fromIndex) {
     if (fromIndex > this->original.size() - 1) {
         return this->lastIndexOf(character);
     }
-#ifdef LINUX
-    register
-#endif
-    int index = 0;
 
+    int index = 0;
     for (index = fromIndex - 1; index >= 0; index--) {
         if (this->charAt(index) == (char) character) {
             return index;
@@ -395,12 +373,7 @@ Array<String> String::split(String regex) const {
     string *splitStrings = stringSplit(this->original.c_str(), regex.toCharPointer());
     Array<String> strings;
 
-#ifdef LINUX
-    register
-#endif
-    int index = 0;
-
-    int splitStringsLength = lengthPointerPointerChar(splitStrings);
+    int index = 0, splitStringsLength = lengthPointerPointerChar(splitStrings);
     for (index = 0; index < splitStringsLength; index++) {
         strings.push(splitStrings[index]);
     }
@@ -422,15 +395,8 @@ boolean String::startsWith(String prefix, int thisOffset) const {
     if (originalLength < prefixLength || thisOffset > (originalLength - prefixLength)) {
         return false;
     }
-#ifdef LINUX
-    register
-#endif
-    int firstIndex = 0;
 
-#ifdef LINUX
-    register
-#endif
-    int secondIndex = thisOffset;
+    int firstIndex = 0, secondIndex = thisOffset;
     for (; firstIndex < prefixLength; firstIndex++) {
         if (prefix.original[firstIndex] != this->original[secondIndex]) {
             return false;
@@ -656,9 +622,6 @@ Array<String> String::split(String regex, int limit) const {
     int remainStringLength = indexOfRegexBelowLimit + regex.length();
     String remainString = this->getStringFromIndex(remainStringLength);
     Array<String> stringArrayLimit;
-#ifdef LINUX
-    register
-#endif
     int index;
     for (index = 0; index < limit - 1; index++) {
         stringArrayLimit.push(stringArrayNoLimit[index]);

@@ -106,7 +106,7 @@ namespace Java {
              */
             Vector(const Vector<E> &target) {
                 const E *targetData = target.original.data();
-                register int index;
+                int index;
                 for (index = 0; index < target.original.size(); index++) {
                     this->original.push_back(targetData[index]);
                 }
@@ -209,7 +209,7 @@ namespace Java {
             Vector<E> clone() const {
                 Vector<E> clonedVector;
                 const E *vectorData = this->original.data();
-                register int index;
+                int index;
                 for (index = 0; index < this->original.size(); index++) {
                     clonedVector.add(vectorData[index]);
                 }
@@ -316,7 +316,7 @@ namespace Java {
                     return false;
                 }
 
-                register int index;
+                int index;
                 for (index = 0; index < size; index++) {
                     E elementOfVector = this->original[index];
                     E elementOfTarget = target.original[index];
@@ -370,7 +370,7 @@ namespace Java {
              */
             int indexOf(const E &element) const {
                 int currentSize = (int) this->original.size();
-                register int index;
+                int index;
                 for (index = 0; index < currentSize; index++) {
                     if (element == this->original[index]) {
                         return index;
@@ -392,7 +392,7 @@ namespace Java {
                     throw IllegalArgumentException("index is out of range");
                 }
 
-                register int position;
+                int position;
                 for (position = index; position < this->original.size(); position++) {
                     if (element == this->original[position]) {
                         return position;
@@ -467,7 +467,7 @@ namespace Java {
                     throw IllegalArgumentException("index is out of range");
                 }
 
-                register int position;
+                int position;
                 for (position = index; position >= 0; position--) {
                     if (element == this->original[position]) {
                         return position;
@@ -520,7 +520,7 @@ namespace Java {
              */
             boolean remove(const Object &element) {
                 const E *referenceToElement = dynamic_cast<const E *>(&element);
-                register int index;
+                int index;
                 for (index = 0; index < this->original.size(); index++) {
                     if ((*referenceToElement) == this->original[index]) {
                         this->remove(index);
@@ -899,7 +899,7 @@ namespace Java {
                 this->clear();
                 this->ensureCapacity(target.size());
                 const E *targetData = target.original.data();
-                register int index;
+                int index;
                 for (index = 0; index < target.size(); index++) {
                     this->original.push_back(targetData[index]);
                 }

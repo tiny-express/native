@@ -223,7 +223,7 @@ TEST (JavaUtilVector, CopyInto) {
     Array<int> anArray;
     vector.copyInto(anArray);
     assertEquals(vector.size(), anArray.length);
-    register int index;
+    int index;
     for (index = 0; index < vector.size(); index++) {
         assertEquals(vector.get(index), anArray.get(index));
     }
@@ -739,7 +739,7 @@ TEST (JavaUtilVector, ToArray) {
 
     Array<int> anArray = vector.toArray();
     // Check elements of vector and array at same order.
-    register int index;
+    int index;
     for (index = 0; index < vector.size(); index++) {
         assertEquals(vector[index], anArray[index]);
     }

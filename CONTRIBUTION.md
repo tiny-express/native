@@ -97,20 +97,6 @@ TEST(General, distribution_sort) {
 }
 ```
 
-##### SHOULD
-```c
-int array_length = 10;
-// Put loop variable in register to optimize performance
-// but only for Linux platform
-#ifdef __linux_
-register
-#elif
-int index = 0;
-for (index = 0; index < array_length; index++) {
-    // doSomething()
-}
-```
-
 ##### SHOULD NOT
 - C99 mode - Declaring variable inside loop parameters can not be allowed here
 - Use calculation in loop parameters
