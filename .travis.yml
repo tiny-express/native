@@ -4,6 +4,9 @@ language: cpp
 os:
 - linux
 - osx
+env:
+  - ARCH=x64
+  - ARCH=arm
 services:
 - docker
 compiler:

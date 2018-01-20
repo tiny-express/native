@@ -53,13 +53,7 @@ int Application(void (*program)(Array <String>), int argc, char **argument) {
 		System::out::println("Application Exception: " + e.getMessage());
 		return 1;
 	} catch (...) {
-#ifdef LINUX
-		std::exception_ptr p = std::current_exception();
-				String exceptionName = p.__cxa_exception_type()->name();
-				System::out::println("Unhandled Exception: " + exceptionName);
-#else
 		System::out::println("Unhandled Exception");
-#endif
 		return 1;
 	}
 }

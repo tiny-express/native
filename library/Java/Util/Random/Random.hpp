@@ -38,11 +38,11 @@ namespace Java {
 				
 				private:
 						std::atomic_long seed;
-						static std::atomic_long seedUniquifierField;
+						//static std::atomic_long seedUniquifierField;
 						static const long MULTIPLIER = 0x5DEECE66DL;
 						static const long ADDEND = 0xBL;
-						static constexpr long MASK = ( 1L << 48 ) - 1;
-						static constexpr double DOUBLE_UNIT = 1.0 / ( 1L << 53 );
+						//static const long MASK = (1L << 48 ) - 1;
+						//static constexpr double DOUBLE_UNIT = 1.0 / ( 1L << 53 );
 						boolean haveNextGaussianNumber = false;
 						double nextGaussianNumber;
 						//static long seedOffset;

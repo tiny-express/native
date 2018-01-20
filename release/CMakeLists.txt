@@ -64,19 +64,6 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wfatal-errors")
 # GNU Source compatible
 add_definitions(-D_GNU_SOURCE)
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    # CMake Modules
-    set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/misc" ${CMAKE_MODULE_PATH})
-    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
-
-    # Enable coverage by cmake modules
-    if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_BUILD_TYPE EQUAL "DEBUG")
-        include(CodeCoverage)
-        setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
-    endif ()
-endif ()
-
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
@@ -85,22 +72,22 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
-        kernel/**/*.cpp
-        library/**/*.cpp
+        ../kernel/**/*.cpp
+        ../library/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
-        kernel/**/*Test.cpp
-        library/**/**/*Test.cpp
-        library/**/**/**/*Test.cpp
+        ../kernel/**/*Test.cpp
+        ../library/**/**/*Test.cpp
+        ../library/**/**/**/*Test.cpp
         )
 
 # Only C++ unit benchmark files
 file(GLOB_RECURSE BENCHMARK_CPP
-        kernel/**/*Benchmark.cpp
-        library/**/**/*Benchmark.cpp
-        library/**/**/**/*Benchmark.cpp
+        ../kernel/**/*Benchmark.cpp
+        ../library/**/**/*Benchmark.cpp
+        ../library/**/**/**/*Benchmark.cpp
         )
 
 # Remove all test files within cpp files
@@ -113,40 +100,16 @@ foreach (benchmark_cpp_file ${BENCHMARK_CPP})
     list(REMOVE_ITEM SOURCES_CPP ${benchmark_cpp_file})
 endforeach ()
 
-# Create test binary for testing
-add_executable(${PROJECT_NAME}_test ${TESTS_CPP} ${SOURCES_CPP} misc/UnitTest.cpp)
+# Remove all test files within cpp files
+foreach (test_cpp_file ${TESTS_CPP})
+    list(REMOVE_ITEM SOURCES_CPP ${test_cpp_file})
+endforeach ()
 
-# Create benchmark binary
-add_executable(${PROJECT_NAME}_benchmark ${BENCHMARK_CPP} ${SOURCES_CPP} benchmark/benchmark.cpp)
-
-# Link google benchmark library
-target_link_libraries(${PROJECT_NAME}_benchmark libbenchmark.a)
-
-# Create native library for static linking
 add_library(${PROJECT_NAME} SHARED ${SOURCES_CPP})
-add_library(${PROJECT_NAME}_static STATIC ${SOURCES_CPP})
-
-# Add make test
-add_custom_target(
-        unit-test
-        COMMAND ./${PROJECT_NAME}_test
-)
-
-# Check memory leak
-add_custom_target(
-        leak
-        COMMAND make native_test
-        COMMAND valgrind --track-origins=yes --error-exitcode=2 --leak-check=full ./native_test
-)
-
-# Enable testing
-include(CTest)
-enable_testing()
 
 # Add make installation - install to Unix system
 set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY true)
 install(TARGETS ${PROJECT_NAME} DESTINATION ../lib OPTIONAL)
-install(TARGETS ${PROJECT_NAME}_static DESTINATION ../lib OPTIONAL)
 install(FILES library.hpp DESTINATION ../include/native)
 install(DIRECTORY java DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY javax DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
@@ -166,8 +129,6 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
 else ()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
 endif ()

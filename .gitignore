@@ -12,8 +12,9 @@ DartConfiguration.tcl
 Testing
 /src
 /Makefile
+/release/Makefile
 /native*
-/libnative*
+libnative*
 /cygnative.dll
 /native_benchmark
 native_test.exe
