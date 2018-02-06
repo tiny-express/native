@@ -27,6 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_STRING_STRING_HPP
 #define NATIVE_JAVA_LANG_STRING_STRING_HPP
 
+#include <string>
 #include "../../../kernel/Java.hpp"
 #include "../../../kernel/String.hpp"
 #include "../../../kernel/Common.hpp"
@@ -95,9 +96,7 @@ namespace Java {
                 public virtual CharSequence {
 
         private:
-            string original;
-            int size;
-            int capacity;
+            std::string original;
             mutable int hash = 0;
 
         public:
@@ -240,8 +239,7 @@ namespace Java {
              * @param original
              */
             inline String(string target) {
-                this->size = lengthPointerChar(target);
-                STRING_CONSTRUCTOR
+               this->original = std::string(target);
             }
 
             /**
@@ -250,8 +248,7 @@ namespace Java {
              * @param target
              */
             inline String(const_string target) {
-                this->size = lengthPointerChar(target);
-                STRING_CONSTRUCTOR
+                this->original = std::string(target);
             }
 
             /**
@@ -260,9 +257,7 @@ namespace Java {
              * @param target
              */
             inline String(const std::string &targetString) {
-                string target = (string) targetString.c_str();
-                this->size = targetString.length();
-                STRING_CONSTRUCTOR
+                this->original = targetString;
             }
 
             /**
@@ -437,7 +432,7 @@ namespace Java {
             template<class T>
             boolean equals(T anObject) const {
                 if (instanceof<String>(anObject)) {
-                    return (boolean) stringEquals(original, anObject.toString().toCharPointer());
+                    return (boolean) stringEquals(this->original.c_str(), anObject.toString().toCharPointer());
                 }
                 return false;
             }
@@ -580,11 +575,15 @@ namespace Java {
             static String join(CharSequence &delimiter, Args &&... elements) {
                 String result;
                 std::initializer_list<CharSequence *> paramList = {&elements...};
+
+                int i = 0;
                 for (const CharSequence *arg : paramList) {
                     result += arg->toString();
-                    result += delimiter.toString();
+                    if (i < paramList.size() - 1) {
+                        result += delimiter.toString();
+                    }
+                    ++i;
                 }
-                result = result.subString(0, result.size - delimiter.length());
                 return result;
             }
 
@@ -638,7 +637,7 @@ namespace Java {
              * @return int
              */
             inline int length() const override {
-                return this->size;
+                return this->original.size();
             }
 
             /**
@@ -839,7 +838,7 @@ namespace Java {
              *
              * @return the String, converted to lowercase.
              */
-            String toLowerCase() const;
+            String toLowerCase();
 
             /**
              * Converts all of the characters in this String to lower case using the rules of the given Locale.
@@ -851,7 +850,7 @@ namespace Java {
             // String toLowerCase(Locale locale);
 
             /**
-             * Converts all of the characters in this String to upper case
+             * Converts all of the characters in this String to ` case
              * using the rules of the default locale.
              *
              * @return the String, converted to uppercase.
@@ -980,11 +979,7 @@ namespace Java {
              * @return a String contain value of this String and target String
              */
             inline String operator+(const string &target) {
-                auto targetValue = (string) target;
-                int targetLength = lengthPointerChar((string) target);
-                int newLength = this->size + targetLength;
-                STRING_OPERATOR_PLUS
-                return this->original;
+                return this->original + std::string(target);
             }
 
             /**
@@ -994,11 +989,7 @@ namespace Java {
              * @return a String contain value of this String and target String
              */
             inline String operator+(const String &target) {
-                string targetValue = target.original;
-                int targetLength = target.size;
-                int newLength = this->size + target.size;
-                STRING_OPERATOR_PLUS
-                return this->original;
+                return this->original + target.original;
             }
 
             /**
@@ -1008,10 +999,7 @@ namespace Java {
              * @return a String contain value of this String and target string
              */
             inline String &operator+=(const String &target) {
-                string targetValue = target.original;
-                int targetLength = target.size;
-                int newLength = this->size + target.size;
-                STRING_OPERATOR_PLUS
+                this->original += target.original;
                 return *this;
             }
 
@@ -1022,10 +1010,7 @@ namespace Java {
              * @return a String contain value of this String and target String
              */
             inline String &operator+=(const_string target) {
-                auto targetValue = target;
-                int targetLength = lengthPointerChar(target);
-                int newLength = this->size + targetLength;
-                STRING_OPERATOR_PLUS
+                this->original.append(target);
                 return *this;
             }
 
@@ -1036,9 +1021,7 @@ namespace Java {
             * @return a reference to this String
             */
             inline String &operator+=(const char &target) {
-                stringAppend(&this->original, target);
-                this->size++;
-                this->capacity = this->size;
+                this->original += target;
                 return *this;
             }
 
@@ -1049,7 +1032,7 @@ namespace Java {
              * @return true if this String is equal to target; false otherwise
              */
             inline boolean operator==(const String &target) const {
-                return stringEquals(this->original, target.toCharPointer()) != 0;
+                return this->original == target.original;
             }
 
             /**
@@ -1059,12 +1042,7 @@ namespace Java {
             * @return a reference to this String
             */
             inline String &operator=(const String &target) {
-                if (this->original != nullptr) {
-                    free(this->original);
-                }
-                this->original = stringCopy(target.original);
-                this->size = target.size;
-                this->capacity = target.capacity;
+                this->original = target.original;
                 return *this;
             }
 
@@ -1085,7 +1063,7 @@ namespace Java {
             * @return true if this String is smaller than target; false otherwise
             */
             inline boolean operator<(const String &target) const {
-                return strcmp(this->original, target.toCharPointer()) < 0;
+                return strcmp(this->original.c_str(), target.toCharPointer()) < 0;
             }
 
             /**
@@ -1095,7 +1073,7 @@ namespace Java {
              * @return true if this String is greater than target; false otherwise
              */
             inline boolean operator>(const String &target) const {
-                return strcmp(this->original, target.toCharPointer()) > 0;
+                return strcmp(this->original.c_str(), target.toCharPointer()) > 0;
             }
 
             /**
@@ -1105,7 +1083,7 @@ namespace Java {
             * @return true if this String is smaller than or equal to target; false otherwise
             */
             inline boolean operator<=(const String &target) const {
-                return strcmp(this->original, target.toCharPointer()) <= 0;
+                return strcmp(this->original.c_str(), target.toCharPointer()) <= 0;
             }
 
             /**
@@ -1115,7 +1093,7 @@ namespace Java {
              * @return true if this String is greater than or equal to target; false otherwise
              */
             inline boolean operator>=(const String &target) const {
-                return strcmp(this->original, target.toCharPointer()) >= 0;
+                return strcmp(this->original.c_str(), target.toCharPointer()) >= 0;
             }
 
             /**
@@ -1138,66 +1116,25 @@ namespace Java {
              * @param format
              * @throw IllegalArgumentException - if not enough arguments
              */
-            template<typename T, typename... Args>
-            static String format(const String &format, T value, Args... args) {
-                const String pattern = "%([[:digit:]]+)?([-#+0 ]*)?" \
-                        "([[:digit:]]+)?(\\.[[:digit:]]+)?(l){0,2}([diuoxXfFeEgGaAcspn%])";
+            template<typename... Args>
+            static String format(String format, const Args... args) {
                 String result;
-                string inputStringPtr = format.toCharPointer();
-                int inputStringLength = format.getSize();
-                int inputStringOffset = 0;
-                int errorCode = 0;
-                regex_t regex;
-
-                errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
-                while (errorCode == 0 && inputStringOffset < format.getSize()) {
-                    regmatch_t matchedResult[16] = {0}; // max 16 groups
-                    errorCode = regexec(&regex, inputStringPtr, 16, matchedResult, 0);
-                    if (errorCode != 0) {
-                        result += String(inputStringPtr, inputStringLength);
-                        break;
-                    }
-
-                    int unmatchedStringLength = matchedResult[0].rm_so;
-                    int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
-
-                    if (unmatchedStringLength > 0) {
-                        result += String(inputStringPtr, unmatchedStringLength);
-                    }
-
-                    if (matchedStringLength > 0) {
-                        String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
-                        result += printObject(matchedString, value);
-
-                        if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
-                            String remainString(inputStringPtr + matchedResult[0].rm_eo,
-                                                inputStringLength - matchedResult[0].rm_eo);
-                            try {
-                                result += String::format(remainString, args...);
-                            } catch (...) {
-                                regfree(&regex);
-                                throw;
-                            }
-                            break;
-                        }
-                    }
-
-                    inputStringPtr += matchedResult[0].rm_eo;
-                    inputStringOffset += matchedResult[0].rm_eo;
-                    inputStringLength -= matchedResult[0].rm_eo;
+                String pattern = "%([-+ #0]*)?([[:digit:]]+)?(\\.[[:digit:]]+)?(l)"
+                        "{0,2}([diuoxXfFeEgGaAcspn%])";
+                regex_t regex = { 0 };
+                regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
+                try {
+                    result = String::formatInternal(regex,
+                                                    format.toCharPointer(),
+                                                    format.length(),
+                                                    args...);
+                } catch (...) {
+                    regfree(&regex);
+                    throw;
                 }
-
                 regfree(&regex);
                 return result;
             }
-
-            /**
-             * Format string
-             *
-             * @param format
-             * @throw IllegalArgumentException - if not enough arguments
-             */
-            static String format(const String &format);
 
         public:
 
@@ -1227,6 +1164,73 @@ namespace Java {
             }
 
         private:
+            /**
+             * Format string
+             *
+             * @param format
+             * @throw IllegalArgumentException - if not enough arguments
+             */
+            template<typename T, typename... Args>
+            static String formatInternal(regex_t& regex,
+                                         const char* format,
+                                         int size,
+                                         const T &value,
+                                         const Args&... args) {
+                String result;
+                string inputString = (string) format;
+                int inputLength = size;
+                int inputOffset = 0;
+                int errorCode = 0;
+
+                while (inputOffset < size) {
+                    regmatch_t matchedResult[16] = {0}; // max 16 groups
+                    errorCode = regexec(&regex, inputString, 16, matchedResult, 0);
+                    if (errorCode != 0) {
+                        result += String(inputString, inputLength);
+                        break;
+                    }
+
+                    const int unmatchedLength = matchedResult[0].rm_so;
+                    if (unmatchedLength > 0)
+                        result += String(inputString, unmatchedLength);
+
+                    const int matchedLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
+                    if (matchedLength > 0) {
+                        String matched(inputString + unmatchedLength, matchedLength);
+                        result += printObject(matched, value);
+
+                        if (inputString[unmatchedLength + matchedLength - 1] != '%') {
+                            try {
+                                result += formatInternal(regex,
+                                                         inputString + matchedResult[0].rm_eo,
+                                                         inputLength - matchedResult[0].rm_eo,
+                                                         args...);
+                            }
+                            catch (...) {
+                                regfree(&regex);
+                                throw;
+                            }
+                            break;
+                        }
+                    }
+
+                    inputString += matchedResult[0].rm_eo;
+                    inputOffset += matchedResult[0].rm_eo;
+                    inputLength -= matchedResult[0].rm_eo;
+                }
+
+                return result;
+            }
+
+
+            /**
+             * Format string
+             *
+             * @param format
+             * @throw IllegalArgumentException - if not enough arguments
+             */
+            static String formatInternal(regex_t& regex, const char* format, int size);
+
             template<typename T>
             static String printObject(const String &format, T value) {
                 String result;

@@ -42,6 +42,12 @@ TEST (JavaLangString, Constructor) {
 	// Given value for String constructor and assign value - Return string
 	String simpleStringConstructor = "Hello world";
 	assertEquals("Hello world", simpleStringConstructor.toString());
+
+    // Constructor with unicode string (utf-8)
+    {
+        String unicodeString = "đây là tiếng anh";
+        assertEquals("đây là tiếng anh", unicodeString);
+    }
 	
 	// Given empty value for String constructor and assign value - Return string
 	String stringConstructor = simpleStringConstructor;
@@ -154,6 +160,20 @@ TEST (JavaLangString, Equals) {
 	String stringEqual3 = "Food Tiny";
 	assertTrue(!stringEqual1.equals(stringEqual3));
 	assertTrue(stringEqual1 != stringEqual3);
+
+    // Compare unicode strings with same value
+    {
+        String unicodeString1 = "đây là tiếng anh";
+        String unicodeString2 = "đây là tiếng anh";
+        assertTrue(unicodeString1 == unicodeString2);
+    }
+
+    // Compare unicode strings with different value
+    {
+        String unicodeString1 = "đây là tiếng anh";
+        String unicodeString2 = "đây là tiếng việt";
+        assertTrue(unicodeString1 != unicodeString2);
+    }
 }
 
 TEST (JavaLangString, CharAt) {
@@ -178,62 +198,123 @@ TEST (JavaLangString, CharAt) {
 }
 
 TEST (JavaLangString, CompareTo) {
-	String smallerString = "ABCDEF";
-	String greaterString = "abcdef";
-	String equalToGreater = "abcdef";
-	
-	int compareResult = greaterString.compareTo(smallerString);
-	assertTrue(compareResult > 0);
-	
-	compareResult = greaterString.compareTo(equalToGreater);
-	assertTrue(compareResult == 0);
-	
-	compareResult = smallerString.compareTo(greaterString);
-	assertTrue(compareResult < 0);
-	
-	Comparable<String> *comparable = &greaterString;
-	compareResult = comparable->compareTo(smallerString);
-	assertTrue(compareResult > 0);
+    {
+        String smallerString = "ABCDEF";
+        String greaterString = "abcdef";
+        String equalToGreater = "abcdef";
+
+        int compareResult = greaterString.compareTo(smallerString);
+        assertTrue(compareResult > 0);
+
+        compareResult = greaterString.compareTo(equalToGreater);
+        assertTrue(compareResult == 0);
+
+        compareResult = smallerString.compareTo(greaterString);
+        assertTrue(compareResult < 0);
+
+        Comparable<String> *comparable = &greaterString;
+        compareResult = comparable->compareTo(smallerString);
+        assertTrue(compareResult > 0);
+    }
+
+    {
+        String smallerString = "Trời";
+        String greaterString = "trời";
+        String equalToGreater = "trời";
+        int compareResult = greaterString.compareTo(smallerString);
+        assertTrue(compareResult > 0);
+
+        compareResult = greaterString.compareTo(equalToGreater);
+        assertTrue(compareResult == 0);
+
+        compareResult = smallerString.compareTo(greaterString);
+        assertTrue(compareResult < 0);
+
+        Comparable<String> *comparable = &greaterString;
+        compareResult = comparable->compareTo(smallerString);
+        assertTrue(compareResult > 0);
+    }
 }
 
 TEST (JavaLangString, CompareToIgnoreCase) {
-	String smallerString = "because";
-	String greaterString = "hello";
-	String greaterUpperCase = "HELLO";
-	
-	int compareResult = greaterString.compareToIgnoreCase(smallerString);
-	assertTrue(compareResult > 0);
-	
-	compareResult = greaterString.compareToIgnoreCase(greaterUpperCase);
-	assertTrue(compareResult == 0);
-	
-	compareResult = smallerString.compareToIgnoreCase(greaterString);
-	assertTrue(compareResult < 0);
+    {
+        String smallerString = "because";
+        String greaterString = "hello";
+        String greaterUpperCase = "HELLO";
+
+        int compareResult = greaterString.compareToIgnoreCase(smallerString);
+        assertTrue(compareResult > 0);
+
+        compareResult = greaterString.compareToIgnoreCase(greaterUpperCase);
+        assertTrue(compareResult == 0);
+
+        compareResult = smallerString.compareToIgnoreCase(greaterString);
+        assertTrue(compareResult < 0);
+    }
+
+    {
+        String smallerString = "biển";
+        String greaterString = "hường";
+        String greaterUpperCase = "Hường";
+
+        int compareResult = greaterString.compareToIgnoreCase(smallerString);
+        assertTrue(compareResult > 0);
+
+        compareResult = greaterString.compareToIgnoreCase(greaterUpperCase);
+        assertTrue(compareResult == 0);
+
+        compareResult = smallerString.compareToIgnoreCase(greaterString);
+        assertTrue(compareResult < 0);
+    }
 }
 
 TEST (JavaLangString, Concat) {
-	// Given three strings - Return concatenation result
-	String textConcat0 = "Food Tiny ";
-	String textConcat1 = "Hello ";
-	String textConcat2 = "World";
-	String concatenationResult = textConcat0 + textConcat1 + textConcat2;
-	assertEquals("Food Tiny Hello World", concatenationResult.toString());
-	
-	// Given two strings - Return concatenation result
-	concatenationResult = textConcat1.concat(textConcat2);
-	assertEquals("Hello World", concatenationResult.toString());
+    {
+        // Given three strings - Return concatenation result
+        String textConcat0 = "Food Tiny ";
+        String textConcat1 = "Hello ";
+        String textConcat2 = "World";
+        String concatenationResult = textConcat0 + textConcat1 + textConcat2;
+        assertEquals("Food Tiny Hello World", concatenationResult.toString());
+
+        // Given two strings - Return concatenation result
+        concatenationResult = textConcat1.concat(textConcat2);
+        assertEquals("Hello World", concatenationResult.toString());
+    }
+
+    {
+        String sub = "Sơn ";
+        String adv = "rất ";
+        String adj = "đẹp trai";
+        String sentence = sub + adv + adj + (string) ".";
+        assertEquals("Sơn rất đẹp trai.", sentence);
+    }
 }
 
 TEST (JavaLangString, Contains) {
-	// Gives a valid string a sub string to find
-	String validString = "a valid string to test";
-	String subString = "valid string";
-	String invalidSubString = "text";
-	
-	// Test true with correct substring inside
-	assertTrue(validString.contains(subString));
-	// Test with with invalid substring inside
-	assertFalse(validString.contains(invalidSubString));
+    {
+        // Gives a valid string a sub string to find
+        String validString = "a valid string to test";
+        String subString = "valid string";
+        String invalidSubString = "text";
+
+        // Test true with correct substring inside
+        assertTrue(validString.contains(subString));
+        // Test with with invalid substring inside
+        assertFalse(validString.contains(invalidSubString));
+    }
+
+    {
+        // Gives a valid string a sub string to find
+        String validString = "đây là tiếng việt";
+        String subString = "tiếng";
+        String invalidSubString = "tiếq";
+
+        // Test true with correct substring inside
+        assertTrue(validString.contains(subString));
+        // Test with with invalid substring inside
+        assertFalse(validString.contains(invalidSubString));
+    }
 }
 
 TEST (JavaLangString, ContentEqual) {
@@ -301,136 +382,185 @@ TEST (JavaLangString, EqualIgnoreCase) {
 }
 
 TEST (JavaLangString, GetBytes) {
-	String text = "Sample Text";
-	Array<byte> bytes = text.getBytes();
-	assertEquals(11, bytes.length);
+    {
+        String text = "Sample Text";
+        Array<byte> bytes = text.getBytes();
+        assertEquals(11, bytes.length);
+    }
+
+    {
+        String text = "tiếng việt";
+        Array<byte> bytes = text.getBytes();
+        assertEquals(14, bytes.length);
+    }
 }
 
 TEST (JavaLangString, GetStringFromIndex) {
-	String aString = "Hello Hello Hello";
-	String result = aString.getStringFromIndex(6);
-	assertEquals("Hello Hello", result.toString());
-	
-	try {
-		result = aString.getStringFromIndex(-1);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1",
-		             e.getMessage());
-	}
-	
-	try {
-		result = aString.getStringFromIndex(20);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: 20",
-		             e.getMessage());
-	}
+    {
+        String aString = "Hello Hello Hello";
+        String result = aString.getStringFromIndex(6);
+        assertEquals("Hello Hello", result.toString());
+
+        try {
+            result = aString.getStringFromIndex(-1);
+        } catch (StringIndexOutOfBoundsException &e) {
+            assertEquals("String index out of range: -1",
+                         e.getMessage());
+        }
+
+        try {
+            result = aString.getStringFromIndex(20);
+        } catch (StringIndexOutOfBoundsException &e) {
+            assertEquals("String index out of range: 20",
+                         e.getMessage());
+        }
+    }
+
+    {
+        String unicodeString = "Nga đã mất liên lạc với vệ tinh thời tiết";
+        String result = unicodeString.getStringFromIndex(4);
+        assertEquals("đã mất liên lạc với vệ tinh thời tiết", result.toString());
+
+        try {
+            result = unicodeString.getStringFromIndex(-1);
+        } catch (StringIndexOutOfBoundsException &e) {
+            assertEquals("String index out of range: -1", e.getMessage());
+        }
+
+        try {
+            result = unicodeString.getStringFromIndex(60);
+        } catch (StringIndexOutOfBoundsException &e) {
+            assertEquals("String index out of range: 60", e.getMessage());
+        }
+    }
 }
 
 TEST (JavaLangString, IndexOf) {
-	String textPlus = "Hello Hello Hello ";
-	
-	int result = textPlus.indexOf('H');
-	assertEquals(0, result);
-	
-	result = textPlus.indexOf('k');
-	assertEquals(-1, result);
-	
-	result = textPlus.indexOf('k');
-	assertEquals(-1, result);
-	
-	result = textPlus.indexOf('l', 4);
-	assertEquals(8, result);
-	
-	result = textPlus.indexOf('k', 4);
-	assertEquals(-1, result);
-	
-	result = textPlus.indexOf('l', -1);
-	assertEquals(2, result);
-	
-	result = textPlus.indexOf('l', 100);
-	assertEquals(-1, result);
-	
-	result = textPlus.indexOf("llo");
-	assertEquals(2, result);
-	
-	result = textPlus.indexOf("llo", 4);
-	assertEquals(8, result);
-	
-	result = textPlus.indexOf("llok");
-	assertEquals(-1, result);
-	
-	result = textPlus.indexOf("llo", -1);
-	assertEquals(2, result);
-	
-	result = textPlus.indexOf("llo", 100);
-	assertEquals(-1, result);
-	
-	result = textPlus.indexOf("lli", 10);
-	assertEquals(-1, result);
+    {
+        String textPlus = "Hello Hello Hello ";
+
+        int result = textPlus.indexOf('H');
+        assertEquals(0, result);
+
+        result = textPlus.indexOf('k');
+        assertEquals(-1, result);
+
+        result = textPlus.indexOf('k');
+        assertEquals(-1, result);
+
+        result = textPlus.indexOf('l', 4);
+        assertEquals(8, result);
+
+        result = textPlus.indexOf('k', 4);
+        assertEquals(-1, result);
+
+        result = textPlus.indexOf('l', -1);
+        assertEquals(2, result);
+
+        result = textPlus.indexOf('l', 100);
+        assertEquals(-1, result);
+
+        result = textPlus.indexOf("llo");
+        assertEquals(2, result);
+
+        result = textPlus.indexOf("llo", 4);
+        assertEquals(8, result);
+
+        result = textPlus.indexOf("llok");
+        assertEquals(-1, result);
+
+        result = textPlus.indexOf("llo", -1);
+        assertEquals(2, result);
+
+        result = textPlus.indexOf("llo", 100);
+        assertEquals(-1, result);
+
+        result = textPlus.indexOf("lli", 10);
+        assertEquals(-1, result);
+    }
+
+    {
+        String unicodeString = "tiếng việt";
+        assertEquals(8, unicodeString.indexOf("việt"));
+        assertEquals(-1, unicodeString.indexOf("tiếq"));
+    }
 }
 
 TEST (JavaLangString, LastIndexOf) {
 	// Given validString check lastIndexOf(string)
-	String textPlus = "Hello Hello Hello ";
-	String validString = "awesome keyword inside this awesome string";
-	String subString = "awesome";
-	String wrongString = "some thing";
-	
-	int result = textPlus.lastIndexOf('H');
-	assertEquals(12, result);
-	
-	result = textPlus.lastIndexOf('a');
-	assertEquals(-1, result);
-	
-	result = textPlus.lastIndexOf('H', 2);
-	assertEquals(0, result);
-	
-	result = textPlus.lastIndexOf('H', 100);
-	assertEquals(12, result);
-	
-	result = textPlus.lastIndexOf('H', -1);
-	assertEquals(-1, result);
-	
-	result = textPlus.lastIndexOf('a', 10);
-	assertEquals(-1, result);
-	
-	// Test true first character of subString appear last in validString is position 28th
-	result = validString.lastIndexOf(subString);
-	assertEquals(28, result);
-	
-	// Test false with wrong subString
-	result = validString.lastIndexOf(wrongString);
-	assertEquals(NOT_FOUND, result);
-	
+    {
+        String textPlus = "Hello Hello Hello ";
+        String validString = "awesome keyword inside this awesome string";
+        String subString = "awesome";
+        String wrongString = "some thing";
+
+        int result = textPlus.lastIndexOf('H');
+        assertEquals(12, result);
+
+        result = textPlus.lastIndexOf('a');
+        assertEquals(-1, result);
+
+        result = textPlus.lastIndexOf('H', 2);
+        assertEquals(0, result);
+
+        result = textPlus.lastIndexOf('H', 100);
+        assertEquals(12, result);
+
+        result = textPlus.lastIndexOf('H', -1);
+        assertEquals(-1, result);
+
+        result = textPlus.lastIndexOf('a', 10);
+        assertEquals(-1, result);
+
+        // Test true first character of subString appear last in validString is position 28th
+        result = validString.lastIndexOf(subString);
+        assertEquals(28, result);
+
+        // Test false with wrong subString
+        result = validString.lastIndexOf(wrongString);
+        assertEquals(NOT_FOUND, result);
+    }
+
+    {
+        String unicodeString = "tiếng việt";
+        assertEquals(9, unicodeString.lastIndexOf('i'));
+        assertEquals(0, unicodeString.lastIndexOf('t', 10));
+        assertEquals(9, unicodeString.lastIndexOf("iệt"));
+        assertEquals(-1, unicodeString.lastIndexOf("iệt", 10));
+        assertEquals(-1, unicodeString.lastIndexOf("tiếq"));
+    }
+
 	// Given validString2 check lastIndexOf(string, fromIndex)
-	String validString2 = "sometimes you win, sometimes you learn";
-	String subString2 = "sometimes";
-	String wrongString2 = "abc xyz";
-	
-	// Test true by 19th, with correct subString2 and correct fromIndex to find
-	result = validString2.lastIndexOf(subString2, 19);
-	assertEquals(19, result);
-	
-	result = validString2.lastIndexOf(subString2, 18);
-	assertEquals(0, result);
-	
-	result = validString2.lastIndexOf(subString2, 0);
-	assertEquals(0, result);
-	
-	result = validString2.lastIndexOf(subString2, 1);
-	assertEquals(0, result);
-	
-	result = validString2.lastIndexOf(subString2, 100);
-	assertEquals(19, result);
-	
-	result = validString2.lastIndexOf(subString2, -1);
-	assertEquals(-1, result);
-	
-	result = validString2.lastIndexOf(subString2, 20);
-	assertEquals(19, result);
-	
-	result = validString2.lastIndexOf(wrongString2, 20);
-	assertEquals(-1, result);
+    {
+        String validString2 = "sometimes you win, sometimes you learn";
+        String subString2 = "sometimes";
+        String wrongString2 = "abc xyz";
+        int result = 0;
+        // Test true by 19th, with correct subString2 and correct fromIndex to find
+        result = validString2.lastIndexOf(subString2, 19);
+        assertEquals(19, result);
+
+        result = validString2.lastIndexOf(subString2, 18);
+        assertEquals(0, result);
+
+        result = validString2.lastIndexOf(subString2, 0);
+        assertEquals(0, result);
+
+        result = validString2.lastIndexOf(subString2, 1);
+        assertEquals(0, result);
+
+        result = validString2.lastIndexOf(subString2, 100);
+        assertEquals(19, result);
+
+        result = validString2.lastIndexOf(subString2, -1);
+        assertEquals(-1, result);
+
+        result = validString2.lastIndexOf(subString2, 20);
+        assertEquals(19, result);
+
+        result = validString2.lastIndexOf(wrongString2, 20);
+        assertEquals(-1, result);
+    }
 }
 
 // TODO (anhnt) getChar run right but need Arrays.toString() to test
@@ -497,12 +627,18 @@ TEST (JavaLangString, IsEmpty) {
 }
 
 TEST (JavaLangString, Length) {
-	String textPlus = "Hello Hello Hello ";
-	
-	assertEquals(18, textPlus.length());
-	
-	textPlus = "";
-	assertEquals(0, textPlus.length());
+    {
+        String textPlus = "Hello Hello Hello ";
+        assertEquals(18, textPlus.length());
+
+        textPlus = "";
+        assertEquals(0, textPlus.length());
+    }
+
+    {
+        String unicodeString = "Ngày 15/12 vừa qua, SpaceX đã đạt được một thành tựu quan trọng trong lịch sử.";
+        assertEquals(101, unicodeString.length());
+    }
 }
 
 TEST (JavaLangString, HashCode) {
@@ -552,15 +688,26 @@ TEST (JavaLangString, RegionMatch) {
 }
 
 TEST (JavaLangString, Join) {
-	String delimiter = "->";
-	String duck1 = "Duck1";
-	String test1 = "test1";
-	String result1 = String::join(delimiter, duck1, test1);
-	assertEquals("Duck1->test1", result1.toString());
-	
-	String duck2 = "Duck2";
-	String result2 = String::join(delimiter, duck2);
-	assertEquals("Duck2", result2.toString());
+    {
+        String delimiter = "->";
+        String duck1 = "Duck1";
+        String test1 = "test1";
+        String result1 = String::join(delimiter, duck1, test1);
+        assertEquals("Duck1->test1", result1.toString());
+
+        String duck2 = "Duck2";
+        String result2 = String::join(delimiter, duck2);
+        assertEquals("Duck2", result2.toString());
+    }
+
+    {
+        String delimiter = "_";
+        String sub = "Sơn";
+        String adv = "rất";
+        String adj = "đẹp_trai";
+        String sentence = String::join(delimiter, sub, adv, adj);
+        assertEquals("Sơn_rất_đẹp_trai", sentence);
+    }
 }
 
 /** This test case is made based on pattern_test.c */
@@ -587,23 +734,33 @@ TEST (JavaLangString, Join) {
 // }
 
 TEST (JavaLangString, Replace) {
-	String textPlus = "Hello Hello Hello ";
-	
-	String result = textPlus.replace('e', 'i');
-	assertEquals("Hillo Hillo Hillo ", result.toString());
-	
-	String target = "llo";
-	String replacement = "llu";
-	result = textPlus.replace(target, replacement);
-	assertEquals("Hellu Hellu Hellu ", result.toString());
-	
-	target = "Hello";
-	replacement = "Phuoc";
-	result = textPlus.replaceAll(target, replacement);
-	assertEquals("Phuoc Phuoc Phuoc ", result.toString());
-	
-	result = textPlus.replaceFirst(target, replacement);
-	assertEquals("Phuoc Hello Hello ", result.toString());
+    {
+        String textPlus = "Hello Hello Hello ";
+
+        String result = textPlus.replace('e', 'i');
+        assertEquals("Hillo Hillo Hillo ", result.toString());
+
+        String target = "llo";
+        String replacement = "llu";
+        result = textPlus.replace(target, replacement);
+        assertEquals("Hellu Hellu Hellu ", result.toString());
+
+        target = "Hello";
+        replacement = "Phuoc";
+        result = textPlus.replaceAll(target, replacement);
+        assertEquals("Phuoc Phuoc Phuoc ", result.toString());
+
+        result = textPlus.replaceFirst(target, replacement);
+        assertEquals("Phuoc Hello Hello ", result.toString());
+    }
+
+    {
+        String unicodeString = "Sơn rất xấu trai.";
+        String target = "xấu";
+        String replacement = "đẹp";
+        String result = unicodeString.replace(target, replacement);
+        assertEquals("Sơn rất đẹp trai.", result.toString());
+    }
 }
 
 TEST (JavaLangString, Split) {
@@ -640,6 +797,14 @@ TEST (JavaLangString, Split) {
 	for (index = 0; index < splitWithLimitNegative.length - 1; index++) {
 		assertEquals("Hello", splitWithLimitNegative[ index ].toString());
 	}
+
+    {
+        String unicodeStringToSplit = "vào vào vào";
+        Array<String> results = unicodeStringToSplit.split(" ");
+        for (String result : results) {
+            assertEquals("vào", result.toString());
+        }
+    }
 }
 
 TEST (JavaLangString, StartsWith) {
@@ -670,24 +835,47 @@ TEST (JavaLangString, StartsWith) {
 }
 
 TEST (JavaLangString, ToLowerCase) {
-	String textPlus = "Hello HELLO Hello ";
-	
-	String result = textPlus.toLowerCase();
-	assertEquals("hello hello hello ", result.toString());
+	return; //mbstowcs
+    {
+        String textPlus = "Hello HELLO Hello ";
+        String result = textPlus.toLowerCase();
+        assertEquals("hello hello hello ", result.toString());
+    }
+
+    {
+        String unicodeString = "Đây Là Tiếng VIỆT";
+        String result = unicodeString.toLowerCase();
+        assertEquals("đây là tiếng việt", result.toString());
+    }
 }
 
 TEST (JavaLangString, ToUpperCase) {
-	String textPlus = "Hello HELLO Hello ";
-	
-	String result = textPlus.toUpperCase();
-	assertEquals("HELLO HELLO HELLO ", result.toString());
+	return; //mbstowcs
+    {
+        String textPlus = "Hello HELLO Hello ";
+        String result = textPlus.toUpperCase();
+        assertEquals("HELLO HELLO HELLO ", result.toString());
+    }
+
+    {
+        String unicodeString = "Đây Là Tiếng VIỆT";
+        String result = unicodeString.toUpperCase();
+        assertEquals("ĐÂY LÀ TIẾNG VIỆT", result.toString());
+    }
 }
 
 TEST (JavaLangString, Trim) {
-	String textPlus = " Hello HELLO Hello ";
-	
-	String result = textPlus.trim();
-	assertEquals("Hello HELLO Hello", result.toString());
+    {
+        String textPlus = " Hello HELLO Hello ";
+        String result = textPlus.trim();
+        assertEquals("Hello HELLO Hello", result.toString());
+    }
+
+    {
+        String unicodeString = "                 đây là tiếng việt   ";
+        String result = unicodeString.trim();
+        assertEquals("đây là tiếng việt", result.toString());
+    }
 }
 
 TEST (JavaLangString, ValueOf) {
@@ -825,41 +1013,66 @@ TEST (JavaLangString, OperatorNotEquals) {
 
 TEST (JavaLangString, OperatorPlusEqualsChar) {
 	// Given a string and append a char  - Return result of the concatenation
-	String text = "Hello";
-	text += ' ';
-	text += 'W';
-	text += 'o';
-	text += 'r';
-	text += 'l';
-	text += 'd';
-	assertEquals("Hello World", text.toString());
+    {
+        String text = "Hello";
+        text += ' ';
+        text += 'W';
+        text += 'o';
+        text += 'r';
+        text += 'l';
+        text += 'd';
+        assertEquals("Hello World", text.toString());
+    }
+
+    {
+        String unicodeString = "thể ";
+        unicodeString += "t";
+        unicodeString += "h";
+        unicodeString += "a";
+        unicodeString += "o";
+        assertEquals("thể thao", unicodeString.toString());
+    }
 }
 
 TEST (JavaLangString, OperatorPlusEqualsString) {
-	// Given 2 Strings to check "+=" operator
-	String leftString = "hello";
-	String rightString = " world";
-	
-	leftString += rightString;
-	assertEquals("hello world", leftString.toString());
-	
-	// Given 2 Strings to check "+=" operator
-	String stringTest = "";
-	String stringTest1 = "Hello";
-	String stringTest2 = " Galaxy";
-	stringTest += stringTest1 + stringTest2 + (string) "!";
-	assertEquals("Hello Galaxy!", stringTest.toString());
-	
-	// Check a String concat with valueOf(number) use "+=" operator
-	int number = 1;
-	stringTest = "Hello ";
-	stringTest += String::valueOf(number);
-	assertEquals("Hello 1", stringTest.toString());
-	
-	// Check a String concat with valueOf(number) use "+=" operator
-	number = 1;
-	stringTest += "" + String::valueOf(number);
-	assertEquals("Hello 11", stringTest.toString());
+    {
+        // Given 2 Strings to check "+=" operator
+        String leftString = "hello";
+        String rightString = " world";
+
+        leftString += rightString;
+        assertEquals("hello world", leftString.toString());
+
+        // Given 2 Strings to check "+=" operator
+        String stringTest = "";
+        String stringTest1 = "Hello";
+        String stringTest2 = " Galaxy";
+        stringTest += stringTest1 + stringTest2 + (string) "!";
+        assertEquals("Hello Galaxy!", stringTest.toString());
+
+        // Check a String concat with valueOf(number) use "+=" operator
+        int number = 1;
+        stringTest = "Hello ";
+        stringTest += String::valueOf(number);
+        assertEquals("Hello 1", stringTest.toString());
+
+        // Check a String concat with valueOf(number) use "+=" operator
+        number = 1;
+        stringTest += "" + String::valueOf(number);
+        assertEquals("Hello 11", stringTest.toString());
+    }
+
+    {
+        String result;
+        String s1 = "đây ";
+        String s2 = "là ";
+        String s3 = "tiếng anh";
+
+        result += s1;
+        result += s2;
+        result += s3;
+        assertEquals("đây là tiếng anh", result.toString());
+    }
 }
 
 TEST (JavaLangString, MemoryCheck) {
@@ -898,28 +1111,52 @@ TEST (JavaLangString, Clone) {
 }
 
 TEST (JavaLangString, SubString) {
-	String validString = "Hello world";
-	String subString = validString.subString(6);
-	auto expect = (string) "world";
-	assertEquals(expect, subString);
-	
-	subString = validString.subString(1, 5);
-	expect = (string) "ello";
-	assertEquals(expect, subString);
+    {
+        String validString = "Hello world";
+        String subString = validString.subString(6);
+        auto expect = (string) "world";
+        assertEquals(expect, subString);
+
+        subString = validString.subString(1, 5);
+        expect = (string) "ello";
+        assertEquals(expect, subString);
+    }
+
+    {
+        String unicodeString = "đây là tiếng anh";
+        String subString = unicodeString.subString(6, 9);
+        assertEquals("là", subString);
+    }
 }
 
 TEST (JavaLangString, CompareOperater) {
-	String greaterString = "acde";
-	String smallerString = "ACDE";
-	String equalToGreaterString = "acde";
-	
-	assertTrue(greaterString > smallerString);
-	assertTrue(smallerString <= greaterString);
-	assertTrue(greaterString <= equalToGreaterString);
-	assertTrue(greaterString >= equalToGreaterString);
-	assertFalse(smallerString > greaterString);
-	assertFalse(smallerString >= greaterString);
-	assertFalse(greaterString <= smallerString);
+    {
+        String greaterString = "acde";
+        String smallerString = "ACDE";
+        String equalToGreaterString = "acde";
+
+        assertTrue(greaterString > smallerString);
+        assertTrue(smallerString <= greaterString);
+        assertTrue(greaterString <= equalToGreaterString);
+        assertTrue(greaterString >= equalToGreaterString);
+        assertFalse(smallerString > greaterString);
+        assertFalse(smallerString >= greaterString);
+        assertFalse(greaterString <= smallerString);
+    }
+
+    {
+        String greaterString = "trời";
+        String smallerString = "Trời";
+        String equalToGreaterString = "trời";
+
+        assertTrue(greaterString > smallerString);
+        assertTrue(smallerString <= greaterString);
+        assertTrue(greaterString <= equalToGreaterString);
+        assertTrue(greaterString >= equalToGreaterString);
+        assertFalse(smallerString > greaterString);
+        assertFalse(smallerString >= greaterString);
+        assertFalse(greaterString <= smallerString);
+    }
 }
 
 TEST (JavaLangString, Format) {
@@ -956,7 +1193,7 @@ TEST (JavaLangString, Format) {
 		String result = String::format(format);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String expect = "123.46 +1e+02 1.234568E+02";
 		String format = "%4.2f %+.0e %E";
@@ -964,14 +1201,14 @@ TEST (JavaLangString, Format) {
 		                               doubleValue);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String expect = "Preceding with zeros: 0000000123";
 		String format = "Preceding with zeros: %010d";
 		String result = String::format(format, longValue);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String expect = "1 123 123456 123";
 		String format = "%u %u %u %d";
@@ -979,7 +1216,7 @@ TEST (JavaLangString, Format) {
 		                               ulongValue, shortObject);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		integerObject = 65;
 		String expect = "Characters: a A";
@@ -987,7 +1224,7 @@ TEST (JavaLangString, Format) {
 		String result = String::format(format, 'a', integerObject);
 		assertEquals(expect.toString(), result.toString());
 	}
-	
+
 	{
 		String format = "%d %d";
 		try {
@@ -996,7 +1233,7 @@ TEST (JavaLangString, Format) {
 			assertEquals("Missing arguments.", e.getMessage());
 		}
 	}
-	
+
 	{
 		String format = "%%% d";
 		try {
@@ -1005,7 +1242,7 @@ TEST (JavaLangString, Format) {
 			assertEquals("Missing arguments.", e.getMessage());
 		}
 	}
-	
+
 	{
 		auto key = (string) "Nhà hàng";
 		double latitude = 10.824093;
@@ -1013,11 +1250,11 @@ TEST (JavaLangString, Format) {
 		string url = urlDecode(key);
 		auto queryFormat = "{\"query\": {\"bool\" : {\"must\" : [{\"nested\":{\"path\":\"shop_type\",\"query\":{ \"match\":{\"shop_type.vi_VN\":\"%s\" } }}},{\"filtered\": {\"filter\": {\"geo_distance\": {\"distance\": \"5km\",\"distance_type\": \"plane\", \"shop_location\": {\"lat\": %f,\"lon\": %f}}}}}]}}}";
 		String body = String::format(queryFormat, url, latitude, longitude);
-		
+
 		String REQUEST_TEMPLATE = "%s %s%s %s\r\n"
 			"%s\r\n\r\n"
 			"%s";
-		
+
 		String result = String::format(REQUEST_TEMPLATE,
 		                               "POST",
 		                               "CASSANDRA",
@@ -1025,7 +1262,7 @@ TEST (JavaLangString, Format) {
 		                               "http1.1",
 		                               "HEADER:HEADER",
 		                               body);
-		
+
 		string expected;
 		int length = asprintf(&expected,
 		                      REQUEST_TEMPLATE.toCharPointer(),
@@ -1035,18 +1272,18 @@ TEST (JavaLangString, Format) {
 		                      "http1.1",
 		                      "HEADER:HEADER",
 		                      body.toCharPointer());
-		
+
 		assertTrue(length > 0);
 		assertEquals(expected, result.toString());
 		free(expected);
 		free(url);
 	}
-	
+
 	{
 		string expected;
 		String result;
 		unsigned long ul = timestamp();
-		
+
 		int length = asprintf(&expected, "%lu", ul);
 		assertTrue(length > 0);
 		result = String::format("%lu", ul);
