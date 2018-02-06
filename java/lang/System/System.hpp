@@ -48,7 +48,7 @@ namespace Java {
 								
 								template <typename T>
 								static void println(T target) {
-									std::cout << target << std::endl;
+									std::cout << target << std::endl << std::flush;
 								}
 						};
 						
@@ -58,7 +58,7 @@ namespace Java {
 						static long currentTimeMillis();
 						static void exit(int status);
 						static void gc();
-						static String getenv(string name);
+						static String getenv(String name);
 				};
 		}
 }

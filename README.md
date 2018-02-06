@@ -6,8 +6,8 @@
 
 * Blazing fast, small footprint with no dependency required
 * Provide rich Java Core classes beside C++ Standard Library
-* Prevents nearly all memory leak and  segfaults via automatic storage
-* Support bindings for NodeJS addon and Python module development (experimental)
+* Prevents nearly all memory leak and segfaults via automatic storage
+* Support unicode character via standard string
 * Classes are strictly tested with unit tests, clean with Valgrind and follow Oracle documentation
 * Feel free to use in your commercial products and welcome for contributions
 
@@ -23,16 +23,14 @@ $ docker pull foodtiny/native:latest
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ cmake -DCMAKE_BUILD_TYPE=Release
-$ make native && sudo make install
+$ ./configure && make native -j4 && sudo make install
 ```
 
 #### Benchmarking with C++/STL
 [Google Benchmark](https://github.com/google/benchmark) is required for benchmarking
 if you're using Linux or Mac please use ./misc/benchmark.sh to install
 ```bash
-$ cmake -DCMAKE_BUILD_TYPE=Release
-$ make native_benchmark
+$ ./configure && make native -j4 && make native_benchmark
 $ ./native_benchmark
 ```
 
