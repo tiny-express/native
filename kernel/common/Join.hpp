@@ -38,9 +38,6 @@
  * @return char pointer
  */
 inline char *joinPointerPointerChar(char **target) {
-#ifdef LINUX
-    register
-#endif
     int totalLength = 0, itemLength = 0;
     char **pointer;
     auto *temporaryResult = (char *) calloc(MAX_STRING_LENGTH, sizeof(char));
@@ -65,9 +62,6 @@ inline char *joinPointerPointerChar(char **target) {
  * @return char pointer
  */
 inline char *joinDelimiterPointerPointerChar(char **target, const char *delimiter) {
-#ifdef LINUX
-    register
-#endif
     int totalLength = 0, itemLength = 0;
     char **pointer;
     int delimiterLength = lengthPointerChar((char *) delimiter);

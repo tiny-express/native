@@ -7,7 +7,6 @@
 * Blazing fast, small footprint with no dependency required
 * Provide rich Java Core classes beside C++ Standard Library
 * Prevents nearly all memory leak and segfaults via automatic storage
-* Support unicode character via standard string
 * Classes are strictly tested with unit tests, clean with Valgrind and follow Oracle documentation
 * Feel free to use in your commercial products and welcome for contributions
 

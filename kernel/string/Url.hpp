@@ -88,10 +88,6 @@ inline char *findParam(char *name, char *params) {
 
     char **queryPairs = stringSplit(params, "&");
     int lengthPairs = lengthPointerPointerChar(queryPairs);
-
-#ifdef LINUX
-    register
-#endif
     int i;
     for (i = 0; i < lengthPairs; i++) {
         char **pair = stringSplit(queryPairs[ i ], "=");
@@ -122,9 +118,6 @@ inline char *findParamFromUrl(char *name, char *url) {
     char **queryPairs = stringSplit(queryUrl, "&");
     int lengthPairs = lengthPointerPointerChar(queryPairs);
 
-#ifdef LINUX
-    register
-#endif
     int i;
     for (i = 0; i < lengthPairs; i++) {
         char **pair = stringSplit(queryPairs[ i ], "=");
