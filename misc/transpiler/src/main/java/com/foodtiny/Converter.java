@@ -26,10 +26,24 @@
 
 package com.foodtiny;
 
+import com.github.javaparser.JavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.ExpressionStmt;
+import com.github.javaparser.ast.stmt.ForStmt;
+import com.github.javaparser.ast.stmt.Statement;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -37,21 +51,203 @@ import java.util.function.Consumer;
  * <p>
  * This is a simple converter translate Java - JUnit test cases
  * to C++ to ensure Native Library comply Oracle documentation.
- * We expect a technical interoperable,consistency and standardization
+ * We expect a technical interoperable, consistency and standardization
  *
  * @author Loi Nguyen <loint@foodtiny.com>
+ * @author Son Duong <sonda@foodtiny.com>
  */
 public class Converter {
+
+    /**
+     * Visit Adapter
+     */
+    private class VisitAdapter extends VoidVisitorAdapter<Void> {
+
+        @Override
+        public void visit(MethodDeclaration n, Void arg) {
+            Optional<BlockStmt> block = n.getBody();
+            BlockStmtHandler(block.orElse(null));
+            super.visit(n, arg);
+        }
+
+        private void BlockStmtHandler(BlockStmt blockStmt) {
+            if (blockStmt == null) {
+                return;
+            }
+
+            for (Statement statement : blockStmt.getStatements()) {
+                switch (statement.getMetaModel().getTypeName()) {
+                    case "BlockStmt":
+                        BlockStmtHandler(statement.asBlockStmt());
+                        break;
+                    case "DoStmt":
+                        break;
+                    case "ExpressionStmt":
+                        ExpressionStmtHandler(statement.asExpressionStmt());
+
+                        // write ';'
+                        writer.println(";");
+                        break;
+                    case "ForeachStmt":
+                        break;
+                    case "ForStmt":
+                        ForStmtHandler(statement.asForStmt());
+                        break;
+                    case "SwitchStmt":
+                        /*
+                        SwitchEntryStmt
+                         */
+                        break;
+                    case "TryStmt":
+                        /*
+                        CatchClause
+                        ThrowStmt
+                         */
+                        break;
+                    case "WhileStmt":
+                        break;
+                    default:
+                        /*
+                        AssertStmt
+                        BreakStmt
+                        ContinueStmt
+                        ReturnStmt
+                         */
+                        break;
+                }
+            }
+        }
+
+        private void ExpressionStmtHandler(ExpressionStmt expressionStmt) {
+            if (expressionStmt == null) {
+                return;
+            }
+
+            ExpressionHandler(expressionStmt.getExpression());
+        }
+
+        private void ForStmtHandler(ForStmt forStmt) {
+            if (forStmt == null) {
+                return;
+            }
+
+            // write 'for' keyword
+            writer.print("for ");
+
+            // write '('
+            writer.print("(");
+
+            // extract initializer of forstatement
+            NodeList<Expression> inits = forStmt.getInitialization();
+            for (int i = 0; i < inits.size(); i++) {
+                // write expression
+                ExpressionHandler(inits.get(i));
+
+                // write ','
+                if (i < inits.size() - 1) {
+                    writer.print(", ");
+                }
+            }
+
+            // write ';'
+            writer.print("; ");
+
+            // extract compare expression
+            ExpressionHandler(forStmt.getCompare().orElse(null));
+            // write ';'
+            writer.print("; ");
+
+            // extract update
+            NodeList<Expression> updates = forStmt.getUpdate();
+            for (int i = 0; i < updates.size(); i++) {
+                // write expression
+                ExpressionHandler(updates.get(i));
+
+                // write ','
+                if (i < updates.size() - 1) {
+                    writer.print(", ");
+                }
+            }
+
+            // write ')'
+            writer.print(") ");
+
+            // write '{'
+            writer.println("{");
+
+            // extract body
+            BlockStmtHandler(forStmt.getBody().asBlockStmt());
+
+            // write '}'
+            writer.println();
+            writer.println("}");
+        }
+
+        private void ExpressionHandler(Expression expression) {
+            if (expression == null) {
+                return;
+            }
+
+            switch (expression.getMetaModel().getTypeName()) {
+                case "ArrayCreationExpr":
+                    break;
+                case "NullLiteralExpr":
+                    break;
+                case "ObjectCreationExpr":
+                    break;
+                case "VariableDeclarationExpr":
+                    VariableDeclarationExprHandler(expression.asVariableDeclarationExpr());
+                    break;
+                default:
+                    /*
+                        AssignExpr
+                        ArrayAccessExpr
+                        BinaryExpr
+                        BooleanLiteralExpr
+                        CastExpr
+                        CharLiteralExpr
+                        ConditionalExpr
+                        DoubleLiteralExpr
+                        EnclosedExpr
+                        IntegerLiteralExpr
+                        LongLiteralExpr
+                        MethodCallExpr
+                        NameExpr
+                        StringLiteralExpr
+                        ThisExpr
+                        UnaryExpr
+                     */
+                    writer.print(expression);
+                    break;
+            }
+        }
+
+        private void VariableDeclarationExprHandler(VariableDeclarationExpr variableDeclarationExpr) {
+            if (variableDeclarationExpr == null) {
+                return;
+            }
+
+            for (VariableDeclarator var : variableDeclarationExpr.getVariables()) {
+                // re-write variable declare statement
+                writer.print(var.getType() + " " + var.getName() + " = " + var.getType() + "()");
+            }
+        }
+    }
 
     /**
      * Convert file
      * Convert single java test case source path to cpp destination path
      *
      * @param srcPath  String
-     * @param destPath String
      * @return String
      */
-    private String convertFile(String srcPath, String destPath) {
+    private String convertFile(String srcPath) {
+        try {
+            FileInputStream inputStream = new FileInputStream(srcPath);
+            CompilationUnit cu = JavaParser.parse(inputStream);
+            cu.accept(new VisitAdapter(writer), null);
+        } catch (Exception e) {
+        }
         return "";
     }
 
@@ -81,13 +277,9 @@ public class Converter {
                                     } catch (IOException exception) {
                                         exception.printStackTrace();
                                     }
-
                                 }
 
-                                String cppTestContent = convertFile(
-                                        javaTestFile.getAbsolutePath(),
-                                        cppTestFile.getAbsolutePath()
-                                );
+                                String cppTestContent = convertFile(javaTestFile.getAbsolutePath());
 
                                 // Write generated content
                                 Writer writer = null;
@@ -108,7 +300,6 @@ public class Converter {
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
-
     }
 
     /**

@@ -64,7 +64,7 @@ MediaType::MediaType() {
     this->subtype = MEDIA_TYPE_WILDCARD;
 }
 
-MediaType::MediaType(const String &type, const String &subtype) {
+MediaType::MediaType(String type, String subtype) {
     if (type.isEmpty()) {
         throw MediaTypeException("`type` must not be empty");
     }
@@ -81,7 +81,7 @@ MediaType::MediaType(const String &type, const String &subtype) {
     this->subtype = subtype;
 }
 
-MediaType::MediaType(const String &type, const String &subtype, const HashMap<String, String> &parameters) {
+MediaType::MediaType(String type, String subtype, HashMap<String, String> parameters) {
 
     if (type.isEmpty()) {
         throw MediaTypeException("`type` must not be empty");
@@ -95,8 +95,8 @@ MediaType::MediaType(const String &type, const String &subtype, const HashMap<St
         throw MediaTypeException("Wildcard type is legal only in '*/*' (all types)");
     }
 
-    this->type = type;
-    this->subtype = subtype;
+    this->type = String(type);
+    this->subtype = String(subtype);
     this->parameters = parameters;
 }
 

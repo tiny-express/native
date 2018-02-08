@@ -148,8 +148,7 @@ set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY true)
 install(TARGETS ${PROJECT_NAME} DESTINATION ../lib OPTIONAL)
 install(TARGETS ${PROJECT_NAME}_static DESTINATION ../lib OPTIONAL)
 install(FILES library.hpp DESTINATION ../include/native)
-install(DIRECTORY java DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
-install(DIRECTORY javax DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY library DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY kernel DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 
 # Add uninstall

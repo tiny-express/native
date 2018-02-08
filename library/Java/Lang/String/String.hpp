@@ -121,7 +121,7 @@ namespace Java {
              *
              * @param byteArray
              */
-            String(Array<byte> &byteArray);
+            String(Array<byte> byteArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -137,7 +137,7 @@ namespace Java {
              *
              * @param charArray
              */
-             String(Array<char> &charArray);
+             String(Array<char> charArray);
 
             /**
              * Allocates a new String that contains the sequence
@@ -177,7 +177,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-             String(Array<char> &charArray, int offset, int count);
+             String(Array<char> charArray, int offset, int count);
 
             /**
              * Allocates a new String that contains characters
@@ -204,7 +204,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-             String(Array<byte> &byteArray, int offset, int length);
+             String(Array<byte> byteArray, int offset, int length);
 
             /**
              * Constructs a new String by decoding the specified
@@ -258,7 +258,7 @@ namespace Java {
              *
              * @param target
              */
-            inline String(const std::string &targetString) {
+            inline String(const std::string targetString) {
                 this->original = targetString;
             }
 
@@ -980,8 +980,8 @@ namespace Java {
              * @param target
              * @return a String contain value of this String and target String
              */
-            inline String operator+(const string &target) {
-                return this->original + std::string(target);
+            inline String operator+(string target) {
+                return this->original.append(target);
             }
 
             /**

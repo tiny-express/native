@@ -73,7 +73,7 @@ namespace Javax {
 									 * @param type
 									 * @param subtype
 									 */
-                                    MediaType(const String &type, const String &subtype);
+                                    MediaType(String type, String subtype);
                 
                                     /**
 									 * Creates a new instance of MediaType with the supplied type, subtype and parameters.
@@ -82,7 +82,7 @@ namespace Javax {
 									 * @param subtype
 									 * @param parameters
 									 */
-                                    MediaType(const String &type, const String &subtype, const HashMap<String, String> &parameters);
+                                    MediaType(String type, String subtype, HashMap<String, String> parameters);
                 
                                     /**
 									 * Remove media type instance

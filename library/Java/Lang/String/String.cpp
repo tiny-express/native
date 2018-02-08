@@ -97,7 +97,7 @@ String::String(string original, int length) {
     this->original = std::string(original, original +  (size_t) length);
 }
 
-String::String(Array<char> &charArray) {
+String::String(Array<char> charArray) {
     this->original.clear();
     this->original.shrink_to_fit();
     int i;
@@ -106,7 +106,7 @@ String::String(Array<char> &charArray) {
     }
 }
 
-String::String(Array<byte> &byteArray) {
+String::String(Array<byte> byteArray) {
     this->original.clear();
     this->original.shrink_to_fit();
     int i;
@@ -128,7 +128,7 @@ String::String(const StringBuffer &stringBuffer) {
     this->original = std::string(stringBuffer.getValue().toCharPointer());
 }
 
-String::String(Array<char> &array, int offset, int length) {
+String::String(Array<char> array, int offset, int length) {
     if (offset < 0) {
         throw StringIndexOutOfBoundsException(offset);
     }
@@ -147,7 +147,7 @@ String::String(Array<char> &array, int offset, int length) {
     }
 }
 
-String::String(Array<byte> &array, int offset, int length) {
+String::String(Array<byte> array, int offset, int length) {
     if (offset < 0) {
         throw StringIndexOutOfBoundsException(offset);
     }
