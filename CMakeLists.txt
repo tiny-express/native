@@ -27,9 +27,6 @@
 cmake_minimum_required(VERSION 2.8.8)
 project(native CXX)
 
-# GNU filesystem layout conventions
-include(GNUInstallDirs)
-
 # Force GCC for Linux
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set(CMAKE_CXX_COMPILER "g++")
@@ -80,9 +77,6 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     endif ()
 endif ()
 
-# Detect platform and include path for OpenSSL
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
-
 # Dynamic linked library for OSX
 set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
 
@@ -92,26 +86,21 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
         kernel/**/*.cpp
-        java/Java.cpp
-        java/**/*.cpp
-        java/**/**/*.cpp
-        javax/**/*.cpp
+        library/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
         kernel/**/*Test.cpp
-        java/**/*Test.cpp
-        java/**/**/*Test.cpp
-        javax/**/*Test.cpp
+        library/**/**/*Test.cpp
+        library/**/**/**/*Test.cpp
         )
 
 # Only C++ unit benchmark files
 file(GLOB_RECURSE BENCHMARK_CPP
         kernel/**/*Benchmark.cpp
-        java/**/*Benchmark.cpp
-        java/**/**/*Benchmark.cpp
-        javax/**/*Benchmark.cpp
+        library/**/**/*Benchmark.cpp
+        library/**/**/**/*Benchmark.cpp
         )
 
 # Remove all test files within cpp files
@@ -159,8 +148,7 @@ set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY true)
 install(TARGETS ${PROJECT_NAME} DESTINATION ../lib OPTIONAL)
 install(TARGETS ${PROJECT_NAME}_static DESTINATION ../lib OPTIONAL)
 install(FILES library.hpp DESTINATION ../include/native)
-install(DIRECTORY java DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
-install(DIRECTORY javax DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY library DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY kernel DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 
 # Add uninstall

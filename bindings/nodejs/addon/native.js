@@ -1,2 +1,2 @@
-var addon = require('bindings')('native');
+var addon = require('bindings')('transpiler');
 console.log(addon.native());

@@ -91,9 +91,6 @@ public:
 		
 		Array(char **charPointerArray) {
 			int size = lengthPointerPointerChar(charPointerArray);
-#ifdef LINUX
-			register
-#endif
 			int index;
 			for (index = 0; index < size; index++) {
 				original.push_back(charPointerArray[ index ]);

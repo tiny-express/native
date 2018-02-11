@@ -87,14 +87,14 @@
 #define P_LEN(NAME, TYPE); \
 inline int lengthPointer##NAME(TYPE *target) {\
     if (NULL == target) return 0;\
-    return __builtin_strlen(target);\
+    return strlen(target);\
 }
 
 // Length of pointer pointer
 #define P_P_LEN(NAME, TYPE); \
 inline int lengthPointerPointer##NAME(TYPE **target) {\
     if (NULL == target) return 0;\
-    register TYPE**pointer;\
+    TYPE**pointer;\
     for (pointer = target; *pointer; ++pointer);\
     return pointer - target;\
 }
@@ -120,11 +120,7 @@ inline boolean isEmptyString(const char *input) {
  * @return void pointer
  */
 inline void *allocateMemory(size_t size) {
-#ifdef DARWIN
     return malloc(size);
-#else
-    return __builtin_malloc(size);
-#endif
 }
 
 /**
@@ -135,11 +131,7 @@ inline void *allocateMemory(size_t size) {
  * @return void*
  */
 inline void *allocateMemory(void *currentPointer, size_t newCapacity) {
-#ifdef DARWIN
     return realloc(currentPointer, newCapacity);
-#else
-    return __builtin_realloc(currentPointer, newCapacity);
-#endif
 }
 
 /**
@@ -149,11 +141,7 @@ inline void *allocateMemory(void *currentPointer, size_t newCapacity) {
  * @return char*
  */
 inline char *stringCopy(const char *target) {
-#ifdef DARWIN
 	return strdup(target);
-#else
-    return __builtin_strdup(target);
-#endif
 }
 
 /**
