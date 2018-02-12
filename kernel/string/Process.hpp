@@ -88,6 +88,7 @@ inline char **stringSplit(const char *target, const char *delimiter) {
 	strncpy(const_target, target, (size_t) targetLength);
 	const_target[ targetLength ] = '\0';
 	char *item = strtok(const_target, delimiter);
+	free(const_target);
 	int count = 0;
 	while (item != nullptr) {
 		data[ count++ ] = stringCopy(item);
