@@ -84,7 +84,7 @@ inline char **stringSplit(const char *target, const char *delimiter) {
 	}
 	auto **data = (char **) calloc(MAX_STRING_LENGTH, sizeof(char *));
 	const int targetLength = lengthPointerChar(target);
-	char const_target[targetLength + 1];
+	char *const_target = (char*) calloc(targetLength + 1, sizeof(char));
 	strncpy(const_target, target, (size_t) targetLength);
 	const_target[ targetLength ] = '\0';
 	char *item = strtok(const_target, delimiter);
