@@ -29,8 +29,7 @@
 using namespace Java::Lang;
 
 long System::currentTimeMillis() {
-	unsigned long timestampInNanoSeconds = timestamp();
-	return (long) timestampInNanoSeconds / 1000;
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
 void System::exit(int status) {
