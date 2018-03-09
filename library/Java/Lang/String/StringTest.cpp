@@ -805,6 +805,21 @@ TEST (JavaLangString, Split) {
             assertEquals("vào", result.toString());
         }
     }
+
+	{
+		String queryString = "firstName=Loi&lastName=Nguyen";
+		Array<String> queryPairs = queryString.split("&");
+
+		Array<String> queryComponent1 = queryPairs.get(0).split("=");
+		assertEquals("firstName", queryComponent1[0]);
+		assertEquals("Loi", queryComponent1[1]);
+		assertEquals(3, queryComponent1[1].length());
+
+		Array<String> queryComponent2 = queryPairs.get(1).split("=");
+		assertEquals("lastName", queryComponent2[0]);
+		assertEquals("Nguyen", queryComponent2[1]);
+		assertEquals(6, queryComponent2[1].length());
+	}
 }
 
 TEST (JavaLangString, StartsWith) {
@@ -1314,7 +1329,7 @@ TEST (JavaLangString, Format) {
 	{
 		string expected;
 		String result;
-		unsigned long ul = timestamp();
+		unsigned long ul = System::currentTimeMillis();
 
 		int length = asprintf(&expected, "%lu", ul);
 		assertTrue(length > 0);

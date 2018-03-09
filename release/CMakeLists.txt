@@ -106,6 +106,7 @@ foreach (test_cpp_file ${TESTS_CPP})
 endforeach ()
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES_CPP})
+add_library(${PROJECT_NAME}_static STATIC ${SOURCES_CPP})
 
 # Add make installation - install to Unix system
 set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY true)
