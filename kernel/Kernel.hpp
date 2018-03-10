@@ -31,7 +31,6 @@
 #include "Builtin.hpp"
 
 // Native kernel
-#include "DateTime.hpp"
 #include "Common.hpp"
 #include "String.hpp"
 #include "Java.hpp"

@@ -27,29 +27,17 @@
 cmake_minimum_required(VERSION 2.8.8)
 project(native CXX)
 
-# Force GCC for Linux
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    set(CMAKE_CXX_COMPILER "g++")
-endif()
-
 # Enable runtime search path support for dynamic libraries on OSX
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_MACOSX_RPATH 1)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w ")
 endif ()
 
-# Force Linux and Darwin use GCC
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-
 # Check C++ compiler version
 include(CheckCXXCompilerFlag)
 
 check_cxx_compiler_flag("-std=gnu++11" COMPILER_SUPPORTS_CXX11)
 check_cxx_compiler_flag("-std=gnu++0x" COMPILER_SUPPORTS_CXX0X)
-
-# Set GCC ignore warning multi-characters constants
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow")
-add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 
 # Check CXX version
 if (COMPILER_SUPPORTS_CXX11)
@@ -59,7 +47,9 @@ elseif (COMPILER_SUPPORTS_CXX0X)
 else ()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif ()
+
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wfatal-errors")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 # GNU Source compatible
 add_definitions(-D_GNU_SOURCE)
@@ -67,11 +57,12 @@ add_definitions(-D_GNU_SOURCE)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # CMake Modules
     set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/misc" ${CMAKE_MODULE_PATH})
-    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
-
-    # Enable coverage by cmake modules
     if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_BUILD_TYPE EQUAL "DEBUG")
+        # Set GCC ignore warning multi-characters constants
+        set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow")
+        add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
+        set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
         include(CodeCoverage)
         setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
     endif ()
