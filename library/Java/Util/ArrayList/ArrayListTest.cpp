@@ -309,7 +309,7 @@ TEST (JavaUtilArrayList, ToString) {
     arrayListStringInArrayList.add(validArrayListInteger.toString());
     arrayListStringInArrayList.add("ArrayList");
     result = arrayListStringInArrayList.toString();
-    expect = (string) R"(["String", "[1, 2, 4, 5]", "ArrayList"])";
+    expect = (string) R"(["String", [1, 2, 4, 5], "ArrayList"])";
     assertEquals(expect, result);
 
     // Give an ArrayList<HashMap>

@@ -660,7 +660,7 @@ namespace Java {
              *
              * @return int
              */
-            int size() const {
+            long size() const {
                 return this->original.size();
             }
 
@@ -684,21 +684,22 @@ namespace Java {
 
                 typename std::unordered_map<Key, Value>::iterator it;
 
-                String startHashMap = "{";
+                backup = "{";
                 String commaAndSpace = ", ";
                 String colonAndSpace = ": ";
                 String endString = "}";
-                String totalString;
+                String appendKeyString;
+                String appendValueString;
 
-                boolean isKeyStringHashMap = false;
-                boolean isValueStringHashMap = false;
+                boolean keyIsString = false;
+                boolean valueIsString = false;
 
                 if (std::is_same<Key, String>::value) {
-                    isKeyStringHashMap = true;
+                    keyIsString = true;
                 }
 
                 if (std::is_same<Value, String>::value) {
-                    isValueStringHashMap = true;
+                    valueIsString = true;
                 }
 
                 long hashMapSize = this->size();
@@ -708,30 +709,26 @@ namespace Java {
                     hashMapCounter +=1;
 
                     // Concat key string
-                    if (isKeyStringHashMap) {
-                        totalString = String("\"") + it->first.toString() + String("\"");
-                    } else {
-                        totalString = it->first.toString();
+                    appendKeyString = it->first.toString();
+                    if (keyIsString) {
+                        appendKeyString = String("\"") + appendKeyString + String("\"");
                     }
-                    // Delimiter
-                    totalString += colonAndSpace;
+
+                    appendValueString = it->second.toString();
 
                     // Concat value string
-                    if (isValueStringHashMap) {
-                        totalString += String("\"") + it->second.toString() + String("\"");
-                    } else {
-                        totalString += it->second.toString();
+                    if (valueIsString && (appendValueString.length() > 0) && (appendValueString[0] != '[')) {
+                        appendValueString = String("\"") + appendValueString  + String("\"");
                     }
 
                     if (hashMapCounter != hashMapSize) {
-                        totalString += commaAndSpace;
+                        appendValueString += commaAndSpace;
                     }
 
-                    startHashMap += totalString;
+                    this->backup += appendKeyString + colonAndSpace + appendValueString;
                 }
 
-                startHashMap += endString;
-                this->backup = startHashMap;
+                this->backup += endString;
                 return this->backup;
             }
 

@@ -494,8 +494,8 @@ namespace Java {
              *
              * @return int
              */
-            int size() const {
-                return static_cast<int>(this->original.size());
+            long size() const {
+                return this->original.size();
             }
 
             /**
@@ -570,31 +570,29 @@ namespace Java {
                     return this->backup;
                 }
 
-                boolean isStringArrayList = false;
-                String startArrayList = "[";
+                boolean valueIsString = false;
+                this->backup = "[";
                 String commaAndSpace = ", ";
                 String endArrayList = "]";
                 String appendString;
                 int index;
 
                 if (std::is_same<E, String>::value) {
-		            isStringArrayList = true;
+                    valueIsString = true;
 	            }
 
                 for (index = 0; index < this->size(); ++index) {
-	                if (isStringArrayList) {
-		                appendString = String("\"") + this->original[index].toString() + String("\"");
-	                } else {
-		                appendString = this->original[index].toString();
+                    appendString = this->original[index].toString();
+	                if (valueIsString && (appendString.length() > 0) && (appendString[0] != '[')) {
+		                appendString = String("\"") + appendString + String("\"");
 	                }
 	                if (index != this->size() - 1) {
 		                appendString += commaAndSpace;
 	                }
-	                startArrayList += appendString;
+	                this->backup += appendString;
                 }
 
-                startArrayList += endArrayList;
-                this->backup = startArrayList;
+                this->backup += endArrayList;
                 return this->backup;
             }
 

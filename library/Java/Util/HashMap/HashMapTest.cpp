@@ -484,6 +484,15 @@ TEST (JavaUtilHashMap, ToString) {
 	HashMap<String, Float> emptyHashMap;
 	expected = (string) "{}";
 	assertEquals(expected, emptyHashMap.toString());
+
+	// Given empty hash map to test default toString()
+	HashMap<String, ArrayList<String>> arrayListHashMap;
+	ArrayList<String> listValue;
+	listValue.add("value1");
+	listValue.add("value2");
+	arrayListHashMap.put("listValue", listValue);
+	expected = (string) "{\"listValue\": [\"value1\", \"value2\"]}";
+	assertEquals(expected, arrayListHashMap.toString());
 }
 
 TEST (JavaUtilHashMap, Reinitialize) {
