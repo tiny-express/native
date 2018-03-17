@@ -68,24 +68,6 @@ TEST (KernelStringProcess, StringReplace) {
 	free(result5);
 }
 
-TEST (KernelStringProcess, StringTrim) {
-    auto expect = (string) "Hello World";
-    auto target = (string) "  Hello World  ";
-    auto result = stringTrim(target);
-	assertEquals(expect, result);
-	free(result);
-
-    auto target1 = (string) "  Hello World";
-	char *result1 = stringTrim(target1);
-	assertEquals(expect, result1);
-	free(result1);
-	
-	auto target2 = (string) "Hello World  ";
-	char *result2 = stringTrim(target2);
-	assertEquals(expect, result2);
-	free(result2);
-}
-
 TEST (KernelStringProcess, StringJoin) {
 	char *target[] = {
 		(char *) "The",
