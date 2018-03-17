@@ -490,8 +490,9 @@ TEST (JavaUtilHashMap, ToString) {
 	ArrayList<String> listValue;
 	listValue.add("value1");
 	listValue.add("value2");
+	listValue.add("");
 	arrayListHashMap.put("listValue", listValue);
-	expected = (string) "{\"listValue\": [\"value1\", \"value2\"]}";
+	expected = (string) "{\"listValue\": [\"value1\", \"value2\", \"\"]}";
 	assertEquals(expected, arrayListHashMap.toString());
 }
 

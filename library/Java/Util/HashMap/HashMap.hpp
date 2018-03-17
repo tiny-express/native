@@ -682,8 +682,6 @@ namespace Java {
                     return this->backup;
                 }
 
-                typename std::unordered_map<Key, Value>::iterator it;
-
                 backup = "{";
                 String commaAndSpace = ", ";
                 String colonAndSpace = ": ";
@@ -705,7 +703,7 @@ namespace Java {
                 long hashMapSize = this->size();
                 long hashMapCounter = 0;
 
-                for (it = this->original.begin(); it != this->original.end(); ++it) {
+                for (auto it = this->original.begin(); it != this->original.end(); ++it) {
                     hashMapCounter +=1;
 
                     // Concat key string
@@ -717,7 +715,7 @@ namespace Java {
                     appendValueString = it->second.toString();
 
                     // Concat value string
-                    if (valueIsString && (appendValueString.length() > 0) && (appendValueString[0] != '[')) {
+                    if (valueIsString && ((appendValueString.length() == 0) || (appendValueString[0] != '['))) {
                         appendValueString = String("\"") + appendValueString  + String("\"");
                     }
 

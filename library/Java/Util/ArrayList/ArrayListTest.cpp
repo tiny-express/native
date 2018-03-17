@@ -317,10 +317,10 @@ TEST (JavaUtilArrayList, ToString) {
     ArrayList<HashMap<String, String>> validHashMapArrayList;
     HashMap<String, String> hashMap;
     hashMap.put("key1", "value1");
-    hashMap.put("key2", "value2");
+    hashMap.put("key2", "");
     validHashMapArrayList.add(hashMap);
     validHashMapArrayList.add(hashMap);
     result = validHashMapArrayList.toString();
-    expect = (string) "[{\"key1\": \"value1\", \"key2\": \"value2\"}, {\"key2\": \"value2\", \"key1\": \"value1\"}]";
+    expect = (string) "[{\"key1\": \"value1\", \"key2\": \"\"}, {\"key2\": \"\", \"key1\": \"value1\"}]";
     assertEquals(expect, result);
 }

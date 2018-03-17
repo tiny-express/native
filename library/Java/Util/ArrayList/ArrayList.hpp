@@ -583,7 +583,7 @@ namespace Java {
 
                 for (index = 0; index < this->size(); ++index) {
                     appendString = this->original[index].toString();
-	                if (valueIsString && (appendString.length() > 0) && (appendString[0] != '[')) {
+	                if (valueIsString && ((appendString.length() == 0) || (appendString[0] != '['))) {
 		                appendString = String("\"") + appendString + String("\"");
 	                }
 	                if (index != this->size() - 1) {
