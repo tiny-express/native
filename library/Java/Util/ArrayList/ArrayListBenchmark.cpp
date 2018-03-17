@@ -25,51 +25,21 @@
  */
 
 #include "../../../../benchmark/benchmark.hpp"
-#include "../HashMap/HashMap.hpp"
-#include <unordered_map>
+
+#include "ArrayList.hpp"
 
 using namespace Java::Lang;
 
-void JavaUtilHashMapConstructor(benchmark::State& state) {
+void JavaUtilArrayListToString(benchmark::State& state) {
+	ArrayList<ArrayList<String>> listString;
+	for (int i=0; i<10000; i++) {
+		ArrayList<String> subListString;
+		subListString.add("Test");
+		listString.add(subListString);
+	}
     while (state.KeepRunning()) {
-        HashMap<String, String> hashMap;
+        listString.toString();
     }
 }
 
-void StdUnorderedMapConstructor(benchmark::State& state) {
-    while (state.KeepRunning()) {
-        std::unordered_map<String, String> hashMap;
-    }
-}
-
-BENCHMARK(JavaUtilHashMapConstructor)->Range(RANGE, RANGE);
-BENCHMARK(StdUnorderedMapConstructor)->Range(RANGE, RANGE);
-
-void JavaUtilHashMapPut(benchmark::State& state) {
-    HashMap<String, String> hashMap;
-    while (state.KeepRunning()) {
-        hashMap.put("test", "test");
-    }
-}
-
-void StdUnorderedMapPut(benchmark::State& state) {
-    std::unordered_map<String, String> map;
-    while (state.KeepRunning()) {
-        map.insert(std::make_pair("test", "test"));
-    }
-}
-
-BENCHMARK(JavaUtilHashMapPut)->Range(RANGE, RANGE);
-BENCHMARK(StdUnorderedMapPut)->Range(RANGE, RANGE);
-
-void JavaUtilHashMapToString(benchmark::State& state) {
-    HashMap<String, String> hashMap;
-    for (int i=0; i<10000; i++) {
-        hashMap.put(String("key") + String::valueOf(i), String("value") + String::valueOf(i));
-    }
-    while (state.KeepRunning()) {
-        hashMap.toString();
-    }
-}
-
-BENCHMARK(JavaUtilHashMapToString)->Range(RANGE, RANGE);
+BENCHMARK(JavaUtilArrayListToString)->Range(RANGE, RANGE);

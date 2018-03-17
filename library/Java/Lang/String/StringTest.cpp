@@ -889,6 +889,16 @@ TEST (JavaLangString, Trim) {
         String result = unicodeString.trim();
         assertEquals("đây là tiếng việt", result.toString());
     }
+
+	{
+		String trimUpperCase = "                this is a cat    ";
+		assertEquals("THIS IS A CAT", trimUpperCase.trim().toUpperCase());
+	}
+
+	{
+		String emptyString = "";
+		assertEquals("", emptyString.trim());
+	}
 }
 
 TEST (JavaLangString, ValueOf) {

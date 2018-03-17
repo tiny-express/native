@@ -157,29 +157,6 @@ inline char *stringJoin(char *target[], const char *delimiter) {
 }
 
 /**
- * String trim
- *
- * @param target
- * @return string
- */
-inline char *stringTrim(const char *target) {
-	if (target == nullptr) {
-		return nullptr;
-	}
-	int len, left, right;
-	left = 0;
-	right = lengthPointerChar(target) - 1;
-	while (target[ left ] == ' ')
-		left++;
-	while (target[ right ] == ' ')
-		right--;
-	len = right - left + 1;
-	auto *result = (char *)calloc((size_t) len + 1, sizeof(char));
-	strncpy(result, &target[ left ], (size_t) len);
-	return result;
-}
-
-/**
  * String start withs a prefix
  *
  * @param target

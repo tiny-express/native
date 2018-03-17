@@ -27,6 +27,7 @@
 #include "../../../../kernel/Test.hpp"
 #include "../List/List.hpp"
 #include "ArrayList.hpp"
+#include "../HashMap/HashMap.hpp"
 
 using namespace Java::Lang;
 
@@ -309,5 +310,17 @@ TEST (JavaUtilArrayList, ToString) {
     arrayListStringInArrayList.add("ArrayList");
     result = arrayListStringInArrayList.toString();
     expect = (string) R"(["String", [1, 2, 4, 5], "ArrayList"])";
+    assertEquals(expect, result);
+
+    // Give an ArrayList<HashMap>
+    // then compare toString() - Should equal
+    ArrayList<HashMap<String, String>> validHashMapArrayList;
+    HashMap<String, String> hashMap;
+    hashMap.put("key1", "value1");
+    hashMap.put("key2", "");
+    validHashMapArrayList.add(hashMap);
+    validHashMapArrayList.add(hashMap);
+    result = validHashMapArrayList.toString();
+    expect = (string) "[{\"key1\": \"value1\", \"key2\": \"\"}, {\"key2\": \"\", \"key1\": \"value1\"}]";
     assertEquals(expect, result);
 }

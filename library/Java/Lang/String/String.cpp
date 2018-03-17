@@ -431,10 +431,13 @@ String String::toUpperCase() {
 }
 
 String String::trim() {
-    string holdPointer = stringTrim(this->original.c_str());
-    String result = holdPointer;
-    free(holdPointer);
-    return result;
+    size_t first = this->original.find_first_not_of(' ');
+    if (std::string::npos == first) {
+        return *this;
+    }
+    size_t last = this->original.find_last_not_of(' ');
+	this->original = this->original.substr(first, (last - first + 1));
+	return *this;
 }
 
 String String::valueOf(boolean target) {
