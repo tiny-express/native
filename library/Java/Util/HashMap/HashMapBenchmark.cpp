@@ -61,3 +61,15 @@ void StdUnorderedMapPut(benchmark::State& state) {
 
 BENCHMARK(JavaUtilHashMapPut)->Range(RANGE, RANGE);
 BENCHMARK(StdUnorderedMapPut)->Range(RANGE, RANGE);
+
+void JavaUtilHashMapToString(benchmark::State& state) {
+    HashMap<String, String> hashMap;
+    for (int i=0; i<10000; i++) {
+        hashMap.put(String("key") + String::valueOf(i), String("value") + String::valueOf(i));
+    }
+    while (state.KeepRunning()) {
+        hashMap.toString();
+    }
+}
+
+BENCHMARK(JavaUtilHashMapToString)->Range(RANGE, RANGE);

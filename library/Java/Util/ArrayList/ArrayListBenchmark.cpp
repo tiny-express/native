@@ -30,7 +30,7 @@
 
 using namespace Java::Lang;
 
-void ArrayListToString(benchmark::State& state) {
+void JavaUtilArrayListToString(benchmark::State& state) {
 	ArrayList<ArrayList<String>> listString;
 	for (int i=0; i<10000; i++) {
 		ArrayList<String> subListString;
@@ -42,4 +42,4 @@ void ArrayListToString(benchmark::State& state) {
     }
 }
 
-BENCHMARK(ArrayListToString)->Range(RANGE, RANGE);
+BENCHMARK(JavaUtilArrayListToString)->Range(RANGE, RANGE);

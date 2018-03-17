@@ -692,7 +692,6 @@ namespace Java {
                 for (it = this->original.begin(); it != this->original.end(); ++it) {
                     if (instanceof<String>(it->first)) {
                         String first = it->first.toString();
-                        //String key = this->replaceEscapeSequence(first);
                         totalString = String("\"") + first + String("\"");
                     } else {
                         totalString = it->first.toString();
@@ -700,7 +699,6 @@ namespace Java {
                     totalString += colonAndSpace;
                     if (instanceof<String>(it->second)) {
                         String second = it->second.toString();
-                        //String value = this->replaceEscapeSequence(second);
                         totalString += String("\"") + second + String("\"");
                     } else {
                         totalString += it->second.toString();
@@ -711,10 +709,9 @@ namespace Java {
 
                 startHashMap = startHashMap.subString(0, startHashMap.getSize() - 2);
                 startHashMap += endString;
-                startHashMap = startHashMap.replaceAll("}\"", "}");
-                startHashMap = startHashMap.replaceAll("\"{", "{");
+
                 this->backup = startHashMap;
-                return this->backup.toString();
+                return this->backup;
             }
 
 //        private:
