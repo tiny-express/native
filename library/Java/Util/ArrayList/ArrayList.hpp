@@ -569,41 +569,31 @@ namespace Java {
                     this->backup = "[]";
                     return this->backup;
                 }
-
                 boolean isStringArrayList = false;
                 String startArrayList = "[";
                 String commaAndSpace = ", ";
                 String endArrayList = "]";
                 String appendString;
-
-                if (instanceof<String>(this->original[0])) {
-                    isStringArrayList = true;
-                }
                 int index;
+
+	            if (String* isString = dynamic_cast<String*>(&this->original[0])) {
+		            isStringArrayList = true;
+	            }
+
                 for (index = 0; index < this->size(); ++index) {
-                    if (isStringArrayList) {
-                        String stringAtIndex = this->original[index].toString();
-                        appendString =
-                                String("\"") + stringAtIndex + String("\"");
-                    } else {
-                        appendString = this->original[index].toString();
-                    }
-                    appendString += commaAndSpace;
-                    startArrayList += appendString;
-                }
-                //startArrayList += this->original[ this->size() - 1 ].toString();
-                // Remove last semicolon
-                if (startArrayList.length() > 0) {
-                    startArrayList = startArrayList.subString(0,
-                                                              startArrayList.length() -
-                                                              2);
+	                if (isStringArrayList) {
+		                appendString = String("\"") + this->original[index].toString() + String("\"");
+	                } else {
+		                appendString = this->original[index].toString();
+	                }
+	                if (index != this->size() - 1) {
+		                appendString += commaAndSpace;
+	                }
+	                startArrayList += appendString;
                 }
                 startArrayList += endArrayList;
-                startArrayList = startArrayList.replaceAll("\"[", "[");
-                startArrayList = startArrayList.replaceAll("]\"", "]");
-                //this->backup = this->replaceEscapeSequence(startArrayList);
                 this->backup = startArrayList;
-                return this->backup.toString();
+                return this->backup;
             }
 
             /**
