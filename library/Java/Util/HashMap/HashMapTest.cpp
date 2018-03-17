@@ -485,15 +485,24 @@ TEST (JavaUtilHashMap, ToString) {
 	expected = (string) "{}";
 	assertEquals(expected, emptyHashMap.toString());
 
-	// Given empty hash map to test default toString()
-	HashMap<String, ArrayList<String>> arrayListHashMap;
+	// Given hash map of array list to test json serialization
+	HashMap<String, ArrayList<String>> hashMapOfArrayList;
 	ArrayList<String> listValue;
 	listValue.add("value1");
 	listValue.add("value2");
 	listValue.add("");
-	arrayListHashMap.put("listValue", listValue);
+	hashMapOfArrayList.put("listValue", listValue);
 	expected = (string) "{\"listValue\": [\"value1\", \"value2\", \"\"]}";
-	assertEquals(expected, arrayListHashMap.toString());
+	assertEquals(expected, hashMapOfArrayList.toString());
+
+	// Given hash map of hash map to test json serialization
+	HashMap<String, HashMap<String, String>> hashMapOfHashMap;
+	HashMap<String, String> hashMapItem;
+	hashMapItem.put("key1", "value1");
+	hashMapItem.put("key2", "value2");
+	hashMapOfHashMap.put("hashmap", hashMapItem);
+	expected = (string) "{\"hashmap\": {\"key2\": \"value2\", \"key1\": \"value1\"}}";
+	assertEquals(expected, hashMapOfHashMap.toString());
 }
 
 TEST (JavaUtilHashMap, Reinitialize) {
