@@ -569,6 +569,7 @@ namespace Java {
                     this->backup = "[]";
                     return this->backup;
                 }
+
                 boolean isStringArrayList = false;
                 String startArrayList = "[";
                 String commaAndSpace = ", ";
@@ -576,7 +577,7 @@ namespace Java {
                 String appendString;
                 int index;
 
-	            if (instanceof<String>(this->original[0])) {
+                if (std::is_same<E, String>::value) {
 		            isStringArrayList = true;
 	            }
 
@@ -591,6 +592,7 @@ namespace Java {
 	                }
 	                startArrayList += appendString;
                 }
+
                 startArrayList += endArrayList;
                 this->backup = startArrayList;
                 return this->backup;
