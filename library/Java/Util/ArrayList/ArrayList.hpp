@@ -576,7 +576,7 @@ namespace Java {
                 String appendString;
                 int index;
 
-	            if (String* isString = dynamic_cast<String*>(&this->original[0])) {
+	            if (instanceof<String>(this->original[0])) {
 		            isStringArrayList = true;
 	            }
 
