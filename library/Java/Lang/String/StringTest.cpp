@@ -895,6 +895,11 @@ TEST (JavaLangString, Trim) {
 		assertEquals("THIS IS A CAT", trimUpperCase.trim().toUpperCase());
 	}
 
+    {
+        String allSpaceString = "  ";
+        assertEquals("", allSpaceString.trim());
+    }
+
 	{
 		String emptyString = "";
 		assertEquals("", emptyString.trim());

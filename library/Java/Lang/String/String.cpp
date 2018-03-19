@@ -433,6 +433,7 @@ String String::toUpperCase() {
 String String::trim() {
     size_t first = this->original.find_first_not_of(' ');
     if (std::string::npos == first) {
+	    this->original = "";
         return *this;
     }
     size_t last = this->original.find_last_not_of(' ');
