@@ -68,9 +68,6 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     endif ()
 endif ()
 
-# Dynamic linked library for OSX
-set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
-
 # Release mode
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 
@@ -142,6 +139,26 @@ install(FILES library.hpp DESTINATION ../include/native)
 install(DIRECTORY library DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY kernel DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 
+# Detect operating system
+find_file (DEBIAN debian_version debconf.conf PATHS /etc)
+find_file (FEDORA fedora-release PATHS /etc)
+find_file (REDHAT redhat-release inittab.RH PATHS /etc)
+
+IF (${APPLE})
+    SET(CPACK_GENERATOR "DMG")
+endif()
+if (DEBIAN)
+    SET(CPACK_GENERATOR "DEB")
+endif()
+if (FEDORA OR REDHAT)
+    SET(CPACK_GENERATOR "RPM")
+endif()
+SET(CPACK_PACKAGE_CONTACT "loint.foodtiny@gmail.com")
+SET(CPACK_PACKAGE_DESCRIPTION "Native Library for C++")
+SET(CPACK_PACKAGE_VERSION  "1.0.4")
+SET(CPACK_PACKAGE_MAINTAINER "Loi Nguyen")
+INCLUDE(CPack)
+
 # Add uninstall
 add_custom_target(
         uninstall
@@ -152,6 +169,7 @@ add_custom_target(
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
     target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
     target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
 elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
