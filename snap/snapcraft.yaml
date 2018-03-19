@@ -1,0 +1,13 @@
+
+  name: native
+  version: '1.0.4'
+  summary: Write Enterprise Application in C++ with the power of Java
+  description: |
+    Native Library brings productivity and maintainability for your C/C++ application as a Java program
+  grade: stable
+  confinement: strict
+  parts:
+    my-part:
+      # See 'snapcraft plugins'
+      plugin: nil
+  
