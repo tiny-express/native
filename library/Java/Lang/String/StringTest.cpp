@@ -35,131 +35,131 @@ using namespace Java::Lang;
 using namespace Java::Util;
 
 TEST (JavaLangString, Constructor) {
-	// Give NULL for String constructor
-	String nullString;
-	assertEquals("", nullString.toString());
-	
-	// Given value for String constructor and assign value - Return string
-	String simpleStringConstructor = "Hello world";
-	assertEquals("Hello world", simpleStringConstructor.toString());
+    // Give NULL for String constructor
+    String nullString;
+    assertEquals("", nullString.toString());
+
+    // Given value for String constructor and assign value - Return string
+    String simpleStringConstructor = "Hello world";
+    assertEquals("Hello world", simpleStringConstructor.toString());
 
     // Constructor with unicode string (utf-8)
     {
         String unicodeString = "đây là tiếng anh";
         assertEquals("đây là tiếng anh", unicodeString);
     }
-	
-	// Given empty value for String constructor and assign value - Return string
-	String stringConstructor = simpleStringConstructor;
-	assertEquals("Hello world", stringConstructor.toString());
-	
-	// Given constant string value for String constructor
-	String stringConstStringConstructor("Hello world");
-	assertEquals("Hello world", stringConstructor.toString());
-	
-	// Given String value for String constructor
-	String objectString = "Hello world";
-	String stringStringConstructor = objectString;
-	assertEquals("Hello world", stringConstructor.toString());
-	
-	// Given constant string for String constructor - Return string
-	String normalString = "Hello world";
-	assertEquals("Hello world", normalString.toString());
-	
-	// Given a char Array
-	Array<char> charArray = { 'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd' };
-	
-	String arrayConstructor(charArray);
-	assertEquals("Hello world", arrayConstructor.toString());
-	assertEquals(charArray.length, arrayConstructor.length());
-	
-	String subArrayConstructor(charArray, 6, 5);
-	assertEquals("world", subArrayConstructor.toString());
-	assertEquals(5, subArrayConstructor.length());
-	
-	try {
-		String exceptionConstructor(charArray, -1, 5);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1", e.getMessage());
-	}
-	
-	try {
-		String exceptionConstructor(charArray, 5, -1);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1", e.getMessage());
-	}
-	
-	try {
-		String exceptionConstructor(charArray, 10, 5);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: 15", e.getMessage());
-	}
-	
-	// Given a byte Array
-	Array<byte> byteArray = { 72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100 };
-	assertEquals("Hello world", arrayConstructor.toString());
-	assertEquals(charArray.length, arrayConstructor.length());
-	
-	String subByteArrayConstructor(byteArray, 6, 5);
-	assertEquals("world", subByteArrayConstructor.toString());
-	assertEquals(5, subByteArrayConstructor.length());
-	
-	try {
-		String exceptionConstructor(byteArray, -1, 5);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1", e.getMessage());
-	}
-	
-	try {
-		String exceptionConstructor(byteArray, 5, -1);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1", e.getMessage());
-	}
-	
-	try {
-		String exceptionConstructor(byteArray, 10, 5);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: 15", e.getMessage());
-	}
 
-	StringBuffer stringBuffer;
-	stringBuffer
-			.append((String) "string")
-			.append((String) "to")
-			.append((String) "test")
-			.append(1);
-	String stringFromBuffer = String(stringBuffer);
-	assertEquals("stringtotest1", stringFromBuffer);
+    // Given empty value for String constructor and assign value - Return string
+    String stringConstructor = simpleStringConstructor;
+    assertEquals("Hello world", stringConstructor.toString());
+
+    // Given constant string value for String constructor
+    String stringConstStringConstructor("Hello world");
+    assertEquals("Hello world", stringConstructor.toString());
+
+    // Given String value for String constructor
+    String objectString = "Hello world";
+    String stringStringConstructor = objectString;
+    assertEquals("Hello world", stringConstructor.toString());
+
+    // Given constant string for String constructor - Return string
+    String normalString = "Hello world";
+    assertEquals("Hello world", normalString.toString());
+
+    // Given a char Array
+    Array<char> charArray = { 'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd' };
+
+    String arrayConstructor(charArray);
+    assertEquals("Hello world", arrayConstructor.toString());
+    assertEquals(charArray.length, arrayConstructor.length());
+
+    String subArrayConstructor(charArray, 6, 5);
+    assertEquals("world", subArrayConstructor.toString());
+    assertEquals(5, subArrayConstructor.length());
+
+    try {
+        String exceptionConstructor(charArray, -1, 5);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: -1", e.getMessage());
+    }
+
+    try {
+        String exceptionConstructor(charArray, 5, -1);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: -1", e.getMessage());
+    }
+
+    try {
+        String exceptionConstructor(charArray, 10, 5);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: 15", e.getMessage());
+    }
+
+    // Given a byte Array
+    Array<byte> byteArray = { 72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100 };
+    assertEquals("Hello world", arrayConstructor.toString());
+    assertEquals(charArray.length, arrayConstructor.length());
+
+    String subByteArrayConstructor(byteArray, 6, 5);
+    assertEquals("world", subByteArrayConstructor.toString());
+    assertEquals(5, subByteArrayConstructor.length());
+
+    try {
+        String exceptionConstructor(byteArray, -1, 5);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: -1", e.getMessage());
+    }
+
+    try {
+        String exceptionConstructor(byteArray, 5, -1);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: -1", e.getMessage());
+    }
+
+    try {
+        String exceptionConstructor(byteArray, 10, 5);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: 15", e.getMessage());
+    }
+
+    StringBuffer stringBuffer;
+    stringBuffer
+            .append((String) "string")
+            .append((String) "to")
+            .append((String) "test")
+            .append(1);
+    String stringFromBuffer = String(stringBuffer);
+    assertEquals("stringtotest1", stringFromBuffer);
 
     StringBuilder stringBuilder;
     stringBuilder.append((String) "test");
-	stringBuilder.append((String) "string");
-	stringBuilder.append((String) "builder");
+    stringBuilder.append((String) "string");
+    stringBuilder.append((String) "builder");
     String stringFromBuilder = String(stringBuilder);
     assertEquals("teststringbuilder", stringFromBuilder);
 }
 
 TEST (JavaLangString, Destructor) {
-	// Given data type declaration - Destructor will be called by system
-	String text = "";
-	
-	// Given memory allocation for textPointer - Cleanup memory success
-	auto textPointer = new String("Hello");
-	delete textPointer;
+    // Given data type declaration - Destructor will be called by system
+    String text = "";
+
+    // Given memory allocation for textPointer - Cleanup memory success
+    auto textPointer = new String("Hello");
+    delete textPointer;
 }
 
 TEST (JavaLangString, Equals) {
-	// Given two String objects with same value - Return they should equal
-	String stringEqual1 = "Hello World";
-	String stringEqual2 = "Hello World";
-	assertTrue(instanceof<String>(stringEqual1));
-	assertTrue(stringEqual1.equals(stringEqual2));
-	assertTrue(stringEqual1 == stringEqual2);
-	
-	// Compare with another String object - Return they are not equal
-	String stringEqual3 = "Food Tiny";
-	assertTrue(!stringEqual1.equals(stringEqual3));
-	assertTrue(stringEqual1 != stringEqual3);
+    // Given two String objects with same value - Return they should equal
+    String stringEqual1 = "Hello World";
+    String stringEqual2 = "Hello World";
+    assertTrue(instanceof<String>(stringEqual1));
+    assertTrue(stringEqual1.equals(stringEqual2));
+    assertTrue(stringEqual1 == stringEqual2);
+
+    // Compare with another String object - Return they are not equal
+    String stringEqual3 = "Food Tiny";
+    assertTrue(!stringEqual1.equals(stringEqual3));
+    assertTrue(stringEqual1 != stringEqual3);
 
     // Compare unicode strings with same value
     {
@@ -177,24 +177,24 @@ TEST (JavaLangString, Equals) {
 }
 
 TEST (JavaLangString, CharAt) {
-	// Given a string - Return first position is exist
-	String text = "Hello World";
-	char positionIsExist = text.charAt(0);
-	assertEquals('H', positionIsExist);
-	
-	// Given a string - Return negative position is not exist
-	try {
-		text.charAt(-1);
-	} catch (StringIndexOutOfBoundsException &exception) {
-		assertEquals("String index out of range", exception.getMessage());
-	}
-	
-	// Given a string - Return out of scope position is not exist
-	try {
-		char outOfScopePositionIsNotExist = text.charAt(1000);
-	} catch (StringIndexOutOfBoundsException &exception) {
-		assertEquals("String index out of range", exception.getMessage());
-	}
+    // Given a string - Return first position is exist
+    String text = "Hello World";
+    char positionIsExist = text.charAt(0);
+    assertEquals('H', positionIsExist);
+
+    // Given a string - Return negative position is not exist
+    try {
+        text.charAt(-1);
+    } catch (StringIndexOutOfBoundsException &exception) {
+        assertEquals("String index out of range", exception.getMessage());
+    }
+
+    // Given a string - Return out of scope position is not exist
+    try {
+        char outOfScopePositionIsNotExist = text.charAt(1000);
+    } catch (StringIndexOutOfBoundsException &exception) {
+        assertEquals("String index out of range", exception.getMessage());
+    }
 }
 
 TEST (JavaLangString, CompareTo) {
@@ -318,67 +318,69 @@ TEST (JavaLangString, Contains) {
 }
 
 TEST (JavaLangString, ContentEqual) {
-	String string = String("Hello world");
-	CharSequence *charSequence = new StringBuffer("Hello world");
-	assertTrue(string.contentEquals(*charSequence));
-	auto stringBuffer = dynamic_cast<StringBuffer *>(charSequence);
-	delete stringBuffer;
-	
-	String stringEqual = String("Hello world");
-	assertTrue(string.contentEquals(stringEqual));
-	
-	String stringNotEqual = String("hello");
-	assertFalse(string.contentEquals(stringNotEqual));
+    String string = String("Hello world");
+    CharSequence *charSequence = new StringBuffer("Hello world");
+    assertTrue(string.contentEquals(*charSequence));
+    auto stringBuffer = dynamic_cast<StringBuffer *>(charSequence);
+    delete stringBuffer;
+
+    String stringEqual = String("Hello world");
+    assertTrue(string.contentEquals(stringEqual));
+
+    String stringNotEqual = String("hello");
+    assertFalse(string.contentEquals(stringNotEqual));
 }
 
 TEST (JavaLangString, CopyValueOf) {
-	// Given a char Array
-	Array<char> charArray = { 'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd' };
-	String copyArrayString = String::copyValueOf(charArray);
-	assertEquals("Hello world", copyArrayString.toString());
-	assertEquals(charArray.length, copyArrayString.length());
-	
-	String copySubArrayString = String::copyValueOf(charArray, 6, 5);
-	assertEquals("world", copySubArrayString.toString());
-	assertEquals(5, copySubArrayString.length());
-	
-	try {
-		String exceptionString = String::copyValueOf(charArray, -1, 5);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1",
-		             e.getMessage());
-	}
-	
-	try {
-		String exceptionString = String::copyValueOf(charArray, 5, -1);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1",
-		             e.getMessage());
-	}
-	
-	try {
-		String exceptionString = String::copyValueOf(charArray, 10, 5);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: 15",
-		             e.getMessage());
-	}
+    // Given a char Array
+    Array<char> charArray = { 'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd' };
+    String copyArrayString = String::copyValueOf(charArray);
+    assertEquals("Hello world", copyArrayString.toString());
+    assertEquals(charArray.length, copyArrayString.length());
+
+    String copySubArrayString = String::copyValueOf(charArray, 6, 5);
+    assertEquals("world", copySubArrayString.toString());
+    assertEquals(5, copySubArrayString.length());
+
+    try {
+        String exceptionString = String::copyValueOf(charArray, -1, 5);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: -1",
+                     e.getMessage());
+    }
+
+    try {
+        String exceptionString = String::copyValueOf(charArray, 5, -1);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: -1",
+                     e.getMessage());
+    }
+
+    try {
+        String exceptionString = String::copyValueOf(charArray, 10, 5);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: 15",
+                     e.getMessage());
+    }
 }
 
 // FIXME
 TEST (JavaLangString, EndsWith) {
-	String text = "Hello welcome to VietNam";
-	String endsWith = "VietNam";
-	assertTrue(text.endsWith(endsWith));
+    String text = "Hello welcome to VietNam";
+    String endsWith = "VietNam";
+    String endsWithfalse = "NietNam";
+    assertTrue(text.endsWith(endsWith));
+    assertFalse(text.endsWith(endsWithfalse));
 }
 
 TEST (JavaLangString, EqualIgnoreCase) {
-	String smallerString = "because";
-	String greaterString = "hello";
-	String greaterUpperCase = "HELLO";
-	
-	assertFalse(greaterString.equalsIgnoreCase(smallerString));
-	assertTrue(greaterString.equalsIgnoreCase(greaterUpperCase));
-	assertFalse(smallerString.equalsIgnoreCase(greaterString));
+    String smallerString = "because";
+    String greaterString = "hello";
+    String greaterUpperCase = "HELLO";
+
+    assertFalse(greaterString.equalsIgnoreCase(smallerString));
+    assertTrue(greaterString.equalsIgnoreCase(greaterUpperCase));
+    assertFalse(smallerString.equalsIgnoreCase(greaterString));
 }
 
 TEST (JavaLangString, GetBytes) {
@@ -487,7 +489,7 @@ TEST (JavaLangString, IndexOf) {
 }
 
 TEST (JavaLangString, LastIndexOf) {
-	// Given validString check lastIndexOf(string)
+    // Given validString check lastIndexOf(string)
     {
         String textPlus = "Hello Hello Hello ";
         String validString = "awesome keyword inside this awesome string";
@@ -530,7 +532,7 @@ TEST (JavaLangString, LastIndexOf) {
         assertEquals(-1, unicodeString.lastIndexOf("tiếq"));
     }
 
-	// Given validString2 check lastIndexOf(string, fromIndex)
+    // Given validString2 check lastIndexOf(string, fromIndex)
     {
         String validString2 = "sometimes you win, sometimes you learn";
         String subString2 = "sometimes";
@@ -565,65 +567,65 @@ TEST (JavaLangString, LastIndexOf) {
 
 // TODO (anhnt) getChar run right but need Arrays.toString() to test
 TEST (JavaLangString, GetChars) {
-	Array<char> charArray(30);
-	String testString = "This is a String";
-	testString.getChars(10, 16, charArray, 0);
-	string charArrayString = charArray.toCharPointer();
-	assertEquals("String", charArrayString);
-	free(charArrayString);
-	
-	try {
-		testString.getChars(-1, 16, charArray, 0);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1",
-		             e.getMessage());
-	}
-	
-	try {
-		testString.getChars(10, 5, charArray, 0);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -5",
-		             e.getMessage());
-	}
-	
-	try {
-		testString.getChars(10, 50, charArray, 0);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: 50",
-		             e.getMessage());
-	}
-	
-	try {
-		testString.getChars(10, 16, charArray, -1);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: -1",
-		             e.getMessage());
-	}
-	
-	try {
-		testString.getChars(10, 16, charArray, 29);
-	} catch (StringIndexOutOfBoundsException &e) {
-		assertEquals("String index out of range: 35",
-		             e.getMessage());
-	}
-	
-	testString.getChars(10, 16, charArray, 10);
-	charArrayString = charArray.toCharPointer();
-	assertEquals("StringString", charArrayString);
-	free(charArrayString);
-	
-	testString.getChars(10, 16, charArray, 3);
-	charArrayString = charArray.toCharPointer();
-	assertEquals("StrStringString", charArrayString);
-	free(charArrayString);
+    Array<char> charArray(30);
+    String testString = "This is a String";
+    testString.getChars(10, 16, charArray, 0);
+    string charArrayString = charArray.toCharPointer();
+    assertEquals("String", charArrayString);
+    free(charArrayString);
+
+    try {
+        testString.getChars(-1, 16, charArray, 0);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: -1",
+                     e.getMessage());
+    }
+
+    try {
+        testString.getChars(10, 5, charArray, 0);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: -5",
+                     e.getMessage());
+    }
+
+    try {
+        testString.getChars(10, 50, charArray, 0);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: 50",
+                     e.getMessage());
+    }
+
+    try {
+        testString.getChars(10, 16, charArray, -1);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: -1",
+                     e.getMessage());
+    }
+
+    try {
+        testString.getChars(10, 16, charArray, 29);
+    } catch (StringIndexOutOfBoundsException &e) {
+        assertEquals("String index out of range: 35",
+                     e.getMessage());
+    }
+
+    testString.getChars(10, 16, charArray, 10);
+    charArrayString = charArray.toCharPointer();
+    assertEquals("StringString", charArrayString);
+    free(charArrayString);
+
+    testString.getChars(10, 16, charArray, 3);
+    charArrayString = charArray.toCharPointer();
+    assertEquals("StrStringString", charArrayString);
+    free(charArrayString);
 }
 
 TEST (JavaLangString, IsEmpty) {
-	String textPlus = "Hello Hello Hello ";
-	assertTrue(!textPlus.isEmpty());
-	
-	textPlus = "";
-	assertTrue(textPlus.isEmpty());
+    String textPlus = "Hello Hello Hello ";
+    assertTrue(!textPlus.isEmpty());
+
+    textPlus = "";
+    assertTrue(textPlus.isEmpty());
 }
 
 TEST (JavaLangString, Length) {
@@ -642,49 +644,49 @@ TEST (JavaLangString, Length) {
 }
 
 TEST (JavaLangString, HashCode) {
-	String string = "Hello world";
-	assertEquals(-832992604, string.hashCode());
+    String string = "Hello world";
+    assertEquals(-832992604, string.hashCode());
 }
 
 TEST (JavaLangString, RegionMatch) {
-	String string1 = "Collection of tutorials";
-	String string2 = "Consists of different tutorials";
-	String string3 = "CONSISTS OF DIFFERENT TUTORIALS";
-	
-	// Case considering
-	boolean match = string1.regionMatches(14, string2, 22, 9);
-	assertTrue(match);
-	
-	match = string1.regionMatches(14, string2, 20, 9);
-	assertFalse(match);
-	
-	match = string1.regionMatches(14, string3, 22, 9);
-	assertFalse(match);
-	
-	// Ignore case
-	match = string1.regionMatches(true, 14, string2, 22, 9);
-	assertTrue(match);
-	
-	match = string1.regionMatches(true, 14, string2, 20, 9);
-	assertFalse(match);
-	
-	match = string1.regionMatches(true, 14, string3, 22, 9);
-	assertTrue(match);
-	
-	match = string1.regionMatches(false, 14, string3, 22, 9);
-	assertFalse(match);
-	
-	match = string1.regionMatches(true, -1, string2, 22, 9);
-	assertFalse(match);
-	
-	match = string1.regionMatches(true, 14, string2, -1, 9);
-	assertFalse(match);
-	
-	match = string1.regionMatches(true, 14, string2, 22, 100);
-	assertTrue(match);
-	
-	match = string1.regionMatches(true, 14, string2, 100, 9);
-	assertFalse(match);
+    String string1 = "Collection of tutorials";
+    String string2 = "Consists of different tutorials";
+    String string3 = "CONSISTS OF DIFFERENT TUTORIALS";
+
+    // Case considering
+    boolean match = string1.regionMatches(14, string2, 22, 9);
+    assertTrue(match);
+
+    match = string1.regionMatches(14, string2, 20, 9);
+    assertFalse(match);
+
+    match = string1.regionMatches(14, string3, 22, 9);
+    assertFalse(match);
+
+    // Ignore case
+    match = string1.regionMatches(true, 14, string2, 22, 9);
+    assertTrue(match);
+
+    match = string1.regionMatches(true, 14, string2, 20, 9);
+    assertFalse(match);
+
+    match = string1.regionMatches(true, 14, string3, 22, 9);
+    assertTrue(match);
+
+    match = string1.regionMatches(false, 14, string3, 22, 9);
+    assertFalse(match);
+
+    match = string1.regionMatches(true, -1, string2, 22, 9);
+    assertFalse(match);
+
+    match = string1.regionMatches(true, 14, string2, -1, 9);
+    assertFalse(match);
+
+    match = string1.regionMatches(true, 14, string2, 22, 100);
+    assertTrue(match);
+
+    match = string1.regionMatches(true, 14, string2, 100, 9);
+    assertFalse(match);
 }
 
 TEST (JavaLangString, Join) {
@@ -764,39 +766,39 @@ TEST (JavaLangString, Replace) {
 }
 
 TEST (JavaLangString, Split) {
-	// Give an Array<String> then asert each element - Should equal
-	String stringToSplit = "Hello Hello Hello Hello";
-	Array<String> strings = stringToSplit.split(" ");
-	for (String item : strings) {
-		assertEquals("Hello", item.toString());
-	}
-	
-	Array<String> splitWithLimit1 = stringToSplit.split(" ", 3);
-	int index;
-	for (index = 0; index < splitWithLimit1.length - 1; index++) {
-		assertEquals("Hello", splitWithLimit1[ index ].toString());
-	}
-	assertEquals("Hello Hello",
-	             splitWithLimit1[ splitWithLimit1.length - 1 ].toString());
-	
-	// Split with limit greater than number of regex occurrence time
-	Array<String> splitWithLimit2 = stringToSplit.split(" ", 10);
-	for (index = 0; index < splitWithLimit2.length - 1; index++) {
-		assertEquals("Hello", splitWithLimit2[ index ].toString());
-	}
-	
-	Array<String> splitWithLimitOne = stringToSplit.split(" ", 1);
-	assertEquals(stringToSplit.toString(), splitWithLimitOne[ 0 ].toString());
-	
-	Array<String> splitWithLimitZero = stringToSplit.split(" ", 0);
-	for (index = 0; index < splitWithLimitZero.length - 1; index++) {
-		assertEquals("Hello", splitWithLimitZero[ index ].toString());
-	}
-	
-	Array<String> splitWithLimitNegative = stringToSplit.split(" ", -1);
-	for (index = 0; index < splitWithLimitNegative.length - 1; index++) {
-		assertEquals("Hello", splitWithLimitNegative[ index ].toString());
-	}
+    // Give an Array<String> then asert each element - Should equal
+    String stringToSplit = "Hello Hello Hello Hello";
+    Array<String> strings = stringToSplit.split(" ");
+    for (String item : strings) {
+        assertEquals("Hello", item.toString());
+    }
+
+    Array<String> splitWithLimit1 = stringToSplit.split(" ", 3);
+    int index;
+    for (index = 0; index < splitWithLimit1.length - 1; index++) {
+        assertEquals("Hello", splitWithLimit1[ index ].toString());
+    }
+    assertEquals("Hello Hello",
+                 splitWithLimit1[ splitWithLimit1.length - 1 ].toString());
+
+    // Split with limit greater than number of regex occurrence time
+    Array<String> splitWithLimit2 = stringToSplit.split(" ", 10);
+    for (index = 0; index < splitWithLimit2.length - 1; index++) {
+        assertEquals("Hello", splitWithLimit2[ index ].toString());
+    }
+
+    Array<String> splitWithLimitOne = stringToSplit.split(" ", 1);
+    assertEquals(stringToSplit.toString(), splitWithLimitOne[ 0 ].toString());
+
+    Array<String> splitWithLimitZero = stringToSplit.split(" ", 0);
+    for (index = 0; index < splitWithLimitZero.length - 1; index++) {
+        assertEquals("Hello", splitWithLimitZero[ index ].toString());
+    }
+
+    Array<String> splitWithLimitNegative = stringToSplit.split(" ", -1);
+    for (index = 0; index < splitWithLimitNegative.length - 1; index++) {
+        assertEquals("Hello", splitWithLimitNegative[ index ].toString());
+    }
 
     {
         String unicodeStringToSplit = "vào vào vào";
@@ -806,47 +808,47 @@ TEST (JavaLangString, Split) {
         }
     }
 
-	{
-		String queryString = "firstName=Loi&lastName=Nguyen";
-		Array<String> queryPairs = queryString.split("&");
+    {
+        String queryString = "firstName=Loi&lastName=Nguyen";
+        Array<String> queryPairs = queryString.split("&");
 
-		Array<String> queryComponent1 = queryPairs.get(0).split("=");
-		assertEquals("firstName", queryComponent1[0]);
-		assertEquals("Loi", queryComponent1[1]);
-		assertEquals(3, queryComponent1[1].length());
+        Array<String> queryComponent1 = queryPairs.get(0).split("=");
+        assertEquals("firstName", queryComponent1[0]);
+        assertEquals("Loi", queryComponent1[1]);
+        assertEquals(3, queryComponent1[1].length());
 
-		Array<String> queryComponent2 = queryPairs.get(1).split("=");
-		assertEquals("lastName", queryComponent2[0]);
-		assertEquals("Nguyen", queryComponent2[1]);
-		assertEquals(6, queryComponent2[1].length());
-	}
+        Array<String> queryComponent2 = queryPairs.get(1).split("=");
+        assertEquals("lastName", queryComponent2[0]);
+        assertEquals("Nguyen", queryComponent2[1]);
+        assertEquals(6, queryComponent2[1].length());
+    }
 }
 
 TEST (JavaLangString, StartsWith) {
-	String textPlus;
-	// textPlus == ""
-	assertFalse(textPlus.startsWith(String("abc"), 10));
-	
-	textPlus = "Hello Hello Hello ";
-	// prefix == ""
-	String nullString;
-	assertTrue(textPlus.startsWith(nullString, 10));
-	
-	// thisOffset < 0
-	assertFalse(textPlus.startsWith(String("Hello"), -1));
-	
-	// textPlus.length < prefix.length
-	assertFalse(textPlus.startsWith(String("Hello Hello Hello H")));
-	
-	// thisOffset > (textPlus.length - prefix.length)
-	assertFalse(( textPlus.startsWith(String("Hello"), 20)));
-	
-	// valid case
-	assertTrue(textPlus.startsWith(String(""), 7));
-	
-	assertTrue(textPlus.startsWith(String("Hello")));
-	
-	assertFalse(textPlus.startsWith(String("ello")));
+    String textPlus;
+    // textPlus == ""
+    assertFalse(textPlus.startsWith(String("abc"), 10));
+
+    textPlus = "Hello Hello Hello ";
+    // prefix == ""
+    String nullString;
+    assertTrue(textPlus.startsWith(nullString, 10));
+
+    // thisOffset < 0
+    assertFalse(textPlus.startsWith(String("Hello"), -1));
+
+    // textPlus.length < prefix.length
+    assertFalse(textPlus.startsWith(String("Hello Hello Hello H")));
+
+    // thisOffset > (textPlus.length - prefix.length)
+    assertFalse(( textPlus.startsWith(String("Hello"), 20)));
+
+    // valid case
+    assertTrue(textPlus.startsWith(String(""), 7));
+
+    assertTrue(textPlus.startsWith(String("Hello")));
+
+    assertFalse(textPlus.startsWith(String("ello")));
 }
 
 TEST (JavaLangString, ToLowerCase) {
@@ -890,131 +892,131 @@ TEST (JavaLangString, Trim) {
         assertEquals("đây là tiếng việt", result.toString());
     }
 
-	{
-		String trimUpperCase = "                this is a cat    ";
-		assertEquals("THIS IS A CAT", trimUpperCase.trim().toUpperCase());
-	}
+    {
+        String trimUpperCase = "                this is a cat    ";
+        assertEquals("THIS IS A CAT", trimUpperCase.trim().toUpperCase());
+    }
 
     {
         String allSpaceString = "  ";
         assertEquals("", allSpaceString.trim());
     }
 
-	{
-		String emptyString = "";
-		assertEquals("", emptyString.trim());
-	}
+    {
+        String emptyString = "";
+        assertEquals("", emptyString.trim());
+    }
 }
 
 TEST (JavaLangString, ValueOf) {
-	// Value of boolean
-	boolean isChecked = true;
-	String valueOfBoolean = String::valueOf(isChecked);
-	assertEquals((string) "true", valueOfBoolean.toString());
-	
-	// Value of single character
-	char givenChar = '\0';
-	String valueOfChar = String::valueOf(givenChar);
-	assertEquals((string) "\0", valueOfChar.toString());
-	
-	// Value of string
-	auto givenString = (string) "Hello world";
-	String valueOfString = String::valueOf(givenString);
-	assertEquals(givenString, valueOfString.toString());
-	
-	// Value of string
-	auto givenEmptyString = (string) "";
-	valueOfString = String::valueOf(givenEmptyString);
-	assertEquals(givenEmptyString, valueOfString.toString());
-	
-	// Value of const_string
-	auto givenConstString = (string) "Hello world";
-	valueOfString = String::valueOf(givenConstString);
-	assertEquals(givenConstString, valueOfString.toString());
-	
-	// Value of const_string
-	givenConstString = (string) "";
-	valueOfString = String::valueOf(givenConstString);
-	assertEquals(givenConstString, valueOfString.toString());
-	
-	// Value of String
-	auto givenObjectString = (string) "Hello world";
-	valueOfString = String::valueOf(givenObjectString);
-	assertEquals(givenObjectString, valueOfString.toString());
-	
-	// Value of short number
-	short givenShortNumber = 5;
-	String valueOfShort = String::valueOf(givenShortNumber);
-	assertEquals("5", valueOfShort.toString());
-	
-	// Value of integer number
-	int givenIntegerNumber = 34567;
-	String valueOfInt = String::valueOf(givenIntegerNumber);
-	assertEquals("34567", valueOfInt.toString());
-	
-	// Value of long number
-	auto givenLongNumber = (long) 12345678893;
-	String valueOfLong = String::valueOf(givenLongNumber);
-	assertEquals("12345678893", valueOfLong.toString());
-	
-	// Value of float number
-	auto givenFloatNumber = (float) 5.68;
-	String valueOfFloat = String::valueOf(givenFloatNumber);
-	assertEquals("5.68", valueOfFloat.toString());
-	
-	// Value of double number
-	auto givenDoubleNumber = (double) 456.324234234240009;
-	String valueOfDouble = String::valueOf(givenDoubleNumber);
-	assertEquals("456.324234234240009", valueOfDouble.toString());
+    // Value of boolean
+    boolean isChecked = true;
+    String valueOfBoolean = String::valueOf(isChecked);
+    assertEquals((string) "true", valueOfBoolean.toString());
+
+    // Value of single character
+    char givenChar = '\0';
+    String valueOfChar = String::valueOf(givenChar);
+    assertEquals((string) "\0", valueOfChar.toString());
+
+    // Value of string
+    auto givenString = (string) "Hello world";
+    String valueOfString = String::valueOf(givenString);
+    assertEquals(givenString, valueOfString.toString());
+
+    // Value of string
+    auto givenEmptyString = (string) "";
+    valueOfString = String::valueOf(givenEmptyString);
+    assertEquals(givenEmptyString, valueOfString.toString());
+
+    // Value of const_string
+    auto givenConstString = (string) "Hello world";
+    valueOfString = String::valueOf(givenConstString);
+    assertEquals(givenConstString, valueOfString.toString());
+
+    // Value of const_string
+    givenConstString = (string) "";
+    valueOfString = String::valueOf(givenConstString);
+    assertEquals(givenConstString, valueOfString.toString());
+
+    // Value of String
+    auto givenObjectString = (string) "Hello world";
+    valueOfString = String::valueOf(givenObjectString);
+    assertEquals(givenObjectString, valueOfString.toString());
+
+    // Value of short number
+    short givenShortNumber = 5;
+    String valueOfShort = String::valueOf(givenShortNumber);
+    assertEquals("5", valueOfShort.toString());
+
+    // Value of integer number
+    int givenIntegerNumber = 34567;
+    String valueOfInt = String::valueOf(givenIntegerNumber);
+    assertEquals("34567", valueOfInt.toString());
+
+    // Value of long number
+    auto givenLongNumber = (long) 12345678893;
+    String valueOfLong = String::valueOf(givenLongNumber);
+    assertEquals("12345678893", valueOfLong.toString());
+
+    // Value of float number
+    auto givenFloatNumber = (float) 5.68;
+    String valueOfFloat = String::valueOf(givenFloatNumber);
+    assertEquals("5.68", valueOfFloat.toString());
+
+    // Value of double number
+    auto givenDoubleNumber = (double) 456.324234234240009;
+    String valueOfDouble = String::valueOf(givenDoubleNumber);
+    assertEquals("456.324234234240009", valueOfDouble.toString());
 }
 
 TEST (JavaLangString, OperatorPlusStringObject) {
-	// Given two strings and concatenate them - Return string
-	String textPlus1 = "Hello ";
-	String textPlus2 = "World";
-	String textResult = textPlus1 + textPlus2;
-	assertEquals("Hello World", textResult.toString());
-	
-	// Concat a string with valueOf(number) - Return string
-	textPlus1 = "Hello ";
-	int aNumber = 1;
-	textResult = textPlus1 + String::valueOf(aNumber);
-	assertEquals("Hello 1", textResult.toString());
-	
-	// Concat 2 Strings with valueOf(number) - Return string
-	textPlus1 = "Hello";
-	aNumber = 1;
-	textResult = textPlus1 + (string) " Galaxy " + String::valueOf(aNumber);
-	assertEquals("Hello Galaxy 1", textResult.toString());
+    // Given two strings and concatenate them - Return string
+    String textPlus1 = "Hello ";
+    String textPlus2 = "World";
+    String textResult = textPlus1 + textPlus2;
+    assertEquals("Hello World", textResult.toString());
+
+    // Concat a string with valueOf(number) - Return string
+    textPlus1 = "Hello ";
+    int aNumber = 1;
+    textResult = textPlus1 + String::valueOf(aNumber);
+    assertEquals("Hello 1", textResult.toString());
+
+    // Concat 2 Strings with valueOf(number) - Return string
+    textPlus1 = "Hello";
+    aNumber = 1;
+    textResult = textPlus1 + (string) " Galaxy " + String::valueOf(aNumber);
+    assertEquals("Hello Galaxy 1", textResult.toString());
 }
 
 TEST (JavaLangString, OperatorPlusStringDataType) {
-	auto world = (string) " World";
-	String hello = "Hello";
-	hello += world;
-	assertEquals("Hello World", hello.toString());
-	
-	String food = "Food";
-	auto tiny = (string) " Tiny";
-	String foodTiny = food + tiny;
-	assertEquals("Food Tiny", foodTiny.toString());
+    auto world = (string) " World";
+    String hello = "Hello";
+    hello += world;
+    assertEquals("Hello World", hello.toString());
+
+    String food = "Food";
+    auto tiny = (string) " Tiny";
+    String foodTiny = food + tiny;
+    assertEquals("Food Tiny", foodTiny.toString());
 }
 
 TEST (JavaLangString, OperatorPlusConstantStringDataType) {
-	String input = "Food";
-	String result = input + String("tiny");
-	String expected = "Foodtiny";
-	assertTrue(expected.equals(result));
-	
-	String input1 = "Hello";
-	String result1 = input1 + String("");
-	String expected1 = "Hello";
-	assertTrue(expected1.equals(result1));
-	
-	String input2 = "";
-	String result2 = input2 + String("World");
-	String expected2 = "World";
-	assertTrue(expected2.equals(result2));
+    String input = "Food";
+    String result = input + String("tiny");
+    String expected = "Foodtiny";
+    assertTrue(expected.equals(result));
+
+    String input1 = "Hello";
+    String result1 = input1 + String("");
+    String expected1 = "Hello";
+    assertTrue(expected1.equals(result1));
+
+    String input2 = "";
+    String result2 = input2 + String("World");
+    String expected2 = "World";
+    assertTrue(expected2.equals(result2));
 }
 
 TEST(JavaLangString, OperatorPlusConstantString) {
@@ -1024,7 +1026,7 @@ TEST(JavaLangString, OperatorPlusConstantString) {
         String result = input1 + input2;
 
         assertEquals("84", input1);
-        assertEquals("01285689999", input2);        
+        assertEquals("01285689999", input2);
         assertEquals("8401285689999", result);
     }
 
@@ -1048,29 +1050,29 @@ TEST(JavaLangString, OperatorPlusConstantString) {
 }
 
 TEST (JavaLangString, OperatorEquals) {
-	// Given two string and compare equal them - Return comparable
-	String textCompare1 = "Hello";
-	String textCompare2 = "Hello";
-	int comparable = false;
-	if (textCompare1 == textCompare2) {
-		comparable = true;
-	}
-	assertTrue(comparable);
+    // Given two string and compare equal them - Return comparable
+    String textCompare1 = "Hello";
+    String textCompare2 = "Hello";
+    int comparable = false;
+    if (textCompare1 == textCompare2) {
+        comparable = true;
+    }
+    assertTrue(comparable);
 }
 
 TEST (JavaLangString, OperatorNotEquals) {
-	// Given two Strings and compare not equal them - Return comparable
-	String textCompare1 = "Hello1";
-	String textCompare2 = "Hello2";
-	int comparable = false;
-	if (textCompare1 != textCompare2) {
-		comparable = true;
-	}
-	assertTrue(comparable);
+    // Given two Strings and compare not equal them - Return comparable
+    String textCompare1 = "Hello1";
+    String textCompare2 = "Hello2";
+    int comparable = false;
+    if (textCompare1 != textCompare2) {
+        comparable = true;
+    }
+    assertTrue(comparable);
 }
 
 TEST (JavaLangString, OperatorPlusEqualsChar) {
-	// Given a string and append a char  - Return result of the concatenation
+    // Given a string and append a char  - Return result of the concatenation
     {
         String text = "Hello";
         text += ' ';
@@ -1134,38 +1136,38 @@ TEST (JavaLangString, OperatorPlusEqualsString) {
 }
 
 TEST (JavaLangString, MemoryCheck) {
-	// Test create object String with validString and change data of validString
-	string validString = stringCopy("foodtiny");
-	String stringTest = validString;
-	free(validString);
-	
-	int expect = 8;
-	int result = stringTest.length();
-	assertEquals(expect, result);
-	
-	// Test copy String and change data of stringTest
-	String stringCopyStringTest(stringTest);
-	stringTest = "";
-	expect = 8;
-	result = stringCopyStringTest.length();
-	assertEquals(expect, result);
+    // Test create object String with validString and change data of validString
+    string validString = stringCopy("foodtiny");
+    String stringTest = validString;
+    free(validString);
+
+    int expect = 8;
+    int result = stringTest.length();
+    assertEquals(expect, result);
+
+    // Test copy String and change data of stringTest
+    String stringCopyStringTest(stringTest);
+    stringTest = "";
+    expect = 8;
+    result = stringCopyStringTest.length();
+    assertEquals(expect, result);
 }
 
 TEST (JavaLangString, Clone) {
-	// Given two string and compare - Should equal
-	String validString("Hello world");
-	String cloneString = validString.clone();
-	assertEquals(validString.toString(), cloneString.toString());
-	
-	// Give two empty string and compare - Should equal
-	String emptyString;
-	String cloneEmptyString = emptyString.clone();
-	assertEquals(emptyString.toString(), cloneEmptyString.toString());
-	
-	// Clone new data for cloneEmptyString
-	// Give two string and compare - Should equal
-	cloneEmptyString = validString.clone();
-	assertEquals(validString.toString(), cloneEmptyString.toString());
+    // Given two string and compare - Should equal
+    String validString("Hello world");
+    String cloneString = validString.clone();
+    assertEquals(validString.toString(), cloneString.toString());
+
+    // Give two empty string and compare - Should equal
+    String emptyString;
+    String cloneEmptyString = emptyString.clone();
+    assertEquals(emptyString.toString(), cloneEmptyString.toString());
+
+    // Clone new data for cloneEmptyString
+    // Give two string and compare - Should equal
+    cloneEmptyString = validString.clone();
+    assertEquals(validString.toString(), cloneEmptyString.toString());
 }
 
 TEST (JavaLangString, SubString) {
@@ -1220,138 +1222,138 @@ TEST (JavaLangString, CompareOperater) {
 TEST (JavaLangString, Format) {
     bool trueValue = true;
     bool falseValue = false;
-	unsigned short ushortValue = 1;
-	short shortValue = -1;
-	int intValue = -123;
-	unsigned int uintValue = 123;
-	long longValue = 123;
-	unsigned long ulongValue = 123456;
-	float floatValue = 123.456;
-	double doubleValue = 123.456789;
-	auto stringValue = (string) "string";
+    unsigned short ushortValue = 1;
+    short shortValue = -1;
+    int intValue = -123;
+    unsigned int uintValue = 123;
+    long longValue = 123;
+    unsigned long ulongValue = 123456;
+    float floatValue = 123.456;
+    double doubleValue = 123.456789;
+    auto stringValue = (string) "string";
     Boolean trueObject = true;
     Boolean falseObject = false;
-	Short shortObject = 123;
-	Integer integerObject = -123;
-	Long longObject = 123456;
-	Float floatObject = 123.456;
-	Double doubleObject = 123.456789;
-	String stringObject = "String";
-	
-	{
-		String expect = "%% the quick -123 123 brown -123 123456 fox 123.456 123.456789 jumps 123.456 123.456789 over the lazy %% string dog String %d";
-		String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
-		String result = String::format(format, intValue, longValue,
-		                               integerObject, longObject, floatValue,
-		                               doubleValue,
-		                               floatObject, doubleObject, stringValue,
-		                               stringObject);
-		assertEquals(expect.toString(), result.toString());
-	}
+    Short shortObject = 123;
+    Integer integerObject = -123;
+    Long longObject = 123456;
+    Float floatObject = 123.456;
+    Double doubleObject = 123.456789;
+    String stringObject = "String";
 
-	{
-		String expect = "%% hello %D %S %d world";
-		String format = "%%% hello %D %S %%d world";
-		String result = String::format(format);
-		assertEquals(expect.toString(), result.toString());
-	}
+    {
+        String expect = "%% the quick -123 123 brown -123 123456 fox 123.456 123.456789 jumps 123.456 123.456789 over the lazy %% string dog String %d";
+        String format = "%%%% the quick %d %d brown %d %d fox %.3f %.6f jumps %.3f %.6f over the lazy %%%% %s dog %s %%d";
+        String result = String::format(format, intValue, longValue,
+                                       integerObject, longObject, floatValue,
+                                       doubleValue,
+                                       floatObject, doubleObject, stringValue,
+                                       stringObject);
+        assertEquals(expect.toString(), result.toString());
+    }
 
-	{
-		String expect = "123.46 +1e+02 1.234568E+02";
-		String format = "%4.2f %+.0e %E";
-		String result = String::format(format, doubleObject, doubleObject,
-		                               doubleValue);
-		assertEquals(expect.toString(), result.toString());
-	}
+    {
+        String expect = "%% hello %D %S %d world";
+        String format = "%%% hello %D %S %%d world";
+        String result = String::format(format);
+        assertEquals(expect.toString(), result.toString());
+    }
 
-	{
-		String expect = "Preceding with zeros: 0000000123";
-		String format = "Preceding with zeros: %010d";
-		String result = String::format(format, longValue);
-		assertEquals(expect.toString(), result.toString());
-	}
+    {
+        String expect = "123.46 +1e+02 1.234568E+02";
+        String format = "%4.2f %+.0e %E";
+        String result = String::format(format, doubleObject, doubleObject,
+                                       doubleValue);
+        assertEquals(expect.toString(), result.toString());
+    }
 
-	{
-		String expect = "1 123 123456 123";
-		String format = "%u %u %u %d";
-		String result = String::format(format, ushortValue, uintValue,
-		                               ulongValue, shortObject);
-		assertEquals(expect.toString(), result.toString());
-	}
+    {
+        String expect = "Preceding with zeros: 0000000123";
+        String format = "Preceding with zeros: %010d";
+        String result = String::format(format, longValue);
+        assertEquals(expect.toString(), result.toString());
+    }
 
-	{
-		integerObject = 65;
-		String expect = "Characters: a A";
-		String format = "Characters: %c %c";
-		String result = String::format(format, 'a', integerObject);
-		assertEquals(expect.toString(), result.toString());
-	}
+    {
+        String expect = "1 123 123456 123";
+        String format = "%u %u %u %d";
+        String result = String::format(format, ushortValue, uintValue,
+                                       ulongValue, shortObject);
+        assertEquals(expect.toString(), result.toString());
+    }
 
-	{
-		String format = "%d %d";
-		try {
-			String result = String::format(format, shortObject);
-		} catch (InterruptedException &e) {
-			assertEquals("Missing arguments.", e.getMessage());
-		}
-	}
+    {
+        integerObject = 65;
+        String expect = "Characters: a A";
+        String format = "Characters: %c %c";
+        String result = String::format(format, 'a', integerObject);
+        assertEquals(expect.toString(), result.toString());
+    }
 
-	{
-		String format = "%%% d";
-		try {
-			String result = String::format(format);
-		} catch (InterruptedException &e) {
-			assertEquals("Missing arguments.", e.getMessage());
-		}
-	}
+    {
+        String format = "%d %d";
+        try {
+            String result = String::format(format, shortObject);
+        } catch (InterruptedException &e) {
+            assertEquals("Missing arguments.", e.getMessage());
+        }
+    }
 
-	{
-		auto key = (string) "Nhà hàng";
-		double latitude = 10.824093;
-		double longitude = 106.683844;
-		string url = urlDecode(key);
-		auto queryFormat = "{\"query\": {\"bool\" : {\"must\" : [{\"nested\":{\"path\":\"shop_type\",\"query\":{ \"match\":{\"shop_type.vi_VN\":\"%s\" } }}},{\"filtered\": {\"filter\": {\"geo_distance\": {\"distance\": \"5km\",\"distance_type\": \"plane\", \"shop_location\": {\"lat\": %f,\"lon\": %f}}}}}]}}}";
-		String body = String::format(queryFormat, url, latitude, longitude);
+    {
+        String format = "%%% d";
+        try {
+            String result = String::format(format);
+        } catch (InterruptedException &e) {
+            assertEquals("Missing arguments.", e.getMessage());
+        }
+    }
 
-		String REQUEST_TEMPLATE = "%s %s%s %s\r\n"
-			"%s\r\n\r\n"
-			"%s";
+    {
+        auto key = (string) "Nhà hàng";
+        double latitude = 10.824093;
+        double longitude = 106.683844;
+        string url = urlDecode(key);
+        auto queryFormat = "{\"query\": {\"bool\" : {\"must\" : [{\"nested\":{\"path\":\"shop_type\",\"query\":{ \"match\":{\"shop_type.vi_VN\":\"%s\" } }}},{\"filtered\": {\"filter\": {\"geo_distance\": {\"distance\": \"5km\",\"distance_type\": \"plane\", \"shop_location\": {\"lat\": %f,\"lon\": %f}}}}}]}}}";
+        String body = String::format(queryFormat, url, latitude, longitude);
 
-		String result = String::format(REQUEST_TEMPLATE,
-		                               "POST",
-		                               "CASSANDRA",
-		                               "_test",
-		                               "http1.1",
-		                               "HEADER:HEADER",
-		                               body);
+        String REQUEST_TEMPLATE = "%s %s%s %s\r\n"
+                "%s\r\n\r\n"
+                "%s";
 
-		string expected;
-		int length = asprintf(&expected,
-		                      REQUEST_TEMPLATE.toCharPointer(),
-		                      "POST",
-		                      "CASSANDRA",
-		                      "_test",
-		                      "http1.1",
-		                      "HEADER:HEADER",
-		                      body.toCharPointer());
+        String result = String::format(REQUEST_TEMPLATE,
+                                       "POST",
+                                       "CASSANDRA",
+                                       "_test",
+                                       "http1.1",
+                                       "HEADER:HEADER",
+                                       body);
 
-		assertTrue(length > 0);
-		assertEquals(expected, result.toString());
-		free(expected);
-		free(url);
-	}
+        string expected;
+        int length = asprintf(&expected,
+                              REQUEST_TEMPLATE.toCharPointer(),
+                              "POST",
+                              "CASSANDRA",
+                              "_test",
+                              "http1.1",
+                              "HEADER:HEADER",
+                              body.toCharPointer());
 
-	{
-		string expected;
-		String result;
-		unsigned long ul = System::currentTimeMillis();
+        assertTrue(length > 0);
+        assertEquals(expected, result.toString());
+        free(expected);
+        free(url);
+    }
 
-		int length = asprintf(&expected, "%lu", ul);
-		assertTrue(length > 0);
-		result = String::format("%lu", ul);
-		assertEquals(expected, result.toString());
-		free(expected);
-	}
+    {
+        string expected;
+        String result;
+        unsigned long ul = System::currentTimeMillis();
+
+        int length = asprintf(&expected, "%lu", ul);
+        assertTrue(length > 0);
+        result = String::format("%lu", ul);
+        assertEquals(expected, result.toString());
+        free(expected);
+    }
 
     {
         String expected = "true false TRUE FALSE";

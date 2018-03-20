@@ -199,7 +199,12 @@ String String::concat(String target) {
 }
 
 boolean String::contains(const CharSequence &charSequence) {
-    return (stringIndex(this->original.c_str(), charSequence.toString().toCharPointer(), 1) != NOT_FOUND);
+    //return (stringIndex(this->original.c_str(), charSequence.toString().toCharPointer(), 1) != NOT_FOUND);
+    std::size_t found = this->original.find(charSequence.toString().toCharPointer());
+    if (found!=std::string::npos)
+        return true;
+    else
+        return false;
 }
 
 Array<byte> String::getBytes() const {
@@ -218,7 +223,19 @@ String String::getStringFromIndex(int index) const {
 }
 
 boolean String::endsWith(const String &suffixString) const {
-    return (bool) stringEndswith(this->original.c_str(), suffixString.original.c_str());
+    //return (bool) stringEndswith(this->original.c_str(), suffixString.original.c_str());
+    int suffix_length = suffixString.toString().length();
+    int targetLength= this->original.size();
+    if (targetLength < suffix_length) {
+        return false;
+    }
+    int i;
+    for (i = suffix_length - 1; i >= 0; i--) {
+        if (suffixString[ i ] != this->original[ targetLength - suffix_length + i ]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 String String::fromCharArray(Array<char> &charArray) {
@@ -226,10 +243,24 @@ String String::fromCharArray(Array<char> &charArray) {
 }
 
 int String::indexOf(int character) const {
-    string pointerHolder = stringFromChar((char) character);
-    int result = stringIndex(this->original.c_str(), pointerHolder, 1);
+    string pointerHolder;
+    char target=(char)character;
+    if (target == '\0') {
+        pointerHolder= strdup("");
+    }
+    else {
+        auto *result = (char *) calloc(2, sizeof(char));
+        result[0] = target;
+        result[1] = '\0';
+        pointerHolder=result;
+
+    }
+    std::size_t found = this->original.find(pointerHolder);
     free(pointerHolder);
-    return result;
+    if (found!=std::string::npos)
+        return found;
+    else
+        return NOT_FOUND;
 }
 
 int String::indexOf(int character, int fromIndex) const {
@@ -303,11 +334,11 @@ int String::lastIndexOf(int character, int fromIndex) {
 
 int String::lastIndexOf(String subString) const {
     std::string reversedString = subString.toCharPointer();
-    std::reverse(reversedString.begin(), reversedString.end()); 
+    std::reverse(reversedString.begin(), reversedString.end());
 
     std::string currentReversedString = this->toCharPointer();
     std::reverse(currentReversedString.begin(), currentReversedString.end());
-    
+
     int result = stringIndex(currentReversedString.c_str(), reversedString.c_str(), 1);
 
     if (result == NOT_FOUND) {
@@ -433,12 +464,12 @@ String String::toUpperCase() {
 String String::trim() {
     size_t first = this->original.find_first_not_of(' ');
     if (std::string::npos == first) {
-	    this->original = "";
+        this->original = "";
         return *this;
     }
     size_t last = this->original.find_last_not_of(' ');
-	this->original = this->original.substr(first, (last - first + 1));
-	return *this;
+    this->original = this->original.substr(first, (last - first + 1));
+    return *this;
 }
 
 String String::valueOf(boolean target) {
