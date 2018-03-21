@@ -199,9 +199,8 @@ String String::concat(String target) {
 }
 
 boolean String::contains(const CharSequence &charSequence) {
-    //return (stringIndex(this->original.c_str(), charSequence.toString().toCharPointer(), 1) != NOT_FOUND);
     std::size_t found = this->original.find(charSequence.toString().toCharPointer());
-    if (found!=std::string::npos)
+    if (found != std::string::npos)
         return true;
     else
         return false;
@@ -223,15 +222,14 @@ String String::getStringFromIndex(int index) const {
 }
 
 boolean String::endsWith(const String &suffixString) const {
-    //return (bool) stringEndswith(this->original.c_str(), suffixString.original.c_str());
     int suffix_length = suffixString.toString().length();
-    int targetLength= this->original.size();
+    int targetLength = this->original.size();
     if (targetLength < suffix_length) {
         return false;
     }
     int i;
     for (i = suffix_length - 1; i >= 0; i--) {
-        if (suffixString[ i ] != this->original[ targetLength - suffix_length + i ]) {
+        if (suffixString[i] != this->original[targetLength - suffix_length + i]) {
             return false;
         }
     }
@@ -257,7 +255,7 @@ int String::indexOf(int character) const {
     }
     std::size_t found = this->original.find(pointerHolder);
     free(pointerHolder);
-    if (found!=std::string::npos)
+    if (found != std::string::npos)
         return found;
     else
         return NOT_FOUND;
@@ -281,24 +279,26 @@ int String::indexOf(int character, int fromIndex) const {
 }
 
 int String::indexOf(String subString) const {
-    return stringIndex(this->original.c_str(), subString.original.c_str(), 1);
+    std::size_t found = this->original.find(subString.original);
+    if (found != std::string::npos)
+        return found;
+    else
+        return NOT_FOUND;
 }
 
 int String::indexOf(String subString, int fromIndex) const {
     if (fromIndex < 0) {
         return this->indexOf(subString);
     }
-    if (fromIndex > this->original.size() - 1) {
+    if (fromIndex > this->original.size() - 1||this->original.size()<subString.original.size()) {
         return -1;
     }
-    string stringFromIndex = stringFrom((char*)this->original.c_str(), fromIndex);
-    int result = stringIndex(stringFromIndex, subString.original.c_str(), 1);
-    free(stringFromIndex);
-    if (result == -1) {
-        return result;
-    }
-    result = fromIndex + result;
-    return result;
+    std::string stringFromIndex=(this)->original.substr(fromIndex);
+    std::size_t found = stringFromIndex.find(subString.original);
+    if (found != std::string::npos)
+        return (found+fromIndex);
+    else
+        return -1;
 }
 
 boolean String::isEmpty() const {
@@ -333,53 +333,40 @@ int String::lastIndexOf(int character, int fromIndex) {
 }
 
 int String::lastIndexOf(String subString) const {
-    std::string reversedString = subString.toCharPointer();
-    std::reverse(reversedString.begin(), reversedString.end());
-
-    std::string currentReversedString = this->toCharPointer();
+    String reversedString = subString;
+    std::reverse(reversedString.original.begin(), reversedString.original.end());
+    std::string currentReversedString = this->original;
     std::reverse(currentReversedString.begin(), currentReversedString.end());
-
-    int result = stringIndex(currentReversedString.c_str(), reversedString.c_str(), 1);
-
-    if (result == NOT_FOUND) {
-        return result;
-    }
-    // Re-calculate first character of subString
-    result = (int)this->original.size() - (int)(result + subString.original.size());
-    return result;
+    std::size_t found = currentReversedString.find(reversedString.original);
+    if (found == std::string::npos)
+        return NOT_FOUND;
+    return((int)this->original.size()-(int)(found+subString.original.size()));
 }
 
 int String::lastIndexOf(String subString, int fromIndex) const {
-    int indexToCreatSubString = this->original.size() - fromIndex - subString.length();
 
     if (fromIndex < 0) {
         return -1;
     }
-
     if (fromIndex > this->original.size() - 1) {
         return this->lastIndexOf(subString);
     }
-
     std::string thisStringReversed = this->original;
     std::reverse(thisStringReversed.begin(), thisStringReversed.end());
-
+    int indexToCreatSubString = this->original.size() - fromIndex - subString.length();
     if (indexToCreatSubString > this->original.size()) {
         return -1;
     }
-
     std::string subStringFromIndex = thisStringReversed.substr(indexToCreatSubString);
-
     std::string reversedString = subString.toCharPointer();
     std::reverse(reversedString.begin(), reversedString.end());
     int result = subStringFromIndex.find(reversedString);
-
     if (result == NOT_FOUND) {
         return result;
     }
 
     // Re-calculate first character of str
     result = fromIndex - result;
-
     return result;
 }
 
