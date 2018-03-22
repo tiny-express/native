@@ -292,7 +292,7 @@ int String::indexOf(String subString, int fromIndex) const {
     if (fromIndex < 0) {
         return this->indexOf(subString);
     }
-    if (fromIndex > this->original.size() - 1||this->original.size() < subString.original.size()){
+    if (fromIndex > (this->original.size() - 1)||(this->original.size()) < (subString.original.size())){
         return -1;
     }
     std::string stringFromIndex=(this)->original.substr(fromIndex);
@@ -422,8 +422,8 @@ boolean String::startsWith(String prefix, int thisOffset) const {
     if (thisOffset < 0) {
         return false;
     }
-    int originalLength = this->original.length();
-    int prefixLength = prefix.original.length();
+    int originalLength = this->original.size();
+    int prefixLength = prefix.original.size();
     if (originalLength < prefixLength || thisOffset > (originalLength - prefixLength)) {
         return false;
     }
@@ -484,11 +484,12 @@ String String::valueOf(char charValue) {
     string pointerHolder;
     if (charValue == '\0') {
         pointerHolder= stringCopy("");
+    } else {
+        auto *result = (char *) calloc(2, sizeof(char));
+        result[0] = charValue;
+        result[1] = '\0';
+        pointerHolder = result;
     }
-    auto *result = (char *) calloc(2, sizeof(char));
-    result[ 0 ] = charValue;
-    result[ 1 ] = '\0';
-    pointerHolder = result;
     String output = pointerHolder;
     free(pointerHolder);
     return output;
