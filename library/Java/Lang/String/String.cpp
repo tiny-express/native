@@ -200,10 +200,12 @@ String String::concat(String target) {
 
 boolean String::contains(const CharSequence &charSequence) {
     std::size_t found = this->original.find(charSequence.toString().toCharPointer());
-    if (found != std::string::npos)
+    if (found != std::string::npos) {
         return true;
-    else
+    }
+    else {
         return false;
+    }
 }
 
 Array<byte> String::getBytes() const {
@@ -222,14 +224,14 @@ String String::getStringFromIndex(int index) const {
 }
 
 boolean String::endsWith(const String &suffixString) const {
-    int suffix_length = suffixString.toString().length();
+    int suffixLength = suffixString.toString().length();
     int targetLength = this->original.size();
-    if (targetLength < suffix_length) {
+    if (targetLength < suffixLength) {
         return false;
     }
     int i;
-    for (i = suffix_length - 1; i >= 0; i--) {
-        if (suffixString[i] != this->original[targetLength - suffix_length + i]) {
+    for (i = suffixLength - 1; i >= 0; i--) {
+        if (suffixString[i] != this->original[targetLength - suffixLength + i]) {
             return false;
         }
     }
@@ -242,7 +244,7 @@ String String::fromCharArray(Array<char> &charArray) {
 
 int String::indexOf(int character) const {
     string pointerHolder;
-    char target=(char)character;
+    char target = (char)character;
     if (target == '\0') {
         pointerHolder= strdup("");
     }
@@ -255,10 +257,12 @@ int String::indexOf(int character) const {
     }
     std::size_t found = this->original.find(pointerHolder);
     free(pointerHolder);
-    if (found != std::string::npos)
+    if (found != std::string::npos) {
         return found;
-    else
+    }
+    else {
         return NOT_FOUND;
+    }
 }
 
 int String::indexOf(int character, int fromIndex) const {
@@ -280,10 +284,12 @@ int String::indexOf(int character, int fromIndex) const {
 
 int String::indexOf(String subString) const {
     std::size_t found = this->original.find(subString.original);
-    if (found != std::string::npos)
+    if (found != std::string::npos) {
         return found;
-    else
+    }
+    else {
         return NOT_FOUND;
+    }
 }
 
 int String::indexOf(String subString, int fromIndex) const {
@@ -295,10 +301,12 @@ int String::indexOf(String subString, int fromIndex) const {
     }
     std::string stringFromIndex=(this)->original.substr(fromIndex);
     std::size_t found = stringFromIndex.find(subString.original);
-    if (found != std::string::npos)
-        return (found+fromIndex);
-    else
+    if (found != std::string::npos) {
+        return (found + fromIndex);
+    }
+    else {
         return -1;
+    }
 }
 
 boolean String::isEmpty() const {
@@ -338,8 +346,9 @@ int String::lastIndexOf(String subString) const {
     std::string currentReversedString = this->original;
     std::reverse(currentReversedString.begin(), currentReversedString.end());
     std::size_t found = currentReversedString.find(reversedString.original);
-    if (found == std::string::npos)
+    if (found == std::string::npos) {
         return NOT_FOUND;
+    }
     return((int)this->original.size()-(int)(found+subString.original.size()));
 }
 
@@ -371,14 +380,12 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 }
 
 String String::replace(char oldChar, char newChar) const {
-    string oldString = stringFromChar(oldChar);
-    string newString = stringFromChar(newChar);
-    string pointerHolder = stringReplace((char*)this->original.c_str(), oldString, newString);
-    String result = pointerHolder;
-    free(pointerHolder);
-    free(oldString);
-    free(newString);
-    return result;
+    std::string copyString=(std::string)this->original;
+    for(int index=0;index<this->original.size();index++)
+        if(this->original[index]==oldChar) {
+            copyString[index] = newChar;
+        }
+    return copyString;
 }
 
 String String::replaceAll(String regex, String replacement) const {
