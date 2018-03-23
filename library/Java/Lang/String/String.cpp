@@ -518,10 +518,11 @@ String String::valueOf(long longValue) {
 }
 
 String String::valueOf(float floatValue) {
-    string pointerHolder = stringFromFloat(floatValue);
-    String result = pointerHolder;
-    free(pointerHolder);
+    std::ostringstream strCout;
+    strCout << floatValue;
+    std::string result = strCout.str();
     return result;
+
 }
 
 String String::valueOf(double doubleValue) {
