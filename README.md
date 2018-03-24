@@ -1,14 +1,13 @@
 # Native Library
-[![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
-[![Coverage status](https://codecov.io/gh/foodtiny/native/branch/master/graph/badge.svg)](https://codecov.io/gh/foodtiny/native)&nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20osx-blue.svg)]()
+[![Join Gitter Chat Channel -](https://badges.gitter.im/foodtiny/native.svg)](https://gitter.im/foodtiny/native?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl/branch/master?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
+[![Coverage status](https://img.shields.io/codecov/c/github/foodtiny/native/master.svg)](https://codecov.io/gh/foodtiny/native)&nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20darwin-blue.svg)]()
 
-**Native Library** brings productivity and maintainability for your C/C++ application like a Java program.
+**Native Library** brings productivity and maintainability for your C/C++ application as a Java program.
 
-* Blazing fast performance, small footprint with no dependency required
-* Provide rich Java Core classes compare to C++/STL
-* Zero memory leak and prevents segfaults via automatic storage
-* C++ and Java developers can use strength of two languages
-* Support bindings for NodeJS addon and Python module development (experimental)
+* Blazing fast, small footprint with no dependency required
+* Provide rich Java Core classes beside C++ Standard Library
+* Prevents nearly all memory leak and segfaults via automatic storage
 * Classes are strictly tested with unit tests, clean with Valgrind and follow Oracle documentation
 * Feel free to use in your commercial products and welcome for contributions
 
@@ -17,15 +16,22 @@ This project is also useful for new developers in practical programming.
 
 ## Getting started
 #### Docker
-```
-docker pull foodtiny/native:latest
+```bash
+$ docker pull foodtiny/native:latest
 ```
 
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ cmake -DCMAKE_BUILD_TYPE=Release
-$ make native && sudo make install
+$ ./configure && make native -j4 && sudo make install
+```
+
+#### Benchmarking with C++/STL
+[Google Benchmark](https://github.com/google/benchmark) is required for benchmarking
+if you're using Linux or Mac please use ./misc/benchmark.sh to install
+```bash
+$ ./configure && make native -j4 && make native_benchmark
+$ ./native_benchmark
 ```
 
 #### Examples
@@ -41,6 +47,7 @@ public:
             hashMap.put("argument " + String::valueOf(counter), argument);
             counter++;
         }
+        System::out::println("We have 4 pairs:");
         String pairs = "Pairs: \n";
         for (Map<String, String>::Entry entry : hashMap.entrySet()) {
             pairs += entry.getKey() + String(" - ") + entry.getValue() + String("\n");
@@ -53,7 +60,7 @@ public:
 };
 
 int main(int argc, char **argv) {
-    return Application(MainApplication::main, argv);
+    return Application(MainApplication::main, argc, argv);
 }
 ```
 
@@ -78,7 +85,7 @@ More examples can be found [here](https://github.com/foodtiny/native/tree/master
 
 ### Contributors
 - This library must be followed [Oracle Java 8 Documentation](https://docs.oracle.com/javase/8/docs/api) for standardization
-- Make sure your commits must be passed before you create pull request
+- Make sure your commits must be passed with [check](./check)  before you create pull request
 - At least one contributor in this project reviews your commits (except you) before merging
 - Best practices guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/master/CONTRIBUTION.md)
 

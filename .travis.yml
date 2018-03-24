@@ -4,6 +4,9 @@ language: cpp
 os:
 - linux
 - osx
+env:
+  - ARCH=x64
+  - ARCH=arm
 services:
 - docker
 compiler:
@@ -14,16 +17,18 @@ addons:
     - ubuntu-toolchain-r-test
     - llvm-toolchain-precise-3.6
     packages:
+    - libgtest-dev
     - valgrind
     - lcov
+    - gradle
 before_script:
 - export CC=gcc
 - export CXX=g++
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install ruby; brew update;brew install llvm50; export CXX=clang++-5.0; fi
 - ./misc/benchmark.sh
+script:
 - cmake . -DCMAKE_BUILD_TYPE=Debug && make native_test -j8
 - cmake . -DCMAKE_BUILD_TYPE=Release && make native_benchmark
-script:
 - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then valgrind --error-exitcode=42 --leak-check=full ./native_test; else ./native_test; fi
 - ./native_benchmark
 after_success:

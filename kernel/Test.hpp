@@ -13,13 +13,14 @@
  * limitations under the License.
  */
 
-#ifndef NATIVE_KERNEL_TEST_H
-#define NATIVE_KERNEL_TEST_H
+#ifndef NATIVE_KERNEL_TEST_HPP
+#define NATIVE_KERNEL_TEST_HPP
 
 #include "Type.hpp"
-#include "../java/lang/String/String.hpp"
-#include "../java/lang/Integer/Integer.hpp"
-#include "../java/lang/Double/Double.hpp"
+#include "../library/Java/Lang/String/String.hpp"
+#include "../library/Java/Lang/Integer/Integer.hpp"
+#include "../library/Java/Lang/Double/Double.hpp"
+#include "../library/Java/Util/ArrayList/ArrayList.hpp"
 
 using namespace Java::Lang;
 
@@ -123,6 +124,7 @@ void CTEST_ERR(const char *fmt, ...);  // doesn't return
 #define sampleConstString ""
 #define sampleInt 1
 #define sampleDouble 0.1
+#define sampleObjectString (String) ""
 
 template<typename Type, typename AnotherType>
 boolean isSame(Type type, AnotherType anotherType) {
@@ -198,20 +200,97 @@ void assertNotEqualsDouble(double expected,
                            int line);
 
 /**
- * Assert Data
+ * Assert Array All Type
  *
  * @param expected
  * @param expectedSize
  * @param actual
  * @param actualSize
  */
-void assertDataString(String expected,
-                      size_t expectedSize,
-                      String actual,
-                      size_t actualSize);
+template<typename Type>
+void assertArrayAllType(Type expected,
+                        Type actual,
+                        const_string file,
+                        int line);
 
-#define assertData(expected, actual)\
-assertDataString(expected, actual, __FILE__, __LINE__)
+#define assertArray(expected, actual)\
+assertArrayAllType(expected, actual, __FILE__, __LINE__)
+
+/**
+ * Assert ArrayList<Type>
+ *
+ * @param expected
+ * @param expectedSize
+ * @param actual
+ * @param actualSize
+ */
+template<typename Type>
+void assertArrayAllType(ArrayList<Type> &expected,
+                        ArrayList<Type> &actual,
+                        const_string file,
+                        int line) {
+    size_t index;
+
+    int expectedSize = expected.size();
+    int actualSize = actual.size();
+
+    if (expectedSize != actualSize) {
+        CTEST_ERR("%s:%d  expected size %d bytes, got %d",
+                  file, line, (uintmax_t) expectedSize,
+                  (uintmax_t) actualSize);
+    }
+
+    for (index = 0; index < expectedSize; index++) {
+        if (expected.get(index) != actual.get(index)) {
+
+            String expectedString = expected.get(index).toString();
+            String actualString = actual.get(index).toString();
+
+            CTEST_ERR("%s:%d expected %s at offset %d got %s",
+                      file,
+                      line,
+                      expectedString.toCharPointer(),
+                      (uintmax_t) index,
+                      actualString.toCharPointer());
+        }
+    }
+}
+
+#if !defined(ARRAY_SIZE)
+#define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))
+#endif
+
+/**
+ * Assert raw pointer
+ *
+ * @param expected
+ * @param expectedSize
+ * @param actual
+ * @param actualSize
+ */
+template<typename Type>
+void assertArrayAllType(Type *expected,
+                        Type *actual,
+                        const_string file,
+                        int line) {
+    size_t index;
+
+    int expectedSize = ARRAY_SIZE(expected);
+    int actualSize = ARRAY_SIZE(actual);
+
+    if (expectedSize != actualSize) {
+        CTEST_ERR("%s:%d  expected size %d bytes, got %d",
+                  file, line, (uintmax_t) expectedSize,
+                  (uintmax_t) actualSize);
+    }
+
+    for (index = 0; index < expectedSize; index++) {
+        if (expected[index] != actual[index]) {
+            CTEST_ERR("%s:%d expected 0x%02x at offset %d got %d",
+                      file, line, expected[index], (uintmax_t) index, actual[index]);
+        }
+    }
+}
 
 /**
  * Asserts that two unsigned intmax_ts are equal.
@@ -331,7 +410,6 @@ void assertEqualsPrecisionDouble(double expected,
 assertEqualsPrecisionDouble(expected, actual, precision, __FILE__, __LINE__);
 
 
-
 /**
  * Asserts that two doubles are equal.
  * With the input precision.
@@ -372,7 +450,8 @@ void assertEqualsAll(Type expected,
     boolean isDouble = isSame(expected, sampleDouble);
 
     boolean isString = isSame(expected, sampleString)
-                       || isSame(expected, sampleConstString);
+                       || isSame(expected, sampleConstString)
+                       || isSame(expected, sampleObjectString);
 
     // Assert int equals
     if (isInt) {
@@ -557,7 +636,7 @@ void assertEqualsIntUnsigned(uintmax_t expected,
                     string file,
                     int line) {
     if (expected != actual) {
-    CTEST_ERR("%s:%d  expected %" PRIuMAX ", got %" PRIuMAX,
+    CTEST_ERR("%s:%d  expected %d, got %d",
                 file, line, expected, actual);
     }
 }
@@ -567,7 +646,7 @@ void assertNotEqualsIntUnsigned(uintmax_t expected,
                         string file,
                         int line) {
     if ((expected) == (actual)) {
-    CTEST_ERR("%s:%d  should not be %" PRIuMAX,
+    CTEST_ERR("%s:%d  should not be %d",
             file, line, actual);
     }
 }
@@ -579,7 +658,7 @@ void assertIntervalInt(intmax_t expectedFirst,
                         int line) {
 
     if (actual < expectedFirst || actual > expectedSecond) {
-    CTEST_ERR("%s:%d  expected %" PRIdMAX "-%" PRIdMAX ", got %" PRIdMAX,
+    CTEST_ERR("%s:%d  expected %d -%d , got %d",
                 file, line, expectedFirst, expectedSecond, actual);
     }
 }
@@ -619,8 +698,8 @@ void assertEqualsString(String expected,
                         const_string file,
                         int line) {
     if (expected != actual) {
-        CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
-                  file, line, expected.toString(), actual.toString());
+        CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
+                  file, line, expected.toCharPointer(), actual.toCharPointer());
     }
 }
 
@@ -630,7 +709,7 @@ void assertEqualsInt(int expected,
                      int line) {
 
     if (expected != actual) {
-        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
+        CTEST_ERR("%s:%d  expected %d, got %d",
                   file, line, expected, actual);
     }
 }
@@ -687,7 +766,7 @@ void assertNotEqualsString(String expected,
                         int line) {
     if (expected == actual) {
         CTEST_ERR("%s:%d\nEXPECTED\n'%'\nACTUAL \n'%s'\n",
-                  file, line, expected.toString(), actual.toString());
+                  file, line, expected.toCharPointer(), actual.toCharPointer());
     }
 }
 
@@ -697,7 +776,7 @@ void assertNotEqualsInt(int expected,
                      int line) {
 
     if (expected == actual) {
-        CTEST_ERR("%s:%d  expected %" PRIdMAX ", got %" PRIdMAX,
+        CTEST_ERR("%s:%d  expected %d, got %d",
                   file, line, expected, actual);
     }
 }
@@ -747,37 +826,6 @@ void assertNotEqualsDouble(double expected,
 }
 
 /**
- * Assert Data
- *
- * @param expected
- * @param expectedSize
- * @param actual
- * @param actualSize
- */
-void assertDataString(String expected,
-                       size_t expectedSize,
-                       String actual,
-                       size_t actualSize,
-                       const_string file,
-                       int line) {
-    size_t i;
-
-    if (expectedSize != actualSize) {
-        CTEST_ERR("%s:%d  expected %" PRIuMAX " bytes, got %" PRIuMAX,
-                  __FILE__, __LINE__, (uintmax_t) expectedSize,
-                  (uintmax_t) actualSize);
-    }
-
-    for (i = 0; i < expectedSize; i++) {
-        if (expected.charAt(i) != actual.charAt(i)) {
-            CTEST_ERR("%s:%d expected 0x%02x at offset %" PRIuMAX " got 0x%02x",
-                      file, line, expected.charAt(i), (uintmax_t) i, actual.charAt(i));
-        }
-    }
-}
-
-
-/**
  * Asserts that two unsigned intmax_ts are equal.
  *
  * @param expected
@@ -799,7 +847,7 @@ void assertNotEqualsInt(intmax_t expected,
                             const_string file,
                             int line) {
     if ((expected) == (actual)) {
-        CTEST_ERR("%s:%d  should not be %" PRIdMAX,
+        CTEST_ERR("%s:%d  should not be %d",
                   file, line, actual);
     }
 }
@@ -1121,6 +1169,6 @@ int ctest_main(int argc, const char *argv[])
 
 #endif
 
-#endif//NATIVE_KERNEL_TEST_H
-
 #define TEST CTEST
+
+#endif//NATIVE_KERNEL_TEST_HPP

@@ -27,15 +27,10 @@
 #ifndef NATIVE_KERNEL_STRING_HPP
 #define NATIVE_KERNEL_STRING_HPP
 
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
-#include <cctype>
-#include <cstdarg>
-
-#include "String/Convert.hpp"
-#include "String/Process.hpp"
-#include "String/Url.hpp"
+#include "Builtin.hpp"
+#include "string/Convert.hpp"
+#include "string/Process.hpp"
+#include "string/Url.hpp"
 
 #define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 #define NUMBER_LIST "0123456789"

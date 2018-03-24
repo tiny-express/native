@@ -1,0 +1,2 @@
+cd Application && ./make && cd ..
+cd Collection && ./make && cd ..

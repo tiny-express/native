@@ -27,31 +27,12 @@
 #ifndef NATIVE_KERNEL_KERNEL_HPP
 #define NATIVE_KERNEL_KERNEL_HPP
 
-// C Standard Library
-#include <cstdio>
-#include <cmath>
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
-#include <climits>
-#include <cstdarg>
-#include <cctype>
-#include <thread>
-#include <memory>
-#include <algorithm>
-#include <vector>
-#include <map>
-#include <set>
-#include <type_traits>
-#include <iostream>
+// C++ builtin functions
+#include "Builtin.hpp"
 
-// Platform macros
-#include "Platform.hpp"
-
-// Native Library
-#include "DateTime.hpp"
+// Native kernel
 #include "Common.hpp"
 #include "String.hpp"
-#include "Type.hpp"
+#include "Java.hpp"
 
 #endif //NATIVE_KERNEL_KERNEL_HPP
