@@ -522,11 +522,16 @@ String String::valueOf(float floatValue) {
     strCout << floatValue;
     std::string result = strCout.str();
     return result;
-
 }
 
 String String::valueOf(double doubleValue) {
-    string pointerHolder = stringFromDouble(doubleValue);
+    int precision = 15;
+    string pointerHolder = (string) calloc(1079, sizeof(char));
+    if (doubleValue == 0.0f && doubleValue < 0) {
+        sprintf(pointerHolder, "-%.*f", precision, doubleValue);
+    } else {
+        sprintf(pointerHolder, "%.*f", precision, doubleValue);
+    }
     String result = pointerHolder;
     free(pointerHolder);
     return result;
