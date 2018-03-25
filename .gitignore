@@ -2,6 +2,8 @@
 .DS_Store
 bin
 .idea
+.vscode
+.gradle
 CMakeFiles
 cmake-*
 cmake_*
@@ -21,6 +23,5 @@ libnative*
 native_test.exe
 build
 libbenchmark.gcno
-.gradle
 gradle*
 /unit_test.sh
