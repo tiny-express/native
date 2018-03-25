@@ -31,10 +31,6 @@
 using namespace std;
 using namespace Java::Lang;
 
-TEST (JavaLangThread, Sleep) {
-	Thread::sleep(1);
-}
-
 class RunnableTarget1 : public virtual Runnable {
 public:
     long value;
@@ -95,7 +91,11 @@ void runnableFunc() {
     Thread::sleep(100);
 }
 
-TEST(JavaLang, ThreadRun) {
+TEST (JavaLangThread, Sleep) {
+    Thread::sleep(1);
+}
+
+TEST(JavaLangThread, ThreadRun) {
     {
         long expect = 0xb00b;
         long result = 0;
@@ -137,7 +137,7 @@ TEST(JavaLang, ThreadRun) {
 
 }
 
-TEST(JavaLang, ThreadSetName) {
+TEST(JavaLangThread, ThreadSetName) {
     Thread thread;
 
     String name = "Thread 1";
@@ -148,7 +148,7 @@ TEST(JavaLang, ThreadSetName) {
     assertEquals("Thread 2", thread.getName().toString());
 }
 
-TEST(JavaLang, ThreadGetName) {
+TEST(JavaLangThread, ThreadGetName) {
     Thread thread;
 
     String name = "Thread 1";
@@ -159,7 +159,7 @@ TEST(JavaLang, ThreadGetName) {
     assertEquals("Thread 2", thread.getName().toString());
 }
 
-TEST(JavaLang, ThreadGetThreadId) {
+TEST(JavaLangThread, ThreadGetThreadId) {
     RunnableTarget3 target;
     Thread thread(&target);
 
@@ -172,7 +172,7 @@ TEST(JavaLang, ThreadGetThreadId) {
     assertEquals(expect.toString(), result.toString());
 }
 
-TEST(JavaLang, ThreadJoinWithTimeout) {
+TEST(JavaLangThread, ThreadJoinWithTimeout) {
     long expect1 = 0xb00b;
     long result1 = 0;
     long expect2 = 0xbeef;
@@ -194,4 +194,20 @@ TEST(JavaLang, ThreadJoinWithTimeout) {
 
     assertEquals(expect1, result1);
     assertEquals(expect2, result2);
+}
+
+TEST(JavaLangThread, ThreadDetach) {
+    {
+        Thread thread([](){
+            Thread::sleep(100);
+        });
+
+        try {
+            thread.start();
+            thread.detach();
+            thread.join();
+        } catch (IllegalArgumentException &e) {
+            assertEquals("Detached thread", e.getMessage());
+        }
+    }
 }

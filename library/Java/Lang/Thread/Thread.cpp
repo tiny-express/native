@@ -118,6 +118,15 @@ void Thread::join(long millis) {
     }
 }
 
+void Thread::detach() {
+    if (this->detached) {
+        throw IllegalArgumentException("Detached thread");
+    } else {
+        this->threadObject.detach();
+        this->detached = true;
+    }
+}
+
 void Thread::sleep(long millis) {
     this_thread::sleep_for(chrono::milliseconds(millis));
 }

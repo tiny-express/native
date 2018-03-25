@@ -39,6 +39,7 @@ namespace Java {
             class Thread : public Object, public virtual Runnable {
                 private:
                     boolean alive = false;
+                    boolean detached = false;
                     String name;
                     unsigned long tid = 0;
                     Runnable *target = NULL;
@@ -99,6 +100,8 @@ namespace Java {
                     void join();
 
                     void join(long millis);
+
+                    void detach();
 
                     static void sleep(long millis);
 
