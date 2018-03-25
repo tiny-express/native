@@ -27,8 +27,8 @@
 #ifndef NATIVE_JAVA_UTIL_CONCURRENT_SEMAPHORE_SEMAPHORE_HPP
 #define NATIVE_JAVA_UTIL_CONCURRENT_SEMAPHORE_SEMAPHORE_HPP
 
-#include "../../../Lang.hpp"
-#include "../../../Lang/IllegalArgumentException/IllegalArgumentException.hpp"
+#include "../../../Lang/String/String.hpp"
+#include "../../../Lang/Object/Object.hpp"
 #include <mutex>
 #include <condition_variable>
 

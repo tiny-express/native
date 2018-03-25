@@ -25,8 +25,10 @@
  */
 
 #include "Semaphore.hpp"
+#include "../../../Lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
 using namespace std::chrono;
+using namespace Java::Util;
 
 Concurrent::Semaphore::Semaphore() {
     permitCounter = 0;
@@ -135,3 +137,4 @@ boolean Concurrent::Semaphore::tryAcquire(int permits, long timeout) {
         }
     }
 }
+

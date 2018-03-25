@@ -26,9 +26,188 @@
 
 #include "../../../../kernel/Test.hpp"
 #include "Thread.hpp"
+#include "../InterruptedException/InterruptedException.hpp"
 
+using namespace std;
 using namespace Java::Lang;
 
+class RunnableTarget1 : public virtual Runnable {
+public:
+    long value;
+
+    RunnableTarget1() {
+        value = 0;
+    }
+
+    ~RunnableTarget1() {
+
+    }
+
+    void run() override {
+        value = 0xb00b;
+        Thread::sleep(1000);
+    }
+};
+
+class RunnableTarget2 : public virtual Runnable {
+public:
+    long value;
+
+    RunnableTarget2() {
+        value = 0;
+    }
+
+    ~RunnableTarget2() {
+
+    }
+
+    void run() override {
+        value = 0xb00b;
+        Thread::sleep(1000);
+        value = 0xbeef;
+    }
+};
+
+class RunnableTarget3 : public virtual Runnable {
+public:
+    unsigned long tid;
+
+    RunnableTarget3() {
+
+    }
+
+    ~RunnableTarget3() {
+
+    }
+
+    void run() override {
+        tid = (unsigned long)pthread_self();
+    }
+};
+
+int runnableFuncValue = 0;
+void runnableFunc() {
+    runnableFuncValue = 0xb00b;
+    Thread::sleep(100);
+}
+
 TEST (JavaLangThread, Sleep) {
-	Thread::sleep(1);
+    Thread::sleep(1);
+}
+
+TEST(JavaLangThread, ThreadRun) {
+    {
+        long expect = 0xb00b;
+        long result = 0;
+        RunnableTarget1* target = new RunnableTarget1();
+
+        Thread thread(target);
+        thread.start();
+        thread.join();
+        result = target->value;
+
+        delete target;
+        assertEquals(expect, result);
+    }
+
+    {
+        long expect = 0xb00b;
+        long result = 0;
+
+        Thread thread(runnableFunc);
+        thread.start();
+        thread.join();
+        result = runnableFuncValue;
+
+        assertEquals(expect, result);
+    }
+
+    {
+        long expect = 0xb00b;
+        long result = 0;
+
+        Thread thread([&result](){
+            result = 0xb00b;
+        });
+        thread.start();
+        thread.join();
+
+        assertEquals(expect, result);
+    }
+
+}
+
+TEST(JavaLangThread, ThreadSetName) {
+    Thread thread;
+
+    String name = "Thread 1";
+    thread.setName(name);
+    assertEquals("Thread 1", thread.getName().toString());
+
+    thread.setName("Thread 2");
+    assertEquals("Thread 2", thread.getName().toString());
+}
+
+TEST(JavaLangThread, ThreadGetName) {
+    Thread thread;
+
+    String name = "Thread 1";
+    thread.setName(name);
+    assertEquals("Thread 1", thread.getName().toString());
+
+    thread.setName("Thread 2");
+    assertEquals("Thread 2", thread.getName().toString());
+}
+
+TEST(JavaLangThread, ThreadGetThreadId) {
+    RunnableTarget3 target;
+    Thread thread(&target);
+
+    thread.start();
+    thread.join();
+
+    String expect = String::format("%lld", target.tid);
+    String result = String::format("%lld", thread.getId());
+
+    assertEquals(expect.toString(), result.toString());
+}
+
+TEST(JavaLangThread, ThreadJoinWithTimeout) {
+    long expect1 = 0xb00b;
+    long result1 = 0;
+    long expect2 = 0xbeef;
+    long result2 = 0;
+
+    {
+        RunnableTarget2 target;
+        Thread thread(&target);
+        thread.start();
+
+        //
+        thread.join(100);
+        result1 = target.value;
+
+        //
+        thread.join();
+        result2 = target.value;
+    }
+
+    assertEquals(expect1, result1);
+    assertEquals(expect2, result2);
+}
+
+TEST(JavaLangThread, ThreadDetach) {
+    {
+        Thread thread([](){
+            Thread::sleep(100);
+        });
+
+        try {
+            thread.start();
+            thread.detach();
+            thread.join();
+        } catch (IllegalArgumentException &e) {
+            assertEquals("Detached thread", e.getMessage());
+        }
+    }
 }
