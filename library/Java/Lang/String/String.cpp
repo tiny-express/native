@@ -538,13 +538,19 @@ String String::valueOf(double doubleValue) {
 }
 
 String String::subString(int beginIndex) const {
-    return this->subString(beginIndex, (int)this->original.size());
+    return this->subString(beginIndex, (int)this->original.length());
 }
 
 String String::subString(int beginIndex, int endIndex) const {
-    string holder = stringFromTo((char*)this->original.c_str(), beginIndex, endIndex - 1);
-    String result = holder;
-    free(holder);
+    if (this->original.c_str() == nullptr) {
+        return "";
+    }
+    int lengthTarget = this->length();
+    if (beginIndex > endIndex || beginIndex < 0 || beginIndex > lengthTarget || endIndex < 0  || endIndex > lengthTarget){
+
+        return "";
+    }
+    std::string result = this->original.substr(beginIndex, endIndex - beginIndex);
     return result;
 }
 
