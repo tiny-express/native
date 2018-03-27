@@ -640,13 +640,23 @@ void String::getChars(int sourceBegin, int sourceEnd,
 }
 
 String String::replace(CharSequence &target, CharSequence &replacement) const {
-    string pointerHolder = stringReplace(
-            (char*)this->original.c_str(),
-            target.toString().toCharPointer(),
-            replacement.toString().toCharPointer()
-    );
-    String result = pointerHolder;
-    free(pointerHolder);
+    if ((char*)target.toString().toCharPointer() == nullptr || (char*)replacement.toString().toCharPointer() == nullptr || (char*)this->toString().toCharPointer() == nullptr) {
+        return "";
+    }
+    size_t pos = 0;
+    size_t pre = 0;
+    std::string targetString = target.toString().original;
+    std::string replaceString = replacement.toString().original;
+    std::string result;
+    while ((pos = this->original.find(targetString,pos)) != std::string::npos) {
+        for (pre; pre<pos; pre++)
+            result += this->original[pre];
+        result += replaceString;
+        pre += targetString.size();
+        pos += targetString.length();
+    }
+    for (; pre<this->length(); pre++)
+        result += this->original[pre];
     return result;
 }
 
