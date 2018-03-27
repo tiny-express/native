@@ -663,14 +663,16 @@ String String::replace(CharSequence &target, CharSequence &replacement) const {
     std::string replaceString = replacement.toString().original;
     std::string result;
     while ((pos = this->original.find(targetString,pos)) != std::string::npos) {
-        for (pre; pre<pos; pre++)
+        for (pre; pre<pos; pre++) {
             result += this->original[pre];
+        }
         result += replaceString;
         pre += targetString.size();
         pos += targetString.length();
     }
-    for (; pre<this->length(); pre++)
+    for (; pre<this->length(); pre++) {
         result += this->original[pre];
+    }
     return result;
 }
 
@@ -692,16 +694,18 @@ Array<String> String::split(String regex, int limit) const {
     if (limit > stringArrayNoLimit.length || limit <= 0) {
         return stringArrayNoLimit;
     }
-    int indexOfRegexBelowLimit = stringIndex(this->original.c_str(), regex.toCharPointer(), limit - 1);
-    int remainStringLength = indexOfRegexBelowLimit + regex.length();
-    String remainString = this->getStringFromIndex(remainStringLength);
-    Array<String> stringArrayLimit;
-    int index;
-    for (index = 0; index < limit - 1; index++) {
-        stringArrayLimit.push(stringArrayNoLimit[index]);
+    int i=0;
+    Array<String> strings;
+    for ( ; i < limit - 1; i++ ){
+        strings.push(stringArrayNoLimit[i]);
     }
-    stringArrayLimit.push(remainString);
-    return stringArrayLimit;
+    String stringSupport;
+    for (i = limit - 1; i < stringArrayNoLimit.length -1; i++){
+        stringSupport += stringArrayNoLimit[i] + regex;
+    }
+    stringSupport += stringArrayNoLimit[stringArrayNoLimit.length - 1];
+    strings.push(stringSupport);
+    return  strings;
 }
 
 String String::print(const String &format, bool value) {
