@@ -376,10 +376,11 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 
 String String::replace(char oldChar, char newChar) const {
     std::string copyString = (std::string)this->original;
-    for (int index = 0; index < this->original.size(); index++)
-        if(this->original[index] == oldChar) {
+    for (int index = 0; index < this->original.size(); index++) {
+        if (this->original[index] == oldChar) {
             copyString[index] = newChar;
         }
+    }
     return copyString;
 }
 
@@ -389,16 +390,28 @@ String String::replaceAll(String regex, String replacement) const {
 }
 
 Array<String> String::split(String regex) const {
-    // TODO (anhnt) fix this later, temporary use replace, need Pattern
-    string *splitStrings = stringSplit(this->original.c_str(), regex.toCharPointer());
+   // TODO (anhnt) fix this later, temporary use replace, need Pattern
     Array<String> strings;
-
-    int index = 0, splitStringsLength = lengthPointerPointerChar(splitStrings);
-    for (index = 0; index < splitStringsLength; index++) {
-        strings.push(splitStrings[index]);
+    if (this->original.c_str() == nullptr || regex.original.c_str() == nullptr) {
+        return strings;
     }
-
-    freePointerPointerChar(splitStrings);
+    size_t pos = 0;
+    size_t pre = 0;
+    std::string targetString = regex.original;
+    std::string result;
+    while ((pos = this->original.find(targetString,pos)) != std::string::npos) {
+        for (pre; pre<pos; pre++) {
+            result += this->original[pre];
+        }
+        strings.push(result);
+        pre += targetString.size();
+        pos += targetString.length();
+        result = "";
+    }
+    for (; pre<this->length(); pre++) {
+        result += this->original[pre];
+    }
+    strings.push(result);
     return strings;
 }
 
@@ -411,9 +424,10 @@ boolean String::startsWith(String prefix) const {
     if (lengthOriginal < lengthPrefix){
         return false;
     }
-    for (int index=0; index<lengthPrefix; index++)
-    if (this->original[index] != prefix.original[index]){
-        return false;
+    for (int index=0; index<lengthPrefix; index++) {
+        if (this->original[index] != prefix.original[index]) {
+            return false;
+        }
     }
     return true;
 }
