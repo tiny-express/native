@@ -30,17 +30,36 @@ using namespace Java::Lang;
 
 Double::Double() {
     this->original = 0;
-    this->originalString = stringFromDouble(this->original);
+    //this->originalString = stringFromDouble(this->original);
+    asprintf(&this->originalString, "lg", this->original);
 }
 
 Double::Double(double original) {
     this->original = original;
-    this->originalString = stringFromDouble(this->original);
+    int precision = 15;
+    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
+    this->originalString = (string) calloc(1079, sizeof(char));
+    // Get string type of input number
+    if (original == 0.0f && original < 0) {
+        sprintf(this->originalString, "-%.*f", precision, original);
+    } else {
+        sprintf(this->originalString, "%.*f", precision, original);
+    }
 }
 
 Double::Double(const Double &doubleNumber) {
     this->original = doubleNumber.original;
-    this->originalString = stringFromDouble(this->original);
+    //this->originalString = stringFromDouble(this->original);
+    this->original = original;
+    int precision = 15;
+    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
+    this->originalString = (string) calloc(1079, sizeof(char));
+    // Get string type of input number
+    if (original == 0.0f && original < 0) {
+        sprintf(this->originalString, "-%.*f", precision, this->original);
+    } else {
+        sprintf(this->originalString, "%.*f", precision, this->original);
+    }
 }
 
 Double::~Double() {

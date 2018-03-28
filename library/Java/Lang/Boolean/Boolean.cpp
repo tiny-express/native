@@ -108,7 +108,10 @@ int Boolean::compareTo(const Boolean &target) const {
  * @return boolean
  */
 boolean Boolean::getBoolean(const_string target) {
-	return stringToBoolean((string) target);
+	if (stringEquals(target, (string) "true")) {
+		return true;
+	}
+	return false;
 }
 
 /**
