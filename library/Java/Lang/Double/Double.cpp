@@ -30,16 +30,13 @@ using namespace Java::Lang;
 
 Double::Double() {
     this->original = 0;
-    //this->originalString = stringFromDouble(this->original);
-    asprintf(&this->originalString, "lg", this->original);
+    asprintf(&this->originalString, "%lg", this->original);
 }
 
 Double::Double(double original) {
     this->original = original;
     int precision = 15;
-    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     this->originalString = (string) calloc(1079, sizeof(char));
-    // Get string type of input number
     if (original == 0.0f && original < 0) {
         sprintf(this->originalString, "-%.*f", precision, original);
     } else {
@@ -49,12 +46,9 @@ Double::Double(double original) {
 
 Double::Double(const Double &doubleNumber) {
     this->original = doubleNumber.original;
-    //this->originalString = stringFromDouble(this->original);
     this->original = original;
     int precision = 15;
-    // max_digits = 3 + MANTISSA_DIGIT - MIN_EXPONENT = 3 + 53 - (-1023)
     this->originalString = (string) calloc(1079, sizeof(char));
-    // Get string type of input number
     if (original == 0.0f && original < 0) {
         sprintf(this->originalString, "-%.*f", precision, this->original);
     } else {
@@ -69,7 +63,9 @@ Double::~Double() {
 }
 
 Double Double::parseDouble(String target) {
-    return Double(stringToDouble(target.toCharPointer()));
+    double result;
+    sscanf(target.toCharPointer(), "%lg", &result);
+    return result;
 }
 
 String Double::toString() const {
@@ -82,9 +78,20 @@ String Double::toString() const {
 //}
 
 char Double::charValue() const {
-    string convertResult = stringFromDouble(this->original);
-    char charValueResult = stringToChar(convertResult);
-    free(convertResult);
+    int precision = 15;
+    string result = (string) calloc(1079, sizeof(char));
+    if (this->original == 0.0f && this->original < 0) {
+        sprintf(result, "-%.*f", precision, this->original);
+    } else {
+        sprintf(result, "%.*f", precision, this->original);
+    }
+    char charValueResult;
+    if (result == "") {
+        charValueResult = '\0';
+    } else{
+        charValueResult = result[0];
+    }
+    free(result);
     return charValueResult;
 }
 
@@ -167,7 +174,13 @@ boolean Double::operator||(const Double &target) const {
 Double &Double::operator=(const Double &target) {
     this->original = target.original;
     free(this->originalString);
-    this->originalString = stringFromDouble(target.original);
+    int precision = 15;
+    this->originalString = (string) calloc(1079, sizeof(char));
+    if (this->original == 0.0f && this->original < 0) {
+        sprintf(this->originalString, "-%.*f", precision, this->original);
+    } else {
+        sprintf(this->originalString, "%.*f", precision, this->original);
+    }
     return *this;
 }
 
@@ -244,7 +257,7 @@ long Double::doubleToRawLongBits(double doubleInput) {
 
 // TODO(thoangminh): Wait for instanceof<>
 boolean Double::equals(const Double &object) const {
-    boolean isDouble = instanceof<Double>(object);
+    boolean isDouble = (typeid(object).name() == typeid(double).name());
     auto castObjectToDouble = (Double *) &object;
     long doubleToLongBitsObject = doubleToLongBits(castObjectToDouble->original);
     long doubleToLongBitsThis = doubleToLongBits(this->original);

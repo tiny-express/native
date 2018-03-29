@@ -37,7 +37,8 @@ using namespace Java::Lang;
  */
 Long::Long() {
 	this->original = 0;
-	this->originalString = stringFromLong(this->original);
+	//this->originalString = stringFromLong(this->original);
+	asprintf(&this->originalString, "%ld", this->original);
 }
 
 /**
@@ -48,7 +49,7 @@ Long::Long() {
  */
 Long::Long(long value) {
 	this->original = value;
-	this->originalString = stringFromLong(this->original);
+	asprintf(&this->originalString, "%ld", this->original);
 }
 
 /**
@@ -59,7 +60,7 @@ Long::Long(long value) {
  */
 Long::Long(const Long &target) {
 	this->original = target.original;
-	this->originalString = stringFromLong(this->original);
+	asprintf(&this->originalString, "%ld", this->original);
 }
 
 /**
