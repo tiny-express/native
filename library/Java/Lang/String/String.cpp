@@ -532,9 +532,10 @@ String String::valueOf(long longValue) {
 }
 
 String String::valueOf(float floatValue) {
-    std::ostringstream strCout;
-    strCout << floatValue;
-    std::string result = strCout.str();
+    string pointerHolder;
+    asprintf(&pointerHolder, "%g", floatValue);
+    String result = pointerHolder;
+    free(pointerHolder);
     return result;
 }
 
