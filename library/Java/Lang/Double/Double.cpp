@@ -88,7 +88,7 @@ char Double::charValue() const {
     char charValueResult;
     if (result == "") {
         charValueResult = '\0';
-    } else{
+    } else {
         charValueResult = result[0];
     }
     free(result);

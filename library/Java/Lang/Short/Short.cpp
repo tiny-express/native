@@ -91,16 +91,15 @@ String Short::toString() const {
  * @return char
  */
 char Short::charValue() const {
-	//return stringToChar(stringFromShort(this->original));
-    string stringS;
+    string stringFromShort;
     char result;
-    asprintf(&stringS, "%d", this->original);
-    if (stringS == "") {
+    asprintf(&stringFromShort, "%d", this->original);
+    if (stringFromShort == "") {
         result = '\0';
     } else {
-        result = stringS[0];
+        result = stringFromShort[0];
     }
-    free(stringS);
+    free(stringFromShort);
     return result;
 }
 
@@ -137,7 +136,7 @@ long Short::longValue() const {
  * @return int
  */
 float Short::floatValue() const {
-	return (float) this->original;
+	return (float)this->original;
 }
 
 /**
@@ -146,7 +145,7 @@ float Short::floatValue() const {
  * @return int
  */
 double Short::doubleValue() const {
-	return (double) this->original;
+	return (double)this->original;
 }
 
 /**
@@ -195,7 +194,7 @@ Short Short::operator*(const Short &target) {
  * @return Short
  */
 Short Short::operator/(const Short &target) {
-	return ( this->original / target.original );
+	return (this->original / target.original);
 }
 
 /**
@@ -204,7 +203,7 @@ Short Short::operator/(const Short &target) {
  * @return Short
  */
 Short Short::operator%(const Short &target) {
-	return ( this->original % target.original );
+	return (this->original % target.original);
 }
 
 /**

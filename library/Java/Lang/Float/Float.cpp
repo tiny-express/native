@@ -163,7 +163,7 @@ String Float::toString() const {
 Float Float::parseFloat(String inputString) {
     float result;
     sscanf(inputString.toCharPointer(), "%g", &result);
-    return (Float) result;
+    return (Float)result;
 }
 
 boolean Float::isFinite(float valueFloat) {

@@ -280,17 +280,23 @@ int String::indexOf(int character, int fromIndex) const {
 }
 
 int String::indexOf(String subString) const {
+    if (this->original.size() == 0 || subString == "") {
+        return -1;
+    }
     std::size_t found = this->original.find(subString.original);
     if (found != std::string::npos) {
         return found;
     } else {
-        return NOT_FOUND;
+        return -1;
     }
 }
 
 int String::indexOf(String subString, int fromIndex) const {
     if (fromIndex < 0) {
         return this->indexOf(subString);
+    }
+    if (this->original.size() == 0 || subString == "") {
+        return -1;
     }
     if (fromIndex > (this->original.size() - 1)||(this->original.size()) < (subString.original.size())){
         return -1;
@@ -400,6 +406,7 @@ Array<String> String::split(String regex) const {
     std::string targetString = regex.original;
     std::string result;
     while ((pos = this->original.find(targetString,pos)) != std::string::npos) {
+
         for (pre; pre<pos; pre++) {
             result += this->original[pre];
         }
@@ -562,7 +569,6 @@ String String::subString(int beginIndex, int endIndex) const {
     }
     int lengthTarget = this->length();
     if (beginIndex > endIndex || beginIndex < 0 || beginIndex > lengthTarget || endIndex < 0  || endIndex > lengthTarget){
-
         return "";
     }
     std::string result = this->original.substr(beginIndex, endIndex - beginIndex);
@@ -604,13 +610,11 @@ long String::hashCode() const {
 
 boolean String::regionMatches(int thisOffset,
                               String otherString, int otherOffset, int len) {
-
     return this->regionMatches(false, thisOffset, otherString, otherOffset, len);
 }
 
 boolean String::regionMatches(boolean ignoreCase, int thisOffset,
                               String otherString, int otherOffset, int len) {
-
     String thisString = this->subString(thisOffset, thisOffset + len);
     otherString = otherString.subString(otherOffset, otherOffset + len);
     if (ignoreCase) {
@@ -624,24 +628,19 @@ void String::getChars(int sourceBegin, int sourceEnd,
     if (sourceBegin < 0) {
         throw StringIndexOutOfBoundsException(sourceBegin);
     }
-
     if (sourceBegin > sourceEnd) {
         throw StringIndexOutOfBoundsException(sourceEnd - sourceBegin);
     }
-
     if (sourceEnd > this->length()) {
         throw StringIndexOutOfBoundsException(sourceEnd);
     }
-
     if (destinationBegin < 0) {
         throw StringIndexOutOfBoundsException(destinationBegin);
     }
-
     if (destinationBegin + (sourceEnd - sourceBegin) > destination.length) {
         throw StringIndexOutOfBoundsException(destinationBegin
                                               + (sourceEnd - sourceBegin));
     }
-
     int index;
     int len = sourceEnd - sourceBegin;
     for (index = 0; index < destinationBegin + len; index++) {
@@ -803,17 +802,14 @@ String String::print(const String &format, char* value) {
     String result;
     auto buffer = (string)calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
     int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toCharPointer(), value);
-
     if (length > DEFAULT_BUFFER_LENGTH) {
         free(buffer);
         buffer = (string) calloc(++length, sizeof(char));
         length = snprintf(buffer, (size_t)length, format.toCharPointer(), value);
     }
-
     if (length > 0) {
         result = String(buffer, length);
     }
-
     free(buffer);
     return result;
 }
@@ -822,17 +818,14 @@ String String::print(const String &format, const char* value) {
     String result;
     auto buffer = (string)calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
     int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toCharPointer(), value);
-
     if (length > DEFAULT_BUFFER_LENGTH) {
         free(buffer);
         buffer = (string) calloc(++length, sizeof(char));
         length = snprintf(buffer, (size_t)length, format.toCharPointer(), value);
     }
-
     if (length > 0) {
         result = String(buffer, length);
     }
-
     free(buffer);
     return result;
 }
@@ -874,7 +867,6 @@ String String::format(const String &format) {
     int inputStringOffset = 0;
     int errorCode = 0;
     regex_t regex;
-
     errorCode = regcomp(&regex, pattern.toCharPointer(), REG_EXTENDED);
     while (errorCode == 0 && inputStringOffset < format.getSize()) {
         regmatch_t matchedResult[16] = {0}; // max 16 groups
@@ -883,14 +875,11 @@ String String::format(const String &format) {
             result += String(inputStringPtr, inputStringLength);
             break;
         }
-
         int unmatchedStringLength = matchedResult[0].rm_so;
         int matchedStringLength = matchedResult[0].rm_eo - matchedResult[0].rm_so;
-
         if (unmatchedStringLength > 0) {
             result += String(inputStringPtr, unmatchedStringLength);
         }
-
         if (matchedStringLength > 0) {
             String matchedString(inputStringPtr + unmatchedStringLength, matchedStringLength);
             if (matchedString.charAt(matchedString.getSize() - 1) != '%') {
@@ -900,12 +889,10 @@ String String::format(const String &format) {
                 result += "%";
             }
         }
-
         inputStringPtr += matchedResult[0].rm_eo;
         inputStringOffset += matchedResult[0].rm_eo;
         inputStringLength -= matchedResult[0].rm_eo;
     }
-
     regfree(&regex);
     return result;
 }

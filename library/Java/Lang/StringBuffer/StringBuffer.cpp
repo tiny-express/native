@@ -369,17 +369,27 @@ StringBufferUnSafe::~StringBufferUnSafe() {
 }*/
 
 int StringBufferUnSafe::indexOf(String stringToGetIndex) const {
-    return stringIndex(this->original, stringToGetIndex.toCharPointer(), 1);
+    return indexOf(stringToGetIndex.toCharPointer(), 0);
 }
 
 int StringBufferUnSafe::indexOf(String stringToGetIndex, int fromIndex) const {
-    String originalString = this->original;
-    String fromIndexString = originalString.getStringFromIndex(fromIndex);
-    int result = fromIndexString.indexOf(stringToGetIndex);
-    if (result == -1) {
-        return result;
+    std::string originalString = this->original;
+    if (fromIndex < 0) {
+        return this->indexOf(stringToGetIndex);
     }
-    return result + fromIndex;
+    if (originalString.size() == 0 || stringToGetIndex == "") {
+        return -1;
+    }
+    if (fromIndex > (originalString.size() - 1)||(originalString.size()) < (stringToGetIndex.length())){
+        return -1;
+    }
+    std::string stringFromIndex=originalString.substr(fromIndex);
+    std::size_t found = stringFromIndex.find(stringToGetIndex.toString().toCharPointer());
+    if (found != std::string::npos) {
+        return (found + fromIndex);
+    } else {
+        return -1;
+    }
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, float floatValue) {
