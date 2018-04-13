@@ -3,8 +3,8 @@
 bin
 .idea
 .vscode*
-/main
-/main.o
+main
+main.o
 !/main/
 CMakeFiles
 cmake-*
