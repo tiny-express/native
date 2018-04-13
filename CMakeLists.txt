@@ -75,20 +75,17 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-multichar -Wno-unused-result")
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
-        library/Kernel/**/*.cpp
         library/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
-        library/Kernel/**/*Test.cpp
         library/**/**/*Test.cpp
         library/**/**/**/*Test.cpp
         )
 
 # Only C++ unit benchmark files
 file(GLOB_RECURSE BENCHMARK_CPP
-        library/Kernel/**/*Benchmark.cpp
         library/**/**/*Benchmark.cpp
         library/**/**/**/*Benchmark.cpp
         )
@@ -139,7 +136,6 @@ install(TARGETS ${PROJECT_NAME} DESTINATION ../lib OPTIONAL)
 install(TARGETS ${PROJECT_NAME}_static DESTINATION ../lib OPTIONAL)
 install(FILES library.hpp DESTINATION ../include/native)
 install(DIRECTORY library DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
-install(DIRECTORY library/Kernel DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 
 # Detect operating system
 find_file(DEBIAN debian_version debconf.conf PATHS /etc)
