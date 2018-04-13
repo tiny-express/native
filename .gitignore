@@ -2,6 +2,7 @@
 .DS_Store
 bin
 .idea
+.vscode*
 CMakeFiles
 cmake-*
 cmake_*
