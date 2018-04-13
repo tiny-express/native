@@ -27,7 +27,7 @@
 #ifndef NATIVE_KERNEL_JAVA_HPP
 #define NATIVE_KERNEL_JAVA_HPP
 
-#include "Builtin.hpp"
+#include "Common.hpp"
 
 namespace Java {
 		namespace Lang {

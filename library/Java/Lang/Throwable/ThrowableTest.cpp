@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "Throwable.hpp"
 
 using namespace Java::Lang;

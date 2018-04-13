@@ -24,11 +24,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_KERNEL_COMMON_HPP
-#define NATIVE_KERNEL_COMMON_HPP
+#ifndef NATIVE_TYPE_HPP
+#define NATIVE_TYPE_HPP
 
-// C++ builtin functions
-#include "Builtin.hpp"
+#define NOT_FOUND -1
+#define MAX_STRING_LENGTH 100000
+
+#ifdef WIN
+#define boolean bool
+#else
+typedef bool boolean;
+#endif
+typedef char *string;
+typedef const char *const_string;
+typedef wchar_t unicode;
+typedef unsigned char byte;
 
 #define _BOOL                   1
 #define CHAR                    2
@@ -62,4 +72,4 @@ long long int: LONG_LONG_INT, unsigned long long int: UNSIGNED_LONG_LONG_INT, \
        void *: VOID_POINTER,                   int *: INT_POINTER,            \
       default: OTHER)
 
-#endif //NATIVE_KERNEL_COMMON_HPP
+#endif//NATIVE_TYPE_HPP

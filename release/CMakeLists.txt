@@ -72,20 +72,20 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
-        ../kernel/**/*.cpp
+        ../library/Kernel/**/*.cpp
         ../library/**/*.cpp
         )
 
 # Only C++ unit test files
 file(GLOB_RECURSE TESTS_CPP
-        ../kernel/**/*Test.cpp
+        ../library/Kernel/**/*Test.cpp
         ../library/**/**/*Test.cpp
         ../library/**/**/**/*Test.cpp
         )
 
 # Only C++ unit benchmark files
 file(GLOB_RECURSE BENCHMARK_CPP
-        ../kernel/**/*Benchmark.cpp
+        ../library/Kernel/**/*Benchmark.cpp
         ../library/**/**/*Benchmark.cpp
         ../library/**/**/**/*Benchmark.cpp
         )

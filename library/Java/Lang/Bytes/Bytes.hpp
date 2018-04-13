@@ -27,7 +27,6 @@
 #ifndef NATIVE_JAVA_LANG_BYTES_HPP
 #define NATIVE_JAVA_LANG_BYTES_HPP
 
-#include "../../../../kernel/Type.hpp"
 #include "../Number/Number.hpp"
 #include "../Integer/Integer.hpp"
 

@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_KERNEL_BUILTIN_HPP
-#define NATIVE_KERNEL_BUILTIN_HPP
+#ifndef NATIVE_KERNEL_COMMON_HPP
+#define NATIVE_KERNEL_COMMON_HPP
 
 // Definitions and macros
 #include "Platform.hpp"
@@ -113,7 +113,7 @@ inline void *allocateMemory(void *currentPointer, size_t newCapacity) {
  * @return char*
  */
 inline char *stringCopy(const char *target) {
-	return strdup(target);
+    return strdup(target);
 }
 
 /**
@@ -129,4 +129,4 @@ inline boolean instanceof(T t) {
     return typeid(t).name() == typeid(Base).name();
 }
 
-#endif //NATIVE_KERNEL_BUILTIN_HPP
+#endif //NATIVE_KERNEL_COMMON_HPP

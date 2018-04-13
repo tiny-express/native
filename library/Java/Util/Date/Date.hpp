@@ -30,7 +30,6 @@
 
 #include "../../Lang.hpp"
 #include "../ArrayList/ArrayList.hpp"
-#include "../../../../kernel/Platform.hpp"
 
 using namespace Java::Lang;
 

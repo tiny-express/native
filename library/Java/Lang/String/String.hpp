@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_STRING_STRING_HPP
 #define NATIVE_JAVA_LANG_STRING_STRING_HPP
 
-#include "../../../../kernel/Java.hpp"
+#include "../../../Kernel/Java.hpp"
 #include "../CharSequence/CharSequence.hpp"
 #include "../../Io/Serializable/Serializable.hpp"
 #include "../../Io/Serializable/Serializable.hpp"

@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "NoSuchAlgorithmException.hpp"
 
 using namespace Java::Security;
