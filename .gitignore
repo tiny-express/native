@@ -3,9 +3,9 @@
 bin
 .idea
 .vscode*
-main
+/main
 main.o
-!/main/
+!misc/*
 CMakeFiles
 cmake-*
 cmake_*
@@ -18,7 +18,8 @@ DartConfiguration.tcl
 Testing
 /src
 /Makefile
-/release/Makefile
+/cmake/Makefile
+/cmake/native*
 /native*
 libnative*
 /native_benchmark
@@ -27,4 +28,4 @@ build
 libbenchmark.gcno
 .gradle
 gradle*
-/unit_test.sh
+unit_test.sh
