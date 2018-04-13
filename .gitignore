@@ -6,6 +6,7 @@ bin
 /main
 main.o
 !misc/*
+*.cbp
 CMakeFiles
 cmake-*
 cmake_*
