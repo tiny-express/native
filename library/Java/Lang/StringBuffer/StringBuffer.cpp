@@ -164,7 +164,7 @@ StringBufferUnSafe::StringBufferUnSafe(const StringBufferUnSafe &other) {
 }
 
 StringBufferUnSafe &StringBufferUnSafe::append(string stringToAppend) {
-    return this->append(stringToAppend, 0, lengthPointerChar(stringToAppend));
+    return this->append(stringToAppend, 0, (int) std::string(stringToAppend).length());
 }
 
 //StringBufferUnSafe &StringBufferUnSafe::append(Object *object) {
@@ -421,8 +421,7 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, boolean boolValue) {
 
 StringBufferUnSafe &
 StringBufferUnSafe::insert(int offset, string stringToInsert) {
-    return this->insert(offset, stringToInsert, 0,
-                        lengthPointerChar(stringToInsert));
+    return this->insert(offset, stringToInsert, 0, (int) std::string(stringToInsert).length());
 }
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, char charValue) {
@@ -440,14 +439,6 @@ StringBufferUnSafe &StringBufferUnSafe::insert(int offset, long longValue) {
     String value = String::valueOf(longValue);
     return this->insert(offset, value.toString(), 0, value.length());
 }
-
-//StringBufferUnSafe &StringBufferUnSafe::insert(int offset, Object &object) {
-//	if (&object == nullptr) {
-//		return this->insert(offset, (string) "null", 0, 4);
-//	}
-//
-//	return this->insert(offset, object.toString(), 0, lengthPointerChar(object.toString()));
-//}
 
 StringBufferUnSafe &StringBufferUnSafe::insert(int offset, int intValue) {
     String value = String::valueOf(intValue);
@@ -486,23 +477,18 @@ int StringBufferUnSafe::lastIndexOf(String stringToGetIndex) const {
 
 int
 StringBufferUnSafe::lastIndexOf(String stringToGetIndex, int fromIndex) const {
-    string reversedOriginal = stringReverse(this->original);
-    string reversedString = stringReverse(stringToGetIndex.toCharPointer());
-    String reversedOriginalString = reversedOriginal;
+    String reversedString = StringBuilder(stringToGetIndex).reverse();
+    String reversedOriginalString = StringBuilder(this->original).reverse();
 
     int substringIndex = this->length() - fromIndex - stringToGetIndex.length();
-    reversedOriginalString = reversedOriginalString.getStringFromIndex(
-            substringIndex);
+    reversedOriginalString = reversedOriginalString.getStringFromIndex(substringIndex);
     int result = reversedOriginalString.indexOf(reversedString);
 
-    free(reversedOriginal);
-    free(reversedString);
     // Calculate result with original
     if (result == -1) {
         return result;
     }
-    result = reversedOriginalString.length() - stringToGetIndex.length() -
-             result;
+    result = reversedOriginalString.length() - stringToGetIndex.length() - result;
     return result;
 }
 

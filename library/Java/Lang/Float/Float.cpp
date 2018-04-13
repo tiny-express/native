@@ -112,7 +112,7 @@ boolean Float::operator||(const Float &target) const {
 Float& Float::operator=(const Float &target) {
     this->original = target.original;
     free(this->originalString);
-    this->originalString = stringFromFloat(this->original);
+    asprintf(&this->originalString, "%f", this->original);
     return *this;
 }
 

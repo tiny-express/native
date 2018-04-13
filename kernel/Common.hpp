@@ -62,8 +62,4 @@ long long int: LONG_LONG_INT, unsigned long long int: UNSIGNED_LONG_LONG_INT, \
        void *: VOID_POINTER,                   int *: INT_POINTER,            \
       default: OTHER)
 
-#include "common/Append.hpp"
-#include "common/Join.hpp"
-#include "common/Segment.hpp"
-
 #endif //NATIVE_KERNEL_COMMON_HPP

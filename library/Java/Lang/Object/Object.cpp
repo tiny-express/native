@@ -24,6 +24,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Object.hpp"
+#include "../System/System.hpp"
+#include "../Integer/Integer.hpp"
 
 using namespace Java::Lang;
+
+Java::Lang::String IntegerToHexString(int inputInt) {
+	return Java::Lang::Integer::toHexString(inputInt);
+}
+
+int Application(void (*program)(Array <String>), int argc, char **argument) {
+	try {
+		Array <String> args;
+		int argumentIndex;
+		for (argumentIndex = 0; argumentIndex < argc; argumentIndex++) {
+			args.push(argument[ argumentIndex ]);
+		}
+		program(argument);
+		return 0;
+	} catch (Exception &e) {
+		System::out::println("Application Exception: " + e.getMessage());
+		return 1;
+	} catch (...) {
+		System::out::println("Unhandled Exception");
+		return 1;
+	}
+}

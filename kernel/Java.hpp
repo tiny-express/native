@@ -28,7 +28,6 @@
 #define NATIVE_KERNEL_JAVA_HPP
 
 #include "Builtin.hpp"
-#include "../kernel/string/Process.hpp"
 
 namespace Java {
 		namespace Lang {
@@ -90,10 +89,10 @@ public:
 		}
 		
 		Array(char **charPointerArray) {
-			int size = lengthPointerPointerChar(charPointerArray);
-			int index;
-			for (index = 0; index < size; index++) {
+			int index = 0;
+			while (charPointerArray[index] != nullptr) {
 				original.push_back(charPointerArray[ index ]);
+				index += 1;
 			}
 			this->length = original.size();
 		}
@@ -167,11 +166,11 @@ public:
 		*/
 		string toCharPointer() {
 			if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
-				string result = stringCopy("");
+				std::string result = "";
 				for (char element : *this) {
-					stringAppend(&result, element);
+					result += element;
 				}
-				return result;
+				return (string) result.c_str();
 			}
 			return (string) "This type is not available for serialize";
 		}
@@ -213,6 +212,12 @@ public:
 		}
 };
 
+/**
+ * Convert integer to hex string
+ *
+ * @param inputInt
+ * @return String
+ */
 Java::Lang::String IntegerToHexString(int inputInt);
 
 /**
@@ -223,6 +228,6 @@ Java::Lang::String IntegerToHexString(int inputInt);
  * @param argument
  * @return int
  */
-int Application(void (*program)(Array<Java::Lang::String>), int argc, char **argument);
+int Application(void (*program)(Array <Java::Lang::String>), int argc, char **argument);
 
 #endif// NATIVE_KERNEL_JAVA_HPP

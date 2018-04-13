@@ -1308,45 +1308,9 @@ TEST (JavaLangString, Format) {
     }
 
     {
-        auto key = (string) "Nhà hàng";
-        double latitude = 10.824093;
-        double longitude = 106.683844;
-        string url = urlDecode(key);
-        auto queryFormat = "{\"query\": {\"bool\" : {\"must\" : [{\"nested\":{\"path\":\"shop_type\",\"query\":{ \"match\":{\"shop_type.vi_VN\":\"%s\" } }}},{\"filtered\": {\"filter\": {\"geo_distance\": {\"distance\": \"5km\",\"distance_type\": \"plane\", \"shop_location\": {\"lat\": %f,\"lon\": %f}}}}}]}}}";
-        String body = String::format(queryFormat, url, latitude, longitude);
-
-        String REQUEST_TEMPLATE = "%s %s%s %s\r\n"
-                "%s\r\n\r\n"
-                "%s";
-
-        String result = String::format(REQUEST_TEMPLATE,
-                                       "POST",
-                                       "CASSANDRA",
-                                       "_test",
-                                       "http1.1",
-                                       "HEADER:HEADER",
-                                       body);
-
-        string expected;
-        int length = asprintf(&expected,
-                              REQUEST_TEMPLATE.toCharPointer(),
-                              "POST",
-                              "CASSANDRA",
-                              "_test",
-                              "http1.1",
-                              "HEADER:HEADER",
-                              body.toCharPointer());
-
-        assertTrue(length > 0);
-        assertEquals(expected, result.toString());
-        free(expected);
-        free(url);
-    }
-
-    {
         string expected;
         String result;
-        unsigned long ul = System::currentTimeMillis();
+        long ul = System::currentTimeMillis();
 
         int length = asprintf(&expected, "%lu", ul);
         assertTrue(length > 0);

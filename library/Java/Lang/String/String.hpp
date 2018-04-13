@@ -27,10 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_STRING_STRING_HPP
 #define NATIVE_JAVA_LANG_STRING_STRING_HPP
 
-#include <string>
 #include "../../../../kernel/Java.hpp"
-#include "../../../../kernel/String.hpp"
-#include "../../../../kernel/Common.hpp"
 #include "../CharSequence/CharSequence.hpp"
 #include "../../Io/Serializable/Serializable.hpp"
 #include "../../Io/Serializable/Serializable.hpp"
@@ -434,7 +431,7 @@ namespace Java {
             template<class T>
             boolean equals(T anObject) const {
                 if (instanceof<String>(anObject)) {
-                    return (boolean) stringEquals(this->original.c_str(), anObject.toString().toCharPointer());
+                    return std::string(this->original.c_str()) == std::string(anObject.toString().toCharPointer());
                 }
                 return false;
             }

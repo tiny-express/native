@@ -32,7 +32,6 @@
 
 // Native kernel
 #include "Common.hpp"
-#include "String.hpp"
 #include "Java.hpp"
 
 #endif //NATIVE_KERNEL_KERNEL_HPP

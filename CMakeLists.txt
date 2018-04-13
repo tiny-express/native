@@ -27,23 +27,15 @@
 cmake_minimum_required(VERSION 2.8.8)
 project(native CXX)
 
-# Enable runtime search path support for dynamic libraries on OSX
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(CMAKE_MACOSX_RPATH 1)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w ")
-endif ()
-
-# Check C++ compiler version
 include(CheckCXXCompilerFlag)
 
 check_cxx_compiler_flag("-std=gnu++11" COMPILER_SUPPORTS_CXX11)
 check_cxx_compiler_flag("-std=gnu++0x" COMPILER_SUPPORTS_CXX0X)
 
-# Check CXX version
 if (COMPILER_SUPPORTS_CXX11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Wfatal-errors -Wno-multichar")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 elseif (COMPILER_SUPPORTS_CXX0X)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x -Wfatal-errors -Wno-multichar")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
 else ()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif ()
@@ -51,13 +43,18 @@ endif ()
 # Support for OpenMP
 find_package(OpenMP)
 if (OPENMP_FOUND)
-    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-    set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
-endif()
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+endif ()
 
 # GNU Source compatible
 add_definitions(-D_GNU_SOURCE)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_MACOSX_RPATH 1)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w ")
+endif ()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # CMake Modules
@@ -73,8 +70,8 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     endif ()
 endif ()
 
-# Release mode
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native")
+# Ignore warnings
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-multichar -Wno-unused-result")
 
 # Only C++ unit test files
 file(GLOB_RECURSE SOURCES_CPP
@@ -145,22 +142,22 @@ install(DIRECTORY library DESTINATION ../include/native FILES_MATCHING PATTERN "
 install(DIRECTORY kernel DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
 
 # Detect operating system
-find_file (DEBIAN debian_version debconf.conf PATHS /etc)
-find_file (FEDORA fedora-release PATHS /etc)
-find_file (REDHAT redhat-release inittab.RH PATHS /etc)
+find_file(DEBIAN debian_version debconf.conf PATHS /etc)
+find_file(FEDORA fedora-release PATHS /etc)
+find_file(REDHAT redhat-release inittab.RH PATHS /etc)
 
 IF (${APPLE})
     SET(CPACK_GENERATOR "DMG")
-endif()
+endif ()
 if (DEBIAN)
     SET(CPACK_GENERATOR "DEB")
-endif()
+endif ()
 if (FEDORA OR REDHAT)
     SET(CPACK_GENERATOR "RPM")
-endif()
+endif ()
 SET(CPACK_PACKAGE_CONTACT "loint.foodtiny@gmail.com")
 SET(CPACK_PACKAGE_DESCRIPTION "Native Library for C++")
-SET(CPACK_PACKAGE_VERSION  "1.0.4")
+SET(CPACK_PACKAGE_VERSION "1.0.4")
 SET(CPACK_PACKAGE_MAINTAINER "Loi Nguyen")
 INCLUDE(CPack)
 

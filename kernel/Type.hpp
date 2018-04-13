@@ -40,8 +40,4 @@ typedef const char *const_string;
 typedef wchar_t unicode;
 typedef unsigned char byte;
 
-string stringDefault(string target);
-
-double numberDefault(double target);
-
 #endif//NATIVE_TYPE_HPP

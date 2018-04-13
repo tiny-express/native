@@ -27,8 +27,8 @@
 #ifndef NATIVE_JAVA_UTIL_RANDOM_HPP
 #define NATIVE_JAVA_UTIL_RANDOM_HPP
 
-#include <atomic>
 #include "../../Lang.hpp"
+#define CHAR_LIST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 using namespace Java::Lang;
 

@@ -898,7 +898,7 @@ String String::format(const String &format) {
 }
 
 String String::valueOf(const_string constStringValue) {
-    if (isEmptyString(constStringValue) != 0) {
+    if (std::string(constStringValue).empty()) {
         return (string) "";
     }
     return constStringValue;

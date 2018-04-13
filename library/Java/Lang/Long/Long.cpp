@@ -37,7 +37,6 @@ using namespace Java::Lang;
  */
 Long::Long() {
 	this->original = 0;
-	//this->originalString = stringFromLong(this->original);
 	asprintf(&this->originalString, "%ld", this->original);
 }
 
@@ -648,7 +647,7 @@ Long Long::operator=(const Long &target) {
 	if (this->originalString != NULL) {
 		free(this->originalString);
 	}
-	this->originalString = stringFromLong(this->original);
+	asprintf(&this->originalString, "%ld", this->original);
 	return *this;
 }
 
