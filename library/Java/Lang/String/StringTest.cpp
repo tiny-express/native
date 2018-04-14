@@ -570,9 +570,8 @@ TEST (JavaLangString, GetChars) {
     Array<char> charArray(30);
     String testString = "This is a String";
     testString.getChars(10, 16, charArray, 0);
-    string charArrayString = charArray.toCharPointer();
-    assertEquals("String", charArrayString);
-    free(charArrayString);
+    Array<char> subCharArray[]={'S','t','r','i','n','g'};
+    assertEquals(subCharArray, charArray);
 
     try {
         testString.getChars(-1, 16, charArray, 0);
@@ -610,14 +609,12 @@ TEST (JavaLangString, GetChars) {
     }
 
     testString.getChars(10, 16, charArray, 10);
-    charArrayString = charArray.toCharPointer();
-    assertEquals("StringString", charArrayString);
-    free(charArrayString);
+    Array<char> subCharArray1[]={'S','t','r','i','n','g','S','t','r','i','n','g'};
+    assertEquals(subCharArray1, charArray);
 
     testString.getChars(10, 16, charArray, 3);
-    charArrayString = charArray.toCharPointer();
-    assertEquals("StrStringString", charArrayString);
-    free(charArrayString);
+    Array<char> subCharArray2[]={'S','t','r','S','t','r','i','n','g','S','t','r','i','n','g'};
+    assertEquals(subCharArray2, charArray);
 }
 
 TEST (JavaLangString, IsEmpty) {
