@@ -158,22 +158,7 @@ public:
 		E get(const int index) const {
 			return (E) original.at(index);
 		}
-		
-		/**
-		* Convert Array to char pointer
-		*
-		* @return string
-		*/
-		string toCharPointer() {
-			if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
-				std::string result = "";
-				for (char element : *this) {
-					result += element;
-				}
-				return (string) result.c_str();
-			}
-			return (string) "This type is not available for serialize";
-		}
+
 public:
 		
 		/**
@@ -195,7 +180,7 @@ public:
 		const E &operator[](const int index) const {
 			return this->original.at(index);
 		}
-		
+
 		/**
 		 * Append a std::initializer_list<E> to this array
 		 *

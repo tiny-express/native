@@ -565,7 +565,6 @@ TEST (JavaLangString, LastIndexOf) {
     }
 }
 
-// TODO (anhnt) getChar run right but need Arrays.toString() to test
 TEST (JavaLangString, GetChars) {
     Array<char> charArray(30);
     String testString = "This is a String";
@@ -608,13 +607,18 @@ TEST (JavaLangString, GetChars) {
                      e.getMessage());
     }
 
-    testString.getChars(10, 16, charArray, 10);
-    Array<char> subCharArray1[]={'S','t','r','i','n','g','S','t','r','i','n','g'};
-    assertEquals(subCharArray1, charArray);
+    testString.getChars(10, 16, charArray, 6);
+    Array<char> subCharArray1= {'S','t','r','i','n','g','S','t','r','i','n','g'};
+
+    for (int index=0; index<Math::min(subCharArray1.length, charArray.length); index++) {
+	    assertTrue((int) subCharArray1[index] == (int) charArray[index]);
+    }
 
     testString.getChars(10, 16, charArray, 3);
-    Array<char> subCharArray2[]={'S','t','r','S','t','r','i','n','g','S','t','r','i','n','g'};
-    assertEquals(subCharArray2, charArray);
+    Array<char> subCharArray2 = {'S','t','r','S','t','r','i','n','g', 'i','n','g'};
+	for (int index=0; index<Math::min(subCharArray2.length, charArray.length); index++) {
+		assertTrue((int) subCharArray2[index] == (int) charArray[index]);
+	}
 }
 
 TEST (JavaLangString, IsEmpty) {
