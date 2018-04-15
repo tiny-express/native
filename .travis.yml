@@ -26,7 +26,7 @@ before_script:
 - export CXX=g++
 - ./misc/benchmark.sh
 script:
-- cd cmake
+- cd develop
 - cmake . -DCMAKE_BUILD_TYPE=Debug && make native_test -j8
 - cmake . -DCMAKE_BUILD_TYPE=Release && make native_benchmark
 - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then valgrind --error-exitcode=42 --leak-check=full ./native_test; else ./native_test; fi
