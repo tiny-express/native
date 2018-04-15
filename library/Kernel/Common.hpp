@@ -48,6 +48,7 @@
 #include <cctype>
 #include <ctime>
 #include <regex.h>
+#include <stddef.h>
 
 #ifdef LINUX
 #include <stdint.h>
@@ -75,6 +76,7 @@
 #include <map>
 #include <unordered_map>
 #include <iostream>
+#include <iomanip>
 #include <set>
 #include <bitset>
 #include <type_traits>
