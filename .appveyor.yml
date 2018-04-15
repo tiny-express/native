@@ -11,6 +11,6 @@ install:
     - c:\cygwin-setup.exe --quiet-mode --no-shortcuts --no-startmenu --no-desktop --upgrade-also --only-site --site http://cygwin.mirror.constant.com/ --root c:\cygwin-root --local-package-dir c:\cygwin-setup-cache --packages gcc-g++,make,openssl-devel,zlib-devel,cmake
 build_script:
     - git submodule update --init
-    - c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER && cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true;"
+    - c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER/cmake && cmake . -DCMAKE_BUILD_TYPE=debug -DCMAKE_VERBOSE_MAKEFILE=true;"
 test_script:
-    - c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER; make native_test -j8 && ./native_test.exe"
+    - c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER/cmake; make native_test -j8 && ./native_test.exe"

@@ -25,7 +25,7 @@
  */
 
 #include "NumberFormatException.hpp"
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 
 TEST (JavaLangNumberFormatException, Constructor) {
 	// Constructs a new NumberFormatException with null as its detail message.

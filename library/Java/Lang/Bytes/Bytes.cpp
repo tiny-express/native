@@ -34,17 +34,17 @@ ByteCache *ByteCache::instance = nullptr;
 
 Bytes::Bytes(byte byteValue) {
     this->original = byteValue;
-    this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
 }
 
 Bytes::Bytes(String inputString) {
     this->original = parseBytes(inputString, 10);
-    this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
 }
 
 Bytes::Bytes() {
     this->original = 0;
-    this->originalString = stringCopy("0");
+    this->originalString = strdup("0");
 }
 
 Bytes::~Bytes() {
@@ -208,21 +208,21 @@ boolean Bytes::operator>=(const Bytes &target) {
 Bytes &Bytes::operator-=(const Bytes &target) {
     free((this->originalString));
     this->original -= target.original;
-    this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
     return *this;
 }
 
 Bytes &Bytes::operator+=(const Bytes &target) {
     free((this->originalString));
     this->original += target.original;
-    this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
     return *this;
 }
 
 Bytes &Bytes::operator*=(const Bytes &target) {
     free((this->originalString));
     this->original *= target.original;
-    this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
     return *this;
 }
 
@@ -232,7 +232,7 @@ Bytes &Bytes::operator/=(const Bytes &target) {
     }
     free((this->originalString));
     this->original /= target.original;
-    this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
     return *this;
 }
 
@@ -242,18 +242,18 @@ Bytes &Bytes::operator%=(const Bytes &target) {
     }
     free((this->originalString));
     this->original %= target.original;
-    this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
     return *this;
 }
 
 Bytes &Bytes::operator=(const Bytes &target) {
     free((this->originalString));
     this->original = target.original;
-    this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
     return *this;
 }
 
 Bytes::Bytes(const Bytes &anotherByte) {
     this->original = anotherByte.original;
-    this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
 }

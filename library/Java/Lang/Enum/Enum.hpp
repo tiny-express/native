@@ -37,32 +37,32 @@ namespace Java {
                     public virtual Serializable {
         private:
             string name;
-            int ordinal;
-            string ordinalString;
+            int original;
+            string originalString;
 
         public:
-            Enum(const_string name, int ordinal) {
+            Enum(const_string name, int original) {
                 this->name = stringCopy(name);
-                this->ordinal = ordinal;
-                this->ordinalString = stringCopy("");
+                this->original = original;
+                this->originalString = stringCopy("");
             }
 
-            Enum(string name, int ordinal) {
+            Enum(string name, int original) {
                 this->name = stringCopy(name);
-                this->ordinal = ordinal;
-                this->ordinalString = stringCopy("");
+                this->original = original;
+                this->originalString = stringCopy("");
             }
 
             ~Enum() {
                 free(this->name);
-                free(this->ordinalString);
+                free(this->originalString);
             }
 
         public:
             Enum clone() {
                 Enum result;
                 result.name = this->name;
-                result.ordinal = this->ordinal;
+                result.original = this->original;
                 return result;
             }
 
@@ -73,7 +73,7 @@ namespace Java {
              * @return int
              */
             int compareTo(const Enum<E> &e) {
-                return this->ordinal - e.ordinal;
+                return this->original - e.original;
             }
 
             /**
@@ -85,12 +85,12 @@ namespace Java {
             }
 
             /**
-             * Returns the ordinal of this enumeration constant
-             * (its position in its enum declaration, where the initial constant is assigned an ordinal of zero).
+             * Returns the original of this enumeration constant
+             * (its position in its enum declaration, where the initial constant is assigned an original of zero).
              * @return int
              */
             int getOrdinal() {
-                return this->ordinal;
+                return this->original;
             }
 
             /**
@@ -98,9 +98,9 @@ namespace Java {
              * @return String
              */
             String toString() {
-                free(this->ordinalString);
-                this->ordinalString = stringFromInt(this->ordinal);
-                return this->ordinalString;
+                free(this->originalString);
+                asprintf(&this->originalString, "%d", this->original);
+	            return this->originalString;
             }
         };
     }

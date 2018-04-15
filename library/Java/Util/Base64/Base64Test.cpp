@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "../Base64/Base64.hpp"
 #include "../Arrays/Arrays.hpp"
 #include "../../Lang/IllegalArgumentException/IllegalArgumentException.hpp"

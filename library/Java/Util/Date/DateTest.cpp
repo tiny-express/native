@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 
 #include "Date.hpp"
 #include "../../Lang/IllegalArgumentException/IllegalArgumentException.hpp"
@@ -662,7 +662,7 @@ TEST(JavaUtilDate, ToString) {
     String actual;
 
     tzset();
-    char *tzname[2];
+    extern char *tzname[2];
     String zone = (string) tzname[0];
 
     // Valid case
