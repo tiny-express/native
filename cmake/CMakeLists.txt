@@ -27,6 +27,10 @@
 cmake_minimum_required(VERSION 2.8.8)
 project(native CXX)
 
+if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
+    set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
+endif()
+
 include(CheckCXXCompilerFlag)
 
 check_cxx_compiler_flag("-std=gnu++11" COMPILER_SUPPORTS_CXX11)
