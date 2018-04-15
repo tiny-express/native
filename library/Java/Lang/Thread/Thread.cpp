@@ -24,115 +24,113 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <pthread.h>
+#include <chrono>
+#include <sstream>
 #include "Thread.hpp"
+#include "../InterruptedException/InterruptedException.hpp"
 
-//using namespace Java::Lang;
-//
-//Thread::Thread() {
-//	this->target = nullptr;
-//	this->threadName = stringCopy("");
-//}
-//
-//Thread::Thread(Runnable &target2) {
-//	this->target = &target2;
-//	this->threadName = stringCopy("");
-//}
-//
-//Thread::Thread(Runnable &target2, String name) {
-//	this->target = &target2;
-//	this->threadName = stringCopy(name.toString());
-//}
-//
-//Thread::Thread(String name) {
-//	this->target = nullptr;
-//	this->threadName = stringCopy(name.toString());
-//}
-//
-//Thread::~Thread() {
-//	//TODO: reduce Thread::Thread.numberThread
-//	if (this->threadName != NULL) {
-//		free(this->threadName);
-//	}
-//}
-//
-///**
-// * Call Runnable target's run() method
-// */
-//void Thread::run() const {
-//	if (this->target != NULL) {
-//		this->target->run();
-//	}
-//}
-//
-///**
-// * Force thread and call Runnable target's run() method
-// */
-//void Thread::start() {
-//	this->isThreadRunning = true;
-//	pthread_create(&this->original, NULL, &Thread::pthread_helper, (void *) this);
-//}
-//
-///**
-// * Stop a thread if it's running
-// */
-//void Thread::stop() {
-//	if (!this->isThreadRunning) {
-//		return;
-//	}
-//
-//	//pthread_cancel(this->original);
-//	this->isThreadRunning = false;
-//}
-//
-///**
-// * Waits for this thread to die if it's running
-// */
-//void Thread::join() {
-//	if (!this->isThreadRunning) {
-//		return;
-//	}
-//
-//	pthread_join(this->original, NULL);
-//}
-//
-///**
-// * Waits at most millis milliseconds for this thread to die if it's running
-// */
-//void Thread::join(unsigned int millis) {
-//	if (!this->isThreadRunning) {
-//		return;
-//	}
-//
-//	usleep(millis * 1000);
-//	pthread_join(this->original, NULL);
-//}
-//
-///**
-// * Return this thread's name
-// */
-//string Thread::getName() {
-//	return this->threadName;
-//}
-//
-///**
-// * Set this thread's name
-// */
-//void Thread::setName(string target) {
-//	this->threadName = stringCopy(target);
-//}
-//
-///**
-// * Returns a string representation of this thread, including the thread's name, priority, and thread group.
-// */
-//string Thread::toString() const {
-//	return this->threadName;
-//}
+using namespace std;
+using namespace Java::Lang;
+
+thread_local Thread* currentThreadPtr = NULL;
+
+Thread::Thread() {
+    init(nullptr, "");
+}
+
+Thread::Thread(Runnable *target) {
+    init(target, "");
+}
+
+Thread::Thread(std::function<void()> func) {
+    this->func = func;
+}
+
+Thread::~Thread() {
+    if (threadObject.joinable())
+        threadObject.join();
+    if (semaphoreObject.availablePermits() > 0)
+        semaphoreObject.release(semaphoreObject.availablePermits());
+}
+
+void Thread::run() {
+    // set thread id
+    this->tid = (unsigned long)pthread_self();
+
+    // set tls
+    if (currentThreadPtr == NULL) {
+        currentThreadPtr = this;
+    }
+
+    mutexObject.lock();
+    alive = true;
+    mutexObject.unlock();
+
+    if (this->func) {
+        this->func();
+    }
+    semaphoreObject.release(1);
+
+    mutexObject.lock();
+    alive = false;
+    mutexObject.unlock();
+}
+
+void Thread::setName(String name) {
+    this->name = name;
+}
+
+void Thread::init(Runnable *target, String name) {
+    this->target = target;
+    this->name = name;
+    this->func = std::bind(&Runnable::run, target);
+}
+
+String Thread::getName() {
+    return this->name;
+}
+
+boolean Thread::isAlive() {
+    std::unique_lock<std::mutex> locker(mutexObject);
+    return alive;
+}
+
+unsigned long Thread::getId() {
+    return this->tid;
+}
+
+void Thread::start() {
+    if (this->func && !isAlive()) {
+        threadObject = std::move(std::thread(&Thread::run, this));
+    }
+}
+
+void Thread::join() {
+    join(0);
+}
+
+void Thread::join(long millis) {
+    if (millis > 0) {
+        semaphoreObject.tryAcquire(1, millis);
+    } else {
+        semaphoreObject.acquire();
+    }
+}
+
+void Thread::detach() {
+    if (this->detached) {
+        throw IllegalArgumentException("Detached thread");
+    } else {
+        this->threadObject.detach();
+        this->detached = true;
+    }
+}
 
 void Thread::sleep(long millis) {
-	long currentTime = System::currentTimeMillis();
-	while (true) {
-		if (System::currentTimeMillis() - currentTime > millis) {
-			break;
-		}
-	}
+    this_thread::sleep_for(chrono::milliseconds(millis));
+}
+
+Thread *Thread::currentThread() {
+    return currentThreadPtr;
 }

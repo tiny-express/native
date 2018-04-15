@@ -27,6 +27,5 @@ libnative*
 native_test.exe
 build
 libbenchmark.gcno
-.gradle
 gradle*
 unit_test.sh

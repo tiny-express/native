@@ -105,22 +105,23 @@ namespace Java {
              */
             String();
 
-            /**
+			/**
              * Initializes a newly created String object
              * so that it represents the same sequence of characters as the argument.
              *
              * @param target
              */
-            String(const String &target);
+			String(const String &target);
 
-            /**
+			/**
              * Constructs a new String by decoding the specified array of bytes.
              *
              * @param byteArray
              */
+
             String(Array<byte> byteArray);
 
-            /**
+			/**
              * Allocates a new String that contains the sequence
              * of characters currently contained in the StringBuilder.
              *
@@ -128,7 +129,7 @@ namespace Java {
              */
              String(const StringBuilder &stringBuilder);
 
-            /**
+			/**
              * Allocates a new String so that it represents the sequence
              * of characters currently contained in the character array argument.
              *
@@ -136,7 +137,7 @@ namespace Java {
              */
              String(Array<char> charArray);
 
-            /**
+			/**
              * Allocates a new String that contains the sequence
              * of characters currently contained in the StringBuffer.
              *
@@ -144,27 +145,27 @@ namespace Java {
              */
              String(const StringBuffer &stringBuffer);
 
-            /**
+			/**
              * Constructs a new String by decoding the specified array of bytes
              * using the specified charset.
              *
              * @param byteArray
              * @param charsetName
              */
-            // TODO (anhnt) need CharSet
-            // String(Array<byte> byteArray, String charsetName);
+			// TODO (anhnt) need CharSet
+			// String(Array<byte> byteArray, String charsetName);
 
-            /**
+			/**
              * Constructs a new String by decoding the specified array of bytes
              * using the specified charset.
              *
              * @param byteArray
              * @param charset
              */
-            // TODO (anhnt) need CharSet
-            // String(Array<byte> byteArray, Charset charset)
+			// TODO (anhnt) need CharSet
+			// String(Array<byte> byteArray, Charset charset)
 
-            /**
+			/**
              * Allocates a new String that contains characters
              * from a subarray of the character array argument.
              *
@@ -176,7 +177,7 @@ namespace Java {
              */
              String(Array<char> charArray, int offset, int count);
 
-            /**
+			/**
              * Allocates a new String that contains characters
              * from a subarray of the Unicode code point array argument.
              *
@@ -188,10 +189,10 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count
              * arguments index characters outside the bounds of the codePoints array
              */
-            // TODO (anhnt) need CharSet
-            // String(Array<int> codePoints, int offset, int count);
+			// TODO (anhnt) need CharSet
+			// String(Array<int> codePoints, int offset, int count);
 
-            /**
+			/**
              * Constructs a new String by decoding the specified
              * subarray of bytes using the platform's default charset.
              *
@@ -203,7 +204,7 @@ namespace Java {
              */
              String(Array<byte> byteArray, int offset, int length);
 
-            /**
+			/**
              * Constructs a new String by decoding the specified
              * subarray of bytes using the specified charset
              *
@@ -214,10 +215,10 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and length arguments index
              * characters outside the bounds of the bytes array
              */
-            // TODO (anhnt) need CharSet
-            // String(Array<byte> &byteArray, int offset, int length, Charset charset);
+			// TODO (anhnt) need CharSet
+			// String(Array<byte> &byteArray, int offset, int length, Charset charset);
 
-            /**
+			/**
              * Constructs a new String by decoding the specified
              * subarray of bytes using the specified charset.
              *
@@ -229,8 +230,8 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and length arguments index
              * characters outside the bounds of the bytes array
              */
-            // TODO (anhnt) need CharSet
-            // String(Array<byte> &byteArray, int offset, int length, String charsetName);
+			// TODO (anhnt) need CharSet
+			// String(Array<byte> &byteArray, int offset, int length, String charsetName);
 
             /**
              * Construct a new String from specific string
@@ -250,7 +251,7 @@ namespace Java {
                 this->original = std::string(target);
             }
 
-            /**
+			/**
              * Construct a new String from specific std::string
              *
              * @param target
@@ -259,7 +260,7 @@ namespace Java {
                 this->original = targetString;
             }
 
-            /**
+			/**
              * Construct a new String from char array with specific length
              *
              * @param original
@@ -267,7 +268,7 @@ namespace Java {
              */
             String(string target, int length);
 
-            /**
+			/**
              * Destructor
              */
             ~String();
@@ -291,7 +292,7 @@ namespace Java {
              */
             int getSize() const;
 
-            /**
+			/**
              * String character at index
              *
              * @param index
@@ -299,25 +300,26 @@ namespace Java {
              */
             char charAt(int index) const override;
 
-            /**
+			/**
              * Returns the character (Unicode code point) at the specified index.
              *
              * @param index
              * @return int
              */
+
             // TODO (anhnt) need Character
             // int codePointAt(int index);
 
-            /**
+			/**
              * Returns the character (Unicode code point) before the specified index.
              *
              * @param index
              * @return int
              */
-            // TODO (anhnt) need Character
-            // int codePointBefore(int index);
+			// TODO (anhnt) need Character
+			// int codePointBefore(int index);
 
-            /**
+			/**
              * Returns the number of Unicode code points
              * in the specified text range of this String.
              *
@@ -325,17 +327,17 @@ namespace Java {
              * @param endIndex
              * @return int
              */
-            // TODO (anhnt) need Character
-            // int codePointCount(int beginIndex, int endIndex);
+			// TODO (anhnt) need Character
+			// int codePointCount(int beginIndex, int endIndex);
 
-            /**
+			/**
              * Clone to new object
              *
              * @return String
              */
             String clone();
 
-            /**
+			/**
              * String compare to another string
              *
              * @param anotherString
@@ -347,7 +349,7 @@ namespace Java {
              */
             int compareTo(const String &anotherString) const override;
 
-            /**
+			/**
              * String compare with another String but ignore case
              *
              * @param targetString
@@ -360,7 +362,6 @@ namespace Java {
              */
             int compareToIgnoreCase(const String &targetString) const;
 
-
             /**
              * String concatenation
              *
@@ -369,7 +370,7 @@ namespace Java {
              */
             String concat(String target);
 
-            /**
+			/**
              * Find substring inside this String
              *
              * @param charSequence
@@ -377,7 +378,7 @@ namespace Java {
              */
             boolean contains(const CharSequence &charSequence);
 
-            /**
+			/**
              * Compares this String to the specified CharSequence.
              * The result is true if and only if this String represents
              * the same sequence of char values as the specified sequence.
@@ -387,7 +388,7 @@ namespace Java {
              */
             boolean contentEquals(const CharSequence &charSequence);
 
-            /**
+			/**
              * Returns the String representation of the char array argument.
              * The contents of the character array are copied;
              * subsequent modification of the character array does not affect the returned string.
@@ -397,7 +398,7 @@ namespace Java {
              */
             static String copyValueOf(Array<char> &charArray);
 
-            /**
+			/**
              * Returns the String representation of a specific subarray of the char array argument.
              *
              * @param charArray
@@ -410,7 +411,7 @@ namespace Java {
              */
             static String copyValueOf(Array<char> &charArray, int offset, int count);
 
-            /**
+			/**
              * String endswith a suffix
              *
              * @param suffixString
@@ -420,7 +421,7 @@ namespace Java {
              */
             boolean endsWith(const String &suffixString) const;
 
-            /**
+			/**
              * Compares this String to the specified object.
              *
              * @param T
@@ -436,14 +437,14 @@ namespace Java {
                 return false;
             }
 
-            /**
+			/**
              * Compares this String to another String, ignoring case considerations.
              *
              * @param anotherString
              * @return true if the given object represents a String equivalent
              * to this string, false otherwise, ignoring case considerations
              */
-            boolean equalsIgnoreCase(String anotherString);
+			boolean equalsIgnoreCase(String anotherString);
 
             /**
              * String hash code
@@ -458,34 +459,34 @@ namespace Java {
              * @param charArray
              * @return String
              */
-            static String fromCharArray(Array<char> &charArray);
+			static String fromCharArray(Array<char> &charArray);
 
-            /**
+			/**
              * Get byte array from this String
              *
              * @return Array<byte>
              */
             Array<byte> getBytes() const;
 
-            /**
+			/**
              * Encodes this String into a sequence of bytes using the named charset,
              * storing the result into a new byte array.
              *
              * @param charSetName
              * @return
              */
-            // Array<byte> getBytes(String charSetName) const;
+			// Array<byte> getBytes(String charSetName) const;
 
-            /**
+			/**
              * Encodes this String into a sequence of bytes using the charset,
              * storing the result into a new byte array.
              *
              * @param charSet
              * @return
              */
-            // Array<byte> getBytes(CharSet charSet) const;
+			// Array<byte> getBytes(CharSet charSet) const;
 
-            /**
+			/**
              * Copies characters from this String into the destination character array.
              *
              * @param sourceBegin
@@ -499,10 +500,10 @@ namespace Java {
              * destinationBegin is negative
              * destinationBegin + (srcEnd - srcBegin) is larger than destination.length
              */
-            void getChars(int sourceBegin, int sourceEnd,
-                          Array<char> &destination, int destinationBegin);
+			void getChars(int sourceBegin, int sourceEnd,
+						  Array<char> &destination, int destinationBegin);
 
-            /**
+			/**
              * Get char to String
              * This function use for class UUID and Long
              *
@@ -511,7 +512,7 @@ namespace Java {
              */
             String getStringFromIndex(int index) const;
 
-            /**
+			/**
              * Returns the index within this String
              * of the first occurrence of the specified character.
              *
@@ -521,7 +522,7 @@ namespace Java {
              */
             int indexOf(int character) const;
 
-            /**
+			/**
              * Returns the index within this String
              * of the first occurrence of the specified String.
              *
@@ -529,9 +530,9 @@ namespace Java {
              * @return index of the first occurrence of the specified substring,
              * or -1 if there is no such occurrence.
              */
-            int indexOf(String subString) const;
+			int indexOf(String subString) const;
 
-            /**
+			/**
              * Returns the index within this String
              * of the first occurrence of the specified character,
              * starting the search at the specified index.
@@ -543,7 +544,7 @@ namespace Java {
              */
             int indexOf(int character, int fromIndex) const;
 
-            /**
+			/**
              * Returns the index within this string
              * of the first occurrence of the specified String.
              * starting the search at the specified index.
@@ -555,14 +556,14 @@ namespace Java {
              */
             int indexOf(String subString, int fromIndex) const;
 
-            /**
+			/**
              * Determine if this String is empty
              *
              * @return true if, and only if, length() is 0.
              */
             boolean isEmpty() const;
 
-            /**
+			/**
              * Returns a new String composed of copies of the CharSequence elements
              * joined together
              *
@@ -586,7 +587,7 @@ namespace Java {
                 return result;
             }
 
-            /**
+			/**
              * Returns the index within this string of the last occurrence
              * of the specified character
              *
@@ -596,7 +597,7 @@ namespace Java {
              */
             int lastIndexOf(int character);
 
-            /**
+			/**
              * Returns the index within this string of the last occurrence
              * of the specified character,
              * searching backward starting at the specified index.
@@ -608,7 +609,7 @@ namespace Java {
              */
             int lastIndexOf(int character, int fromIndex);
 
-            /**
+			/**
              * Returns the index within this string of the last occurrence
              * of the specified substring
              *
@@ -618,7 +619,7 @@ namespace Java {
              */
             int lastIndexOf(String subString) const;
 
-            /**
+			/**
              * Returns the index within this string of the last occurrence
              * of the specified substring,
              * searching backward starting at the specified index.
@@ -630,7 +631,7 @@ namespace Java {
              */
             int lastIndexOf(String subString, int fromIndex) const;
 
-            /**
+			/**
              * Returns the length of this string
              *
              * @return int
@@ -639,7 +640,7 @@ namespace Java {
                 return this->original.size();
             }
 
-            /**
+			/**
              * Tells whether or not this string matches the given regular expression.
              *
              * @param regex
@@ -648,10 +649,11 @@ namespace Java {
              * @return true if, and only if, this string matches
              * the given regular expression
              */
+
             // TODO (anhnt) need Pattern
             // boolean matches(String regex) const;
 
-            /**
+			/**
              * Returns the index within this String that is offset
              * from the given index by codePointOffset code points
              *
@@ -665,10 +667,10 @@ namespace Java {
              * the absolute value of codePointOffset code points.
              * @return the index within this String
              */
-            // TODO (anhnt) need Character
-            // int offsetByCodePoints(int index, int codePointOffset);
+			// TODO (anhnt) need Character
+			// int offsetByCodePoints(int index, int codePointOffset);
 
-            /**
+			/**
              * Tests if two string regions are equal.
              *
              * @param thisOffset
@@ -678,10 +680,10 @@ namespace Java {
              * @return true if the specified subregion of this String exactly
              * matches the specified subregion of the String argument; false otherwise.
              */
-            boolean regionMatches(int thisOffset,
-                                  String otherString, int otherOffset, int len);
+			boolean regionMatches(int thisOffset,
+								  String otherString, int otherOffset, int len);
 
-            /**
+			/**
              * Tests if two string regions are equal.
              *
              * @param ignoreCase
@@ -693,10 +695,10 @@ namespace Java {
              * subregion of the String argument; false otherwise.
              * Whether the matching is exact or case insensitive depends on the ignoreCase argument.
              */
-            boolean regionMatches(boolean ignoreCase, int thisOffset,
-                                  String otherString, int otherOffset, int len);
+			boolean regionMatches(boolean ignoreCase, int thisOffset,
+								  String otherString, int otherOffset, int len);
 
-            /**
+			/**
              * Returns a string resulting from replacing all occurrences
              * of oldChar in this String with newChar.
              *
@@ -707,7 +709,7 @@ namespace Java {
              */
             String replace(char oldChar, char newChar) const;
 
-            /**
+			/**
              * Replaces each substring of this string that matches the literal
              * target sequence with the specified literal replacement sequence.
              * The replacement proceeds from the beginning of the string to the end.
@@ -716,9 +718,9 @@ namespace Java {
              * @param replacement
              * @return The resulting String
              */
-            String replace(CharSequence &target, CharSequence &replacement) const;
+			String replace(CharSequence &target, CharSequence &replacement) const;
 
-            /**
+			/**
              * Replaces each substring of this string that matches
              * the given regular expression with the given replacement.
              *
@@ -730,7 +732,7 @@ namespace Java {
              */
             String replaceAll(String regex, String replacement) const;
 
-            /**
+			/**
              * Replaces the first substring of this string that matches
              * the given regular expression with the given replacement.
              *
@@ -742,7 +744,7 @@ namespace Java {
              */
             String replaceFirst(String regex, String replacement) const;
 
-            /**
+			/**
              * Splits this String around matches of the given regular expression.
              *
              * @param regex
@@ -753,7 +755,7 @@ namespace Java {
              */
             Array<String> split(String regex) const;
 
-            /**
+			/**
              * Splits this string around matches of the given regular expression.
              *
              * @param regex
@@ -765,7 +767,7 @@ namespace Java {
              */
             Array<String> split(String regex, int limit) const;
 
-            /**
+			/**
              * Tests if this string starts with the specified prefix.
              *
              * @param prefix
@@ -774,7 +776,7 @@ namespace Java {
              */
             boolean startsWith(String prefix) const;
 
-            /**
+			/**
              * Tests if the substring of this string beginning
              * at the specified index starts with the specified prefix.
              *
@@ -787,7 +789,7 @@ namespace Java {
              */
             boolean startsWith(String prefix, int thisOffset) const;
 
-            /**
+			/**
              * Returns a character sequence that is a subsequence of this sequence.
              *
              * @param beginIndex
@@ -796,9 +798,9 @@ namespace Java {
              * if endIndex is greater than length(), or if beginIndex is greater than endIndex
              * @return the specified subsequence.
              */
-            // CharSequence subSequence(int beginIndex, int endIndex);
+			// CharSequence subSequence(int beginIndex, int endIndex);
 
-            /**
+			/**
              * Returns a String that is a substring of this String.
              * The substring begins with the character at the specified
              * index and extends to the end of this string.
@@ -808,9 +810,9 @@ namespace Java {
              * or larger than the length of this String object.
              * @return the specified substring as a String.
              */
-            String subString(int beginIndex) const;
+			String subString(int beginIndex) const;
 
-            /**
+			/**
              * Returns a string that is a substring of this string.
              * The substring begins at the specified beginIndex
              * and extends to the character at index endIndex - 1
@@ -822,16 +824,16 @@ namespace Java {
              * or beginIndex is larger than endIndex.
              * @return the specified substring as a String.
              */
-            String subString(int beginIndex, int endIndex) const;
+			String subString(int beginIndex, int endIndex) const;
 
-            /**
+			/**
              * Converts this string to a new character array.
              *
              * @return a newly allocated character array contain
              */
             Array<char> toCharArray() const;
 
-            /**
+			/**
              * Converts all of the characters in this String to lower case
              * using the rules of the default locale.
              *
@@ -866,7 +868,7 @@ namespace Java {
             // TODO need Locale
             // String toUpperCase(Locale locale);
 
-            /**
+			/**
              * Returns a String whose value is this string, with any leading
              *
              * and trailing whitespace removed.
@@ -882,14 +884,14 @@ namespace Java {
             */
             string toCharPointer() const;
 
-            /**
+			/**
              * Return a String a string contain value of this String
              *
              * @return a String contain value of this String
              */
             String toString() const;
 
-            /**
+			/**
              * Returns the String representation of the boolean argument.
              *
              * @param boolValue
@@ -898,7 +900,7 @@ namespace Java {
              */
             static String valueOf(boolean boolValue);
 
-            /**
+			/**
              * Returns the String representation of the char argument.
              *
              * @param charValue
@@ -906,7 +908,7 @@ namespace Java {
              */
             static String valueOf(char charValue);
 
-            /**
+			/**
              * Returns the String representation of the string argument.
              *
              * @param stringValue
@@ -938,7 +940,7 @@ namespace Java {
              */
             static String valueOf(short shortValue);
 
-            /**
+			/**
              * Returns the String representation of the int argument.
              *
              * @param intValue
@@ -946,7 +948,7 @@ namespace Java {
              */
             static String valueOf(int intValue);
 
-            /**
+			/**
              * Returns the String representation of the long argument.
              *
              * @param longValue
@@ -962,7 +964,7 @@ namespace Java {
              */
             static String valueOf(float floatValue);
 
-            /**
+			/**
              * Returns the String representation of the double argument.
              *
              * @param doubleValue
@@ -1168,7 +1170,7 @@ namespace Java {
                 return result;
             }
 
-            /**
+			/**
              * Format string
              *
              * @param format
