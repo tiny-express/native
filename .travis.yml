@@ -26,10 +26,11 @@ before_script:
 - export CXX=g++
 - ./misc/benchmark.sh
 script:
-- cd cmake && cmake . -DCMAKE_BUILD_TYPE=Debug && make native_test -j8
-- cd cmake &&  cmake . -DCMAKE_BUILD_TYPE=Release && make native_benchmark
-- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then valgrind --error-exitcode=42 --leak-check=full ./cmake/native_test; else ./cmake/native_test; fi
-- ./cmake/native_benchmark
+- cd cmake
+- cmake . -DCMAKE_BUILD_TYPE=Debug && make native_test -j8
+- cmake . -DCMAKE_BUILD_TYPE=Release && make native_benchmark
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then valgrind --error-exitcode=42 --leak-check=full ./native_test; else ./native_test; fi
+- ./native_benchmark
 after_success:
 - cd $TRAVIS_BUILD_DIR
 - ./misc/codecov.sh
