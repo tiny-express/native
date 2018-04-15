@@ -1,1 +1,7 @@
+bindings/* linguist-vendored
+cmake/* linguist-vendored
+examples/* linguist-vendored
+misc/* linguist-vendored
+*.java linguist-vendored
 *.cpp linguist-language=C++
+
