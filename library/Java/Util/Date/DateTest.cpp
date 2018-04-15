@@ -662,7 +662,7 @@ TEST(JavaUtilDate, ToString) {
     String actual;
 
     tzset();
-    extern char *tzname[2];
+    char *tzname[2];
     String zone = (string) tzname[0];
 
     // Valid case
