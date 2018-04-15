@@ -24,12 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "NoSuchElementException.hpp"
 
 using namespace Java::Lang;
 
-TEST (NoSuchElementException, Constructor) {
+TEST (JavaLangNoSuchElementException, Constructor) {
 	// Constructs a new NoSuchElementException with null as its detail message.
 	NoSuchElementException NoSuchElementExceptionWithNullMessage;
 	assertEquals("", NoSuchElementExceptionWithNullMessage.getMessage());
@@ -49,7 +49,7 @@ TEST (NoSuchElementException, Constructor) {
 	assertEquals("NoSuchElementException with the specified message", NoSuchElementExceptionWithCause.getCause()->getCause()->getMessage());
 }
 
-TEST (NoSuchElementException, TryCatch) {
+TEST (JavaLangNoSuchElementException, TryCatch) {
 	try {
 		throw NoSuchElementException("Throw NoSuchElementException");
 	} catch (NoSuchElementException &exception) {

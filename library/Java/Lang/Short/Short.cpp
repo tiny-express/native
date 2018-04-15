@@ -35,7 +35,7 @@ using namespace Java::Lang;
  */
 Short::Short() {
 	this->original = 0;
-	this->originalString = stringFromShort(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 }
 
 /**
@@ -45,7 +45,7 @@ Short::Short() {
  */
 Short::Short(short original) {
 	this->original = original;
-	this->originalString = stringFromShort(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 }
 
 /**
@@ -55,7 +55,7 @@ Short::Short(short original) {
  */
 Short::Short(const Short &shortNumber) {
 	this->original = shortNumber.original;
-	this->originalString = stringFromShort(this->original);
+    asprintf(&this->originalString, "%d", this->original);
 }
 
 Short::~Short() {
@@ -71,7 +71,9 @@ Short::~Short() {
  * @return short
  */
 Short Short::parseShort(String target) {
-	return Short(stringToShort(target.toCharPointer()));
+    short result;
+    sscanf(target.toCharPointer(), "%hi", &result);
+	return (Short) result;
 }
 
 /**
@@ -89,7 +91,16 @@ String Short::toString() const {
  * @return char
  */
 char Short::charValue() const {
-	return stringToChar(stringFromShort(this->original));
+    string stringFromShort;
+    char result;
+    asprintf(&stringFromShort, "%d", this->original);
+    if (stringFromShort == "") {
+        result = '\0';
+    } else {
+        result = stringFromShort[0];
+    }
+    free(stringFromShort);
+    return result;
 }
 
 /**
@@ -125,7 +136,7 @@ long Short::longValue() const {
  * @return int
  */
 float Short::floatValue() const {
-	return (float) this->original;
+	return (float)this->original;
 }
 
 /**
@@ -134,7 +145,7 @@ float Short::floatValue() const {
  * @return int
  */
 double Short::doubleValue() const {
-	return (double) this->original;
+	return (double)this->original;
 }
 
 /**
@@ -146,7 +157,7 @@ double Short::doubleValue() const {
 Short Short::operator=(const Short &target) {
 	this->original = target.original;
 	free(this->originalString);
-	this->originalString = stringFromShort(this->original);
+    asprintf(&this->originalString, "%d", this->original);
 	return *this;
 }
 
@@ -183,7 +194,7 @@ Short Short::operator*(const Short &target) {
  * @return Short
  */
 Short Short::operator/(const Short &target) {
-	return ( this->original / target.original );
+	return (this->original / target.original);
 }
 
 /**
@@ -192,7 +203,7 @@ Short Short::operator/(const Short &target) {
  * @return Short
  */
 Short Short::operator%(const Short &target) {
-	return ( this->original % target.original );
+	return (this->original % target.original);
 }
 
 /**

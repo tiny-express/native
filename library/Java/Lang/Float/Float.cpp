@@ -31,22 +31,22 @@ using namespace Java::Lang;
 
 Float::Float() {
     this->original = 0;
-    this->originalString = stringFromFloat(this->original);
+    asprintf(&this->originalString, "%g", this->original);
 }
 
 Float::Float(float original) {
     this->original = original;
-    this->originalString = stringFromFloat(this->original);
+    asprintf(&this->originalString, "%g", this->original);
 }
 
 Float::Float(const Float &floatNumber) {
     this->original = floatNumber.original;
-    this->originalString = stringFromFloat(this->original);
+    asprintf(&this->originalString, "%g", this->original);
 }
 
 Float::Float(String inputString) {
     this->original = this->parseFloat(inputString).floatValue();
-    this->originalString = stringFromFloat(this->original);
+    asprintf(&this->originalString, "%g", this->original);
 }
 
 Float::~Float() {
@@ -112,7 +112,7 @@ boolean Float::operator||(const Float &target) const {
 Float& Float::operator=(const Float &target) {
     this->original = target.original;
     free(this->originalString);
-    this->originalString = stringFromFloat(this->original);
+    asprintf(&this->originalString, "%f", this->original);
     return *this;
 }
 
@@ -161,7 +161,9 @@ String Float::toString() const {
 }
 
 Float Float::parseFloat(String inputString) {
-    return (Float) stringToFloat(inputString.toCharPointer());
+    float result;
+    sscanf(inputString.toCharPointer(), "%g", &result);
+    return (Float)result;
 }
 
 boolean Float::isFinite(float valueFloat) {
@@ -573,7 +575,7 @@ int Float::compareTo(const Float &anotherFloat) const {
 
 // TODO(thoangminh): Wait for instanceof<>
 boolean Float::equals(const Float &object) const {
-    boolean isFloat = instanceof<Float>(object);
+    boolean isFloat = typeid(object).name() == typeid(float).name();
     auto castObjectToFloat = (Float*)&object;
     int floatToIntBitsObject = floatToIntBits(castObjectToFloat->original);
     int floatToIntBitsThis = floatToIntBits(this->original);

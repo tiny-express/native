@@ -27,7 +27,6 @@
 #ifndef NATIVE_JAVA_SECURITY_MESSAGE_DIGEST_SPI_HPP_
 #define NATIVE_JAVA_SECURITY_MESSAGE_DIGEST_SPI_HPP_
 
-#include "../../../../kernel/Type.hpp"
 #include "../../Lang.hpp"
 
 namespace Java {

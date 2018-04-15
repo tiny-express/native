@@ -108,7 +108,7 @@ int Boolean::compareTo(const Boolean &target) const {
  * @return boolean
  */
 boolean Boolean::getBoolean(const_string target) {
-	return stringToBoolean((string) target);
+	return std::string(target) == std::string("true");
 }
 
 /**

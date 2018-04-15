@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_KERNEL_BUILTIN_HPP
-#define NATIVE_KERNEL_BUILTIN_HPP
+#ifndef NATIVE_KERNEL_COMMON_HPP
+#define NATIVE_KERNEL_COMMON_HPP
 
 // Definitions and macros
 #include "Platform.hpp"
@@ -63,7 +63,9 @@
 #endif
 
 // C++ Standard Library
+#include <atomic>
 #include <thread>
+#include <mutex>
 #include <memory>
 #include <algorithm>
 #include <stack>
@@ -82,36 +84,6 @@
 #include <string>
 #include <initializer_list>
 #include <functional>
-
-// Builtin functions
-#define P_LEN(NAME, TYPE); \
-inline int lengthPointer##NAME(TYPE *target) {\
-    if (NULL == target) return 0;\
-    return strlen(target);\
-}
-
-// Length of pointer pointer
-#define P_P_LEN(NAME, TYPE); \
-inline int lengthPointerPointer##NAME(TYPE **target) {\
-    if (NULL == target) return 0;\
-    TYPE**pointer;\
-    for (pointer = target; *pointer; ++pointer);\
-    return pointer - target;\
-}
-
-P_LEN(Char, char);
-P_LEN(Char, const char);
-P_P_LEN(Char, char);
-
-/**
- * Is string empty ?
- *
- * @param input
- * @return TRUE or FALSE
- */
-inline boolean isEmptyString(const char *input) {
-    return lengthPointerChar(input) == 0;
-}
 
 /**
  * Allocate new memory with specific size
@@ -141,7 +113,7 @@ inline void *allocateMemory(void *currentPointer, size_t newCapacity) {
  * @return char*
  */
 inline char *stringCopy(const char *target) {
-	return strdup(target);
+    return strdup(target);
 }
 
 /**
@@ -157,4 +129,4 @@ inline boolean instanceof(T t) {
     return typeid(t).name() == typeid(Base).name();
 }
 
-#endif //NATIVE_KERNEL_BUILTIN_HPP
+#endif //NATIVE_KERNEL_COMMON_HPP

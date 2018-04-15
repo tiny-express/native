@@ -25,7 +25,7 @@
 */
 
 #include "ClientErrorException.hpp"
-#include "../../../../../kernel/Test.hpp"
+#include "../../../../Test.hpp"
 
 using namespace Javax::Ws::Rs;
 

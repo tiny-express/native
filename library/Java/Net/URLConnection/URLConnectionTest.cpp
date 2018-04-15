@@ -25,7 +25,7 @@
  */
 //
 //extern "C" {
-//#include "../../../../../../kernel/test.h"
+//#include "../../../../../../Kernel/test.h"
 //}
 //#include "URLConnection.hpp"
 //
