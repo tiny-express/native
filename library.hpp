@@ -40,6 +40,9 @@
 #include "library/Javax/Net.hpp"
 #include "library/Javax/Sql.hpp"
 
+// Test
+#include "library/Test.hpp"
+
 // Java::Lang is imported by default
 using namespace Java::Lang;
 

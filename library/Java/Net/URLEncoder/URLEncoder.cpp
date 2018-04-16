@@ -33,15 +33,40 @@ String URLEncoder::encode(const String &source) {
     return URLEncoder::encode(source, "UTF-8");
 }
 
+inline char charToHex(char code) {
+    static char hex[] = "0123456789abcdef";
+    return hex[code & 15];
+}
+
+inline char *urlEncode(char *target, int size) {
+    char *targetIndex = target;
+    auto result = (char *) calloc((size_t) size * 3 + 1, sizeof(char));
+    char *resultIndex = result;
+    while (*targetIndex) {
+        if (isalnum(*targetIndex) || *targetIndex == '-' || *targetIndex == '_' || *targetIndex == '.' ||
+            *targetIndex == '~') {
+            *resultIndex++ = *targetIndex;
+        } else if (*targetIndex == ' ') {
+            *resultIndex++ = '+';
+        } else {
+            *resultIndex++ = '%', *resultIndex++ = charToHex(*targetIndex >> 4), *resultIndex++ = charToHex(
+                    *targetIndex & 15);
+        }
+        targetIndex++;
+    }
+    *resultIndex = '\0';
+    return result;
+}
+
 String URLEncoder::encode(const String &source, const String &encoding) {
     // TODO(truongchauhien): String class need to be refactoring.
-//    String &referenceToEncoding = const_cast<String &>(encoding);
-//    if (referenceToEncoding.toUpperCase() == "UTF-8") {
-//        string encodedString = urlEncode(source.toCharPointer());
-//        String result(encodedString);
-//        free(encodedString);
-//        return result;
-//    }
+    String &referenceToEncoding = const_cast<String &>(encoding);
+    if (referenceToEncoding.toUpperCase() == "UTF-8") {
+        string encodedString = urlEncode(source.toCharPointer(), source.length());
+        String result(encodedString);
+        free(encodedString);
+        return result;
+    }
     // TODO(truongchauhien): Need "java.nio.charset.Charset" class and "Array<byte> getBytes(const Charset &) method".
     throw UnsupportedEncodingException(encoding);
 }

@@ -31,8 +31,7 @@
 using namespace Java::Net;
 using namespace Java::Lang;
 
-TEST(JavaNetURLDecoderDecode, Decode) {
-	return;
+TEST(JavaNet, URLDecoderDecode) {
     {
         String target = "Qu%c3%a1n+%c4%83n";
         String result = URLDecoder::decode(target);
