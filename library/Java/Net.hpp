@@ -30,5 +30,6 @@
 #include "Net/HttpURLConnection/HttpURLConnection.hpp"
 #include "Net/URL/URL.hpp"
 #include "Net/URLEncoder/URLEncoder.hpp"
+#include "Net/URLDecoder/URLDecoder.hpp"
 
 #endif // NATIVE_JAVA_NET_HPP
