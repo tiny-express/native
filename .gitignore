@@ -19,8 +19,8 @@ DartConfiguration.tcl
 Testing
 /src
 /Makefile
-/cmake/Makefile
-/cmake/native*
+/develop/Makefile
+/develop/native*
 /native*
 libnative*
 /native_benchmark
