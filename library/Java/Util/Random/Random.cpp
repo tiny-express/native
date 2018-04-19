@@ -33,7 +33,7 @@
 /**
  * Set seedUniquifierField
  */
-//std::atomic_long Random::seedUniquifierField = { 8682522807148012L};
+std::atomic_long Random::seedUniquifierField = { 8682522807148012L};
 
 /**
  * Set seed offset;
@@ -75,8 +75,8 @@ Random::Random(long seed) {
  * @return
  */
 long Random::initialScramble(long seed) {
-    return 0;
-	//return (seed ^ MULTIPLIER ) & MASK;
+    //return 0;
+	return (seed ^ MULTIPLIER ) & MASK;
 }
 
 /**
@@ -87,10 +87,10 @@ long Random::initialScramble(long seed) {
 long Random::seedUniquifier() {
 	long current = 0;
 	long next = 0;
-//	do {
-//		current = seedUniquifierField.load();
-//		next = current * 181783497276652981L;
-//	} while (!seedUniquifierField.compare_exchange_strong(current, next));
+	do {
+		current = seedUniquifierField.load();
+		next = current * 181783497276652981L;
+	} while (!seedUniquifierField.compare_exchange_strong(current, next));
     return next;
 }
 
@@ -128,7 +128,7 @@ int Random::next(int bits) {
 	long nextSeed = 0;
 	do {
 		oldSeed = seed.load();
-		//nextSeed = (( oldSeed * MULTIPLIER + ADDEND ) & MASK );
+		nextSeed = (( oldSeed * MULTIPLIER + ADDEND ) & MASK );
 	} while (!seed.compare_exchange_weak(oldSeed, nextSeed));
 	return (int) ( nextSeed >> ( 48 - bits ));
 }
@@ -202,8 +202,8 @@ void Random::nextBytes(Array<byte> *bytes) {
  * @return double
  */
 double Random::nextDouble() {
-	//return (((long) ( next(26)) << 27 ) + next(27)) * DOUBLE_UNIT;
-    return (((long) ( next(26)) << 27 ) + next(27));
+	return (((long) ( next(26)) << 27 ) + next(27)) * DOUBLE_UNIT;
+    //return (((long) ( next(26)) << 27 ) + next(27));
 }
 
 /**
