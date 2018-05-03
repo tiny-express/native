@@ -3,6 +3,7 @@
 bin
 .idea
 .vscode*
+.gradle
 /main
 main.o
 !misc/*
