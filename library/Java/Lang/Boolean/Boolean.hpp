@@ -27,7 +27,6 @@
 #ifndef NATIVE_JAVA_LANG_BOOLEAN_HPP
 #define NATIVE_JAVA_LANG_BOOLEAN_HPP
 
-#include "../../../../kernel/String.hpp"
 #include "../Object/Object.hpp"
 #include "../../Io/Serializable/Serializable.hpp"
 #include "../../Lang/Comparable/Comparable.hpp"

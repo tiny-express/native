@@ -36,22 +36,22 @@ using namespace Java::Lang;
 
 Integer::Integer() {
 	this->original = 0;
-	this->originalString = stringFromInt(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 }
 
 Integer::Integer(int original) {
 	this->original = original;
-	this->originalString = stringFromInt(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 }
 
 Integer::Integer(String inputString) {
 	this->original = Integer::parseInt(inputString);
-	this->originalString = stringFromInt(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 }
 
 Integer::Integer(const Integer &integer) {
 	this->original = integer.original;
-	this->originalString = stringFromInt(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 }
 
 Integer::~Integer() {
@@ -61,8 +61,14 @@ Integer::~Integer() {
 }
 
 char Integer::charValue() const {
-	string convertResult = stringFromInt(this->original);
-	char result = stringToChar(convertResult);
+	string convertResult;
+    asprintf(&convertResult, "%d", this->original);
+	char result;
+    if (convertResult == "") {
+        result = '\0';
+    } else {
+        result = convertResult[0];
+    }
 	free(convertResult);
 	return result;
 }
@@ -94,7 +100,7 @@ double Integer::doubleValue() const {
 Integer &Integer::operator=(const Integer &target) {
 	this->original = target.original;
 	free(this->originalString);
-	this->originalString = stringFromInt(this->original);
+    asprintf(&this->originalString, "%d", this->original);
 	return *this;
 }
 
@@ -151,14 +157,14 @@ Integer Integer::operator%(const Integer &target) {
 Integer &Integer::operator+=(const Integer &target) {
 	this->original += target.original;
 	free(this->originalString);
-	this->originalString = stringFromInt(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 	return *this;
 }
 
 Integer &Integer::operator-=(const Integer &target) {
 	this->original -= target.original;
 	free(this->originalString);
-	this->originalString = stringFromInt(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 	return *this;
 }
 
@@ -168,14 +174,14 @@ Integer &Integer::operator/=(const Integer &target) {
 	}
 	this->original /= target.original;
 	free(this->originalString);
-	this->originalString = stringFromInt(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 	return *this;
 }
 
 Integer &Integer::operator*=(const Integer &target) {
 	this->original *= target.original;
 	free(this->originalString);
-	this->originalString = stringFromInt(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 	return *this;
 }
 
@@ -185,7 +191,7 @@ Integer &Integer::operator%=(const Integer &target) {
 	}
 	this->original %= target.original;
 	free(this->originalString);
-	this->originalString = stringFromInt(this->original);
+	asprintf(&this->originalString, "%d", this->original);
 	return *this;
 }
 

@@ -24,31 +24,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "URLDecoder.hpp"
 #include "../../Io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
 
 using namespace Java::Net;
 using namespace Java::Lang;
 
-TEST(JavaNet, URLDecoderDecode) {
-    return; //mbstowcs
-    String target = "Qu%c3%a1n+%c4%83n";
-    String result = URLDecoder::decode(target);
-    String expect = u8"Quán ăn";
-    assertEquals(expect.toString(), result.toString());
-}
+TEST(JavaNetURLDecoderDecode, Decode) {
+	return;
+    {
+        String target = "Qu%c3%a1n+%c4%83n";
+        String result = URLDecoder::decode(target);
+        String expect = u8"Quán ăn";
+        assertEquals(expect.toString(), result.toString());
+    }
 
-TEST(JavaNet, URLDecoderDecodeUsingSpecificEncodingScheme) {
-    return; //mbstowcs
-    String target = "Qu%c3%a1n+%c4%83n";
-    String result = URLDecoder::decode(target, "UTF-8");
-    String expect = u8"Quán ăn";
-    assertEquals(expect.toString(), result.toString());
-
-    try {
-        URLDecoder::decode(target, "UTF-0");
-    } catch (UnsupportedEncodingException &ex) {
-        assertEquals("UTF-0", ex.getMessage());
+    {
+        String target = "Qu%c3%a1n+%c4%83n";
+        String result = URLDecoder::decode(target, "UTF-8");
+        String expect = u8"Quán ăn";
+        assertEquals(expect.toString(), result.toString());
+        try {
+            URLDecoder::decode(target, "UTF-0");
+        } catch (UnsupportedEncodingException &ex) {
+            assertEquals("UTF-0", ex.getMessage());
+        }
     }
 }

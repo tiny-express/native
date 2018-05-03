@@ -27,7 +27,6 @@
 #ifndef NATIVE_JAVA_LANG_INTEGER_HPP
 #define NATIVE_JAVA_LANG_INTEGER_HPP
 
-#include "../../../../kernel/String.hpp"
 #include "../Number/Number.hpp"
 #include "../String/String.hpp"
 #include "../Comparable/Comparable.hpp"

@@ -24,10 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define TESTING
-#include "../kernel/Test.hpp"
+#include "../library.hpp"
 
 int main(int argc, const char *argv[]) {
-	int result = ctest_main(argc, argv);
-	return result;
+	return ApplicationTest(argc, argv);
 }
