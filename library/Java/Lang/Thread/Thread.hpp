@@ -27,68 +27,87 @@
 #ifndef NATIVE_JAVA_LANG_THREAD_HPP
 #define NATIVE_JAVA_LANG_THREAD_HPP
 
-#include <pthread.h>
+#include <functional>
 #include "../Object/Object.hpp"
-#include "../String/String.hpp"
 #include "../Runnable/Runnable.hpp"
-#include "../System/System.hpp"
+#include "../../Util/Concurrent/Semaphore/Semaphore.hpp"
+
+using namespace Java::Util::Concurrent;
 
 namespace Java {
-	namespace Lang {
-		class Thread : public Object, public virtual Runnable {
-		private:
-			pthread_t original;
-			string threadName;
-			Runnable *target;
+		namespace Lang {
+            class Thread : public Object, public virtual Runnable {
+                private:
+                    boolean alive = false;
+                    boolean detached = false;
+                    String name;
+                    unsigned long tid = 0;
+                    Runnable *target = NULL;
+                    Semaphore semaphoreObject;
+                    std::thread threadObject;
+                    std::mutex mutexObject;
+                    std::function<void()> func;
 
-			boolean isThreadRunning;
-			///Adds-on function to adapt pthread_create of C style
-		public:
-			void *pthread_run(void *context) {
-				((Thread *) context)->target->run();
-			}
+                 private:
+                    /**
+                     * Initializes a Thread.
+                     *
+                     * @param target the object whose run() method gets called
+                     * @param name the name of the new Thread
+                     * @param stackSize the desired stack size for the new thread, or
+                     *        zero to indicate that this parameter is to be ignored.
+                     */
+                    void init(Runnable *target, String name);
 
-			static void *pthread_helper(void *context) {
-				return ((Thread *) context)->pthread_run(context);
-			}
+				 public:
+                    Thread();
+                    Thread(Runnable* target);
+                    Thread(std::function<void()> func);
+                    ~Thread();
 
-		public:
-			Thread();
+                    void run() override;
 
-			Thread(Runnable &target2);
+                    /**
+                     * Changes the name of this thread to be equal to the argument
+                     * name.
+                     * 
+                     * First the checkAccess method of this thread is called
+                     * with no arguments. This may result in throwing a
+                     * SecurityException.
+                     *
+                     * @param      name   the new name for this thread.
+                     * @exception  SecurityException  if the current thread cannot modify this
+                     *               thread.
+                     * @see        #getName
+                     * @see        #checkAccess()
+                     */
+                    void setName(String name);
 
-			Thread(Runnable &target2, String name);
+                    /**
+                     * Returns this thread's name.
+                     *
+                     * @return  this thread's name.
+                     * @see     #setName(String)
+                     */
+                    String getName();
 
-			Thread(String name);
+                    boolean isAlive();
 
-			//Thread(ThreadGroup group, Runnable &target);
-			//Thread(ThreadGroup group, Runnable &target, String &name);
-			//Thread(ThreadGroup group, Runnable &target, String &name, long stackSize);
-			//Thread(ThreadGroup group, String &name);
-			~Thread();
+                    unsigned long getId();
 
-		public:
-			void run() const;
+                    void start();
 
-			void start();
+                    void join();
 
-			void stop();
+                    void join(long millis);
 
-			void join();
+                    void detach();
 
-			void join(unsigned int millis);
+                    static void sleep(long millis);
 
-			string getName();
+                    static Thread* currentThread();
+            };
+        } // namespace Lang
+} // namespace Java
 
-			static void sleep(long millis);
-
-			static void sleep(long millis, int nanos);
-
-			void setName(string target);
-
-			String toString() const;
-		};
-	}
-}
-
-#endif   // JAVA_LANG_THREAD_THREAD_HPP
+#endif   // JAVA_LANG_THREAD_THREAD_HPP_

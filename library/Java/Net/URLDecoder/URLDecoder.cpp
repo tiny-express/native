@@ -34,13 +34,13 @@ String URLDecoder::decode(const String &source) {
 
 String URLDecoder::decode(const String &source, const String &encoding) {
     // TODO(truongchauhien): String class need to be refactoring.
-    String &referenceToEncoding = const_cast<String &>(encoding);
-    if (referenceToEncoding.toUpperCase() == "UTF-8") {
-        string decodedString = urlDecode(source.toCharPointer());
-        String result(decodedString);
-        free(decodedString);
-        return result;
-    }
+//    String &referenceToEncoding = const_cast<String &>(encoding);
+//    if (referenceToEncoding.toUpperCase() == "UTF-8") {
+//        string decodedString = urlDecode(source.toCharPointer());
+//        String result(decodedString);
+//        free(decodedString);
+//        return result;
+//    }
     // TODO(truongchauhien): Need "java.nio.charset.Charset" class and "Array<byte> getBytes(const Charset &) method".
     throw UnsupportedEncodingException(encoding);
 }

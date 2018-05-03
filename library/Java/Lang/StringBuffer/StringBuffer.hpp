@@ -26,8 +26,6 @@
 #ifndef NATIVE_STRING_BUFFER_HPP
 #define NATIVE_STRING_BUFFER_HPP
 
-#include "../../../../kernel/String.hpp"
-#include <mutex>
 #include "../StringBuilder/StringBuilder.hpp"
 
 namespace Java {
@@ -35,6 +33,7 @@ namespace Java {
         class StringBufferUnSafe :
                 public Object,
                 public virtual CharSequence {
+        friend class String;
         protected:
             string original = nullptr;
             int currentLength = 0;

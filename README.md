@@ -26,14 +26,6 @@ $ git clone https://github.com/foodtiny/native.git
 $ ./configure && make native -j4 && sudo make install
 ```
 
-#### Benchmarking with C++/STL
-[Google Benchmark](https://github.com/google/benchmark) is required for benchmarking
-if you're using Linux or Mac please use ./misc/benchmark.sh to install
-```bash
-$ ./configure && make native -j4 && make native_benchmark
-$ ./native_benchmark
-```
-
 #### Examples
 ```cpp
 #include <native/library.hpp>
@@ -82,6 +74,7 @@ argument 0 is ./main
 [{"argument 0": "./main", "argument 1": "one", "argument 2": "two", "argument 3": "three"}]
 ```
 More examples can be found [here](https://github.com/foodtiny/native/tree/master/examples)
+Support unit test by default via ApplicationTest [here](https://github.com/foodtiny/native/tree/master/examples/Docker/ApplicationTest)  - Powered by C-Unit
 
 ### Contributors
 - This library must be followed [Oracle Java 8 Documentation](https://docs.oracle.com/javase/8/docs/api) for standardization
@@ -119,7 +112,6 @@ All data types are implemented and ready to use in C++ Application
 - [x] char - Java.Lang.Character
 - [x] byte - Java.Lang.Byte
 - [x] string - Java.Lang.String
-- [x] unicode - java.lang.Character
 - [x] short - Java.Lang.Short
 - [x] int - Java.Lang.Integer
 - [x] long - Java.Lang.Long

@@ -27,7 +27,6 @@
 #ifndef NATIVE_JAVA_UTIL_ARRAYLIST_ARRAYLIST_HPP
 #define NATIVE_JAVA_UTIL_ARRAYLIST_ARRAYLIST_HPP
 
-#include "../../../../kernel/String.hpp"
 #include "../../Lang.hpp"
 #include "../../Io/Serializable/Serializable.hpp"
 #include "../AbstractList/AbstractList.hpp"
