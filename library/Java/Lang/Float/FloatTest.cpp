@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "Float.hpp"
 
 using namespace Java::Lang;
@@ -529,21 +529,18 @@ TEST (JavaLangFloat, ToStringNoneParam) {
     assertEquals(expectedResultToString, actualResultToString);
 
     // Test Float::MAX_VALUE
-    variableTestToString = Float::MAX_VALUE;
     expectedResultToString = (String) "3.40282e+38";
-    actualResultToString = variableTestToString.toString();
+    actualResultToString = variableTestToString.toString(Float::MAX_VALUE);
     assertEquals(expectedResultToString, actualResultToString);
 
     // Test Float::MIN_NORMAL
-    variableTestToString = Float::MIN_NORMAL;
     expectedResultToString = (String) "1.4013e-45";
-    actualResultToString = variableTestToString.toString();
+    actualResultToString = variableTestToString.toString(Float::MIN_NORMAL);
     assertEquals(expectedResultToString, actualResultToString);
 
     // Test Float::MIN_VALUE
-    variableTestToString = Float::MIN_VALUE;
     expectedResultToString = (String) "1.17549e-38";
-    actualResultToString = variableTestToString.toString();
+    actualResultToString = variableTestToString.toString(Float::MIN_VALUE);
     assertEquals(expectedResultToString, actualResultToString);
 }
 

@@ -16,11 +16,10 @@
 #ifndef NATIVE_KERNEL_TEST_HPP
 #define NATIVE_KERNEL_TEST_HPP
 
-#include "Type.hpp"
-#include "../library/Java/Lang/String/String.hpp"
-#include "../library/Java/Lang/Integer/Integer.hpp"
-#include "../library/Java/Lang/Double/Double.hpp"
-#include "../library/Java/Util/ArrayList/ArrayList.hpp"
+#include "Java/Lang/String/String.hpp"
+#include "Java/Lang/Integer/Integer.hpp"
+#include "Java/Lang/Double/Double.hpp"
+#include "Java/Util/ArrayList/ArrayList.hpp"
 
 using namespace Java::Lang;
 
@@ -39,7 +38,6 @@ using namespace Java::Lang;
 #include <cinttypes> /* intmax_t, uintmax_t, PRI* */
 #include <cstddef> /* size_t */
 #include <csignal>
-#include "Common.hpp"
 
 typedef void (*SetupFunc)(void *);
 

@@ -24,12 +24,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "NoSuchAlgorithmException.hpp"
 
 using namespace Java::Security;
 
-TEST(JavaLang, NoSuchAlgorithmExceptionConstructor) {
+TEST(JavaLangNoSuchAlgorithmException, Constructor) {
 
     NoSuchAlgorithmException noSuchAlgorithmExceptionWithNullMessage;
     assertEquals(
@@ -44,8 +44,7 @@ TEST(JavaLang, NoSuchAlgorithmExceptionConstructor) {
             "NoSuchAlgorithmException with the specified message",
             noSuchAlgorithmExceptionWithMessage.getMessage());
 
-    NoSuchAlgorithmException noSuchAlgorithmExceptionWithMessageAndCause =
-            NoSuchAlgorithmException(
+    auto noSuchAlgorithmExceptionWithMessageAndCause = NoSuchAlgorithmException(
                     "NoSuchAlgorithmException with the specified message and cause",
                     &noSuchAlgorithmExceptionWithMessage);
     assertEquals(
@@ -56,8 +55,7 @@ TEST(JavaLang, NoSuchAlgorithmExceptionConstructor) {
             noSuchAlgorithmExceptionWithMessageAndCause.getCause()
                     ->getMessage());
 
-    NoSuchAlgorithmException noSuchAlgorithmExceptionWithCause =
-            NoSuchAlgorithmException(&noSuchAlgorithmExceptionWithMessageAndCause);
+    auto noSuchAlgorithmExceptionWithCause = NoSuchAlgorithmException(&noSuchAlgorithmExceptionWithMessageAndCause);
     assertEquals("NoSuchAlgorithmException with the specified message and cause",
                noSuchAlgorithmExceptionWithCause.getCause()
                        ->getMessage());
@@ -67,7 +65,7 @@ TEST(JavaLang, NoSuchAlgorithmExceptionConstructor) {
                        ->getMessage());
 }
 
-TEST(JavaLang, NoSuchAlgorithmExceptionTryCatch) {
+TEST(JavaLangNoSuchAlgorithmException,TryCatch) {
     try {
         throw NoSuchAlgorithmException("Throw NoSuchAlgorithmException");
     } catch (Exception e) {

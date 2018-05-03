@@ -25,7 +25,7 @@
  */
 
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "IOException.hpp"
 
 using namespace Java::Lang;

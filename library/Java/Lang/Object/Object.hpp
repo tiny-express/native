@@ -27,7 +27,7 @@
 #ifndef NATIVE_JAVA_LANG_OBJECT_HPP
 #define NATIVE_JAVA_LANG_OBJECT_HPP
 
-#include "../../../../kernel/Kernel.hpp"
+#include "../../../Kernel/Java.hpp"
 #include "../String/String.hpp"
 #include "../InterruptedException/InterruptedException.hpp"
 #include "../CloneNotSupportedException/CloneNotSupportedException.hpp"

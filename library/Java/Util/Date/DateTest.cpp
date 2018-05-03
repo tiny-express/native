@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 
 #include "Date.hpp"
 #include "../../Lang/IllegalArgumentException/IllegalArgumentException.hpp"
@@ -66,9 +66,9 @@ TEST(JavaUtilDate, Constructor) {
     assertEquals(01, date.getMinutes());
     assertEquals(13, date.getSeconds());
 
-    // Test Date(long date)
-    date = Date(1498042091);  // 2017
-    assertEquals(117, date.getYear());
+    // Test Date(long millisec)
+    date = Date(1523780056162);
+    assertEquals("Sun Apr 15 15:14:16 +07 2018", date.toString());
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);

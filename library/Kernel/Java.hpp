@@ -27,8 +27,7 @@
 #ifndef NATIVE_KERNEL_JAVA_HPP
 #define NATIVE_KERNEL_JAVA_HPP
 
-#include "Builtin.hpp"
-#include "../kernel/string/Process.hpp"
+#include "Common.hpp"
 
 namespace Java {
 		namespace Lang {
@@ -90,10 +89,10 @@ public:
 		}
 		
 		Array(char **charPointerArray) {
-			int size = lengthPointerPointerChar(charPointerArray);
-			int index;
-			for (index = 0; index < size; index++) {
+			int index = 0;
+			while (charPointerArray[index] != nullptr) {
 				original.push_back(charPointerArray[ index ]);
+				index += 1;
 			}
 			this->length = original.size();
 		}
@@ -159,22 +158,7 @@ public:
 		E get(const int index) const {
 			return (E) original.at(index);
 		}
-		
-		/**
-		* Convert Array to char pointer
-		*
-		* @return string
-		*/
-		string toCharPointer() {
-			if (std::is_same<E, byte>::value || std::is_same<E, char>::value) {
-				string result = stringCopy("");
-				for (char element : *this) {
-					stringAppend(&result, element);
-				}
-				return result;
-			}
-			return (string) "This type is not available for serialize";
-		}
+
 public:
 		
 		/**
@@ -196,7 +180,7 @@ public:
 		const E &operator[](const int index) const {
 			return this->original.at(index);
 		}
-		
+
 		/**
 		 * Append a std::initializer_list<E> to this array
 		 *
@@ -213,7 +197,23 @@ public:
 		}
 };
 
+/**
+ * Convert integer to hex string
+ *
+ * @param inputInt
+ * @return String
+ */
 Java::Lang::String IntegerToHexString(int inputInt);
+
+/**
+ * Application testing
+ * This function handle any application exception to keep program safety
+ *
+ * @param program
+ * @param argument
+ * @return int
+ */
+int ApplicationTest(int argc, const char **argv);
 
 /**
  * Application starting point
@@ -223,6 +223,6 @@ Java::Lang::String IntegerToHexString(int inputInt);
  * @param argument
  * @return int
  */
-int Application(void (*program)(Array<Java::Lang::String>), int argc, char **argument);
+int Application(void (*program)(Array <Java::Lang::String>), int argc, char **argv);
 
 #endif// NATIVE_KERNEL_JAVA_HPP

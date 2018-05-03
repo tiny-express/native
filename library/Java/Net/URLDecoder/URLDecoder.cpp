@@ -32,11 +32,37 @@ String URLDecoder::decode(const String &source) {
     return URLDecoder::decode(source, "UTF-8");
 }
 
+
+inline char charFromHex(char ch) {
+    return isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10;
+}
+
+inline char *urlDecode(char *target, int size) {
+    char *targetIndex = target;
+    auto result = (char *) calloc((size_t) size + 1, sizeof(char));
+    char *resultIndex = result;
+    while (*targetIndex) {
+        if (*targetIndex == '%') {
+            if (targetIndex[1] && targetIndex[2]) {
+                *resultIndex++ = charFromHex(targetIndex[1]) << 4 | charFromHex(targetIndex[2]);
+                targetIndex += 2;
+            }
+        } else if (*targetIndex == '+') {
+            *resultIndex++ = ' ';
+        } else {
+            *resultIndex++ = *targetIndex;
+        }
+        targetIndex++;
+    }
+    *resultIndex = '\0';
+    return result;
+}
+
 String URLDecoder::decode(const String &source, const String &encoding) {
     // TODO(truongchauhien): String class need to be refactoring.
     String &referenceToEncoding = const_cast<String &>(encoding);
     if (referenceToEncoding.toUpperCase() == "UTF-8") {
-        string decodedString = urlDecode(source.toCharPointer());
+        string decodedString = urlDecode(source.toCharPointer(), source.length());
         String result(decodedString);
         free(decodedString);
         return result;

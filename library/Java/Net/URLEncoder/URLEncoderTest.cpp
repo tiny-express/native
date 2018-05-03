@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "../URLEncoder/URLEncoder.hpp"
 #include "../../Io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
 
@@ -32,7 +32,6 @@ using namespace Java::Net;
 using namespace Java::Lang;
 
 TEST(JavaNet, URLEncoderEncode) {
-    return; //mbstowcs
     String hello = "";
     String target = u8"Quán ăn";
     String result = URLEncoder::encode(target);
@@ -41,7 +40,6 @@ TEST(JavaNet, URLEncoderEncode) {
 }
 
 TEST(JavaNet, URLEncoderEncodeUsingSpecificEncodingScheme) {
-    return; //mbstowcs
     String target = u8"Quán ăn";
     String result = URLEncoder::encode(target, "UTF-8");
     String expect = "Qu%c3%a1n+%c4%83n";

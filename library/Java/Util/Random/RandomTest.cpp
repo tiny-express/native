@@ -24,7 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../../kernel/Test.hpp"
+#include "../../../Test.hpp"
 #include "Random.hpp"
 #include "../../Lang/IllegalArgumentException/IllegalArgumentException.hpp"
 
@@ -65,11 +65,11 @@ TEST (JavaUtilRandom,NextIntWithBound) {
 	}
 	
 	// Test nextInt(bound) with bound = 64 is a power of 2
-	bound = 64;
+	bound = 900;
 	for (index = 0; index < 100; index++) {
-		int a = random1.nextInt(bound);
-		assertTrue(a >= 0 && a < bound); // Check if the return value is in [0, bound)
-	}
+        int a = random1.nextInt(bound);
+        assertTrue(a >= 0 && a < bound);
+    }
 }
 
 TEST (JavaUtilRandom,NextBytes) {

@@ -2,8 +2,12 @@
 .DS_Store
 bin
 .idea
-.vscode
+.vscode*
 .gradle
+/main
+main.o
+!misc/*
+*.cbp
 CMakeFiles
 cmake-*
 cmake_*
@@ -16,7 +20,8 @@ DartConfiguration.tcl
 Testing
 /src
 /Makefile
-/release/Makefile
+/develop/Makefile
+/develop/native*
 /native*
 libnative*
 /native_benchmark
@@ -24,4 +29,4 @@ native_test.exe
 build
 libbenchmark.gcno
 gradle*
-/unit_test.sh
+unit_test.sh
