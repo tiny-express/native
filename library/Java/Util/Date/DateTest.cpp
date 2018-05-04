@@ -68,7 +68,8 @@ TEST(JavaUtilDate, Constructor) {
 
     // Test Date(long millisec)
     date = Date(1523780056162);
-    assertEquals("Sun Apr 15 15:14:16 +07 2018", date.toString());
+    Date expectedResult("Sun Apr 15 (and) 15:14:16 2018");
+    assertEquals(expectedResult.toString(), date.toString());
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
