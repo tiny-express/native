@@ -24,12 +24,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <algorithm>
-#include <cstring>
-#include <sstream>
-#include <codecvt>
 #include "String.hpp"
-#include <cstdlib>
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../StringBuilder/StringBuilder.hpp"
 #include "../StringBuffer/StringBuffer.hpp"
