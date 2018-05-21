@@ -68,7 +68,10 @@ TEST(JavaUtilDate, Constructor) {
 
     // Test Date(long millisec)
     date = Date(1523780056162);
-    assertEquals("Sun Apr 15 15:14:16 +07 2018", date.toString());
+
+    assertEquals(118, date.getYear());
+    assertEquals(3, date.getMonth());
+    assertEquals(15, date.getDate());
 
     // Test Date sameDate = date;
     date = Date(2017, 02, 13, 8, 01, 13);
@@ -647,6 +650,7 @@ TEST(JavaUtilDate, UTC) {
     actual = Date(timeActual);
     utcTime = expected.getTime() + expected.getTimezoneOffset() * 60;
     expected.setTime(utcTime);
+
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
     assertEquals(expected.getDate(), actual.getDate());
