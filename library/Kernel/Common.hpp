@@ -49,7 +49,6 @@
 #include <ctime>
 #include <regex.h>
 #include <stddef.h>
-
 #ifdef LINUX
 #include <stdint.h>
 #endif
@@ -86,6 +85,7 @@
 #include <string>
 #include <initializer_list>
 #include <functional>
+#include <codecvt>
 
 /**
  * Allocate new memory with specific size

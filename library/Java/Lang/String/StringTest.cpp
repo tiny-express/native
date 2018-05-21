@@ -853,30 +853,30 @@ TEST (JavaLangString, StartsWith) {
 }
 
 TEST (JavaLangString, ToLowerCase) {
-    {
-        String textPlus = "Hello HELLO Hello ";
-        String result = textPlus.toLowerCase();
-        assertEquals("hello hello hello ", result.toString());
-    }
+   {
+       String textPlus = "Hello HELLO Hello ";
+       String result = textPlus.toLowerCase();
+       assertEquals("hello hello hello ", result);
+   }
 
-    {
-        String unicodeString = "Đây Là Tiếng VIỆT";
-        String result = unicodeString.toLowerCase();
-        assertEquals("đây là tiếng việt", result.toString());
-    }
+   {
+       String unicodeString = "Đây Là Tiếng VIỆT";
+       String result = unicodeString.toLowerCase();
+       assertEquals("đây là tiếng việt", result);
+   }
 }
 
 TEST (JavaLangString, ToUpperCase) {
-    {
-        String textPlus = "Hello HELLO Hello ";
-        String result = textPlus.toUpperCase();
-        assertEquals("HELLO HELLO HELLO ", result.toString());
-    }
+   {
+       String textPlus = "Hello HELLO Hello ";
+       String result = textPlus.toUpperCase();
+       assertEquals("HELLO HELLO HELLO ", result);
+   }
 
     {
         String unicodeString = "Đây Là Tiếng VIỆT";
         String result = unicodeString.toUpperCase();
-        assertEquals("ĐÂY LÀ TIẾNG VIỆT", result.toString());
+        assertEquals("ĐÂY LÀ TIẾNG VIỆT", result);
     }
 }
 
@@ -893,10 +893,10 @@ TEST (JavaLangString, Trim) {
         assertEquals("đây là tiếng việt", result.toString());
     }
 
-    {
-        String trimUpperCase = "                this is a cat    ";
-        assertEquals("THIS IS A CAT", trimUpperCase.trim().toUpperCase());
-    }
+   {
+       String trimUpperCase = "                this is a cat    ";
+       assertEquals("THIS IS A CAT", trimUpperCase.trim().toUpperCase());
+   }
 
     {
         String allSpaceString = "  ";

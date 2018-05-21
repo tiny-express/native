@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_NET_URL_ENCODER_HPP
-#define NATIVE_JAVA_NET_URL_ENCODER_HPP
+#ifndef NATIVE_JAVA_NET_URL_DECODER_HPP
+#define NATIVE_JAVA_NET_URL_DECODER_HPP
 
 #include "../../Lang/Object/Object.hpp"
 #include "../../Lang/String/String.hpp"
