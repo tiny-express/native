@@ -20,12 +20,10 @@ addons:
     - valgrind
     - lcov
     - gradle
-before_install:
-- sudo apt-get install -qq g++-5
-- sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+    - gcc-5
 before_script:
-- export CC=gcc
-- export CXX=g++
+- export CC=gcc-5
+- export CXX=g++-5
 - ./misc/benchmark.sh
 script:
 - cd develop
