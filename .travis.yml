@@ -20,10 +20,11 @@ addons:
     - valgrind
     - lcov
     - gradle
-    - gcc-5
+    - g++-5
 before_script:
-- export CC=gcc-5
-- export CXX=g++-5
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90; fi
+- export CC=gcc
+- export CXX=g++
 - ./misc/benchmark.sh
 script:
 - cd develop
