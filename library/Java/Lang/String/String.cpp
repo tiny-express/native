@@ -26,8 +26,10 @@
 
 #include <algorithm>
 #include <cstring>
-#include <locale.h>
+#include <sstream>
+#include <codecvt>
 #include "String.hpp"
+#include <cstdlib>
 #include "../StringIndexOutOfBoundsException/StringIndexOutOfBoundsException.hpp"
 #include "../StringBuilder/StringBuilder.hpp"
 #include "../StringBuffer/StringBuffer.hpp"
@@ -35,59 +37,28 @@
 
 using namespace Java::Lang;
 
-std::string wideStringToMultiByteString(const std::wstring &input) {
-	char *buffer = new char[DEFAULT_BUFFER_LENGTH]();
-	size_t len = wcstombs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
-	std::string result;
-
-	if (len != static_cast<std::size_t>(-1)) {
-		if (len > DEFAULT_BUFFER_LENGTH) {
-			delete[] buffer;
-			++len;
-			buffer = new char[len]();
-			len = wcstombs(buffer, input.c_str(), len);
-		}
-		result = std::string(buffer, buffer + len);
-	}
-
-	delete[] buffer;
-	return result;
+std::wstring multiByteStringToWideString(const std::string &input) {
+    setlocale(LC_CTYPE, "");
+	std::wstring_convert<std::codecvt_utf8<wchar_t> > convertToWstring;
+	return convertToWstring.from_bytes(input.c_str());
 }
 
-std::wstring multiByteStringToWideString(const std::string &input) {
-	wchar_t *buffer = new wchar_t[DEFAULT_BUFFER_LENGTH]();
-	std::size_t len = mbstowcs(buffer, input.c_str(), DEFAULT_BUFFER_LENGTH);
-	std::wstring result;
-
-	if (len != static_cast<std::size_t>(-1)) {
-		if (len > DEFAULT_BUFFER_LENGTH) {
-			delete[] buffer;
-			++len;
-			buffer = new wchar_t[len]();
-			len = mbstowcs(buffer, input.c_str(), len);
-		}
-
-		result = std::wstring(buffer, buffer + len);
-	}
-
-	delete[] buffer;
-	return result;
+std::string wideStringToMultiByteString(const std::wstring &input) {
+    setlocale(LC_CTYPE, "");
+	std::wstring_convert<std::codecvt_utf8<wchar_t> > convertToString;
+	return convertToString.to_bytes(input.c_str());
 }
 
 std::string toUpper(const std::string &input) {
-	setlocale(LC_CTYPE, "en_US.UTF-8");
 	std::wstring wideString = multiByteStringToWideString(input);
-	auto &f = std::use_facet<std::ctype<wchar_t>>(std::locale());
-	std::transform(wideString.begin(), wideString.end(), wideString.begin(), towupper);
+    std::transform(wideString.begin(), wideString.end(), wideString.begin(), towupper);
 	return wideStringToMultiByteString(wideString);
 }
 
 std::string toLower(const std::string &input) {
-	setlocale(LC_CTYPE, "en_US.UTF-8");
-	std::wstring wideString = multiByteStringToWideString(input);
-	auto &f = std::use_facet<std::ctype<wchar_t>>(std::locale());
-	std::transform(wideString.begin(), wideString.end(), wideString.begin(), towlower);
-	return wideStringToMultiByteString(wideString);
+    std::wstring wideString = multiByteStringToWideString(input);
+    std::transform(wideString.begin(), wideString.end(), wideString.begin(), towlower);
+    return wideStringToMultiByteString(wideString);
 }
 
 String::String() {
