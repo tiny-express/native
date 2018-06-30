@@ -96,12 +96,23 @@ endforeach ()
 add_library(${PROJECT_NAME} SHARED ${SOURCES_CPP})
 add_library(${PROJECT_NAME}_static STATIC ${SOURCES_CPP})
 
+# Link library for OSX and other platform
+# Darwin platform no need to link realtime library (-lrt)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
+else ()
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
+endif ()
+
 # Add make installation - install to Unix system
 set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY true)
-install(TARGETS ${PROJECT_NAME} DESTINATION ../lib OPTIONAL)
-install(TARGETS ${PROJECT_NAME}_static DESTINATION ../lib OPTIONAL)
-install(FILES library.hpp DESTINATION ../include/native)
-install(DIRECTORY library DESTINATION ../include/native FILES_MATCHING PATTERN "*.hpp")
+install(TARGETS ${PROJECT_NAME} DESTINATION lib OPTIONAL)
+install(TARGETS ${PROJECT_NAME}_static DESTINATION lib OPTIONAL)
+install(FILES library.hpp DESTINATION include/native)
+install(DIRECTORY library DESTINATION include/native FILES_MATCHING PATTERN "*.hpp")
 
 # Detect operating system
 find_file(DEBIAN debian_version debconf.conf PATHS /etc)
@@ -129,14 +140,3 @@ add_custom_target(
         COMMAND rm -rf /usr/include/native
         COMMAND rm -rf /usr/lib/libnative*
 )
-
-# Link library for OSX and other platform
-# Darwin platform no need to link realtime library (-lrt)
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
-else ()
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
-endif ()
