@@ -147,7 +147,17 @@ TEST (JavaLangString, Destructor) {
     auto textPointer = new String("Hello");
     delete textPointer;
 }
+TEST (JavaLangString, getSize) {
+    //Given a String - Return size of the String
+    String text = "Hello World";
+    int sizeOfText = text.getSize();
+    assertEquals(11, sizeOfText);
 
+    //Given a null String
+    String nullText =  "";
+    assertEquals(0, nullText.getSize());
+
+}
 TEST (JavaLangString, Equals) {
     // Given two String objects with same value - Return they should equal
     String stringEqual1 = "Hello World";
@@ -611,14 +621,14 @@ TEST (JavaLangString, GetChars) {
     Array<char> subCharArray1= {'S','t','r','i','n','g','S','t','r','i','n','g'};
 
     for (int index=0; index<Math::min(subCharArray1.length, charArray.length); index++) {
-	    assertTrue((int) subCharArray1[index] == (int) charArray[index]);
+        assertTrue((int) subCharArray1[index] == (int) charArray[index]);
     }
 
     testString.getChars(10, 16, charArray, 3);
     Array<char> subCharArray2 = {'S','t','r','S','t','r','i','n','g', 'i','n','g'};
-	for (int index=0; index<Math::min(subCharArray2.length, charArray.length); index++) {
-		assertTrue((int) subCharArray2[index] == (int) charArray[index]);
-	}
+    for (int index=0; index<Math::min(subCharArray2.length, charArray.length); index++) {
+        assertTrue((int) subCharArray2[index] == (int) charArray[index]);
+    }
 }
 
 TEST (JavaLangString, IsEmpty) {
@@ -852,26 +862,54 @@ TEST (JavaLangString, StartsWith) {
     assertFalse(textPlus.startsWith(String("ello")));
 }
 
-TEST (JavaLangString, ToLowerCase) {
-   {
-       String textPlus = "Hello HELLO Hello ";
-       String result = textPlus.toLowerCase();
-       assertEquals("hello hello hello ", result);
-   }
+TEST(JavaLangString, toCharArray){
+    //Given a string - Return an array of char
+    String text = "Hello World";
+    String textResult = "";
+    int index;
+    Array<char> arrayOfText = text.toCharArray();
+    for(index = 0; index < arrayOfText.length; index++) {
+        textResult += arrayOfText[index];
+    }
+    assertEquals("Hello World", textResult);
 
-   {
-       String unicodeString = "Đây Là Tiếng VIỆT";
-       String result = unicodeString.toLowerCase();
-       assertEquals("đây là tiếng việt", result);
-   }
+    //Given a null String
+    String nullText = "";
+    textResult = "";
+    Array<char> arrayNull = nullText.toCharArray();
+    assertEquals("", arrayNull);
+}
+
+TEST(JavaLangString, toCharPointer){
+    String text = "Hello World";
+    int index;
+    char* ptrToText = text.toCharPointer();
+    for(index = 0; index < text.length() ; index++) {
+
+        assertEquals(text[index], *(ptrToText + index));
+    }
+}
+
+TEST (JavaLangString, ToLowerCase) {
+    {
+        String textPlus = "Hello HELLO Hello ";
+        String result = textPlus.toLowerCase();
+        assertEquals("hello hello hello ", result);
+    }
+
+    {
+        String unicodeString = "Đây Là Tiếng VIỆT";
+        String result = unicodeString.toLowerCase();
+        assertEquals("đây là tiếng việt", result);
+    }
 }
 
 TEST (JavaLangString, ToUpperCase) {
-   {
-       String textPlus = "Hello HELLO Hello ";
-       String result = textPlus.toUpperCase();
-       assertEquals("HELLO HELLO HELLO ", result);
-   }
+    {
+        String textPlus = "Hello HELLO Hello ";
+        String result = textPlus.toUpperCase();
+        assertEquals("HELLO HELLO HELLO ", result);
+    }
 
     {
         String unicodeString = "Đây Là Tiếng VIỆT";
@@ -893,10 +931,10 @@ TEST (JavaLangString, Trim) {
         assertEquals("đây là tiếng việt", result.toString());
     }
 
-   {
-       String trimUpperCase = "                this is a cat    ";
-       assertEquals("THIS IS A CAT", trimUpperCase.trim().toUpperCase());
-   }
+    {
+        String trimUpperCase = "                this is a cat    ";
+        assertEquals("THIS IS A CAT", trimUpperCase.trim().toUpperCase());
+    }
 
     {
         String allSpaceString = "  ";
