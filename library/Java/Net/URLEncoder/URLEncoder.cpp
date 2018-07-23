@@ -38,26 +38,6 @@ inline char charToHex(char code) {
     return hex[code & 15];
 }
 
-//inline char *urlEncode(char *target, int size) {
-//    char *targetIndex = target;
-//    auto result = (char *) calloc((size_t) size * 3 + 1, sizeof(char));
-//    char *resultIndex = result;
-//    while (*targetIndex) {
-//        if (isalnum(*targetIndex) || *targetIndex == '-' || *targetIndex == '_' || *targetIndex == '.' ||
-//            *targetIndex == '~') {
-//            *resultIndex++ = *targetIndex;
-//        } else if (*targetIndex == ' ') {
-//            *resultIndex++ = '+';
-//        } else {
-//            *resultIndex++ = '%', *resultIndex++ = charToHex(*targetIndex >> 4), *resultIndex++ = charToHex(
-//                    *targetIndex & 15);
-//        }
-//        targetIndex++;
-//    }
-//    *resultIndex = '\0';
-//    return result;
-//}
-
 inline String urlEncode(String target) {
     String result;
     int targetIndex = 0;
@@ -83,8 +63,6 @@ String URLEncoder::encode(const String &source, const String &encoding) {
     auto &referenceToEncoding = const_cast<String &>(encoding);
     if (referenceToEncoding.toUpperCase() == "UTF-8") {
         String encodedString = urlEncode(source.toCharPointer());
-        //String result(encodedString);
-        //free(encodedString);
         return encodedString;
     }
     // TODO(truongchauhien): Need "java.nio.charset.Charset" class and "Array<byte> getBytes(const Charset &) method".

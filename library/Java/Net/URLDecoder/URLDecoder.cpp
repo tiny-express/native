@@ -38,27 +38,6 @@ inline char charFromHex(char ch) {
     return (char)(isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10);
 }
 
-//inline char *urlDecode(char *target, int size) {
-//    char *targetIndex = target;
-//    auto result = (char *) calloc((size_t) size + 1, sizeof(char));
-//    char *resultIndex = result;
-//    while (*targetIndex) {
-//        if (*targetIndex == '%') {
-//            if (targetIndex[1] && targetIndex[2]) {
-//                *resultIndex++ = charFromHex(targetIndex[1]) << 4 | charFromHex(targetIndex[2]);
-//                targetIndex += 2;
-//            }
-//        } else if (*targetIndex == '+') {
-//            *resultIndex++ = ' ';
-//        } else {
-//            *resultIndex++ = *targetIndex;
-//        }
-//        targetIndex++;
-//    }
-//    *resultIndex = '\0';
-//    return result;
-//}
-
 inline String urlDecode(String target) {
     String result;
     int targetIndex = 0;
@@ -83,8 +62,6 @@ String URLDecoder::decode(const String &source, const String &encoding) {
     auto &referenceToEncoding = const_cast<String &>(encoding);
     if (referenceToEncoding.toUpperCase() == "UTF-8") {
         String decodedString = urlDecode(source.toCharPointer());
-        //String result(decodedString);
-        //free(decodedString);
         return decodedString;
     }
     // TODO(truongchauhien): Need "java.nio.charset.Charset" class and "Array<byte> getBytes(const Charset &) method".
