@@ -50,7 +50,8 @@ inline String urlEncode(String target) {
                 result += '+';
             }
         } else {
-            result += '%', result += charToHex(target[targetIndex] >> 4),
+            result += '%';
+            result += charToHex(target[targetIndex] >> 4);
             result += charToHex(target[targetIndex] & 15);
         }
         targetIndex++;
