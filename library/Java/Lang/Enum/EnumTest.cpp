@@ -33,18 +33,29 @@ TEST (JavaLangEnum, GetName) {
 	// Given valid enum and name to test getName()
 	Enum<Integer> validEnum = Enum<Integer>("validName", 7);
 	String expectedValue = "validName";
-	assertEquals(expectedValue.toString(), validEnum.getName().toString());
+	assertEquals(expectedValue.toString(), validEnum.name().toString());
 }
 
 TEST (JavaLangEnum, GetOrdinal) {
 	// Given valid enum and name to test getOrdinal()
 	Enum<Integer> validEnum = Enum<Integer>("validName", 18);
 	int expectedValue = 18;
-	assertEquals(expectedValue, validEnum.getOrdinal());
+	assertEquals(expectedValue, validEnum.ordinal());
 }
 
 TEST (JavaLangEnum, ToString) {
 	// Given valid enum and name to test getOrdinal()
 	Enum<Integer> validEnum = Enum<Integer>("validName", 18);
-	assertEquals("18", validEnum.toString());
+	assertEquals("validName", validEnum.toString());
+}
+
+TEST (JavaLangEnum, equals) {
+	// Compare 2 equals enum - Return true
+	Enum<Integer> enum1 = Enum<Integer>("enum1", 1);
+	Enum<Integer> enum2 = Enum<Integer>("enum2", 1);
+	assertTrue(enum1.equals(enum2) == true);
+
+	// Compare 2 unequal enum - Return false
+	Enum<Integer> enum3 = Enum<Integer>("enum3", 3);
+	assertTrue(enum1.equals(enum3) == 0);
 }
