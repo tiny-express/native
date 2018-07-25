@@ -36,30 +36,28 @@ namespace Java {
                 //public virtual Comparable<E>,
                      public virtual Serializable {
         private:
-            String name;
-            int original;
-            String originalString;
+            String enumName;
+            int ordinalNumber;
 
         public:
-            Enum(const_string name, int original) {
-                this->name = stringCopy(name);
-                this->original = original;
-                this->originalString = stringCopy(name);
+            Enum(const_string enumName, int ordinalNumber) : enumName(), ordinalNumber()
+            {
+                this->enumName = enumName;
+                this->ordinalNumber = ordinalNumber;
             }
 
-            Enum(string name, int original) {
-                this->name = stringCopy(name);
-                this->original = original;
-                this->originalString = stringCopy(name);
+            Enum(String enumName, int originalConstants) : enumName(), ordinalNumber()
+            {
+                this->enumName = enumName;
+                this->ordinalNumber = originalConstants;
             }
 
-            ~Enum() {}
 
         public:
             Enum clone() {
                 Enum result;
-                result.name = this->name;
-                result.original = this->original;
+                result.enumName = this->enumName;
+                result.ordinalNumber = this->ordinalNumber;
                 return result;
             }
 
@@ -70,15 +68,15 @@ namespace Java {
              * @return int
              */
             int compareTo(const Enum<E> &e) {
-                return this->original - e.original;
+                return this->ordinalNumber - e.ordinalNumber;
             }
 
             /**
              * Returns the name of this enum constant, exactly as declared in its enum declaration.
              * @return String
              */
-            String getName() {
-                return this->name;
+            String name() {
+                return this->enumName;
             }
 
             /**
@@ -86,8 +84,8 @@ namespace Java {
              * (its position in its enum declaration, where the initial constant is assigned an original of zero).
              * @return int
              */
-            int getOrdinal() {
-                return this->original;
+            int ordinal() {
+                return this->ordinalNumber;
             }
 
             /**
@@ -95,7 +93,7 @@ namespace Java {
              * @return String
              */
             String toString() {
-                return this->originalString;
+                return this->enumName;
             }
 
             /**
@@ -103,7 +101,7 @@ namespace Java {
             * @return boolean
             */
             boolean equals(Enum<E> &other) {
-                return this->original == other.original;
+                return this->ordinalNumber == other.ordinalNumber;
             }
         };
     }
