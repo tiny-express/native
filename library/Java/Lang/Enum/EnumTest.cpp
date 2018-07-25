@@ -46,5 +46,16 @@ TEST (JavaLangEnum, GetOrdinal) {
 TEST (JavaLangEnum, ToString) {
 	// Given valid enum and name to test getOrdinal()
 	Enum<Integer> validEnum = Enum<Integer>("validName", 18);
-	assertEquals("18", validEnum.toString());
+	assertEquals("validName", validEnum.toString());
+}
+
+TEST (JavaLangEnum, equals) {
+	// Compare 2 equals enum - Return true
+	Enum<Integer> enum1 = Enum<Integer>("enum1", 1);
+	Enum<Integer> enum2 = Enum<Integer>("enum2", 1);
+	assertTrue(enum1.equals(enum2) == true);
+
+	// Compare 2 unequal enum - Return false
+	Enum<Integer> enum3 = Enum<Integer>("enum3", 3);
+	assertTrue(enum1.equals(enum3) == 0);
 }

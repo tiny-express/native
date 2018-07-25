@@ -33,30 +33,27 @@ namespace Java {
     namespace Lang {
         template<typename E>
         class Enum : public Object,
-                    //public virtual Comparable<E>,
-                    public virtual Serializable {
+                //public virtual Comparable<E>,
+                     public virtual Serializable {
         private:
-            string name;
+            String name;
             int original;
-            string originalString;
+            String originalString;
 
         public:
             Enum(const_string name, int original) {
                 this->name = stringCopy(name);
                 this->original = original;
-                this->originalString = stringCopy("");
+                this->originalString = stringCopy(name);
             }
 
             Enum(string name, int original) {
                 this->name = stringCopy(name);
                 this->original = original;
-                this->originalString = stringCopy("");
+                this->originalString = stringCopy(name);
             }
 
-            ~Enum() {
-                free(this->name);
-                free(this->originalString);
-            }
+            ~Enum() {}
 
         public:
             Enum clone() {
@@ -98,9 +95,15 @@ namespace Java {
              * @return String
              */
             String toString() {
-                free(this->originalString);
-                asprintf(&this->originalString, "%d", this->original);
-	            return this->originalString;
+                return this->originalString;
+            }
+
+            /**
+            * Returns true if the specified object is equal to this enum constant
+            * @return boolean
+            */
+            boolean equals(Enum<E> &other) {
+                return this->original == other.original;
             }
         };
     }
