@@ -40,16 +40,16 @@ namespace Java {
             int ordinalNumber;
 
         public:
-            Enum(const_string enumName, int ordinalNumber) : enumName(), ordinalNumber()
-            {
-                this->enumName = enumName;
-                this->ordinalNumber = ordinalNumber;
+            Enum(const_string enumName, int ordinalNumber) : enumName(enumName), ordinalNumber(ordinalNumber) {
+
             }
 
-            Enum(String enumName, int originalConstants) : enumName(), ordinalNumber()
-            {
-                this->enumName = enumName;
-                this->ordinalNumber = originalConstants;
+            Enum(String enumName, int ordinalNumber) : enumName(enumName), ordinalNumber(ordinalNumber) {
+
+            }
+
+            Enum(string enumName, int ordinalNumber) : enumName(enumName), ordinalNumber(ordinalNumber) {
+
             }
 
 
