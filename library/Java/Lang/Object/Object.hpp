@@ -233,7 +233,7 @@ namespace Java {
 						 *               be cloned.
 						 * @see java.lang.Cloneable
 						 */
-						Object &clone() throw (CloneNotSupportedException) {
+						Object &clone() {
 							throw CloneNotSupportedException();
 						}
 						
@@ -284,7 +284,7 @@ namespace Java {
 					     *
 					     * @throws Throwable the {@code Exception} raised by this method
 					     */
-						void finalize() throw(Throwable);
+						void finalize();
 				
 				public:
 						/**
@@ -389,7 +389,7 @@ namespace Java {
 					     * @see        java.lang.Object#notify()
 					     * @see        java.lang.Object#notifyAll()
 					     */
-						virtual void wait() throw(InterruptedException) final {
+						virtual void wait() final {
 							throw InterruptedException();
 						}
 						
@@ -478,7 +478,7 @@ namespace Java {
 						 * @see        java.lang.Object#notify()
 						 * @see        java.lang.Object#notifyAll()
 						 */
-						virtual void wait(int timeout) throw(InterruptedException) final {
+						virtual void wait(int timeout) final {
 							throw InterruptedException();
 						}
 						
@@ -544,7 +544,7 @@ namespace Java {
 					     *             status</i> of the current thread is cleared when
 					     *             this exception is thrown.
 					     */
-						virtual void wait(int timeout, int nanos) throw(InterruptedException) final {
+						virtual void wait(int timeout, int nanos) final {
 							throw InterruptedException();
 						}
 						

@@ -27,7 +27,7 @@
 #ifndef NATIVE_TYPE_HPP
 #define NATIVE_TYPE_HPP
 
-#define NOT_FOUND -1
+#define DO_NOT_FOUND -1
 #define MAX_STRING_LENGTH 100000
 
 #ifdef WIN
@@ -58,7 +58,7 @@ typedef unsigned char byte;
 #define DOUBLE                  16
 #define CHAR_POINTER            17
 #define INT_POINTER             18
-#define OTHER                   19
+#define DEFAULT                 19
 
 #define typename(x)  _Generic((x),                                            \
         _Bool: _BOOL,                  unsigned char: UNSIGNED_CHAR,          \
@@ -70,6 +70,6 @@ long long int: LONG_LONG_INT, unsigned long long int: UNSIGNED_LONG_LONG_INT, \
         float: FLOAT,                         double: DOUBLE,                 \
   long double: LONG_DOUBLE,                   char *: CHAR_POINTER,           \
        void *: VOID_POINTER,                   int *: INT_POINTER,            \
-      default: OTHER)
+      default: DEFAULT)
 
 #endif//NATIVE_TYPE_HPP

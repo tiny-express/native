@@ -26,6 +26,7 @@
 
 #include "URLDecoder.hpp"
 #include "../../../../library/Java/Io/UnsupportedEncodingException/UnsupportedEncodingException.hpp"
+
 using namespace Java::Net;
 
 String URLDecoder::decode(const String &source) {
@@ -34,38 +35,34 @@ String URLDecoder::decode(const String &source) {
 
 
 inline char charFromHex(char ch) {
-    return isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10;
+    return (char)(isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10);
 }
 
-inline char *urlDecode(char *target, int size) {
-    char *targetIndex = target;
-    auto result = (char *) calloc((size_t) size + 1, sizeof(char));
-    char *resultIndex = result;
-    while (*targetIndex) {
-        if (*targetIndex == '%') {
-            if (targetIndex[1] && targetIndex[2]) {
-                *resultIndex++ = charFromHex(targetIndex[1]) << 4 | charFromHex(targetIndex[2]);
+inline String urlDecode(String target) {
+    String result;
+    int targetIndex = 0;
+    while (targetIndex < target.getSize()) {
+        if (target[targetIndex] == '%') {
+            if (target[targetIndex + 1] && target[targetIndex + 2]) {
+                result += charFromHex(target[targetIndex + 1]) << 4 | charFromHex(target[targetIndex + 2]);
                 targetIndex += 2;
             }
-        } else if (*targetIndex == '+') {
-            *resultIndex++ = ' ';
+        } else if (target[targetIndex] == '+') {
+            result += ' ';
         } else {
-            *resultIndex++ = *targetIndex;
+            result += target[targetIndex];
         }
         targetIndex++;
     }
-    *resultIndex = '\0';
     return result;
 }
 
 String URLDecoder::decode(const String &source, const String &encoding) {
     // TODO(truongchauhien): String class need to be refactoring.
-    String &referenceToEncoding = const_cast<String &>(encoding);
+    auto &referenceToEncoding = const_cast<String &>(encoding);
     if (referenceToEncoding.toUpperCase() == "UTF-8") {
-        string decodedString = urlDecode(source.toCharPointer(), source.length());
-        String result(decodedString);
-        free(decodedString);
-        return result;
+        String decodedString = urlDecode(source.toCharPointer());
+        return decodedString;
     }
     // TODO(truongchauhien): Need "java.nio.charset.Charset" class and "Array<byte> getBytes(const Charset &) method".
     throw UnsupportedEncodingException(encoding);
