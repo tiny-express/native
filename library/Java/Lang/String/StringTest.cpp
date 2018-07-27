@@ -530,7 +530,7 @@ TEST (JavaLangString, LastIndexOf) {
 
         // Test false with wrong subString
         result = validString.lastIndexOf(wrongString);
-        assertEquals(NOT_FOUND, result);
+        assertEquals(DO_NOT_FOUND, result);
     }
 
     {

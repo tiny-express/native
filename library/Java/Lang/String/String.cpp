@@ -224,7 +224,7 @@ int String::indexOf(int character) const {
 	if (found != std::string::npos) {
 		return found;
 	} else {
-		return NOT_FOUND;
+		return DO_NOT_FOUND;
 	}
 }
 
@@ -314,7 +314,7 @@ int String::lastIndexOf(String subString) const {
 	std::reverse(currentReversedString.begin(), currentReversedString.end());
 	std::size_t found = currentReversedString.find(reversedString.original);
 	if (found == std::string::npos) {
-		return NOT_FOUND;
+		return DO_NOT_FOUND;
 	}
 	return ((int) this->original.size() - (int) (found + subString.original.size()));
 }
@@ -337,7 +337,7 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 	std::string reversedString = subString.toCharPointer();
 	std::reverse(reversedString.begin(), reversedString.end());
 	int result = subStringFromIndex.find(reversedString);
-	if (result == NOT_FOUND) {
+	if (result == DO_NOT_FOUND) {
 		return result;
 	}
 
