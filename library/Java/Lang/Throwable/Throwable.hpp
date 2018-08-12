@@ -31,7 +31,7 @@
 
 namespace Java {
 		namespace Lang {
-				class Throwable {
+				class Throwable : std::exception {
 				private:
 						Throwable *cause;
 						String message;
