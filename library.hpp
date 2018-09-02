@@ -36,9 +36,7 @@
 
 // Java Modules
 #include "library/Javax/Cql.hpp"
-#include "library/Javax/Json.hpp"
 #include "library/Javax/Net.hpp"
-#include "library/Javax/Sql.hpp"
 
 // Test
 #include "library/Test.hpp"

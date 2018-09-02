@@ -3,16 +3,13 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl/branch/master?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
 [![Coverage status](https://img.shields.io/codecov/c/github/foodtiny/native/master.svg)](https://codecov.io/gh/foodtiny/native)&nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20darwin-blue.svg)]()
 
-**Native Library** brings productivity and maintainability for your C/C++ application as a Java program.
+**Native Library** provides a set of Java packages are re-written in C++
 
 * Blazing fast, small footprint with no dependency required
-* Provide rich Java Core classes beside C++ Standard Library
-* Prevents nearly all memory leak and segfaults via automatic storage
-* Classes are strictly tested with unit tests, clean with Valgrind and follow Oracle documentation
+* Cross platform, outstanding performance with multiple-core support from STL
+* Prevents nearly all memory leak and segmentation fault via automatic storage
+* Packages are strictly tested with unit tests, clean with Valgrind and follow Oracle documentation
 * Feel free to use in your commercial products and welcome for contributions
-
-This project is also useful for new developers in practical programming.
-
 
 ## Getting started
 #### Docker
@@ -23,7 +20,9 @@ $ docker pull foodtiny/native:latest
 #### Installation
 ```bash
 $ git clone https://github.com/foodtiny/native.git
-$ ./configure && make native -j4 && sudo make install
+$ cmake . -DCMAKE_BUILD_TYPE=Release
+$ make native
+$ sudo make install
 ```
 
 #### Examples
@@ -59,7 +58,7 @@ int main(int argc, char **argv) {
 Compile your source and link with native library
 ```bash
 $ g++ -c -o main.o HelloWorld.cpp
-$ g++ -o main main.o -lnative
+$ g++ -o main main.o -lnative -lstdc++
 $ ./main one two three
 ```
 
