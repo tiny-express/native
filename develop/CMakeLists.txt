@@ -25,7 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8.8)
-project(native)
+project(native C CXX)
 
 find_package (Threads)
 
@@ -58,7 +58,6 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../misc" ${CMAKE_MODULE_PATH})
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow")
     add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
-    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
     include(CodeCoverage)
     setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
@@ -111,11 +110,19 @@ target_link_libraries(${PROJECT_NAME}_benchmark
 add_library(${PROJECT_NAME} SHARED ${SOURCES_CPP})
 add_library(${PROJECT_NAME}_static STATIC ${SOURCES_CPP})
 
-# Add make test
-add_custom_target(
-        unit-test
-        COMMAND ../${PROJECT_NAME}_test
-)
+# Link library for OSX and other platform
+# Darwin platform no need to link realtime library (-lrt)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
+    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
+    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
+else ()
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
+    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
+endif ()
 
 # Check memory leak
 add_custom_target(
@@ -161,17 +168,3 @@ add_custom_target(
         COMMAND rm -rf /usr/include/native
         COMMAND rm -rf /usr/lib/libnative*
 )
-
-# Link library for OSX and other platform
-# Darwin platform no need to link realtime library (-lrt)
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(DYLD_LIBRARY_PATH ${DYLD_LIBRARY_PATH})
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm -lrt)
-else ()
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} -lm)
-    target_link_libraries(${PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} -lm)
-endif ()
