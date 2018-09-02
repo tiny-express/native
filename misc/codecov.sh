@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ "$TRAVIS_OS_NAME" == "linux" ]];
 then
-    cd develop
+    cd $TRAVIS_BUILD_DIR/develop
     lcov --directory . --capture --output-file coverage.info
     lcov --remove coverage.info '/usr/*' --output-file coverage.info
     lcov --list coverage.info

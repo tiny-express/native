@@ -33,7 +33,6 @@ script:
 - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then valgrind --error-exitcode=42 --leak-check=full ./native_test; else ./native_test; fi
 - ./native_benchmark
 after_success:
-- cd $TRAVIS_BUILD_DIR/develop
 - ./misc/codecov.sh
 - ./misc/build_docker.sh
 notifications:
