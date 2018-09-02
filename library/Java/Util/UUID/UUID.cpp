@@ -26,12 +26,6 @@
 
 #include "UUID.hpp"
 
-#include <string>
-#include <cstdio>
-#include <ctime>
-#include <arpa/inet.h>
-#include "uuid.hpp"
-
 /**
  * Default constructor
  *
