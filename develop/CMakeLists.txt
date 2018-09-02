@@ -55,17 +55,12 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 endif ()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    # CMake Modules
-    set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../misc" ${CMAKE_MODULE_PATH})
-    if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_BUILD_TYPE EQUAL "DEBUG")
-        # Set GCC ignore warning multi-characters constants
-        set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow")
-        add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
-        set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
-        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
-        include(CodeCoverage)
-        setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
-    endif ()
+    set(GCC_COVERAGE_COMPILE_FLAGS "-Wno-multichar -Woverflow")
+    add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fprofile-arcs -ftest-coverage")
+    include(CodeCoverage)
+    setup_target_for_coverage(${PROJECT_NAME}_coverage tests coverage)
 endif ()
 
 # Ignore warnings
