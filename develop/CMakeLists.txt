@@ -27,6 +27,8 @@
 cmake_minimum_required(VERSION 2.8.8)
 project(native)
 
+find_package (Threads)
+
 if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
     set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
 endif()
