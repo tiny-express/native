@@ -101,10 +101,15 @@ endforeach ()
 add_executable(${PROJECT_NAME}_test ${TESTS_CPP} ${SOURCES_CPP} ../misc/UnitTest.cpp)
 
 # Create benchmark binary
-add_executable(${PROJECT_NAME}_benchmark ${BENCHMARK_CPP} ${SOURCES_CPP} ../misc/benchmark/benchmark.cpp)
+add_executable(${PROJECT_NAME}_benchmark
+        ${BENCHMARK_CPP}
+        ${SOURCES_CPP}
+        ../misc/benchmark/benchmark.cpp)
 
 # Link google benchmark library
-target_link_libraries(${PROJECT_NAME}_benchmark libbenchmark.a)
+target_link_libraries(${PROJECT_NAME}_benchmark
+        libbenchmark.a
+        ${CMAKE_THREAD_LIBS_INIT})
 
 # Create native library for static linking
 add_library(${PROJECT_NAME} SHARED ${SOURCES_CPP})
