@@ -41,7 +41,7 @@ namespace Java {
 				{
 				private:
 						long timer;
-						tm *localTimer;
+						struct tm *localTimer;
 						string backUp = nullptr;
 				private:
 						/**

@@ -75,12 +75,6 @@ argument 0 is ./main
 More examples can be found [here](https://github.com/foodtiny/native/tree/master/examples)
 Support unit test by default via ApplicationTest [here](https://github.com/foodtiny/native/tree/master/examples/Docker/ApplicationTest)  - Powered by C-Unit
 
-### Contributors
-- This library must be followed [Oracle Java 8 Documentation](https://docs.oracle.com/javase/8/docs/api) for standardization
-- Make sure your commits must be passed with [check](./check)  before you create pull request
-- At least one contributor in this project reviews your commits (except you) before merging
-- Best practices guidelines in [CONTRIBUTION.md](https://github.com/foodtiny/native/tree/master/CONTRIBUTION.md)
-
 # Documentation
 [![Documentation](https://img.shields.io/badge/documentation-doxygen-ff69b4.svg)](https://foodtiny.github.io/native/annotated.html)
 #### Differences

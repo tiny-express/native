@@ -31,8 +31,7 @@
 
 using namespace Java::Util;
 
-TEST(JavaUtilDate, Constructor) {
-    return;
+TEST (JavaUtilDate, Constructor) {
     // Get the current local time
     long now = time(nullptr);
     tm tempCurrentTime;
@@ -98,7 +97,7 @@ TEST(JavaUtilDate, Constructor) {
     assertEquals(expected.toString(), actualDate.toString());
 }
 
-TEST(JavaUtilDate, SetYear) {
+TEST (JavaUtilDate, SetYear) {
     // Create variable to test
     Date date;
 
@@ -127,8 +126,7 @@ TEST(JavaUtilDate, SetYear) {
     assertEquals(4000, date.getYear());
 }
 
-TEST(JavaUtilDate, GetYear) {
-    return;
+TEST (JavaUtilDate, GetYear) {
     // Create variable to test
     Date date;
 
@@ -142,15 +140,14 @@ TEST(JavaUtilDate, GetYear) {
 
 }
 
-TEST(JavaUtilDate, SetMonth) {
-    return;
+TEST (JavaUtilDate, SetMonth) {
     // Create variable to test
     Date expected;
     Date actual;
 
     // Set month = 12 => Year+= 1 , month = 0.
     expected = Date(2018, 0, 13, 10, 01, 13);
-    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual = Date(2017, 1, 13, 10, 01, 13);
     actual.setMonth(12);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -161,7 +158,7 @@ TEST(JavaUtilDate, SetMonth) {
 
     // Set month = 33 => Year+= 2, month = 9.
     expected = Date(2019, 9, 13, 10, 01, 13);
-    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual = Date(2017, 1, 13, 10, 01, 13);
     actual.setMonth(33);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -172,7 +169,7 @@ TEST(JavaUtilDate, SetMonth) {
 
     // Set month = 0
     expected = Date(2017, 0, 13, 10, 01, 13);
-    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual = Date(2017, 1, 13, 10, 01, 13);
     actual.setMonth(0);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -183,7 +180,7 @@ TEST(JavaUtilDate, SetMonth) {
 
     // Set month = -1 => Year-= 1, month = 11.
     expected = Date(2016, 11, 13, 10, 01, 13);
-    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual = Date(2017, 1, 13, 10, 01, 13);
     actual.setMonth(-1);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -194,7 +191,7 @@ TEST(JavaUtilDate, SetMonth) {
 
     // Set month = -12 => Year-= 1, month = 0.
     expected = Date(2016, 0, 13, 10, 01, 13);
-    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual = Date(2017, 1, 13, 10, 01, 13);
     actual.setMonth(-12);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -205,7 +202,7 @@ TEST(JavaUtilDate, SetMonth) {
 
     // Set month = -33 => Year-= 3, month = 3.
     expected = Date(2014, 3, 13, 10, 01, 13);
-    actual 	 = Date(2017, 1, 13, 10, 01, 13);
+    actual = Date(2017, 1, 13, 10, 01, 13);
     actual.setMonth(-33);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -215,8 +212,7 @@ TEST(JavaUtilDate, SetMonth) {
     assertEquals(expected.getSeconds(), actual.getSeconds());
 }
 
-TEST(JavaUtilDate, GetMonth) {
-    return;
+TEST (JavaUtilDate, GetMonth) {
     // Create variable to test
     Date date;
 
@@ -225,15 +221,14 @@ TEST(JavaUtilDate, GetMonth) {
     assertEquals(2, date.getMonth());
 }
 
-TEST(JavaUtilDate, SetDate) {
-    return;
+TEST (JavaUtilDate, SetDate) {
     // Create variable to test
     Date expected;
     Date actual;
 
     // Set month = 3, date = -1 => month = 2, date = 30
     expected = Date(2017, 2, 30, 10, 01, 13);
-    actual 	 = Date(2017, 3, 1, 10, 01, 13);
+    actual = Date(2017, 3, 1, 10, 01, 13);
     actual.setDate(-1);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -244,7 +239,7 @@ TEST(JavaUtilDate, SetDate) {
 
     // Set month = 6, date = -75 => month = 3, date = 16
     expected = Date(2017, 3, 16, 10, 01, 13);
-    actual 	 = Date(2017, 6, 1, 10, 01, 13);
+    actual = Date(2017, 6, 1, 10, 01, 13);
     actual.setDate(-75);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -255,7 +250,7 @@ TEST(JavaUtilDate, SetDate) {
 
     // Set month = 3, date = 0 => month = 2, date = 31
     expected = Date(2017, 2, 31, 10, 01, 13);
-    actual 	 = Date(2017, 3, 1, 10, 01, 13);
+    actual = Date(2017, 3, 1, 10, 01, 13);
     actual.setDate(0);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -266,7 +261,7 @@ TEST(JavaUtilDate, SetDate) {
 
     // Set month = 2, date = 0 => month = 1, date = 28
     expected = Date(2017, 1, 28, 10, 01, 13);
-    actual 	 = Date(2017, 2, 1, 10, 01, 13);
+    actual = Date(2017, 2, 1, 10, 01, 13);
     actual.setDate(0);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -277,7 +272,7 @@ TEST(JavaUtilDate, SetDate) {
 
     // Set month = 5, date = 32 => month = 6, date = 2
     expected = Date(2017, 6, 2, 10, 01, 13);
-    actual 	 = Date(2017, 5, 1, 10, 01, 13);
+    actual = Date(2017, 5, 1, 10, 01, 13);
     actual.setDate(32);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -287,8 +282,7 @@ TEST(JavaUtilDate, SetDate) {
     assertEquals(expected.getSeconds(), actual.getSeconds());
 }
 
-TEST(JavaUtilDate, GetDate) {
-    return;
+TEST (JavaUtilDate, GetDate) {
     // Create variable to test
     Date date;
 
@@ -297,15 +291,14 @@ TEST(JavaUtilDate, GetDate) {
     assertEquals(13, date.getDate());
 }
 
-TEST(JavaUtilDate, SetHours) {
-    return;
+TEST (JavaUtilDate, SetHours) {
     // Create variable to test
     Date expected;
     Date actual;
 
     // Set hour = -1 => date -= 1, hour = 23
     expected = Date(2017, 2, 12, 23, 01, 13);
-    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual = Date(2017, 2, 13, 1, 01, 13);
     actual.setHours(-1);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -316,7 +309,7 @@ TEST(JavaUtilDate, SetHours) {
 
     // Set hour = -58 => date -= 3, hour = 14
     expected = Date(2017, 2, 10, 14, 01, 13);
-    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual = Date(2017, 2, 13, 1, 01, 13);
     actual.setHours(-58);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -327,7 +320,7 @@ TEST(JavaUtilDate, SetHours) {
 
     // Set hour = 0
     expected = Date(2017, 2, 13, 0, 01, 13);
-    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual = Date(2017, 2, 13, 1, 01, 13);
     actual.setHours(0);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -338,7 +331,7 @@ TEST(JavaUtilDate, SetHours) {
 
     // Set hour = 24. Day += 1, hour = 0
     expected = Date(2017, 2, 14, 0, 01, 13);
-    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual = Date(2017, 2, 13, 1, 01, 13);
     actual.setHours(24);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -349,7 +342,7 @@ TEST(JavaUtilDate, SetHours) {
 
     // Set hour = 49. Day += 2, hour = 1
     expected = Date(2017, 2, 15, 1, 01, 13);
-    actual 	 = Date(2017, 2, 13, 1, 01, 13);
+    actual = Date(2017, 2, 13, 1, 01, 13);
     actual.setHours(49);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -359,8 +352,7 @@ TEST(JavaUtilDate, SetHours) {
     assertEquals(expected.getSeconds(), actual.getSeconds());
 }
 
-TEST(JavaUtilDate, GetHour) {
-    return;
+TEST (JavaUtilDate, GetHour) {
     // Create variable to test
     Date date;
 
@@ -369,15 +361,14 @@ TEST(JavaUtilDate, GetHour) {
     assertEquals(8, date.getHours());
 }
 
-TEST(JavaUtilDate, SetMinutes) {
-    return;
+TEST (JavaUtilDate, SetMinutes) {
     // Create variable to test
     Date expected;
     Date actual;
 
     // Set minute = -1 => hour -= 1, minute = 59
     expected = Date(2017, 2, 13, 9, 59, 13);
-    actual 	 = Date(2017, 2, 13, 10, 1, 13);
+    actual = Date(2017, 2, 13, 10, 1, 13);
     actual.setMinutes(-1);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -388,7 +379,7 @@ TEST(JavaUtilDate, SetMinutes) {
 
     // Set minute = 0
     expected = Date(2017, 2, 13, 10, 0, 13);
-    actual 	 = Date(2017, 2, 13, 10, 1, 13);
+    actual = Date(2017, 2, 13, 10, 1, 13);
     actual.setMinutes(0);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -399,7 +390,7 @@ TEST(JavaUtilDate, SetMinutes) {
 
     // Set minute = 60 => hour += 1, minute = 0
     expected = Date(2017, 2, 13, 11, 00, 13);
-    actual 	 = Date(2017, 2, 13, 10, 1, 13);
+    actual = Date(2017, 2, 13, 10, 1, 13);
     actual.setMinutes(60);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -410,7 +401,7 @@ TEST(JavaUtilDate, SetMinutes) {
 
     // Set minute = 150 => hour += 2, minute = 30
     expected = Date(2017, 2, 13, 12, 30, 13);
-    actual 	 = Date(2017, 2, 13, 10, 1, 13);
+    actual = Date(2017, 2, 13, 10, 1, 13);
     actual.setMinutes(150);
     assertEquals(expected.getYear(), actual.getYear());
     assertEquals(expected.getMonth(), actual.getMonth());
@@ -420,8 +411,7 @@ TEST(JavaUtilDate, SetMinutes) {
     assertEquals(expected.getSeconds(), actual.getSeconds());
 }
 
-TEST(JavaUtilDate, GetMinutes) {
-    return;
+TEST (JavaUtilDate, GetMinutes) {
     // Create variable to test
     Date date;
 
@@ -454,8 +444,7 @@ TEST(JavaUtilDate, GetMinutes) {
     assertEquals(01, sameDate.getMinutes());
 }
 
-TEST(JavaUtilDate, SetSeconds) {
-    return;
+TEST (JavaUtilDate, SetSeconds) {
     // Create variable to test
     Date expected;
     Date actual;
@@ -505,8 +494,7 @@ TEST(JavaUtilDate, SetSeconds) {
     assertEquals(expected.getSeconds(), actual.getSeconds());
 }
 
-TEST(JavaUtilDate, GetSeconds) {
-    return;
+TEST (JavaUtilDate, GetSeconds) {
     // Create variable to test
     Date date;
 
@@ -515,8 +503,7 @@ TEST(JavaUtilDate, GetSeconds) {
     assertEquals(13, date.getSeconds());
 }
 
-TEST(JavaUtilDate, GetTime) {
-    return;
+TEST (JavaUtilDate, GetTime) {
     // Create variable to test
     Date date;
 
@@ -525,8 +512,7 @@ TEST(JavaUtilDate, GetTime) {
     assertEquals(now, date.getTime());
 }
 
-TEST(JavaUtilDate, SetTime) {
-    return;
+TEST (JavaUtilDate, SetTime) {
     // Create variable to test
     Date tempDate;
     Date date;
@@ -544,8 +530,7 @@ TEST(JavaUtilDate, SetTime) {
     assertEquals(0, date.getSeconds());
 }
 
-TEST(JavaUtilDate, GetDay) {
-    return;
+TEST (JavaUtilDate, GetDay) {
     // Create variable to test
     Date date;
 
@@ -554,8 +539,7 @@ TEST(JavaUtilDate, GetDay) {
     assertEquals(0, date.getDay());
 }
 
-TEST(JavaUtilDate, After) {
-    return;
+TEST (JavaUtilDate, After) {
     // Create variable to test
     Date date;
     Date tempDate = Date(2017, 8, 10, 8, 01, 13);;
@@ -569,8 +553,7 @@ TEST(JavaUtilDate, After) {
     assertFalse(date.after(tempDate));
 }
 
-TEST(JavaUtilDate, Before) {
-    return;
+TEST (JavaUtilDate, Before) {
     // Create variable to test
     Date date;
     Date tempDate = Date(2017, 8, 10, 8, 01, 13);;
@@ -584,8 +567,7 @@ TEST(JavaUtilDate, Before) {
     assertFalse(date.before(tempDate));
 }
 
-TEST(JavaUtilDate, Clone) {
-    return;
+TEST (JavaUtilDate, Clone) {
     // Create variable to test
     Date tempDate;
     Date date;
@@ -601,8 +583,7 @@ TEST(JavaUtilDate, Clone) {
     assertEquals(13, date.getSeconds());
 }
 
-TEST(JavaUtilDate, CompareTo) {
-    return;
+TEST (JavaUtilDate, CompareTo) {
     // Create variable to test
     Date date;
     Date temp = Date(2017, 02, 13, 8, 01, 13);
@@ -620,15 +601,14 @@ TEST(JavaUtilDate, CompareTo) {
     assertEquals(1, notEqualDate->compareTo(temp));
 }
 
-TEST(JavaUtilDate, HashCode) {
+TEST (JavaUtilDate, HashCode) {
     Date date = Date(2017, 02, 14, 8, 01, 13);
     long expected = date.getTime();
     long actual = date.hashCode();
     assertEquals(expected, actual);
 }
 
-TEST(JavaUtilDate, GetTimezoneOffset) {
-    return;
+TEST (JavaUtilDate, GetTimezoneOffset) {
     // Create variable to test
     Date date;
     int expectedResult;
@@ -636,15 +616,14 @@ TEST(JavaUtilDate, GetTimezoneOffset) {
     long now = time(nullptr);
     tm tempLocalTimer = {0};
     tm *localTimer = localtime_r(&now, &tempLocalTimer);
-    expectedResult = static_cast<int> (- localTimer->tm_gmtoff / 60);
+    expectedResult = static_cast<int> (-localTimer->tm_gmtoff / 60);
 
     // Test Date(int year, int month, int date, int hrs, int min, int sec)
     date = Date(2017, 02, 13, 8, 01, 13);
     assertEquals(expectedResult, date.getTimezoneOffset());
 }
 
-TEST(JavaUtilDate, ToLocaleString) {
-    return;
+TEST (JavaUtilDate, ToLocaleString) {
     // Create variable to test
     Date actualDate;
     string expected;
@@ -657,8 +636,7 @@ TEST(JavaUtilDate, ToLocaleString) {
     assertEquals(expected, actual.toString());
 }
 
-TEST(JavaUtilDate, UTC) {
-    return;
+TEST (JavaUtilDate, UTC) {
     // Create variable to test
     Date expected;
     String expectedString;
@@ -681,8 +659,7 @@ TEST(JavaUtilDate, UTC) {
     assertEquals(expected.getSeconds(), actual.getSeconds());
 }
 
-TEST(JavaUtilDate, ToString) {
-    return;
+TEST (JavaUtilDate, ToString) {
     // Create variable to test
     Date actualDate = Date();
     String expected;
@@ -699,28 +676,27 @@ TEST(JavaUtilDate, ToString) {
     assertEquals(expected.toString(), actual.toString());
 }
 
-TEST(JavaUtilDate, ToGMTString) {
+TEST (JavaUtilDate, ToGMTString) {
     Date expected = Date("13 Mar 2017 10:03:30 GMT");
     Date actualDate = Date("13 Mar 2017 10:03:30 UTC");
     assertEquals(expected.toGMTString().toString(), actualDate.toGMTString().toString());
 }
 
-TEST(JavaUtilDate, Parse) {
-    return;
+TEST (JavaUtilDate, Parse) {
     // Create variable to test
     Date expected;
 
-    Date   actualDate;
+    Date actualDate;
     String actualString;
-    long   actualTime;
+    long actualTime;
 
     // Empty String
     actualString = "";
     try {
-    actualTime = Date::parse(actualString);
+        actualTime = Date::parse(actualString);
     }
     catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // String with bracket
@@ -824,128 +800,116 @@ TEST(JavaUtilDate, Parse) {
     // Input String with ignored character
     actualString = "Monday, 2009 June 15, 2009 1:45:30 UTC +7";
     try {
-    actualTime = Date::parse(actualString);
+        Date::parse(actualString);
     }
     catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Input String with ignored character
     actualString = "Monday, June 15, 80x 1:45:30 UTC+7";
     try {
-    actualTime = Date::parse(actualString);
+        Date::parse(actualString);
     }
     catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Input String with ignored character
     actualString = "Monday, abc June 15, 2009 1:45:30 UTC+0430";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Input String hour > 12 and has AM
     actualString = "Monday, June 15, 2009 13:45:30 AM";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Input String hour > 12 and has PM
     actualString = "Monday, June 15, 2009 13:45:30 PM";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Full date/time pattern with TimeZone not UTC || UT || GMT and TimeZoneOffset
     actualString = "Monday, June 15, 2009 1:45:30 EST+0430";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Full date/time pattern with more than one time sequence
     actualString = "Monday, June 15, 2009 1:45:30 12:12 UTC +0430";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Full date/time pattern with more than one date sequence
     actualString = "Monday, June 15, 20/6/2017 2009 1:45:30 UTC +0430";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Full date/time pattern with ignored symbol after number
     actualString = "Monday, June 15x 2009 1:45:30 UTC +0430";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Full date/time pattern with number does not belong to date, time or timeZone sequence
     actualString = "Monday, June 15, 2009 1:45:30 12 UTC +0430";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Full date/time pattern with accepted word does not belong to date, time or timeZone sequence
     actualString = "Monday, June 15, 2009 1:45:30 June UTC +0430";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        actualTime = Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // Full date/time pattern with ignored symbol
     actualString = "Monday, * June 15, 2009 1:45:30 UTC +0430";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 
     // String without date
     actualString = "1:45:30 UTC +0430";
     try {
-    actualTime = Date::parse(actualString);
-    }
-    catch (InterruptedException &e) {
-    assertTrue(e.getMessage().isEmpty());
+        Date::parse(actualString);
+    } catch (InterruptedException &e) {
+        assertTrue(e.getMessage().isEmpty());
     }
 }
 
-TEST(JavaUtilDate, Equals) {
+TEST (JavaUtilDate, Equals) {
     // Create Variable to test
     Date largerDate = Date(2014, 10, 15);
     Date smallerDate = Date(2014, 10, 16);
     Date equalToLargerDate = Date(2014, 10, 15);
 
-    //
     assertTrue(largerDate.equals(equalToLargerDate));
     assertFalse(largerDate.equals(smallerDate));
 }

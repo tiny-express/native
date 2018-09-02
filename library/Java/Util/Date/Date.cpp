@@ -526,14 +526,12 @@ void Date::initializeDate(int year, int month, int date,
 
     this->timer = mktime(&localTimer);
     this->localTimer = localtime(&this->timer);
-
-    this->updateDateStatus();
 }
 
-void Date::initializeDate(long timer) {
+void Date::initializeDate(long timestamp) {
     this->timer = timer;
-    this->localTimer = localtime(&this->timer);
-
+    time_t ts = timestamp;
+    this->localTimer = localtime(&ts);
     this->updateDateStatus();
 }
 
@@ -565,4 +563,5 @@ Date::Date(const Date &anotherDate) {
 
 Date &Date::operator=(const Date &anotherDate) {
     this->initializeDate(anotherDate.timer);
+    return *this;
 }

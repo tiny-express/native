@@ -311,7 +311,6 @@ BitSet BitSet::clone() {
     if (!sizeIsSticky) {
         this->trimToSize();
     }
-
     return *this;
 }
 
@@ -775,4 +774,5 @@ BitSet& BitSet::operator=(const BitSet &target) {
     this->words = Arrays::copyOf(target.words, target.words.length);
     this->wordsInUse = target.wordsInUse;
     this->sizeIsSticky = target.sizeIsSticky;
+    return *this;
 }
