@@ -22,12 +22,12 @@ parsers:
       loop: yes
       method: no
       macro: no
+
 ignore:
-  - "Kernel/test.h"
+  - "library/Test.hpp"
+  - "library/Java/Util/UUID/libuuid"
 
 comment:
   layout: "reach, diff, flags, files, footer"
   behavior: default
   require_changes: no
-ignore:
-  - "Kernel/test.h"
