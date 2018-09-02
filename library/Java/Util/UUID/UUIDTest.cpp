@@ -52,6 +52,19 @@ TEST (JavaUtilUUID, Constructor) {
 	assertEquals(expectedLeastSigBits, uuid.getLeastSignificantBits());
 }
 
+TEST (JavaUtilUUID, RandomUUID) {
+	// Given valid an instance of UUID, test equals with ifself
+	UUID uuid = UUID::randomUUID();
+	assertEquals(36, uuid.toString().length());
+	assertTrue(uuid.equals(uuid));
+}
+
+TEST (JavaUtilUUID, TimeUUID) {
+    UUID uuid = UUID::timeUUID();
+    assertEquals(36, uuid.toString().length());
+    assertTrue(uuid.equals(uuid));
+}
+
 TEST (JavaUtilUUID, ClockSequence) {
 	// Given valid uuid and expectedResult based on result of java code
 	UUID uuid = UUID::fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
@@ -85,7 +98,6 @@ TEST (JavaUtilUUID, Compare) {
 TEST (JavaUtilUUID, Equals) {
 	// Given valid an instance of UUID, test equals with ifself
 	UUID uuid = UUID::randomUUID();
-	
 	assertTrue(uuid.equals(uuid));
 }
 

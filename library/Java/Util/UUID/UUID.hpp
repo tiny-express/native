@@ -31,6 +31,8 @@
 
 using namespace Java::Lang;
 
+#include "libuuid/uuid.h"
+
 namespace Java {
 		namespace Util {
 				class UUID :
@@ -51,7 +53,7 @@ namespace Java {
 						 * @param Array<byte> data
 						 * @return UUID
 						 */
-						UUID(Array<byte> data);
+						explicit UUID(Array<byte> data);
 						
 						/**
 						 * Returns val represented by the specified number of hex digits
@@ -175,6 +177,13 @@ namespace Java {
 						 * @return UUID
 						 */
 						static UUID randomUUID();
+
+						/**
+						 * Static factory to retrieve a type 1 (pseudo randomly generated) UUID.
+						 *
+						 * @return UUID
+						 */
+						static UUID timeUUID();
 						
 						/**
 						 * Creates a UUID from the string standard representation as described in the toString() method.

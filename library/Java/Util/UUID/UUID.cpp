@@ -26,6 +26,12 @@
 
 #include "UUID.hpp"
 
+#include <string>
+#include <cstdio>
+#include <ctime>
+#include <arpa/inet.h>
+#include "uuid.hpp"
+
 /**
  * Default constructor
  *
@@ -233,19 +239,19 @@ int UUID::version() {
  * @return UUID
  */
 UUID UUID::randomUUID() {
-	Array<byte> randomBytes = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	
-	srand(time(0));
-	int index;
-	for (index = 0; index < 16; ++index) {
-		randomBytes[ index ] = (byte) ( random() % 1000000 );
-	}
-	
-	randomBytes[ 6 ] &= 0x0f;  /* clear version        */
-	randomBytes[ 6 ] |= 0x40;  /* set to version 4     */
-	randomBytes[ 8 ] &= 0x3f;  /* clear variant        */
-	randomBytes[ 8 ] |= 0x80;  /* set to IETF variant  */
-	return UUID(randomBytes);
+	uuid_t uuid;
+	uuid_generate_random(uuid);
+	char uuid_str[37];
+	uuid_unparse_lower(uuid, uuid_str);
+	return UUID::fromString(uuid_str);
+}
+
+UUID UUID::timeUUID() {
+    uuid_t uuid;
+    uuid_generate_time_safe(uuid);
+    char uuid_str[37];
+    uuid_unparse_lower(uuid, uuid_str);
+	return UUID::fromString(uuid_str);
 }
 
 /**
