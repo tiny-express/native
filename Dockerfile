@@ -1,4 +1,5 @@
-FROM gcc
+FROM gcc:6
+RUN apt-get update -y
 RUN apt-get install -y cmake
 ADD . native
 RUN cd native && cmake . -DCMAKE_BUILD_TYPE=Release && make native_static -j8 && make native -j8 && make install
