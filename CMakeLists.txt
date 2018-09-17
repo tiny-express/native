@@ -25,7 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8.8)
-project(native CXX)
+project(native C CXX)
 
 find_package (Threads)
 
@@ -68,13 +68,11 @@ file(GLOB_RECURSE SOURCES_CPP
         )
 
 file(GLOB_RECURSE TESTS_CPP
-        library/**/**/*Test.cpp
-        library/**/**/**/*Test.cpp
+        library/**/*Test.cpp
         )
 
 file(GLOB_RECURSE BENCHMARK_CPP
-        library/**/**/*Benchmark.cpp
-        library/**/**/**/*Benchmark.cpp
+        library/**/*Benchmark.cpp
         )
 
 # Remove all test files
