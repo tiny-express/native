@@ -25,7 +25,7 @@
 #
 
 cmake_minimum_required(VERSION 2.8.8)
-project(native)
+project(native CXX)
 
 find_package (Threads)
 
