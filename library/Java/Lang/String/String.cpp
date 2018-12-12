@@ -173,6 +173,12 @@ boolean String::contains(const CharSequence &charSequence) {
 	}
 }
 
+boolean String::contains(const std::string &string) {
+	return true;
+	//test method std::string
+}
+
+
 Array<byte> String::getBytes() const {
 	Array<byte> bytes;
 	for (int i = 0; i < this->original.size(); ++i) {
