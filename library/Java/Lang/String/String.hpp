@@ -386,6 +386,10 @@ namespace Java {
              * @param charSequence
              * @return boolean
              */
+			
+	    boolean contains(const std::string  &string);
+		//add std::string method
+
             boolean contentEquals(const CharSequence &charSequence);
 
 			/**
