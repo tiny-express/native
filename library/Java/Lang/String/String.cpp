@@ -173,9 +173,14 @@ boolean String::contains(const CharSequence &charSequence) {
 	}
 }
 
-boolean String::contains(const std::string &string) {
-	return true;
-	//test method std::string
+//vothaisontlu
+boolean String::contains(const std::string &input) {
+	int size = input.length(); 
+	if (size>0) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 
