@@ -327,6 +327,34 @@ TEST (JavaLangString, Contains) {
     }
 }
 
+
+//vothaisontlu
+TEST (JavaLangString, Contains) {
+    {
+        // Gives a valid string a sub string to find
+        String validString = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        String invalidSubString = "";
+
+        // Test true with correct substring inside
+        assertTrue(validString.contains(validString));
+        // Test with with invalid substring inside
+        assertFalse(validString.contains(invalidSubString));
+    }
+
+    {
+         // Gives a valid string a sub string to find
+        String validString = "qwertyuiiop";
+        String invalidSubString = "";
+
+        // Test true with correct substring inside
+        assertTrue(validString.contains(validString));
+        // Test with with invalid substring inside
+        assertFalse(validString.contains(invalidSubString));
+    }
+}
+
+
+
 TEST (JavaLangString, ContentEqual) {
     String string = String("Hello world");
     CharSequence *charSequence = new StringBuffer("Hello world");
