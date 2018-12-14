@@ -173,7 +173,8 @@ boolean String::contains(const CharSequence &charSequence) {
 	}
 }
 
-//vothaisontlu
+
+//vothaisontlu//////////////////////////////////////////////////////////////////////////////////////////
 boolean String::contains(const std::string &input) {
 	int size = input.length(); 
 	if (size>0) {
@@ -182,7 +183,6 @@ boolean String::contains(const std::string &input) {
 		return false;
 	}
 }
-
 
 
 Array<byte> String::getBytes() const {
