@@ -301,33 +301,8 @@ TEST (JavaLangString, Concat) {
     }
 }
 
+
 TEST (JavaLangString, Contains) {
-    {
-        // Gives a valid string a sub string to find
-        String validString = "a valid string to test";
-        String subString = "valid string";
-        String invalidSubString = "text";
-
-        // Test true with correct substring inside
-        assertTrue(validString.contains(subString));
-        // Test with with invalid substring inside
-        assertFalse(validString.contains(invalidSubString));
-    }
-
-    {
-        // Gives a valid string a sub string to find
-        String validString = "đây là tiếng việt";
-        String subString = "tiếng";
-        String invalidSubString = "tiếq";
-
-        // Test true with correct substring inside
-        assertTrue(validString.contains(subString));
-        // Test with with invalid substring inside
-        assertFalse(validString.contains(invalidSubString));
-    }
-}
-
-TEST (std_CharTbasic_string, Contains) {
     {
         // Gives a valid string a sub string to find
         String validString = "this is string";
@@ -346,6 +321,18 @@ TEST (std_CharTbasic_string, Contains) {
         String subString = "tiếng";
         String invalidSubString = "tiếq";
 
+        // Test true with correct substring inside
+        assertTrue(validString.contains(subString));
+        // Test with with invalid substring inside
+        assertFalse(validString.contains(invalidSubString));
+    }
+    
+    {
+        // Gives a valid string a sub string to find
+        String validString = "Visual studio Code";
+        String subString = "Visual studio";
+        String invalidSubString = "studi0";
+ 
         // Test true with correct substring inside
         assertTrue(validString.contains(subString));
         // Test with with invalid substring inside
