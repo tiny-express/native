@@ -173,6 +173,15 @@ boolean String::contains(const CharSequence &charSequence) {
 	}
 }
 
+boolean String::contains(const std::string &input) {
+	std::size_t found = this->original.find(input.c_str());
+	if (found != std::string::npos) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 Array<byte> String::getBytes() const {
 	Array<byte> bytes;
 	for (int i = 0; i < this->original.size(); ++i) {
