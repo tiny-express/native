@@ -325,6 +325,16 @@ TEST (JavaLangString, Contains) {
         // Test with with invalid substring inside
         assertFalse(validString.contains(invalidSubString));
     }
+    
+    {
+        // Gives a valid string a sub string to find
+        String validString = "visual studio code";
+   
+        // Test true with correct substring inside
+        assertTrue(validString.contains("visual studio"));
+        // Test with with invalid substring inside
+        assertFalse(validString.contains("studi0"));
+    }
 }
 
 TEST (JavaLangString, ContentEqual) {
