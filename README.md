@@ -1,7 +1,7 @@
 # Native Library
-[![Join Gitter Chat Channel -](https://badges.gitter.im/foodtiny/native.svg)](https://gitter.im/foodtiny/native?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl/branch/master?svg=true)](https://ci.appveyor.com/project/foodtiny/native)&nbsp;[![Build Status](https://travis-ci.org/foodtiny/native.svg?branch=master)](https://travis-ci.org/foodtiny/native)
-[![Coverage status](https://img.shields.io/codecov/c/github/foodtiny/native/master.svg)](https://codecov.io/gh/foodtiny/native)&nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20darwin-blue.svg)]()
+[![Join Gitter Chat Channel -](https://badges.gitter.im/tiny-express/native.svg)](https://gitter.im/tiny-express/native?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build status](https://ci.appveyor.com/api/projects/status/5rbqtwl3nyb1vcyl/branch/master?svg=true)](https://ci.appveyor.com/project/tiny-express/native)&nbsp;[![Build Status](https://travis-ci.org/tiny-express/native.svg?branch=master)](https://travis-ci.org/tiny-express/native)
+[![Coverage status](https://img.shields.io/codecov/c/github/tiny-express/native/master.svg)](https://codecov.io/gh/tiny-express/native)&nbsp;[![Support Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20darwin-blue.svg)]()
 
 **Native Library** provides a set of Java packages are re-written in C++
 
@@ -19,7 +19,7 @@ $ docker pull foodtiny/native:latest
 
 #### Installation
 ```bash
-$ git clone https://github.com/foodtiny/native.git
+$ git clone https://github.com/tiny-express/native.git
 $ cd native
 $ cmake . -DCMAKE_BUILD_TYPE=Release
 $ make native
@@ -73,11 +73,11 @@ argument 0 is ./main
 
 [{"argument 0": "./main", "argument 1": "one", "argument 2": "two", "argument 3": "three"}]
 ```
-More examples can be found [here](https://github.com/foodtiny/native/tree/master/examples)
-Support unit test by default via ApplicationTest [here](https://github.com/foodtiny/native/tree/master/examples/Docker/ApplicationTest)  - Powered by C-Unit
+More examples can be found [here](https://github.com/tiny-express/native/tree/master/examples)
+Support unit test by default via ApplicationTest [here](https://github.com/tiny-express/native/tree/master/examples/Docker/ApplicationTest)  - Powered by C-Unit
 
 # Documentation
-[![Documentation](https://img.shields.io/badge/documentation-doxygen-ff69b4.svg)](https://foodtiny.github.io/native/annotated.html)
+[![Documentation](https://img.shields.io/badge/documentation-doxygen-ff69b4.svg)](https://tiny-express.github.io/native/annotated.html)
 #### Differences
 This library provides Java classes in C++ so its syntax are friendly for
 both programming languages:
