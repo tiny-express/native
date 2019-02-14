@@ -96,19 +96,19 @@ char Double::charValue() const {
 }
 
 short Double::shortValue() const {
-    return static_cast<short> (this->original);
+    return this->original;
 }
 
 int Double::intValue() const {
-    return static_cast<int> (this->original);
+    return this->original;
 }
 
 long Double::longValue() const {
-    return static_cast<long> (this->original);
+    return this->original;
 }
 
 float Double::floatValue() const {
-    return static_cast<float> (this->original);
+    return this->original;
 }
 
 double Double::doubleValue() const {
@@ -116,7 +116,7 @@ double Double::doubleValue() const {
 }
 
 byte Double::byteValue() const {
-    return static_cast<byte> (this->original);
+    return this->original;
 }
 
 Double Double::operator+(const Double &target) {
@@ -300,7 +300,7 @@ boolean Double::isNaN() {
 
 double Double::longBitsToDouble(long longBitsInput) {
     if (Double::isNaN(longBitsInput)) {
-        return NAN;
+        return NaN;
     }
 
     double resultLongBitsToDouble;

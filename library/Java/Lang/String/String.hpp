@@ -435,7 +435,7 @@ namespace Java {
             template<class T>
             boolean equals(T anObject) const {
                 if (instanceof<String>(anObject)) {
-                    return std::string(this->original.c_str()) == std::string(anObject.toString().toCharPointer());
+                    return std::string(this->original.c_str()).compare(anObject.toString().toCharPointer()) == 0;
                 }
                 return false;
             }
@@ -1036,7 +1036,7 @@ namespace Java {
              * @return true if this String is equal to target; false otherwise
              */
             inline boolean operator==(const String &target) const {
-                return this->original == target.original;
+                return this->original.compare(target.original) == 0;
             }
 
             /**
@@ -1057,7 +1057,7 @@ namespace Java {
             * @return true if this String is different from target; false otherwise
             */
             inline boolean operator!=(const String &target) const {
-                return !this->operator==(target);
+                return this->original.compare(target.original) != 0;
             }
 
             /**

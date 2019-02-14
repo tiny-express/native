@@ -439,37 +439,9 @@ void assertEqualsAll(Type expected,
                      AnotherType actual,
                      const_string file,
                      int line) {
-
     String expectedString = String::valueOf(expected);
     String actualString = String::valueOf(actual);
-
-    boolean isInt = isSame(expected, sampleInt)
-                    && isSame(actual, sampleInt);
-    boolean isDouble = isSame(expected, sampleDouble);
-
-    boolean isString = isSame(expected, sampleString)
-                       || isSame(expected, sampleConstString)
-                       || isSame(expected, sampleObjectString);
-
-    // Assert int equals
-    if (isInt) {
-        int expectedInt = Integer::valueOf(expectedString).intValue();
-        int actualInt = Integer::valueOf(actualString).intValue();
-        assertEqualsInt(expectedInt, actualInt, file, line);
-    }
-
-    // Assert double equals
-    if (isDouble) {
-        double expectedDouble = Double::valueOf(expectedString).doubleValue();
-        double actualDouble = Double::valueOf(actualString).doubleValue();
-
-        assertEqualsDouble(expectedDouble, actualDouble, file, line);
-    }
-
-    // Assert string equals
-    if (isString) {
-        assertEqualsString(expectedString, actualString, file, line);
-    }
+    assertEqualsString(expectedString, actualString, file, line);
 }
 
 #define assertEquals(expected, actual)\
@@ -696,6 +668,12 @@ void assertEqualsString(String expected,
                         const_string file,
                         int line) {
     if (expected != actual) {
+        for (int i=0; i<expected.length(); i++) {
+            printf("%d - %d\n", expected[i], actual[i]);
+            fflush(stdout);
+        }
+        printf("LENGTH: %d - %d\n", expected.length(), actual.length());
+        fflush(stdout);
         CTEST_ERR("%s:%d\nEXPECTED\n'%s'\nACTUAL \n'%s'\n",
                   file, line, expected.toCharPointer(), actual.toCharPointer());
     }

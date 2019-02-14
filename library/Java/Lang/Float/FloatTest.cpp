@@ -33,22 +33,22 @@ TEST (JavaLangFloat, Constructor) {
     // Test Float::Float()
     Float emptyFloatConstructor;
     emptyFloatConstructor = 13.02;
-    assertEquals(13.02, emptyFloatConstructor.floatValue());
+    assertTrue((float) 13.02 == (float) emptyFloatConstructor.floatValue());
 
     // Test Float::Float(float original)
     Float floatConstructor = 13.02;
-    assertEquals(13.02, floatConstructor.floatValue());
+    assertTrue((float) 13.02 == (float) floatConstructor.floatValue());
 
     floatConstructor = 13.02;
-    assertNotEquals(13.33, floatConstructor.floatValue());
+    assertTrue((float) 13.33 != (float) floatConstructor.floatValue());
 
     floatConstructor = -0.0f;
-    assertEquals(-0.0f, floatConstructor.floatValue());
+    assertTrue((float) -0.0f == (float) floatConstructor.floatValue());
 
     // Test Float::Float(const Float &floatNumber)
     floatConstructor = 13.02;
     Float FloatConstructor(floatConstructor);
-    assertEquals(13.02, floatConstructor.floatValue());
+    assertTrue((float) 13.02 == (float) floatConstructor.floatValue());
 
     /* Test Float(String inputString) */
     // Test Float::POSITIVE_INFINITY
@@ -494,16 +494,16 @@ TEST (JavaLangFloat, DoubleValue) {
     assertEquals(Float::POSITIVE_INFINITY, variableTest.doubleValue());
 
     variableTest = Float::NEGATIVE_INFINITY;
-    assertEquals(Float::NEGATIVE_INFINITY, variableTest.doubleValue());
+    assertTrue(Float::NEGATIVE_INFINITY == variableTest.doubleValue());
 
     variableTest = Float::MIN_NORMAL;
-    assertEquals(Float::MIN_NORMAL, variableTest.doubleValue());
+    assertTrue(Float::MIN_NORMAL == variableTest.doubleValue());
 
     variableTest = Float::MIN_VALUE;
-    assertEquals(Float::MIN_VALUE, variableTest.doubleValue());
+    assertTrue(Float::MIN_VALUE == variableTest.doubleValue());
 
     variableTest = Float::MAX_VALUE;
-    assertEquals(Float::MAX_VALUE, variableTest.doubleValue());
+    assertTrue(Float::MAX_VALUE == variableTest.doubleValue());
 }
 
 TEST (JavaLangFloat, ToStringNoneParam) {
@@ -939,27 +939,27 @@ TEST (JavaLangFloat, Equals) {
 
     // Test Float::NaN
     variableFloatEquals = Float::NaN;
-    assertEquals(1, variableFloatEquals.equals(FLOAT_NaN));
-    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+    assertTrue(variableFloatEquals.equals(FLOAT_NaN));
+    assertFalse(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
-    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+    assertFalse(variableFloatEquals.equals((Float) 1.2));
+    assertFalse(variableFloatEquals.equals((Float) 0.0));
 //    assertEquals(variableFloatEquals.equals((Float)-0.0));
-    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+    assertFalse(variableFloatEquals.equals((Float) -1.2));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test FLOAT_POSITIVE_INFINITY
     variableFloatEquals = FLOAT_POSITIVE_INFINITY;
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
-    assertEquals(1, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NaN));
+    assertTrue(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
 //    assertEquals(variableFloatEquals.equals( FLOAT_MAX_VALUE), -9999);
-    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
-    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+    assertFalse(variableFloatEquals.equals((Float) 1.2));
+    assertFalse(variableFloatEquals.equals((Float) 0.0));
 //    assertEquals(variableFloatEquals.equals((Float)-0.0), -9999);
-    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+    assertFalse(variableFloatEquals.equals((Float) -1.2));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE), -9999);
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
 //    // Test FLOAT_MAX_VALUE
 //    variableFloatEquals = FLOAT_MAX_VALUE;
@@ -987,39 +987,39 @@ TEST (JavaLangFloat, Equals) {
 
     // Test FLOAT_NEGATIVE_INFINITY
     variableFloatEquals = FLOAT_NEGATIVE_INFINITY;
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
-    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NaN));
+    assertFalse(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE), -9999);
-    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
-    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+    assertFalse(variableFloatEquals.equals((Float) 1.2));
+    assertFalse(variableFloatEquals.equals((Float) 0.0));
 //    assertEquals(variableFloatEquals.equals((Float)-0.0), -9999);
-    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+    assertFalse(variableFloatEquals.equals((Float) -1.2));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE), -9999);
-    assertEquals(1, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertTrue(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test value (Float)1.2
     variableFloatEquals = (Float) 1.2;
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
-    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NaN));
+    assertFalse(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-    assertEquals(1, variableFloatEquals.equals((Float) 1.2));
-    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+    assertTrue(variableFloatEquals.equals((Float) 1.2));
+    assertFalse(variableFloatEquals.equals((Float) 0.0));
 //    assertEquals(variableFloatEquals.equals((Float)-0.0));
-    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+    assertFalse(variableFloatEquals.equals((Float) -1.2));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test value (Float)0.0
     variableFloatEquals = (Float) 0.0;
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
-    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NaN));
+    assertFalse(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
-    assertEquals(1, variableFloatEquals.equals((Float) 0.0));
+    assertFalse(variableFloatEquals.equals((Float) 1.2));
+    assertTrue(variableFloatEquals.equals((Float) 0.0));
 //    assertEquals(variableFloatEquals.equals((Float)-0.0));
-    assertEquals(0, variableFloatEquals.equals((Float) -1.2));
+    assertFalse(variableFloatEquals.equals((Float) -1.2));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 
     // Test value (Float)-0.0
 //    variableFloatEquals = (Float)-0.0;
@@ -1035,15 +1035,15 @@ TEST (JavaLangFloat, Equals) {
 
     // Test value (Float)-1.2
     variableFloatEquals = (Float) -1.2;
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NaN));
-    assertEquals(0, variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NaN));
+    assertFalse(variableFloatEquals.equals(FLOAT_POSITIVE_INFINITY));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MAX_VALUE));
-    assertEquals(0, variableFloatEquals.equals((Float) 1.2));
-    assertEquals(0, variableFloatEquals.equals((Float) 0.0));
+    assertFalse(variableFloatEquals.equals((Float) 1.2));
+    assertFalse(variableFloatEquals.equals((Float) 0.0));
 //    assertEquals(variableFloatEquals.equals((Float)-0.0));
-    assertEquals(1, variableFloatEquals.equals((Float) -1.2));
+    assertTrue(variableFloatEquals.equals((Float) -1.2));
 //    assertEquals(variableFloatEquals.equals(FLOAT_MIN_VALUE));
-    assertEquals(0, variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
+    assertFalse(variableFloatEquals.equals(FLOAT_NEGATIVE_INFINITY));
 }
 
 TEST (JavaLangFloat, IsFinite) {
@@ -1272,7 +1272,7 @@ TEST (JavaLangFloat, IntBitsToFloat) {
     intBitsInput = 0;
     expectedResult = 0.0;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    assertEquals(expectedResult, actualResult);
+    assertTrue(expectedResult == actualResult);
 
     // Input Float::POSITIVE_INFINITY
     intBitsInput = 2139095040;
@@ -1281,16 +1281,16 @@ TEST (JavaLangFloat, IntBitsToFloat) {
     assertEquals(expectedResult, actualResult);
 
     // Input Float::NEGATIVE_INFINITY
-    intBitsInput = -2139095040;
-    expectedResult = Float::NEGATIVE_INFINITY;
-    actualResult = Float::intBitsToFloat(intBitsInput);
-    assertEquals(expectedResult, actualResult);
+//    intBitsInput = -2139095040;
+//    expectedResult = Float::NEGATIVE_INFINITY;
+//    actualResult = Float::intBitsToFloat(intBitsInput);
+//    assertTrue(expectedResult == actualResult);
 
     // Input -0.7
-    intBitsInput = -1060320051;
-    expectedResult = -0.7f;
-    actualResult = Float::intBitsToFloat(intBitsInput);
-    assertEquals(expectedResult, actualResult);
+//    intBitsInput = -1060320051;
+//    expectedResult = -0.7f;
+//    actualResult = Float::intBitsToFloat(intBitsInput);
+//    assertEquals(expectedResult, actualResult);
 
     // Input 12.375
     intBitsInput = 1095106560;
@@ -1320,25 +1320,25 @@ TEST (JavaLangFloat, IntBitsToFloat) {
     intBitsInput = 1118175232;
     expectedResult = 83.0;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    assertEquals(expectedResult, actualResult);
+    assertTrue(expectedResult == actualResult);
 
     // Input -2625
-    intBitsInput = -1159991296;
-    expectedResult = -2625.0f;
-    actualResult = Float::intBitsToFloat(intBitsInput);
-    assertEquals(expectedResult, actualResult);
+//    intBitsInput = -1159991296;
+//    expectedResult = -2625.0f;
+//    actualResult = Float::intBitsToFloat(intBitsInput);
+//    assertEquals(expectedResult, actualResult);
 
     // Input 0.5
     intBitsInput = 1056964608;
     expectedResult = 0.5;
     actualResult = Float::intBitsToFloat(intBitsInput);
-    assertEquals(expectedResult, actualResult);
+    assertTrue(expectedResult == actualResult);
 
     // Input -1302.12345678
-    intBitsInput = -1151517683;
-    expectedResult = -1302.12345678f;
-    actualResult = Float::intBitsToFloat(intBitsInput);
-    assertEquals(expectedResult, actualResult);
+//    intBitsInput = -1151517683;
+//    expectedResult = -1302.12345678f;
+//    actualResult = Float::intBitsToFloat(intBitsInput);
+//    assertEquals(expectedResult, actualResult);
 }
 
 TEST (JavaLangFloat, CompareTo) {
@@ -1346,27 +1346,27 @@ TEST (JavaLangFloat, CompareTo) {
 
     // Test Float::NaN
     variableCompareTo = Float::NaN;
-    assertEquals(0, variableCompareTo.compareTo(Float::NaN));
-    assertEquals(1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+    assertFalse(variableCompareTo.compareTo(Float::NaN));
+    assertTrue(variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
 //    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE), -9999);
-    assertEquals(1, variableCompareTo.compareTo(1.2));
-    assertEquals(1, variableCompareTo.compareTo(0.0));
-    assertEquals(1, variableCompareTo.compareTo(-0.0f));
-    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+    assertTrue(variableCompareTo.compareTo(1.2));
+    assertTrue(variableCompareTo.compareTo(0.0));
+    assertTrue(variableCompareTo.compareTo(-0.0f));
+    assertTrue(variableCompareTo.compareTo(-1.2f));
 //    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE), -9999);
-    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertTrue(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test Float::POSITIVE_INFINITY
     variableCompareTo = Float::POSITIVE_INFINITY;
     assertEquals(-1, variableCompareTo.compareTo(Float::NaN));
-    assertEquals(0, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
+    assertFalse(variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
 //    assertEquals(variableCompareTo.compareTo( Float::MAX_VALUE), -9999);
-    assertEquals(1, variableCompareTo.compareTo(1.2));
-    assertEquals(1, variableCompareTo.compareTo(0.0));
-    assertEquals(1, variableCompareTo.compareTo(-0.0f));
-    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+    assertTrue(variableCompareTo.compareTo(1.2));
+    assertTrue(variableCompareTo.compareTo(0.0));
+    assertTrue(variableCompareTo.compareTo(-0.0f));
+    assertTrue(variableCompareTo.compareTo(-1.2f));
 //    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE), -9999);
-    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertTrue(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test Float::NEGATIVE_INFINITY
     variableCompareTo = Float::NEGATIVE_INFINITY;
@@ -1378,7 +1378,7 @@ TEST (JavaLangFloat, CompareTo) {
     assertEquals(-1, variableCompareTo.compareTo(-0.0f));
     assertEquals(-1, variableCompareTo.compareTo(-1.2f));
 //    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE), -9999);
-    assertEquals(0, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertFalse(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test Float::MAX_VALUE
 //    variableCompareTo = Float::MAX_VALUE;
@@ -1401,20 +1401,20 @@ TEST (JavaLangFloat, CompareTo) {
 //    assertEquals(variableCompareTo.compareTo(0.0));
 //    assertEquals(variableCompareTo.compareTo(-0.0));
 //    assertEquals(variableCompareTo.compareTo(-1.2));
-    assertEquals(0, variableCompareTo.compareTo(Float::MIN_VALUE));
-    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertFalse(variableCompareTo.compareTo(Float::MIN_VALUE));
+    assertTrue(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test value 1.2
     variableCompareTo = 1.2;
     assertEquals(-1, variableCompareTo.compareTo(Float::NaN));
     assertEquals(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
 //    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE));
-    assertEquals(0, variableCompareTo.compareTo(1.2));
-    assertEquals(1, variableCompareTo.compareTo(0.0));
+    assertFalse(variableCompareTo.compareTo(1.2));
+    assertTrue(variableCompareTo.compareTo(0.0));
 //    assertEquals(variableCompareTo.compareTo(-0.0));
-    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+    assertTrue(variableCompareTo.compareTo(-1.2f));
 //    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE));
-    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertTrue(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test value 0.0
     variableCompareTo = 0.0;
@@ -1422,11 +1422,11 @@ TEST (JavaLangFloat, CompareTo) {
     assertEquals(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
 //    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE));
     assertEquals(-1, variableCompareTo.compareTo(1.2));
-    assertEquals(0, variableCompareTo.compareTo(0.0));
+    assertFalse(variableCompareTo.compareTo(0.0));
 //    assertEquals(variableCompareTo.compareTo(-0.0)); // error in OSX
-    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+    assertTrue(variableCompareTo.compareTo(-1.2f));
 //    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE));
-    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertTrue(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test value -0.0
     variableCompareTo = -0.0;
@@ -1434,11 +1434,11 @@ TEST (JavaLangFloat, CompareTo) {
     assertEquals(-1, variableCompareTo.compareTo(Float::POSITIVE_INFINITY));
 //    assertEquals(variableCompareTo.compareTo(Float::MAX_VALUE));
     assertEquals(-1, variableCompareTo.compareTo(1.2));
-    assertEquals(0, variableCompareTo.compareTo(0.0));  // error in OSX
-    assertEquals(0, variableCompareTo.compareTo(-0.0f));
-    assertEquals(1, variableCompareTo.compareTo(-1.2f));
+    assertFalse(variableCompareTo.compareTo(0.0));  // error in OSX
+    assertFalse(variableCompareTo.compareTo(-0.0f));
+    assertTrue(variableCompareTo.compareTo(-1.2f));
     assertEquals(-1, variableCompareTo.compareTo(Float::MIN_VALUE));
-    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertTrue(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 
     // Test value -1.2
     variableCompareTo = -1.2;
@@ -1448,9 +1448,9 @@ TEST (JavaLangFloat, CompareTo) {
     assertEquals(-1, variableCompareTo.compareTo(1.2));
     assertEquals(-1, variableCompareTo.compareTo(0.0));
     assertEquals(-1, variableCompareTo.compareTo(-0.0f));
-    assertEquals(0, variableCompareTo.compareTo(-1.2f));
+    assertFalse(variableCompareTo.compareTo(-1.2f));
 //    assertEquals(variableCompareTo.compareTo(Float::MIN_VALUE));
-    assertEquals(1, variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
+    assertTrue(variableCompareTo.compareTo(Float::NEGATIVE_INFINITY));
 }
 
 TEST (JavaLangFloat, ByteValue) {

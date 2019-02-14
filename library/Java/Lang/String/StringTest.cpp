@@ -589,8 +589,8 @@ TEST (JavaLangString, GetChars) {
     Array<char> charArray(30);
     String testString = "This is a String";
     testString.getChars(10, 16, charArray, 0);
-    Array<char> subCharArray[]={'S','t','r','i','n','g'};
-    assertEquals(subCharArray, charArray);
+    Array<char> subCharArray = {'S','t','r','i','n','g'};
+    assertEquals(subCharArray, String(charArray).subString(0, 6));
 
     try {
         testString.getChars(-1, 16, charArray, 0);

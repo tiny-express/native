@@ -90,8 +90,9 @@ namespace Java {
 
             /**
              * A constant holding a Not-a-Number (NaN) value of type
+             * https://docs.oracle.com/javase/8/docs/api/constant-values.html#java.lang.Double.NaN
              */
-            static constexpr double NaN = NAN;  // -nan
+            static constexpr double NaN = NAN;
 
             /**
              * A constant holding the largest positive finite value of type

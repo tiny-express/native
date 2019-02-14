@@ -597,16 +597,12 @@ float Float::min(float numberFloat, float anotherNumberFloat) {
 }
 
 float Float::intBitsToFloat(int intBitsInput) {
-    float resultIntBitsToFloat;
-    String convertIntBitsToBinary32StringType;
-
-    convertIntBitsToBinary32StringType
-            = intBitsToBinary32StringType(intBitsInput);
-
-    resultIntBitsToFloat
-            = binary32StringTypeToFloat(convertIntBitsToBinary32StringType);
-
-    return  resultIntBitsToFloat;
+    union {
+        int i;
+        float f;
+    } u;
+    u.i = (long) intBitsInput;
+    return (float) u.f;
 }
 
 String Float::toString(float inputFloat) {

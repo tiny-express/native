@@ -610,9 +610,9 @@ TEST (JavaLangStringBuffer, CharAt) {
 TEST (JavaLangStringBuffer, CodePointAt) {
     StringBuffer stringBuffer = StringBuffer("CodePointAt");
 
-    // Test vaild index
+    // Test valid index
     char expectCodePointAtResult = 'A';
-    assertEquals(expectCodePointAtResult, stringBuffer.codePointAt(9));
+    assertEquals((int) expectCodePointAtResult, (int) stringBuffer.codePointAt(9));
 
     // Test negative index
     try {
@@ -644,9 +644,9 @@ TEST (JavaLangStringBuffer, CodePointAt) {
 TEST (JavaLangStringBuffer, CodePointBefore) {
     StringBuffer stringBuffer = StringBuffer("CodePointAt");
 
-    // Test vaild index
+    // Test valid index
     char expectCodePointBeforeResult = 'A';
-    assertEquals(expectCodePointBeforeResult, stringBuffer.codePointBefore(10));
+    assertEquals((int) expectCodePointBeforeResult, (int) stringBuffer.codePointBefore(10));
 
     // Test zero index
     try {
