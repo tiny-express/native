@@ -486,7 +486,7 @@ int BitSet::nextClearBit(int fromIndex) const {
         word = ~this->words[indexOfWord];
     }
 
-    // while loop must return a value, so don't need to return anything after while loop.
+    return 0;
 }
 
 int BitSet::nextSetBit(int fromIndex) const {
@@ -515,7 +515,7 @@ int BitSet::nextSetBit(int fromIndex) const {
         word = this->words[indexOfWord];
     }
 
-    // while loop must return a value, so don't need to return anything after while loop.
+    return 0;
 }
 
 int BitSet::previousClearBit(int fromIndex) const {
@@ -548,7 +548,7 @@ int BitSet::previousClearBit(int fromIndex) const {
         word = ~this->words[indexOfWord];
     }
 
-    // while loop must return a value, so don't need to return anything after while loop.
+    return 0;
 }
 
 int BitSet::previousSetBit(int fromIndex) const {
@@ -580,6 +580,7 @@ int BitSet::previousSetBit(int fromIndex) const {
         indexOfWord = indexOfWord - 1;
         word = this->words[indexOfWord];
     }
+    return -1;
 }
 
 void BitSet::set(int bitIndex) {

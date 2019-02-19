@@ -316,7 +316,7 @@ int Long::numberOfLeadingZeros(long source) {
         --shiftCount;
     }
 
-    // for loop must return a value, so don't need to return anything after for loop.
+    return 0;
 }
 
 /**
@@ -338,7 +338,7 @@ int Long::numberOfTrailingZeros(long source) {
         }
     }
 
-    // for loop must return a value, so don't need to return anything after for loop.
+    return 0;
 }
 
 /**

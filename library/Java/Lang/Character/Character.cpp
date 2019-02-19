@@ -579,4 +579,5 @@ int Character::digit(int codePoint, int radix) {
 				return -1;
 		}
 	}
+	return -1;
 }

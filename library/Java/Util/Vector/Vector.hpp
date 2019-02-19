@@ -354,15 +354,6 @@ namespace Java {
             }
 
             /**
-             * Returns the hash code value for this Vector.
-             *
-             * @return int
-             */
-            int hashCode() const {
-                // TODO
-            }
-
-            /**
              * Returns index of an element in this Vector or returns -1 if the element is not found.
              *
              * @param element
@@ -804,7 +795,7 @@ namespace Java {
              * @return String
              */
             String toString() const {
-                // TODO
+                return "";
             }
 
         public:

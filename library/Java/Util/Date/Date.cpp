@@ -530,7 +530,6 @@ void Date::initializeDate(int year, int month, int date,
 }
 
 void Date::initializeDate(long timestamp) {
-    this->timer = timer;
     time_t ts = timestamp;
     this->localTimer = localtime(&ts);
     this->updateDateStatus();

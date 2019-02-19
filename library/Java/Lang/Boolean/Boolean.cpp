@@ -190,4 +190,5 @@ boolean Boolean::valueOf(const_string target) {
  */
 Boolean Boolean::operator=(const Boolean &target) {
 	this->original = target.original;
+	return *this;
 }

@@ -36,7 +36,7 @@
  * Force inclusion of SVID stuff since we need it if we're compiling in
  * gcc-wall wall mode
  */
-#define _SVID_SOURCE
+#define _DEFAULT_SOURCE
 
 #ifdef _WIN32
 #define _WIN32_WINNT 0x0500

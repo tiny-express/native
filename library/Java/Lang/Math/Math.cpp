@@ -517,6 +517,7 @@ float Math::ulp(float value) {
 			/*   return Float::intBitsToFloat(1 << (exp - (Float::MIN_EXPONENT
 														 - (Float::SIGNIFICAND_WIDTH - 1)) ));*/
 	}
+	return 0.0;
 }
 
 double Math::ulp(double value) {

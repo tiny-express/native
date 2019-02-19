@@ -287,11 +287,6 @@ namespace Java {
 						void finalize();
 				
 				public:
-						/**
-						 * Not support this function yet
-						 */
-						Class<Object> getClass() {
-						}
 						
 						/**
 					     * Wakes up a single thread that is waiting on this object's

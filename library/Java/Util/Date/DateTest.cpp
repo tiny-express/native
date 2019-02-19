@@ -95,6 +95,13 @@ TEST (JavaUtilDate, Constructor) {
     actualString = "Thu Jan 9 (and) 2014 12:35:34";
     actualDate = Date(actualString);
     assertEquals(expected.toString(), actualDate.toString());
+
+    // Timestamp
+    auto timestamp = 1550607665000;
+    expected = Date(timestamp);
+    actualString = "Wed Feb 20 03:21:05 +07 2019";
+    assertEquals(expected.toString(), actualString.toString());
+    assertTrue(expected.getTime() == timestamp);
 }
 
 TEST (JavaUtilDate, SetYear) {

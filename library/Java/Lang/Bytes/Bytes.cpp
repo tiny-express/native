@@ -144,7 +144,10 @@ long Bytes::toUnsignedLong(byte byteValue) {
 }
 
 Bytes Bytes::valueOf(byte byteValue) {
-    return ByteCache::getInstance()->getByteAtIndex((int) byteValue);
+    auto byteInstance = ByteCache::getInstance();
+    auto value = byteInstance->getByteAtIndex((int) byteValue);
+    delete byteInstance;
+    return value;
 }
 
 Bytes Bytes::valueOf(String stringValue) {
