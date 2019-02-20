@@ -134,7 +134,7 @@ long Date::getTime() const {
 }
 
 int Date::getTimezoneOffset() const {
-    return (int) -(this->localTimer->tm_gmtoff / 60);
+    return (int) - (this->localTimer->tm_gmtoff / 60);
 }
 
 boolean Date::after(Date specifiedDate) const {
