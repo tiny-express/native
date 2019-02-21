@@ -35,9 +35,9 @@ namespace Java {
 				class IllegalArgumentException : public RuntimeException {
 				public:
 						IllegalArgumentException();
-						IllegalArgumentException(String message);
-						IllegalArgumentException(String message, Throwable *cause);
-						IllegalArgumentException(Throwable *cause);
+						explicit IllegalArgumentException(const String &message);
+						explicit IllegalArgumentException(const String &message, Throwable *cause);
+						explicit IllegalArgumentException(Throwable *cause);
 				};
 		}
 }

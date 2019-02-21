@@ -32,7 +32,7 @@ NoSuchElementException::NoSuchElementException() : RuntimeException() {
 
 }
 
-NoSuchElementException::NoSuchElementException(String message) : RuntimeException(message) {
+NoSuchElementException::NoSuchElementException(const String &message) : RuntimeException(message) {
 
 }
 
@@ -40,6 +40,6 @@ NoSuchElementException::NoSuchElementException(Throwable *cause) : RuntimeExcept
 
 }
 
-NoSuchElementException::NoSuchElementException(String message, Throwable *cause) : RuntimeException(message, cause) {
+NoSuchElementException::NoSuchElementException(const String &message, Throwable *cause) : RuntimeException(message, cause) {
 
 }

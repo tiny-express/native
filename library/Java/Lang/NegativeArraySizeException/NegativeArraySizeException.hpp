@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_NEGATIVEARRAYSIZEEXCEPTION_HPP
-#define NATIVE_JAVA_LANG_NEGATIVEARRAYSIZEEXCEPTION_HPP
+#ifndef NATIVE_JAVA_LANG_NEGATIVE_ARRAY_SIZE_EXCEPTION_HPP
+#define NATIVE_JAVA_LANG_NEGATIVE_ARRAY_SIZE_EXCEPTION_HPP
 
 #include "../RuntimeException/RuntimeException.hpp"
 #include "../../Lang.hpp"
@@ -35,9 +35,9 @@ namespace Java {
 				class NegativeArraySizeException : public RuntimeException {
 				public:
 						NegativeArraySizeException();
-						NegativeArraySizeException(String message);
+						NegativeArraySizeException(const String &message);
 				};
 		}
 }
 
-#endif // NATIVE_JAVA_LANG_NEGATIVEARRAYSIZEEXCEPTION_HPP
+#endif // NATIVE_JAVA_LANG_NEGATIVE_ARRAY_SIZE_EXCEPTION_HPP

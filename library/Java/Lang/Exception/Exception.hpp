@@ -35,9 +35,9 @@ namespace Java {
 				class Exception : public Throwable {
 				public:
 						Exception();
-						Exception(String message);
-						Exception(String message, Throwable *cause);
-						Exception(Throwable *cause);
+						explicit Exception(const String &message);
+						explicit Exception(const String &message, Throwable *cause);
+						explicit Exception(Throwable *cause);
 				};
 		}
 }

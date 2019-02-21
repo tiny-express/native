@@ -35,9 +35,9 @@ namespace Java {
 				class RuntimeException : public Exception {
 				public:
 						RuntimeException();
-						RuntimeException(String message);
-						RuntimeException(Throwable *cause);
-						RuntimeException(String message, Throwable *cause);
+						explicit RuntimeException(const String &message);
+						explicit RuntimeException(Throwable *cause);
+						explicit RuntimeException(const String &message, Throwable *cause);
 				};
 		}
 }

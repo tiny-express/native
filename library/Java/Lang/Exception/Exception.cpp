@@ -32,10 +32,10 @@ using namespace Java::Lang;
 Exception::Exception() : Throwable::Throwable() {
 }
 
-Exception::Exception(String message) : Throwable::Throwable(message) {
+Exception::Exception(const String &message) : Throwable::Throwable(message) {
 }
 
-Exception::Exception(String message, Throwable *cause) : Throwable::Throwable(message, cause) {
+Exception::Exception(const String &message, Throwable *cause) : Throwable::Throwable(message, cause) {
 }
 
 Exception::Exception(Throwable *cause) : Throwable::Throwable(cause) {

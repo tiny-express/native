@@ -32,7 +32,7 @@ StringIndexOutOfBoundsException::StringIndexOutOfBoundsException() : IndexOutOfB
 
 }
 
-StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(String message) : IndexOutOfBoundsException(message) {
+StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(const String &message) : IndexOutOfBoundsException(message) {
 
 }
 
@@ -40,7 +40,7 @@ StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(Throwable *caus
 
 }
 
-StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(String message, Throwable *cause) : IndexOutOfBoundsException(message, cause) {
+StringIndexOutOfBoundsException::StringIndexOutOfBoundsException(const String &message, Throwable *cause) : IndexOutOfBoundsException(message, cause) {
 
 }
 

@@ -31,10 +31,10 @@ using namespace Java::Lang;
 IllegalArgumentException::IllegalArgumentException() : RuntimeException::RuntimeException() {
 }
 
-IllegalArgumentException::IllegalArgumentException(String message) : RuntimeException::RuntimeException(message) {
+IllegalArgumentException::IllegalArgumentException(const String &message) : RuntimeException::RuntimeException(message) {
 }
 
-IllegalArgumentException::IllegalArgumentException(String message, Throwable *cause) : RuntimeException::RuntimeException(message, cause) {
+IllegalArgumentException::IllegalArgumentException(const String &message, Throwable *cause) : RuntimeException::RuntimeException(message, cause) {
 }
 
 IllegalArgumentException::IllegalArgumentException(Throwable *cause) : RuntimeException::RuntimeException(cause) {

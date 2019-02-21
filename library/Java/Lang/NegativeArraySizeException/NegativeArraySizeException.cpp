@@ -32,6 +32,6 @@ NegativeArraySizeException::NegativeArraySizeException() : RuntimeException() {
 
 }
 
-NegativeArraySizeException::NegativeArraySizeException(String message) : RuntimeException(message) {
+NegativeArraySizeException::NegativeArraySizeException(const String &message) : RuntimeException(message) {
 
 }

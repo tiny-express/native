@@ -35,9 +35,9 @@ namespace Java {
 				class ArithmeticException : public RuntimeException {
 				public:
 						ArithmeticException();
-						ArithmeticException(String message);
-						ArithmeticException(Throwable *cause);
-						ArithmeticException(String message, Throwable *cause);
+						explicit ArithmeticException(const String &message);
+						explicit ArithmeticException(Throwable *cause);
+						explicit ArithmeticException(const String &message, Throwable *cause);
 				};
 		}
 }

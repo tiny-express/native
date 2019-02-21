@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_LANG_STRINGINDEXOUTOFBOUNDSEXCEPTION_HPP
-#define NATIVE_JAVA_LANG_STRINGINDEXOUTOFBOUNDSEXCEPTION_HPP
+#ifndef NATIVE_JAVA_LANG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION_HPP
+#define NATIVE_JAVA_LANG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION_HPP
 
 #include "../IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
 #include "../../Lang.hpp"
@@ -35,12 +35,12 @@ namespace Java {
 				class StringIndexOutOfBoundsException : public IndexOutOfBoundsException {
 				public:
 						StringIndexOutOfBoundsException();
-						StringIndexOutOfBoundsException(String message);
-						StringIndexOutOfBoundsException(Throwable *cause);
-						StringIndexOutOfBoundsException(String message, Throwable *cause);
-						StringIndexOutOfBoundsException(int index);
+						explicit StringIndexOutOfBoundsException(const String &message);
+						explicit StringIndexOutOfBoundsException(Throwable *cause);
+						explicit StringIndexOutOfBoundsException(const String &message, Throwable *cause);
+						explicit StringIndexOutOfBoundsException(int index);
 				};
 		}
 }
 
-#endif // NATIVE_JAVA_LANG_STRINGINDEXOUTOFBOUNDSEXCEPTION_HPP
+#endif // NATIVE_JAVA_LANG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION_HPP

@@ -35,9 +35,9 @@ namespace Java {
 				class IndexOutOfBoundsException : public RuntimeException {
 				public:
 						IndexOutOfBoundsException();
-						IndexOutOfBoundsException(String message);
-						IndexOutOfBoundsException(Throwable *cause);
-						IndexOutOfBoundsException(String message, Throwable *cause);
+						explicit IndexOutOfBoundsException(const String &message);
+						explicit IndexOutOfBoundsException(Throwable *cause);
+						explicit IndexOutOfBoundsException(const String &message, Throwable *cause);
 				};
 		}
 }
