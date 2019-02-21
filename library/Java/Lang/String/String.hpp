@@ -450,6 +450,15 @@ namespace Java {
 			boolean equalsIgnoreCase(const String &anotherString);
 
             /**
+             * Compares this String to another String, ignoring case considerations.
+             *
+             * @param anotherString
+             * @return true if the given object represents a String equivalent
+             * to this string, false otherwise, ignoring case considerations
+             */
+            boolean equalsIgnoreCase(string anotherString);
+
+            /**
              * String hash code
              *
              * @return long

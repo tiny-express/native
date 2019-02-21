@@ -1066,6 +1066,10 @@ TEST (JavaLangString, OperatorPlusConstantStringDataType) {
     String result2 = input2 + String("World");
     String expected2 = "World";
     assertTrue(expected2.equals(result2));
+
+    String helloWorld = "Hello World";
+    assertTrue(helloWorld == "Hello World");
+    assertTrue(helloWorld != "hello World");
 }
 
 TEST(JavaLangString, OperatorPlusConstantString) {
