@@ -119,7 +119,7 @@ namespace Java {
              * @param byteArray
              */
 
-            String(Array<byte> byteArray);
+            String(const Array<byte> &byteArray);
 
 			/**
              * Allocates a new String that contains the sequence
@@ -135,7 +135,7 @@ namespace Java {
              *
              * @param charArray
              */
-             String(Array<char> charArray);
+             String(const Array<char> &charArray);
 
 			/**
              * Allocates a new String that contains the sequence
@@ -175,7 +175,7 @@ namespace Java {
              * @throw IndexOutOfBoundsException If the offset and count arguments index
              * characters outside the bounds of the value array
              */
-             String(Array<char> charArray, int offset, int count);
+             String(const Array<char> &charArray, int offset, int count);
 
 			/**
              * Allocates a new String that contains characters
@@ -202,7 +202,7 @@ namespace Java {
              * @throwIndexOutOfBoundsException If the offset and the length arguments index
              * characters outside the bounds of the bytes array
              */
-             String(Array<byte> byteArray, int offset, int length);
+             String(const Array<byte> &byteArray, int offset, int length);
 
 			/**
              * Constructs a new String by decoding the specified
@@ -256,7 +256,7 @@ namespace Java {
              *
              * @param target
              */
-            inline String(const std::string targetString) {
+            inline String(const std::string &targetString) {
                 this->original = targetString;
             }
 
@@ -368,7 +368,7 @@ namespace Java {
              * @param target
              * @return String
              */
-            String concat(String target);
+            String concat(const String &target);
 
 			/**
              * Find substring inside this String
@@ -399,7 +399,7 @@ namespace Java {
              * @param charArray
              * @return a String that contains the characters of the charArray.
              */
-            static String copyValueOf(Array<char> &charArray);
+            static String copyValueOf(const Array<char> &charArray);
 
 			/**
              * Returns the String representation of a specific subarray of the char array argument.
@@ -412,7 +412,7 @@ namespace Java {
              * @return a String that contains the characters of the
              * specified subarray of charArray.
              */
-            static String copyValueOf(Array<char> &charArray, int offset, int count);
+            static String copyValueOf(const Array<char> &charArray, int offset, int count);
 
 			/**
              * String endswith a suffix
@@ -433,7 +433,7 @@ namespace Java {
              * to this string, false otherwise
              */
             template<class T>
-            boolean equals(T anObject) const {
+            boolean equals(const T &anObject) const {
                 if (instanceof<String>(anObject)) {
                     return std::string(this->original.c_str()).compare(anObject.toString().toCharPointer()) == 0;
                 }
@@ -447,7 +447,7 @@ namespace Java {
              * @return true if the given object represents a String equivalent
              * to this string, false otherwise, ignoring case considerations
              */
-			boolean equalsIgnoreCase(String anotherString);
+			boolean equalsIgnoreCase(const String &anotherString);
 
             /**
              * String hash code
@@ -462,7 +462,7 @@ namespace Java {
              * @param charArray
              * @return String
              */
-			static String fromCharArray(Array<char> &charArray);
+			static String fromCharArray(const Array<char> &charArray);
 
 			/**
              * Get byte array from this String
@@ -504,7 +504,7 @@ namespace Java {
              * destinationBegin + (srcEnd - srcBegin) is larger than destination.length
              */
 			void getChars(int sourceBegin, int sourceEnd,
-						  Array<char> &destination, int destinationBegin);
+			        Array<char> &destination, int destinationBegin);
 
 			/**
              * Get char to String
@@ -533,7 +533,7 @@ namespace Java {
              * @return index of the first occurrence of the specified substring,
              * or -1 if there is no such occurrence.
              */
-			int indexOf(String subString) const;
+			int indexOf(const String &subString) const;
 
 			/**
              * Returns the index within this String
@@ -557,7 +557,7 @@ namespace Java {
              * @return index of the first occurrence of the specified substring,
              * start from fromIndex or -1 if there is no such occurrence.
              */
-            int indexOf(String subString, int fromIndex) const;
+            int indexOf(const String &subString, int fromIndex) const;
 
 			/**
              * Determine if this String is empty
@@ -575,7 +575,7 @@ namespace Java {
              * @return a new String that is composed of the elements
              */
             template<typename ... Args>
-            static String join(CharSequence &delimiter, Args &&... elements) {
+            static String join(const CharSequence &delimiter, Args &&... elements) {
                 String result;
                 std::initializer_list<CharSequence *> paramList = {&elements...};
 
@@ -620,7 +620,7 @@ namespace Java {
              * @return index of the last occurrence of the specified substring,
              * or -1 if the substring does not occur.
              */
-            int lastIndexOf(String subString) const;
+            int lastIndexOf(const String &subString) const;
 
 			/**
              * Returns the index within this string of the last occurrence
@@ -632,7 +632,7 @@ namespace Java {
              * @return index of the last occurrence of the specified substring,
              * or -1 if the substring does not occur.
              */
-            int lastIndexOf(String subString, int fromIndex) const;
+            int lastIndexOf(const String &subString, int fromIndex) const;
 
 			/**
              * Returns the length of this string
@@ -684,7 +684,7 @@ namespace Java {
              * matches the specified subregion of the String argument; false otherwise.
              */
 			boolean regionMatches(int thisOffset,
-								  String otherString, int otherOffset, int len);
+								  const String& otherString, int otherOffset, int len);
 
 			/**
              * Tests if two string regions are equal.
@@ -699,7 +699,7 @@ namespace Java {
              * Whether the matching is exact or case insensitive depends on the ignoreCase argument.
              */
 			boolean regionMatches(boolean ignoreCase, int thisOffset,
-								  String otherString, int otherOffset, int len);
+								  const String &otherString, int otherOffset, int len);
 
 			/**
              * Returns a string resulting from replacing all occurrences
@@ -721,7 +721,7 @@ namespace Java {
              * @param replacement
              * @return The resulting String
              */
-			String replace(CharSequence &target, CharSequence &replacement) const;
+			String replace(const CharSequence &target, const CharSequence &replacement) const;
 
 			/**
              * Replaces each substring of this string that matches
@@ -733,7 +733,7 @@ namespace Java {
              * if the regular expression's syntax is invalid
              * @return The resulting String
              */
-            String replaceAll(String regex, String replacement) const;
+            String replaceAll(const String &regex, const String &replacement) const;
 
 			/**
              * Replaces the first substring of this string that matches
@@ -745,7 +745,7 @@ namespace Java {
              * if the regular expression's syntax is invalid
              * @return The resulting String
              */
-            String replaceFirst(String regex, String replacement) const;
+            String replaceFirst(const String &regex, const String &replacement) const;
 
 			/**
              * Splits this String around matches of the given regular expression.
@@ -756,7 +756,7 @@ namespace Java {
              * @return the array of Strings computed by splitting this String
              * around matches of the given regular expression
              */
-            Array<String> split(String regex) const;
+            Array<String> split(const String &regex) const;
 
 			/**
              * Splits this string around matches of the given regular expression.
@@ -768,7 +768,7 @@ namespace Java {
              * @return array of Strings computed by splitting this String
              * around matches of the given regular expression
              */
-            Array<String> split(String regex, int limit) const;
+            Array<String> split(const String &regex, int limit) const;
 
 			/**
              * Tests if this string starts with the specified prefix.
@@ -777,7 +777,7 @@ namespace Java {
              * @return true if the character sequence represented by the argument is a prefix
              * of the character sequence represented by this string; false otherwise.
              */
-            boolean startsWith(String prefix) const;
+            boolean startsWith(const String &prefix) const;
 
 			/**
              * Tests if the substring of this string beginning
@@ -790,7 +790,7 @@ namespace Java {
              * The result is false if thisOffset is negative or greater than the length
              * of this String object;
              */
-            boolean startsWith(String prefix, int thisOffset) const;
+            boolean startsWith(const String prefix, int thisOffset) const;
 
 			/**
              * Returns a character sequence that is a subsequence of this sequence.
@@ -925,7 +925,7 @@ namespace Java {
              * @param stringValue
              * @return a String containing stringValue.
              */
-            static String valueOf(String stringValue);
+            static String valueOf(const String stringValue);
 
             /**
              * Returns the String representation of the const string argument.

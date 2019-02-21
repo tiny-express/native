@@ -63,7 +63,7 @@ String::String(string original, int length) {
 	this->original = std::string(original, original + (size_t) length);
 }
 
-String::String(Array<char> charArray) {
+String::String(const Array<char> &charArray) {
 	this->original.clear();
 	this->original.shrink_to_fit();
 	int i;
@@ -72,7 +72,7 @@ String::String(Array<char> charArray) {
 	}
 }
 
-String::String(Array<byte> byteArray) {
+String::String(const Array<byte> &byteArray) {
 	this->original.clear();
 	this->original.shrink_to_fit();
 	int i;
@@ -94,7 +94,7 @@ String::String(const StringBuffer &stringBuffer) {
 	this->original = std::string(stringBuffer.getValue().toCharPointer());
 }
 
-String::String(Array<char> array, int offset, int length) {
+String::String(const Array<char> &array, int offset, int length) {
 	if (offset < 0) {
 		throw StringIndexOutOfBoundsException(offset);
 	}
@@ -113,7 +113,7 @@ String::String(Array<char> array, int offset, int length) {
 	}
 }
 
-String::String(Array<byte> array, int offset, int length) {
+String::String(const Array<byte> &array, int offset, int length) {
 	if (offset < 0) {
 		throw StringIndexOutOfBoundsException(offset);
 	}
@@ -132,9 +132,7 @@ String::String(Array<byte> array, int offset, int length) {
 	}
 }
 
-String::~String() {
-
-}
+String::~String() = default;
 
 int String::getSize() const {
 	return this->original.size();
@@ -159,7 +157,7 @@ int String::compareToIgnoreCase(const String &anotherString) const {
 	return strcasecmp(this->original.c_str(), anotherString.original.c_str());
 }
 
-String String::concat(String target) {
+String String::concat(const String &target) {
 	this->original += target.original;
 	return *this;
 }
@@ -213,7 +211,7 @@ boolean String::endsWith(const String &suffixString) const {
 	return true;
 }
 
-String String::fromCharArray(Array<char> &charArray) {
+String String::fromCharArray(const Array<char> &charArray) {
 	return String(charArray);
 }
 
@@ -232,7 +230,7 @@ int String::indexOf(int character) const {
 	std::size_t found = this->original.find(pointerHolder);
 	free(pointerHolder);
 	if (found != std::string::npos) {
-		return found;
+		return (int) found;
 	} else {
 		return DO_NOT_FOUND;
 	}
@@ -255,19 +253,19 @@ int String::indexOf(int character, int fromIndex) const {
 	return -1;
 }
 
-int String::indexOf(String subString) const {
+int String::indexOf(const String &subString) const {
 	if (this->original.size() == 0 || subString == "") {
 		return -1;
 	}
 	std::size_t found = this->original.find(subString.original);
 	if (found != std::string::npos) {
-		return found;
+		return (int) found;
 	} else {
 		return -1;
 	}
 }
 
-int String::indexOf(String subString, int fromIndex) const {
+int String::indexOf(const String &subString, int fromIndex) const {
 	if (fromIndex < 0) {
 		return this->indexOf(subString);
 	}
@@ -280,7 +278,7 @@ int String::indexOf(String subString, int fromIndex) const {
 	std::string stringFromIndex = (this)->original.substr(fromIndex);
 	std::size_t found = stringFromIndex.find(subString.original);
 	if (found != std::string::npos) {
-		return (found + fromIndex);
+		return (int) (found + fromIndex);
 	} else {
 		return -1;
 	}
@@ -317,7 +315,7 @@ int String::lastIndexOf(int character, int fromIndex) {
 	return -1;
 }
 
-int String::lastIndexOf(String subString) const {
+int String::lastIndexOf(const String &subString) const {
 	String reversedString = subString;
 	std::reverse(reversedString.original.begin(), reversedString.original.end());
 	std::string currentReversedString = this->original;
@@ -329,7 +327,7 @@ int String::lastIndexOf(String subString) const {
 	return ((int) this->original.size() - (int) (found + subString.original.size()));
 }
 
-int String::lastIndexOf(String subString, int fromIndex) const {
+int String::lastIndexOf(const String &subString, int fromIndex) const {
 
 	if (fromIndex < 0) {
 		return -1;
@@ -339,14 +337,14 @@ int String::lastIndexOf(String subString, int fromIndex) const {
 	}
 	std::string thisStringReversed = this->original;
 	std::reverse(thisStringReversed.begin(), thisStringReversed.end());
-	int indexToCreatSubString = this->original.size() - fromIndex - subString.length();
+	int indexToCreatSubString = (int) this->original.size() - fromIndex - subString.length();
 	if (indexToCreatSubString > this->original.size()) {
 		return -1;
 	}
 	std::string subStringFromIndex = thisStringReversed.substr(indexToCreatSubString);
 	std::string reversedString = subString.toCharPointer();
 	std::reverse(reversedString.begin(), reversedString.end());
-	int result = subStringFromIndex.find(reversedString);
+	auto result = (int) subStringFromIndex.find(reversedString);
 	if (result == DO_NOT_FOUND) {
 		return result;
 	}
@@ -366,12 +364,12 @@ String String::replace(char oldChar, char newChar) const {
 	return copyString;
 }
 
-String String::replaceAll(String regex, String replacement) const {
+String String::replaceAll(const String &regex, const String &replacement) const {
 	// TODO (anhnt) fix this later, temporary use replace, need Pattern
 	return replace(regex, replacement);
 }
 
-Array<String> String::split(String regex) const {
+Array<String> String::split(const String &regex) const {
 	// TODO (anhnt) fix this later, temporary use replace, need Pattern
 	Array<String> strings;
 	if (this->original.c_str() == nullptr || regex.original.c_str() == nullptr) {
@@ -383,7 +381,7 @@ Array<String> String::split(String regex) const {
 	std::string result;
 	while ((pos = this->original.find(targetString, pos)) != std::string::npos) {
 
-		for (pre; pre < pos; pre++) {
+		for (; pre < pos; pre++) {
 			result += this->original[pre];
 		}
 		strings.push(result);
@@ -398,12 +396,12 @@ Array<String> String::split(String regex) const {
 	return strings;
 }
 
-boolean String::startsWith(String prefix) const {
+boolean String::startsWith(const String &prefix) const {
 	if (this->original.c_str() == nullptr || prefix.original.c_str() == nullptr) {
 		return false;
 	}
-	int lengthOriginal = this->original.size();
-	int lengthPrefix = prefix.original.size();
+	int lengthOriginal = (int) this->original.size();
+	int lengthPrefix = (int) prefix.original.size();
 	if (lengthOriginal < lengthPrefix) {
 		return false;
 	}
@@ -419,8 +417,8 @@ boolean String::startsWith(String prefix, int thisOffset) const {
 	if (thisOffset < 0) {
 		return false;
 	}
-	int originalLength = this->original.size();
-	int prefixLength = prefix.original.size();
+	int originalLength = (int) this->original.size();
+	int prefixLength = (int) prefix.original.size();
 	if (originalLength < prefixLength || thisOffset > (originalLength - prefixLength)) {
 		return false;
 	}
@@ -562,15 +560,15 @@ boolean String::contentEquals(const CharSequence &charSequence) {
 	return strcmp(this->original.c_str(), charSequence.toString().toCharPointer()) == 0;
 }
 
-String String::copyValueOf(Array<char> &charArray) {
+String String::copyValueOf(const Array<char> &charArray) {
 	return String(charArray);
 }
 
-String String::copyValueOf(Array<char> &charArray, int offset, int count) {
+String String::copyValueOf(const Array<char> &charArray, int offset, int count) {
 	return String(charArray, offset, count);
 }
 
-boolean String::equalsIgnoreCase(String anotherString) {
+boolean String::equalsIgnoreCase(const String &anotherString) {
 	return this->compareToIgnoreCase(anotherString) == 0;
 }
 
@@ -586,18 +584,18 @@ long String::hashCode() const {
 }
 
 boolean String::regionMatches(int thisOffset,
-                              String otherString, int otherOffset, int len) {
+                              const String &otherString, int otherOffset, int len) {
 	return this->regionMatches(false, thisOffset, otherString, otherOffset, len);
 }
 
 boolean String::regionMatches(boolean ignoreCase, int thisOffset,
-                              String otherString, int otherOffset, int len) {
+                              const String &otherString, int otherOffset, int len) {
 	String thisString = this->subString(thisOffset, thisOffset + len);
-	otherString = otherString.subString(otherOffset, otherOffset + len);
+	auto subString = otherString.subString(otherOffset, otherOffset + len);
 	if (ignoreCase) {
-		return thisString.compareToIgnoreCase(otherString) == 0;
+		return thisString.compareToIgnoreCase(subString) == 0;
 	}
-	return thisString.compareTo(otherString) == 0;
+	return thisString.compareTo(subString) == 0;
 }
 
 void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, int destinationBegin) {
@@ -629,7 +627,7 @@ void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, 
 	}
 }
 
-String String::replace(CharSequence &target, CharSequence &replacement) const {
+String String::replace(const CharSequence &target, const CharSequence &replacement) const {
 	if ((char *) target.toString().toCharPointer() == nullptr ||
 	    (char *) replacement.toString().toCharPointer() == nullptr ||
 	    (char *) this->toString().toCharPointer() == nullptr) {
@@ -641,7 +639,7 @@ String String::replace(CharSequence &target, CharSequence &replacement) const {
 	std::string replaceString = replacement.toString().original;
 	std::string result;
 	while ((pos = this->original.find(targetString, pos)) != std::string::npos) {
-		for (pre; pre < pos; pre++) {
+		for (; pre < pos; pre++) {
 			result += this->original[pre];
 		}
 		result += replaceString;
@@ -654,7 +652,7 @@ String String::replace(CharSequence &target, CharSequence &replacement) const {
 	return result;
 }
 
-String String::replaceFirst(String regex, String replacement) const {
+String String::replaceFirst(const String &regex, const String &replacement) const {
 	// TODO (anhnt) fix this later, temporary, need Pattern
 	int stringWithFirstRegexLength = this->indexOf(regex) + regex.length();
 	String stringWithFirstRegex = this->subString(0, stringWithFirstRegexLength);
@@ -663,7 +661,7 @@ String String::replaceFirst(String regex, String replacement) const {
 	return stringWithFirstRegex + remainString;
 }
 
-Array<String> String::split(String regex, int limit) const {
+Array<String> String::split(const String &regex, int limit) const {
 	// TODO (anhnt) fix this later, temporary, need Pattern
 	Array<String> stringArrayNoLimit = this->split(regex);
 	if (limit == 1) {

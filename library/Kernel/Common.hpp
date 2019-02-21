@@ -127,7 +127,7 @@ inline char *stringCopy(const char *target) {
  * @return
  */
 template<typename Base, typename T>
-inline boolean instanceof(T t) {
+inline boolean instanceof(const T &t) {
     return typeid(t).name() == typeid(Base).name();
 }
 

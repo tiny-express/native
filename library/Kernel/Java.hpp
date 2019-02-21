@@ -80,7 +80,7 @@ public:
 		 *
 		 * @param list
 		 */
-		Array(std::initializer_list<E> list) {
+		Array(const std::initializer_list<E> &list) {
 			typename std::initializer_list<E>::iterator it;
 			for (it = list.begin(); it != list.end(); ++it) {
 				original.push_back(*it);

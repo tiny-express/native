@@ -526,7 +526,7 @@ namespace Java {
 			 * 					that the map previously associated null with the key,
 			 * 					if the implementation supports null values.)
 			 */
-			Value putIfAbsent(Key key, Value value) {
+			Value putIfAbsent(const Key &key, const Value &value) {
 				Value result;
 				auto const iteratorFind = this->original.find(key);
 

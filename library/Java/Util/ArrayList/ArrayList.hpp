@@ -166,7 +166,7 @@ namespace Java {
 			 *
 			 * @param collection
 			 */
-			ArrayList(Collection<E> &collection);
+			ArrayList(const Collection<E> &collection);
 
 			/**
 			 * Constructs an empty list with the specified initial capacity.
@@ -192,7 +192,7 @@ namespace Java {
 			 * @param e
 			 * @return boolean
 			 */
-			boolean add(E element) {
+			boolean add(const E &element) {
 				this->original.push_back(element);
 				return true;
 			}
@@ -203,7 +203,7 @@ namespace Java {
 			 * @param index
 			 * @param element
 			 */
-			void add(int index, E element) {
+			void add(int index, const E element) {
 				if (index < 0 || index > this->original.size() - 1) {
 					return;
 				}
@@ -217,7 +217,7 @@ namespace Java {
 			 * @param c
 			 * @return boolean
 			 */
-			boolean addAll(Collection<E> collection) {
+			boolean addAll(const Collection<E> &collection) {
 				// TODO: Please discuss about param Collection
 				return true;
 			}
@@ -230,7 +230,7 @@ namespace Java {
 			 * @param collection
 			 * @return boolean
 			 */
-			boolean addAll(int index, Collection<E> collection) {
+			boolean addAll(int index, const Collection<E> &collection) {
 				// TODO: Please discuss about param Collection
 				return true;
 			}
@@ -259,7 +259,7 @@ namespace Java {
 			 * @param element
 			 * @return boolean
 			 */
-			boolean contains(E element) const {
+			boolean contains(const E &element) const {
 				for (E item : *this) {
 					if (item == element) {
 						return true;
@@ -274,7 +274,7 @@ namespace Java {
 			 * @param collection
 			 * @return boolean
 			 */
-			boolean containsAll(Collection<Object> &collection) const {
+			boolean containsAll(const Collection<Object> &collection) const {
 				// TODO: Please discuss about param Collection
 				return true;
 			}
@@ -296,7 +296,7 @@ namespace Java {
 			 *
 			 * @param action
 			 */
-			void forEach(Consumer<E> action) const {
+			void forEach(const Consumer<E> &action) const {
 				// TODO: Please complete class Consumer
 			}
 
@@ -322,7 +322,7 @@ namespace Java {
 			 * @param element
 			 * @return int
 			 */
-			int indexOf(E element) const {
+			int indexOf(const E &element) const {
 				int index;
 				for (index = 0; index < this->size(); ++index) {
 					if (this->get(index) == element) {
@@ -359,7 +359,7 @@ namespace Java {
 			 * @param object
 			 * @return int
 			 */
-			int lastIndexOf(E element) const {
+			int lastIndexOf(const E &element) const {
 				int index;
 				for (index = this->size() - 1; index >= 0; --index) {
 					if (this->get(index) == element) {
@@ -416,7 +416,7 @@ namespace Java {
 			 * @param element
 			 * @return boolean
 			 */
-			boolean remove(E element) {
+			boolean remove(const E &element) {
 				int position = this->indexOf(element);
 				if (position == -1) {
 					return false;
@@ -432,7 +432,7 @@ namespace Java {
 			 * @param target
 			 * @return boolean
 			 */
-			boolean removeAll(Collection<Object> &target) {
+			boolean removeAll(const Collection<Object> &target) {
 				// TODO: Please discuss about param Collection
 				return true;
 			}
@@ -443,7 +443,7 @@ namespace Java {
 			 * @param filter
 			 * @return boolean
 			 */
-			boolean removeIf(Predicate<E> filter) {
+			boolean removeIf(const Predicate<E> &filter) {
 				// TODO: Please complete class Predicate
 				return true;
 			}
@@ -454,7 +454,7 @@ namespace Java {
 			 *
 			 * @param unaryOperator
 			 */
-			void replaceAll(UnaryOperator<E> unaryOperator) {
+			void replaceAll(const UnaryOperator<E> &unaryOperator) {
 				// TODO: Please complete class UnaryOperator
 			}
 
@@ -465,7 +465,7 @@ namespace Java {
 			 * @param collection
 			 * @return boolean
 			 */
-			boolean retainAll(Collection<Object> &collection) {
+			boolean retainAll(const Collection<Object> &collection) {
 				// TODO: Please discuss about Param Collection
 				return true;
 			}
@@ -478,7 +478,7 @@ namespace Java {
 			 * @param element
 			 * @return E
 			 */
-			E set(int index, E element) {
+			E set(int index, const E element) {
 				if (index < 0 || index >= this->size()) {
 					String message = "Index out of range: ";
 					message += Integer(index).stringValue();
@@ -502,7 +502,7 @@ namespace Java {
 			 *
 			 * @param cmp
 			 */
-			void sort(Comparator<E> &cmp) {
+			void sort(const Comparator<E> &cmp) {
 				// TODO: Please complete class Comparator
 			}
 

@@ -321,6 +321,7 @@ TEST (JavaUtilArrayList, ToString) {
     validHashMapArrayList.add(hashMap);
     validHashMapArrayList.add(hashMap);
     result = validHashMapArrayList.toString();
-    expect = (string) "[{\"key1\": \"value1\", \"key2\": \"\"}, {\"key2\": \"\", \"key1\": \"value1\"}]";
-    assertEquals(expect, result);
+    String expect1 = (string) "[{\"key1\": \"value1\", \"key2\": \"\"}, {\"key2\": \"\", \"key1\": \"value1\"}]";
+    String expect2 = (string) "[{\"key2\": \"\", \"key1\": \"value1\"}, {\"key1\": \"value1\", \"key2\": \"\"}]";
+    assertTrue((result.equals(expect1)) || (result.equals(expect2))) ;
 }
