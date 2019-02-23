@@ -885,6 +885,6 @@ String String::valueOf(const_string constStringValue) {
 	return constStringValue;
 }
 
-String String::valueOf(String stringValue) {
+String String::valueOf(const String &stringValue) {
 	return stringValue;
 }

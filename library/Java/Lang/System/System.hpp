@@ -41,12 +41,12 @@ namespace Java {
 						class out {
 						public:
 								template <typename T>
-								static void print(T target) {
+								static void print(const T &target) {
 									std::cout << target;
 								}
 								
 								template <typename T>
-								static void println(T target) {
+								static void println(const T &target) {
 									std::cout << target << std::endl << std::flush;
 								}
 						};
