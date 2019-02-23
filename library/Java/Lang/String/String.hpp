@@ -934,7 +934,7 @@ namespace Java {
              * @param stringValue
              * @return a String containing stringValue.
              */
-            static String valueOf(String stringValue);
+            static String valueOf(const String &stringValue);
 
             /**
              * Returns the String representation of the const string argument.
