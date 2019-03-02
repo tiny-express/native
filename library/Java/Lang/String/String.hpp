@@ -1054,7 +1054,7 @@ namespace Java {
             * @param target
             * @return a reference to this String
             */
-            inline String &operator=(const String target) {
+            inline String &operator=(const String &target) {
                 this->original = target.original;
                 return *this;
             }
