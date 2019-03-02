@@ -1045,7 +1045,7 @@ namespace Java {
              * @return true if this String is equal to target; false otherwise
              */
             inline boolean operator==(const String &target) const {
-                return this->original.compare(target.original) == 0;
+                return this->original == target.original;
             }
 
             /**
@@ -1054,7 +1054,7 @@ namespace Java {
             * @param target
             * @return a reference to this String
             */
-            inline String &operator=(const String &target) {
+            inline String &operator=(const String target) {
                 this->original = target.original;
                 return *this;
             }
@@ -1066,7 +1066,7 @@ namespace Java {
             * @return true if this String is different from target; false otherwise
             */
             inline boolean operator!=(const String &target) const {
-                return this->original.compare(target.original) != 0;
+                return this->original != target.original;
             }
 
             /**
