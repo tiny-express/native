@@ -31,11 +31,18 @@ using namespace Java::Util;
 
 TEST(JavaUtilArrays, AsList) {
 	auto stringList = Arrays::asList({ "a", "b", "c", "d"});
+	
 	assertEquals(4, stringList.size());
 	assertEquals("a", stringList.get(0));
 	assertEquals("b", stringList.get(1));
 	assertEquals("c", stringList.get(2));
 	assertEquals("d", stringList.get(3));
+
+	assertTrue(stringList.contains("a"));
+    assertTrue(stringList.contains("b"));
+    assertTrue(stringList.contains("c"));
+    assertTrue(stringList.contains("d"));
+    assertFalse(stringList.contains("e"));
 }
 
 /**
