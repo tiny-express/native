@@ -86,6 +86,8 @@
 #include <initializer_list>
 #include <functional>
 #include <codecvt>
+#include <chrono>
+#include <utility>
 
 /**
  * Allocate new memory with specific size

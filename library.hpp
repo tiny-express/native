@@ -31,6 +31,7 @@
 #include "library/Java/Io.hpp"
 #include "library/Java/Lang.hpp"
 #include "library/Java/Net.hpp"
+#include "library/Java/Text.hpp"
 #include "library/Java/Security.hpp"
 #include "library/Java/Util.hpp"
 
