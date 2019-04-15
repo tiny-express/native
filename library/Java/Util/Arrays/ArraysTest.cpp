@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Tiny Express Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -31,7 +31,7 @@ using namespace Java::Util;
 
 TEST(JavaUtilArrays, AsList) {
 	auto stringList = Arrays::asList({ "a", "b", "c", "d"});
-	
+
 	assertEquals(4, stringList.size());
 	assertEquals("a", stringList.get(0));
 	assertEquals("b", stringList.get(1));

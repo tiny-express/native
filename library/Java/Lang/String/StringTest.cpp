@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Food Tiny Project. All rights reserved.
+ * Copyright 2017 Tiny Express Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -281,11 +281,11 @@ TEST (JavaLangString, CompareToIgnoreCase) {
 TEST (JavaLangString, Concat) {
     {
         // Given three strings - Return concatenation result
-        String textConcat0 = "Food Tiny ";
+        String textConcat0 = "Tiny Express ";
         String textConcat1 = "Hello ";
         String textConcat2 = "World";
         String concatenationResult = textConcat0 + textConcat1 + textConcat2;
-        assertEquals("Food Tiny Hello World", concatenationResult.toString());
+        assertEquals("Tiny Express Hello World", concatenationResult.toString());
 
         // Given two strings - Return concatenation result
         concatenationResult = textConcat1.concat(textConcat2);
