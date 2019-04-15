@@ -136,8 +136,7 @@ namespace Java {
 			/**
 			 * Constructs an empty list
 			 */
-			ArrayList() {
-			}
+			ArrayList() = default;
 
 			/**
 			 * ArrayList copy constructor from initializer list

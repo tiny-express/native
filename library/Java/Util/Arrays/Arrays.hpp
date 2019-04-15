@@ -126,14 +126,13 @@ namespace Java {
     namespace Util {
         class Arrays : public Object {
         private:
-            Arrays();
-
-            ~Arrays();
+            Arrays() = delete;
+            ~Arrays() = delete;
 
         public:
-            template<typename AnotherType, typename... Type>
-            static List<AnotherType> asList(Type... array) {
-                //FIXME: Please implement ArrayList<Type>(array);
+            template<typename E>
+            static ArrayList<E> asList(const std::initializer_list<E> &target) {
+                return target;
             }
 
             BINARY_SEARCH_BY_INDEX(char);
