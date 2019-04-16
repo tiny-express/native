@@ -43,12 +43,11 @@ void SimpleDateFormat::setTimeZone(const TimeZone &timeZone) {
 String SimpleDateFormat::format(const Date &date) {
     String tz = String("TZ=") + this->timeZone.getID();
     putenv(tz.toCharPointer());
-
     std::time_t current_time;
     std::time(&current_time);
     struct std::tm *timeinfo = std::localtime(&current_time);
     long offset = timeinfo->tm_gmtoff;
-
+    unsetenv("TZ");
     size_t bufferLength = 80;
     string buffer = (string) calloc(bufferLength, sizeof(char));
     time_t timestamp = (time_t) ((date.getTime() / 1000) + offset);

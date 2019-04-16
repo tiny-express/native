@@ -428,8 +428,7 @@ long Date::parse(String inputString) {
 long Date::getOffsetFromUTC() {
     long currentTime;
     struct tm * timeInfo;
-
-    time( &currentTime );
+    time(&currentTime);
     timeInfo = gmtime (&currentTime);
     time_t utc = mktime(timeInfo);
     timeInfo = localtime(&currentTime);
@@ -437,7 +436,6 @@ long Date::getOffsetFromUTC() {
 
     // Get offset in hours from UTC
     double offsetFromUTC = difftime(utc, local); // HOUR_IN_SECOND;
-
     return (long) offsetFromUTC;
 }
 
@@ -527,6 +525,7 @@ void Date::initializeDate(int year, int month, int date,
 
     this->timer = mktime(&localTimer);
     this->localTimer = localtime(&this->timer);
+    this->updateDateStatus();
 }
 
 void Date::initializeDate(long timestamp) {
@@ -549,7 +548,6 @@ String Date::timeToString(String pattern, tm *timeManagement) const {
 long Date::getUTCTime(long timer) {
     tm tempTimer = {0};
     tm *utcTimer = gmtime_r(&timer, &tempTimer);
-
     return mktime(utcTimer);
 }
 
