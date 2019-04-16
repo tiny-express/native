@@ -30,9 +30,20 @@
 using namespace Java::Lang;
 using namespace Java::Text;
 
+// SimpleDateFormat simpleDateFormat = "yyyy-MM-dd HH:mm:ss";
+// FIX ME
+
 TEST (JavaTextSimpleDateFormat, Constructor) {
-    // SimpleDateFormat simpleDateFormat = "yyyy-MM-dd HH:mm:ss";
-    // FIX ME
-    SimpleDateFormat simpleDateFormat = "%Y-%m-%d %H:%M:%S";
-    assertEquals("2019-04-15 19:09:15", simpleDateFormat.format(Date(1555330155000)));
+    SimpleDateFormat simpleDateFormat = "%Y-%m-%d %H:%M:%S"; // GMT
+    assertEquals("2019-04-15 12:09:15", simpleDateFormat.format(Date(1555330155000)));
 }
+
+TEST (JavaTextSimpleDateFormat, SetTimeZone) {
+    SimpleDateFormat simpleDateFormat = "%Y-%m-%d %H:%M:%S"; // GMT
+    simpleDateFormat.setTimeZone(TimeZone::getTimeZone("Asia/Ho_Chi_Minh")); // +07
+    assertEquals("2019-04-15 19:09:15", simpleDateFormat.format(Date(1555330155000)));
+
+    simpleDateFormat.setTimeZone(TimeZone::getTimeZone("Asia/Singapore")); // +08
+    assertEquals("2019-04-15 20:09:15", simpleDateFormat.format(Date(1555330155000)));
+}
+

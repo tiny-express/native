@@ -36,12 +36,24 @@ SimpleDateFormat::SimpleDateFormat(const String &datePattern) {
     this->datePattern = datePattern;
 }
 
+void SimpleDateFormat::setTimeZone(const TimeZone &timeZone) {
+    this->timeZone = timeZone;
+}
+
 String SimpleDateFormat::format(const Date &date) {
-    int bufferLength = 80;
+    String tz = String("TZ=") + this->timeZone.getID();
+    putenv(tz.toCharPointer());
+
+    std::time_t current_time;
+    std::time(&current_time);
+    struct std::tm *timeinfo = std::localtime(&current_time);
+    long offset = timeinfo->tm_gmtoff;
+
+    size_t bufferLength = 80;
     string buffer = (string) calloc(bufferLength, sizeof(char));
-    time_t time = (time_t) (date.getTime() / 1000);
-    strftime(buffer, bufferLength, this->datePattern.toCharPointer(), localtime(&time));
-    static String formattedDate = buffer;
+    time_t timestamp = (time_t) ((date.getTime() / 1000) + offset);
+    std::strftime(buffer, bufferLength, this->datePattern.toCharPointer(), std::gmtime(&timestamp));
+    String formattedDate = buffer;
     free(buffer);
     return formattedDate.trim();
 }

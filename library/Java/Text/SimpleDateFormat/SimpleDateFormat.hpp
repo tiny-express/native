@@ -30,6 +30,7 @@
 #include "../../Util/Date/Date.hpp"
 #include "../DateFormat/DateFormat.hpp"
 #include "../FieldPosition/FieldPosition.hpp"
+#include "../../Util/TimeZone/TimeZone.hpp"
 
 using namespace Java::Lang;
 using namespace Java::Util;
@@ -39,11 +40,14 @@ namespace Java {
         class SimpleDateFormat : public DateFormat {
         private:
             String datePattern;
+            TimeZone timeZone;
         public:
             SimpleDateFormat(const_string datePattern);
             SimpleDateFormat(const String &datePattern);
+            void setTimeZone(const TimeZone &timeZone);
             String format(const Date &date);
-             StringBuffer format(Date date, StringBuffer buffer, FieldPosition fieldPos);
+            String setTimeZone();
+            StringBuffer format(Date date, StringBuffer buffer, FieldPosition fieldPos);
         };
     }
 }
