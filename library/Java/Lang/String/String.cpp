@@ -56,7 +56,12 @@ std::string toLower(const std::string &input) {
     return wideStringToMultiByteString(wideString);
 }
 
-String::String() {
+String::String() = default;
+
+String::~String() = default;
+
+String::String(std::nullptr_t aNullptr) {
+    this->original = "";
 }
 
 String::String(string original, int length) {
@@ -131,8 +136,6 @@ String::String(const Array<byte> &array, int offset, int length) {
 		this->original.push_back((char) array[i]);
 	}
 }
-
-String::~String() = default;
 
 int String::getSize() const {
 	return this->original.size();
