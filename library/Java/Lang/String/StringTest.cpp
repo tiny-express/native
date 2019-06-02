@@ -139,6 +139,14 @@ TEST (JavaLangString, Constructor) {
     assertEquals("teststringbuilder", stringFromBuilder);
 }
 
+TEST (JavaLangString, NullPointer) {
+    // Given a null pointer
+    // Length of this string is zero
+    // Avoid memory access error
+    String text = nullptr;
+    assertTrue(text.isEmpty());
+}
+
 TEST (JavaLangString, Destructor) {
     // Given data type declaration - Destructor will be called by system
     String text = "";
@@ -147,7 +155,8 @@ TEST (JavaLangString, Destructor) {
     auto textPointer = new String("Hello");
     delete textPointer;
 }
-TEST (JavaLangString, getSize) {
+
+TEST (JavaLangString, GetSize) {
     //Given a String - Return size of the String
     String text = "Hello World";
     int sizeOfText = text.getSize();
@@ -156,8 +165,8 @@ TEST (JavaLangString, getSize) {
     //Given a null String
     String nullText =  "";
     assertEquals(0, nullText.getSize());
-
 }
+
 TEST (JavaLangString, Equals) {
     // Given two String objects with same value - Return they should equal
     String stringEqual1 = "Hello World";

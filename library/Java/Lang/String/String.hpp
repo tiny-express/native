@@ -105,6 +105,12 @@ namespace Java {
              */
             String();
 
+            /**
+             * Support null pointer initialization
+             * @param aNullptr
+             */
+            String(std::nullptr_t aNullptr);
+
 			/**
              * Initializes a newly created String object
              * so that it represents the same sequence of characters as the argument.
@@ -118,7 +124,6 @@ namespace Java {
              *
              * @param byteArray
              */
-
             String(const Array<byte> &byteArray);
 
 			/**
