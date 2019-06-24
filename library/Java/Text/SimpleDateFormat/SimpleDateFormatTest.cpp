@@ -34,16 +34,18 @@ using namespace Java::Text;
 // FIX ME
 
 TEST (JavaTextSimpleDateFormat, Constructor) {
-    SimpleDateFormat simpleDateFormat = "%Y-%m-%d %H:%M:%S"; // GMT
-    assertEquals("2019-04-15 12:09:15", simpleDateFormat.format(Date(1555330155000)));
+    // RFC3339
+    SimpleDateFormat simpleDateFormat = "%Y-%m-%dT%T%z";
+    assertEquals("2019-04-15T12:09:15+0000", simpleDateFormat.format(Date(1555330155000)));
 }
 
 TEST (JavaTextSimpleDateFormat, SetTimeZone) {
-    SimpleDateFormat simpleDateFormat = "%Y-%m-%d %H:%M:%S"; // GMT
+    // RFC3339
+    SimpleDateFormat simpleDateFormat = "%Y-%m-%dT%T%z";
     simpleDateFormat.setTimeZone(TimeZone::getTimeZone("Asia/Ho_Chi_Minh")); // +07
-    assertEquals("2019-04-15 19:09:15", simpleDateFormat.format(Date(1555330155000)));
+    assertEquals("2019-04-15T19:09:15+0700", simpleDateFormat.format(Date(1555330155000)));
 
     simpleDateFormat.setTimeZone(TimeZone::getTimeZone("Asia/Singapore")); // +08
-    assertEquals("2019-04-15 20:09:15", simpleDateFormat.format(Date(1555330155000)));
+    assertEquals("2019-04-15T20:09:15+0800", simpleDateFormat.format(Date(1555330155000)));
 }
 
