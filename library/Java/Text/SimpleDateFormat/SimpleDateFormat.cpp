@@ -45,13 +45,13 @@ String SimpleDateFormat::format(const Date &date) {
     putenv(tz.toCharPointer());
     std::time_t current_time;
     std::time(&current_time);
-    struct std::tm *timeinfo = std::localtime(&current_time);
+    struct std::tm *timeinfo = std::gmtime(&current_time);
     long offset = timeinfo->tm_gmtoff;
-    unsetenv("TZ");
     size_t bufferLength = 80;
     string buffer = (string) calloc(bufferLength, sizeof(char));
     time_t timestamp = (time_t) ((date.getTime() / 1000) + offset);
-    std::strftime(buffer, bufferLength, this->datePattern.toCharPointer(), std::gmtime(&timestamp));
+    std::strftime(buffer, bufferLength, this->datePattern.toCharPointer(), std::localtime(&timestamp));
+    unsetenv("TZ");
     String formattedDate = buffer;
     free(buffer);
     return formattedDate.trim();
