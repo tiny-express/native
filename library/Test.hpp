@@ -492,6 +492,7 @@ static char ctest_errorbuffer[MSG_SIZE];
 static jmp_buf ctest_err;
 static int color_output = 1;
 static const_string suite_name;
+static const_string test_name;
 
 typedef int (*filter_func)(struct CTEST*);
 
@@ -957,6 +958,10 @@ static int suite_filter(struct CTEST* t) {
     return strncmp(suite_name, t->ssname, strlen((char *)suite_name)) == 0;
 }
 
+static int suite_test_filter(struct CTEST* t) {
+    return strncmp(test_name, t->ttname, strlen((char *)test_name)) == 0 && suite_filter(t);
+}
+
 static uint64_t getCurrentTime() {
     struct timeval now;
     gettimeofday(&now, nullptr);
@@ -1026,9 +1031,15 @@ int ctest_main(int argc, const char *argv[])
 #endif
 
     if (argc == 2) {
-    suite_name = argv[1];
-    filter = suite_filter;
+        suite_name = argv[1];
+        filter = suite_filter;
     }
+    if (argc > 2) {
+        suite_name = argv[1];
+        test_name = argv[2];
+        filter = suite_test_filter;
+    }
+
 #ifdef CTEST_NO_COLORS
     color_output = 0;
 #else
@@ -1038,69 +1049,77 @@ int ctest_main(int argc, const char *argv[])
 
     struct CTEST* ctest_begin = &__TNAME(suite, test);
     struct CTEST* ctest_end = &__TNAME(suite, test);
+
     // find begin and end of section by comparing magics
     while (1) {
-    struct CTEST* t = ctest_begin-1;
-    if (t->magic != __CTEST_MAGIC) break;
-    ctest_begin--;
+        struct CTEST* t = ctest_begin - 1;
+        if (t->magic != __CTEST_MAGIC)
+            break;
+        ctest_begin--;
     }
     while (1) {
-    struct CTEST* t = ctest_end+1;
-    if (t->magic != __CTEST_MAGIC) break;
-    ctest_end++;
+        struct CTEST* t = ctest_end+1;
+        if (t->magic != __CTEST_MAGIC)
+            break;
+        ctest_end++;
     }
     ctest_end++;    // end after last one
 
     static struct CTEST* test;
     for (test = ctest_begin; test != ctest_end; test++) {
-    if (test == &__TNAME(suite, test)) continue;
-    if (filter(test)) total++;
+        if (test == &__TNAME(suite, test))
+            continue;
+        if (filter(test))
+            total++;
     }
 
     for (test = ctest_begin; test != ctest_end; test++) {
-    if (test == &__TNAME(suite, test)) continue;
-    if (filter(test)) {
-        ctest_errorbuffer[0] = 0;
-        ctest_errorsize = MSG_SIZE-1;
-        ctest_errormsg = ctest_errorbuffer;
-        printf("TEST %d/%d %s:%s ", index, total, test->ssname, test->ttname);
-        fflush(stdout);
-        if (test->skip) {
-        color_print(ANSI_BYELLOW, "[SKIPPED]");
-        num_skip++;
-        } else {
-        int result = setjmp(ctest_err);
-        if (result == 0) {
+        if (test == &__TNAME(suite, test))
+            continue;
+        if (filter(test)) {
+            ctest_errorbuffer[0] = 0;
+            ctest_errorsize = MSG_SIZE-1;
+            ctest_errormsg = ctest_errorbuffer;
+            printf("TEST %d/%d %s:%s ", index, total, test->ssname, test->ttname);
+            fflush(stdout);
+            if (test->skip) {
+                color_print(ANSI_BYELLOW, "[SKIPPED]");
+                num_skip++;
+            } else {
+                int result = setjmp(ctest_err);
+                if (result == 0) {
 #ifdef __APPLE__
-            if (!test->setup) {
-            test->setup = (SetupFunc) find_symbol(test, "setup");
-            }
-            if (!test->teardown) {
-            test->teardown = (TearDownFunc) find_symbol(test, "teardown");
-            }
+                if (!test->setup) {
+                    test->setup = (SetupFunc) find_symbol(test, "setup");
+                }
+                if (!test->teardown) {
+                    test->teardown = (TearDownFunc) find_symbol(test, "teardown");
+                }
 #endif
 
-            if (test->setup) test->setup(test->data);
-//                    if (test->data)
-//                        test->run(test->data);
-//                    else
-            test->run();
-            if (test->teardown) test->teardown(test->data);
-            // if we got here it's ok
+                if (test->setup)
+                    test->setup(test->data);
+//                        if (test->data)
+//                            test->run(test->data);
+//                        else
+                test->run();
+                if (test->teardown)
+                    test->teardown(test->data);
+                // if we got here it's ok
 #ifdef CTEST_COLOR_OK
-            color_print(ANSI_GREEN, "[OK]");
+                color_print(ANSI_GREEN, "[OK]");
 #else
-            color_print(ANSI_GREEN, "[OK]");
+                color_print(ANSI_GREEN, "[OK]");
 #endif
-            num_ok++;
-        } else {
-            color_print(ANSI_BRED, "[FAIL]");
-            num_fail++;
+                num_ok++;
+            } else {
+                color_print(ANSI_BRED, "[FAIL]");
+                num_fail++;
+            }
+            if (ctest_errorsize != MSG_SIZE-1) printf("%s", ctest_errorbuffer);
+            }
+            index++;
         }
-        if (ctest_errorsize != MSG_SIZE-1) printf("%s", ctest_errorbuffer);
-        }
-        index++;
-    }
     }
     uint64_t t2 = getCurrentTime();
 
