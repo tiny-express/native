@@ -1394,4 +1394,14 @@ TEST (JavaLangString, Format) {
         String result = String::format(format, trueObject, falseObject, trueObject, falseObject);
         assertEquals(expected.toString(), result.toString());
     }
+
+    {
+        try {
+            int number = 4;
+            String result = String::format("This is wrong number %s", number);
+            assertFail();
+        } catch (IllegalArgumentException &e) {
+            assertEquals("Missing arguments.", e.getMessage());
+        }
+    }
 }
