@@ -1,27 +1,21 @@
 #include "../../../library.hpp"
 
+#include <native/library.hpp>
+
 class MainApplication {
 public:
-		static void main(Array<String> arguments) {
-			HashMap<String, String> hashMap;
-			int counter = 0;
-			for (String argument : arguments) {
-				hashMap.put("argument " + String::valueOf(counter), argument);
-				counter++;
-			}
-			// Collect key value pairs
-			String pairs = String("We have ") + String::valueOf(hashMap.size()) + String(" pairs: \n");
-			for (Map<String, String>::Entry entry : hashMap.entrySet()) {
-				pairs += entry.getKey() + String(" is ") + entry.getValue() + String("\n");
-			}
-			System::out::println(pairs);
-			// Serialize to json data
-			ArrayList<HashMap<String, String>> arrayList;
-			arrayList.add(hashMap);
-			System::out::println(arrayList.toString());
-		}
+    static void main(Array<String> arguments) {
+        HashMap<String, String> hashMap = {};
+        int index = 0;
+        for (var argument : arguments) {
+            hashMap.put(String::valueOf(index++), argument);
+        }
+        hashMap.forEach([](const String &key, const String &value) {
+            System::out::println(String::format("Key is %s - Value is %s", key, value));
+        });
+    }
 };
 
 int main(int argc, char **argv) {
-	return Application(MainApplication::main, argc, argv);
+    return Application(MainApplication::main, argc, argv);
 }
