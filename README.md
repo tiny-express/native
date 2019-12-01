@@ -41,7 +41,7 @@ class MainApplication {
 public:
     static void main(Array<String> arguments) {
         HashMap<String, String> hashMap = {};
-        int index = 0;
+        var index = 0;
         for (var argument : arguments) {
             hashMap.put(String::valueOf(index++), argument);
         }
