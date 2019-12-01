@@ -175,7 +175,7 @@ namespace Java {
 						/**
 						 * Removes all of the mappings from this map (optional operation).
 						 */
-						void clear() {
+						virtual void clear() {
 						}
 						
 						/**
