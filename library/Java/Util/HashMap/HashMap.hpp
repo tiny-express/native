@@ -126,19 +126,6 @@ namespace Java {
 				return true;
 			}
 
-			/**
-			 * forEach method: loop a HashMap and do the function action
-			 *
-			 * @param action
-			 */
-//            void forEach(BiConsumer<void(Key, Value)> action) {
-//                for (auto &element : this->original) {
-//                    Key key = element.first;
-//                    Value value = element.second;
-//                    action(key, value);
-//                }
-//            }
-
 			// TODO(thoangminh): We will support this method later
 			/**
 			 * Returns the hash code value for this map.  The hash code of a map is
@@ -430,6 +417,19 @@ namespace Java {
 				}
 
 				return entrySet;
+			}
+
+			/**
+			 *  Represents an operation that accepts two input arguments and returns no result.
+			 *  This is the two-arity specialization of Consumer.
+			 *  Unlike most other functional interfaces, BiConsumer is expected to operate via side-effects.
+			 *
+			 * @param action
+			 */
+            void forEach(const std::function<void(const Key&, const Value&)> &action) const {
+                for (auto &pair : this->original) {
+                    action(pair.first, pair.second);
+                }
 			}
 
 			/**

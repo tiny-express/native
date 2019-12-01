@@ -295,8 +295,10 @@ namespace Java {
 			 *
 			 * @param action
 			 */
-			void forEach(const Consumer<E> &action) const {
-				// TODO: Please complete class Consumer
+			void forEach(const std::function<void(const E&)> &action) const {
+                for (auto &item : this->original) {
+                    action(item);
+                }
 			}
 
 			/**

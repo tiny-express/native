@@ -169,6 +169,13 @@ TEST (JavaUtilArrayList, ForEach) {
     }
 
     assertArray(expected, actual);
+
+    ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
+    int counter = 0;
+    validArrayList.forEach([&counter](const String &item) {
+        counter++;
+    });
+    assertEquals(4, counter);
 }
 
 TEST (JavaUtilArrayList, Get) {

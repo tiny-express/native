@@ -151,11 +151,10 @@ TEST (JavaUtilHashMap, EntrySet) {
 	}
 	int counter = 0;
 	Set<class Map<String, String>::Entry> entrySet = hashMap.entrySet();
-	// TODO - loint@foodtiny.com will improve entrySet
-	// then we can put it inside foreach without any performance issue
 	for (Map<String, String>::Entry entry : entrySet) {
 		counter += 1;
 	}
+
 	// Make sure foreach is working
 	assertEquals(100, counter);
 	
@@ -168,6 +167,32 @@ TEST (JavaUtilHashMap, EntrySet) {
 		String *stringValue = entry.getValue();
 		delete stringValue;
 	}
+}
+
+TEST(JavaUtilHashMap, ForEach) {
+    HashMap<String, String> hashMap;
+    int index = 1;
+    for (index; index <= 100; index++) {
+        hashMap.put("Key " + String::valueOf(index),
+                    "Value " + String::valueOf(index));
+    }
+    int counter = 0;
+    hashMap.forEach([&counter](const String&, const String &) {
+        counter += 1;
+    });
+
+    // Make sure foreach is working
+    assertEquals(100, counter);
+
+    HashMap<String, String *> hashMapStringPointer;
+    hashMapStringPointer.put("test1", new String("test1"));
+    hashMapStringPointer.put("test2", new String("test1"));
+    hashMapStringPointer.put("test3", new String("test1"));
+    hashMapStringPointer.forEach([&counter](const String &key, String *value) {
+        assertEquals("test1", value->toString());
+        String *stringValue = value;
+        delete stringValue;
+    });
 }
 
 TEST (JavaUtilHashMap, Get) {
