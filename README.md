@@ -32,21 +32,20 @@ $ sudo ldconfig
 ```
 
 #### Examples
+HelloWorld.cpp
 ```cpp
-#include <native/library.hpp>
-
 #include <native/library.hpp>
 
 class MainApplication {
 public:
     static void main(Array<String> arguments) {
-        HashMap<String, String> hashMap = {};
+        HashMap<String, String> hashMap;
         var index = 0;
         for (var argument : arguments) {
             hashMap.put(String::valueOf(index++), argument);
         }
         hashMap.forEach([](const String &key, const String &value) {
-            System::out::println(String::format("Key is %s - Value is %s", key, value));
+            System::out::println(String::format("Key is %s - value is %s", key, value));
         });
     }
 };
