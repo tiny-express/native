@@ -442,15 +442,14 @@ namespace Java {
 			 * 							or default if no mapping with key
 			 */
 			Value get(const Key &key) const {
-				Value result;
 				auto const iteratorToString = this->original.find(key);
-
 				if (iteratorToString == this->original.end()) {
-					return result;
+					// Default value if could not found
+					// Prevent null pointer reference
+					Value value;
+				    return value;
 				}
-
-				result = iteratorToString->second;
-				return result;
+				return iteratorToString->second;
 			}
 
 			/**
@@ -496,7 +495,7 @@ namespace Java {
 			 * @param value
 			 */
 			void put(const Key &key, const Value &value) {
-				this->original.insert(std::make_pair(key, value));
+				this->original.insert(std::pair<Key, Value>(key, value));
 			}
 
 			/**
@@ -506,9 +505,7 @@ namespace Java {
 			 */
 			void putAll(const HashMap<Key, Value> &map) {
 				for (auto const &element: map) {
-					Key key = element.first;
-					Value value = element.second;
-					this->original.insert(std::make_pair(key, value));
+				    this->put(element.first, element.second);
 				}
 			}
 

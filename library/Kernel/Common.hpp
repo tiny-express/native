@@ -88,6 +88,8 @@
 #include <codecvt>
 #include <chrono>
 #include <utility>
+#include <tuple>
+#include <random>
 
 /**
  * Allocate new memory with specific size
