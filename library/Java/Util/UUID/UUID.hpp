@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Tiny Express Project. All rights reserved.
+ * Copyright 2017-2020 Tiny Express Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -93,7 +93,8 @@ namespace Java {
 						 *
 						 * @return int - The clock sequence of this UUID
 						 */
-						int clockSequence();
+						int clockSequence() const;
+
 						/**
 						 * Compares this UUID with the specified UUID.
 						 *
@@ -103,7 +104,7 @@ namespace Java {
 						 *  0 : if this object equal both of mostSigBits and leastSigBits
 						 *  1 : if this object more than target either mostSigBits or leastSigBits
 						 */
-						int compareTo(UUID target);
+						int compareTo(UUID target) const;
 						
 						/**
 						 * Compares this object to the specified object.
@@ -113,63 +114,63 @@ namespace Java {
 						 * true : if the target are same mostSigBits and leastSigBits
 						 * false : otherwise
 						 */
-						boolean equals(UUID target);
+						boolean equals(UUID target) const;
 						
 						/**
 						 * Returns the least significant 64 bits of this UUID's 128 bit value.
 						 *
 						 * @return long
 						 */
-						long getLeastSignificantBits();
+						long getLeastSignificantBits() const;
 						
 						/**
 						 * Returns the most significant 64 bits of this UUID's 128 bit value.
 						 *
 						 * @return long
 						 */
-						long getMostSignificantBits();
+						long getMostSignificantBits() const;
 						
 						/**
 						 * Returns a hash code for this UUID.
 						 *
 						 * @return int
 						 */
-						int hashCode();
+						int hashCode() const;
 						
 						/**
 						 * The node value associated with this UUID.
 						 *
 						 * @return long
 						 */
-						long node();
+						long node() const;
 						
 						/**
 						 * The timestamp value associated with this UUID.
 						 *
 						 * @return long
 						 */
-						long getTimestamp();
+						long getTimestamp() const;
 						
 						/**
 						 * Returns a String object representing this UUID.
 						 *
 						 * @return String
 						 */
-						String toString();
+						String toString() const;
 						
 						/**
 						 * The variant number associated with this UUID.
 						 *
 						 * @return int
 						 */
-						int variant();
+						int variant() const;
 						
 						/**
 						 * The version number associated with this UUID.
 						 *
 						 * @return int
 						 */
-						int version();
+						int version() const;
 						
 						/**
 						 * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.
