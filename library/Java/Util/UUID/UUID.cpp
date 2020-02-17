@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Tiny Express Project. All rights reserved.
+ * Copyright 2017-2020 Tiny Express Project. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -96,7 +96,7 @@ UUID::~UUID() {
  *
  * @return int - The clock sequence of this UUID
  */
-int UUID::clockSequence() {
+int UUID::clockSequence() const {
 	if (version() != 1) {
 		//FIXME: exception ("Not a time-based UUID");
 		return -1;
@@ -114,7 +114,7 @@ int UUID::clockSequence() {
  *  0 : if this object equal both of mostSigBits and leastSigBits
  *  1 : if this object more than target either mostSigBits or leastSigBits
  */
-int UUID::compareTo(UUID target) {
+int UUID::compareTo(UUID target) const {
 	if (this->mostSigBits < target.mostSigBits) {
 		return -1;
 	}
@@ -138,7 +138,7 @@ int UUID::compareTo(UUID target) {
  * true : if the target are same mostSigBits and leastSigBits
  * false : otherwise
  */
-boolean UUID::equals(UUID target) {
+boolean UUID::equals(UUID target) const {
 	return ( this->mostSigBits == target.mostSigBits &&
 	         this->leastSigBits == target.leastSigBits );
 }
@@ -148,7 +148,7 @@ boolean UUID::equals(UUID target) {
  *
  * @return long
  */
-long UUID::getLeastSignificantBits() {
+long UUID::getLeastSignificantBits() const {
 	return this->leastSigBits;
 }
 
@@ -157,7 +157,7 @@ long UUID::getLeastSignificantBits() {
  *
  * @return long
  */
-long UUID::getMostSignificantBits() {
+long UUID::getMostSignificantBits() const {
 	return this->mostSigBits;
 }
 
@@ -166,7 +166,7 @@ long UUID::getMostSignificantBits() {
  *
  * @return int
  */
-int UUID::hashCode() {
+int UUID::hashCode() const {
 	long xorValue = this->mostSigBits ^this->leastSigBits;
 	return ((int) ( xorValue >> 32 )) ^ (int) xorValue;
 }
@@ -176,7 +176,7 @@ int UUID::hashCode() {
  *
  * @return long
  */
-long UUID::node() {
+long UUID::node() const {
 	if (this->version() != 1) {
 		//FIXME: throw an exception here - "Not a time-based UUID"
 	}
@@ -189,7 +189,7 @@ long UUID::node() {
  *
  * @return long
  */
-long UUID::getTimestamp() {
+long UUID::getTimestamp() const {
 	return this->timestamp;
 }
 
@@ -198,7 +198,7 @@ long UUID::getTimestamp() {
  *
  * @return String
  */
-String UUID::toString() {
+String UUID::toString() const {
 	// Please improve this function by using String.format
 	String uuid;
 	uuid = digits(mostSigBits >> 32, 8) + (string) "-";
@@ -214,7 +214,7 @@ String UUID::toString() {
  *
  * @return int
  */
-int UUID::variant() {
+int UUID::variant() const {
 	return (int) (( this->leastSigBits >> ( 64 - ( this->leastSigBits >> 62 ))) & ( this->leastSigBits >> 63 ));
 }
 
@@ -223,7 +223,7 @@ int UUID::variant() {
  *
  * @return int
  */
-int UUID::version() {
+int UUID::version() const {
 	return (int) (( this->mostSigBits >> 12 ) & 0x0f );
 }
 
@@ -278,4 +278,4 @@ UUID UUID::fromString(String name) {
 	
 	UUID result = UUID(mostSigBits, leastSigBits);
 	return result;
-};
+}
