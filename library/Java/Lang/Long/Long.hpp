@@ -164,7 +164,7 @@ namespace Java {
 						 * @param long val
 						 * @return Long
 						 */
-						static Long getLong(String nm, long val);
+						static Long getLong(String nm, long value);
 						
 						/**
 						 * Returns the long value of the system property with the specified name.
@@ -173,7 +173,7 @@ namespace Java {
 						 * @param Long val
 						 * @return Long
 						 */
-						static Long getLong(String nm, Long val);
+						static Long getLong(String nm, Long value);
 						
 						/**
 						 * Returns a hash code for this Long.
@@ -375,7 +375,7 @@ namespace Java {
 						 * @param int shift
 						 * @return String
 						 */
-						static String toUnsignedString0(long val, int shift);
+						static String toUnsignedString0(long value, int shift);
 						
 						/**
 						 * Format a long (treated as unsigned) into a character buffer.
@@ -387,7 +387,7 @@ namespace Java {
 						 * @param int len
 						 * @return int
 						 */
-						static int formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len);
+						static int formatUnsignedLong(long value, int shift, Array<char> &buf, int offset, int len);
 				
 				public:
 						
