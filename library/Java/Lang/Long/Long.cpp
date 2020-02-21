@@ -226,7 +226,7 @@ Long Long::getLong(String nm) {
  * @param long val
  * @return Long
  */
-Long Long::getLong(String nm, long value) {
+Long Long::getLong(String nm, long val) {
 	return Long();
 }
 
@@ -237,7 +237,7 @@ Long Long::getLong(String nm, long value) {
  * @param Long val
  * @return Long
  */
-Long Long::getLong(String nm, Long value) {
+Long Long::getLong(String nm, Long val) {
 	return Long();
 }
 
@@ -588,7 +588,7 @@ Long Long::valueOf(String s, int radix) {
  * @param int len
  * @return int
  */
-int Long::formatUnsignedLong(long value, int shift, Array<char> &buf, int offset, int len) {
+int Long::formatUnsignedLong(long val, int shift, Array<char> &buf, int offset, int len) {
 	int charPos = len;
 	int radix = 1 << shift;
 	int mask = radix - 1;
@@ -604,9 +604,9 @@ int Long::formatUnsignedLong(long value, int shift, Array<char> &buf, int offset
 	};
 	
 	do {
-		buf[ offset + --charPos ] = digits[ ((int) value) & mask ];
-		value >>= shift;
-	} while (value != 0 && charPos > 0);
+		buf[ offset + --charPos ] = digits[ ((int) val ) & mask ];
+		val >>= shift;
+	} while (val != 0 && charPos > 0);
 	
 	return charPos;
 }
@@ -618,11 +618,11 @@ int Long::formatUnsignedLong(long value, int shift, Array<char> &buf, int offset
  * @param int shift
  * @return String
  */
-String Long::toUnsignedString0(long value, int shift) {
+String Long::toUnsignedString0(long val, int shift) {
 	// assert shift > 0 && shift <=5 : "Illegal shift value";
 	static int SIZE = 64;
 	
-	int mag = SIZE - Long::numberOfLeadingZeros(value);
+	int mag = SIZE - Long::numberOfLeadingZeros(val);
 	int chars = Math::max((( mag + ( shift - 1 )) / shift ), 1);
 	
 	Array<char> buff;
@@ -630,7 +630,7 @@ String Long::toUnsignedString0(long value, int shift) {
 		buff.push('0');
 	}
 	
-	formatUnsignedLong(value, shift, buff, 0, chars);
+	formatUnsignedLong(val, shift, buff, 0, chars);
 	
 	String result = String::fromCharArray(buff);
 	return result;

@@ -40,7 +40,6 @@ typedef const char *const_string;
 typedef wchar_t unicode;
 typedef unsigned char byte;
 #define var auto
-#define val const auto
 
 #define _BOOL                   1
 #define CHAR                    2
