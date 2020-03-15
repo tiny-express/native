@@ -35,7 +35,7 @@ using namespace Java::Lang;
 using namespace Java::Util;
 
 TEST (JavaLangString, Constructor) {
-    // Give NULL for String constructor
+    // Give nullptr for String constructor
     String nullString;
     assertEquals("", nullString.toString());
 

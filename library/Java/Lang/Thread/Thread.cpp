@@ -33,7 +33,7 @@
 using namespace std;
 using namespace Java::Lang;
 
-thread_local Thread* currentThreadPtr = NULL;
+thread_local Thread* currentThreadPtr = nullptr;
 
 Thread::Thread() {
     init(nullptr, "");
@@ -59,7 +59,7 @@ void Thread::run() {
     this->tid = (unsigned long)pthread_self();
 
     // set tls
-    if (currentThreadPtr == NULL) {
+    if (currentThreadPtr == nullptr) {
         currentThreadPtr = this;
     }
 

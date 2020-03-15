@@ -136,6 +136,55 @@ TEST (JavaUtilLinkedList, Remove) {
 	assertEquals(7.3f, linkedList.getLast());
 }
 
+TEST (JavaUtilLinkedList, RemoveByIndex) {
+    // Given valid linked list to test remove(), remove..()
+    LinkedList<long> linkedList;
+    linkedList.add(3);
+    linkedList.add(5);
+    linkedList.add(9);
+    linkedList.add(10);
+    linkedList.add(15);
+
+    {
+        assertTrue(linkedList.remove(2));
+        assertEquals(4, linkedList.size());
+    }
+
+    {
+        assertTrue(linkedList.remove(3));
+        assertEquals(3, linkedList.size());
+    }
+
+    assertEquals(3, linkedList.get(0));
+    assertEquals(5, linkedList.get(1));
+    assertEquals(10, linkedList.get(2));
+}
+
+TEST (JavaUtilLinkedList, RemoveByNode) {
+    // Given valid linked list to test remove(), remove..()
+    LinkedList<long> linkedList;
+    linkedList.add(3);
+    linkedList.add(5);
+    linkedList.add(9);
+    linkedList.add(10);
+    linkedList.add(15);
+    assertEquals(5, linkedList.size());
+    linkedList.forEach([&](const Node<long> &node) {
+        assertTrue(linkedList.remove(node));
+    });
+    assertEquals(0, linkedList.size());
+
+    linkedList.add(1);
+    linkedList.add(2);
+    assertEquals(2, linkedList.size());
+
+    linkedList.forEach([&](const Node<long> &node) {
+        assertTrue(linkedList.remove(node));
+    });
+
+    assertEquals(0, linkedList.size());
+}
+
 TEST (JavaUtilLinkedList, Size) {
 	// Given empty linked list - Return size of list is zero
 	LinkedList<int> linkedList;

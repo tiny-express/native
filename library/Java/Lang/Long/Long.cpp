@@ -66,7 +66,7 @@ Long::Long(const Long &target) {
  * Default destructor
  */
 Long::~Long() {
-	if (this->originalString != NULL) {
+	if (this->originalString != nullptr) {
 		free(this->originalString);
 	}
 }
@@ -644,7 +644,7 @@ String Long::toUnsignedString0(long val, int shift) {
  */
 Long Long::operator=(const Long &target) {
 	this->original = target.original;
-	if (this->originalString != NULL) {
+	if (this->originalString != nullptr) {
 		free(this->originalString);
 	}
 	asprintf(&this->originalString, "%ld", this->original);

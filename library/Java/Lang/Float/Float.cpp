@@ -50,7 +50,7 @@ Float::Float(String inputString) {
 }
 
 Float::~Float() {
-    if (this->originalString != NULL) {
+    if (this->originalString != nullptr) {
         free(this->originalString);
     }
 }
