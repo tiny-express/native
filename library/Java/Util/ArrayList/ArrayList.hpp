@@ -246,8 +246,8 @@ namespace Java {
 			 *
 			 * @param action
 			 */
-			void forEach(const std::function<void(const E&)> &action) const {
-                for (auto &item : this->original) {
+			void forEach(const std::function<void(E)> &action) {
+                for (var &item : this->original) {
                     action(item);
                 }
 			}

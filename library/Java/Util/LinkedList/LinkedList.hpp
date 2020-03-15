@@ -186,11 +186,11 @@ namespace Java {
 						 *
 						 * @param callback
 						 */
-						void forEach(const std::function<void(const Node<E> &node)> &callback) {
-                            ArrayList<Node<E>> nodes;
+						void forEach(const std::function<void(Node<E>* node)> &callback) {
+                            ArrayList<Node<E>*> nodes;
                             var node = this->first;
                             while (hasNext(node)) {
-                                nodes.add(*node);
+                                nodes.add(node);
                                 node = node->next;
                             }
                             nodes.forEach(callback);
@@ -662,12 +662,12 @@ namespace Java {
 							return element;
 						}
 						
-						void deleteNode(Node<E> *node) {
+						inline void deleteNode(Node<E> *node) {
                             delete node;
                             this->nodeSize--;
 						}
 
-						boolean hasNext(Node<E> *node) {
+						inline boolean hasNext(Node<E> *node) {
                             return node != nullptr;
                         }
 				};
