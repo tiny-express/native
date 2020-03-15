@@ -197,6 +197,20 @@ TEST (JavaUtilLinkedList, RemoveByNode) {
     assertEquals(sum, 6);
 }
 
+TEST (JavaUtilLinkedList, GetNodeById) {
+    LinkedList<long> linkedList;
+    linkedList.add(3);
+    linkedList.add(5);
+    linkedList.add(9);
+    linkedList.add(10);
+    linkedList.add(15);
+    assertEquals(5, linkedList.size());
+
+    linkedList.forEach([&](Node<long> *node) {
+        assertEquals(linkedList.getNode(node->id)->id, node->id);
+    });
+}
+
 TEST (JavaUtilLinkedList, Size) {
 	// Given empty linked list - Return size of list is zero
 	LinkedList<int> linkedList;

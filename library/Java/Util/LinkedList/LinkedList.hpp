@@ -209,7 +209,17 @@ namespace Java {
 						E element() {
 							return getFirst();
 						}
-						
+
+                        /**
+                         * Returns the element at the specified id in list.
+                         *
+                         * @param index
+                         * @return Node<E>
+                         */
+                        Node<E> *getNode(long nodeId) {
+                            return findNodeById(nodeId);
+                        }
+
 						/**
 						 * Returns the element at the specified position in this list.
 						 *
