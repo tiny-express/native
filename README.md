@@ -46,6 +46,7 @@ public:
         }
         hashMap.forEach([](String key, String value) {
             System::out::println(String::format("Key is %s - value is %s", key, value));
+            return true;
         });
     }
 };
