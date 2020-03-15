@@ -177,8 +177,9 @@ TEST(JavaUtilHashMap, ForEach) {
                     "Value " + String::valueOf(index));
     }
     int counter = 0;
-    hashMap.forEach([&counter](const String&, const String &) {
+    hashMap.forEach([&counter](String, String) {
         counter += 1;
+        return true;
     });
 
     // Make sure foreach is working
@@ -188,10 +189,11 @@ TEST(JavaUtilHashMap, ForEach) {
     hashMapStringPointer.put("test1", new String("test1"));
     hashMapStringPointer.put("test2", new String("test1"));
     hashMapStringPointer.put("test3", new String("test1"));
-    hashMapStringPointer.forEach([&counter](const String &key, String *value) {
+    hashMapStringPointer.forEach([&counter](String key, String *value) {
         assertEquals("test1", value->toString());
         String *stringValue = value;
         delete stringValue;
+        return true;
     });
 }
 

@@ -44,7 +44,7 @@ public:
         for (var argument : arguments) {
             hashMap.put(String::valueOf(index++), argument);
         }
-        hashMap.forEach([](const String &key, const String &value) {
+        hashMap.forEach([](String key, String value) {
             System::out::println(String::format("Key is %s - value is %s", key, value));
         });
     }

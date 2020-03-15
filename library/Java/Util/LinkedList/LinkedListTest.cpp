@@ -171,6 +171,7 @@ TEST (JavaUtilLinkedList, RemoveByNode) {
     assertEquals(5, linkedList.size());
     linkedList.forEach([&](Node<long> *node) {
         assertTrue(linkedList.remove(*node));
+        return true;
     });
     assertEquals(0, linkedList.size());
 
@@ -181,6 +182,7 @@ TEST (JavaUtilLinkedList, RemoveByNode) {
 
     linkedList.forEach([&](Node<long> *node) {
         assertTrue(linkedList.remove(*node));
+        return true;
     });
     assertEquals(0, linkedList.size());
 
@@ -189,10 +191,12 @@ TEST (JavaUtilLinkedList, RemoveByNode) {
     linkedList.add(5);
     linkedList.forEach([](Node<long> *node) {
         node->element = 3;
+        return true;
     });
     var sum = 0;
     linkedList.forEach([&sum](Node<long> *node) {
         sum += node->element;
+        return true;
     });
     assertEquals(sum, 6);
 }
@@ -208,6 +212,7 @@ TEST (JavaUtilLinkedList, GetNodeById) {
 
     linkedList.forEach([&](Node<long> *node) {
         assertEquals(linkedList.getNode(node->id)->id, node->id);
+        return true;
     });
 }
 

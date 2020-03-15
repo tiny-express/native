@@ -174,6 +174,7 @@ TEST (JavaUtilArrayList, ForEach) {
     int counter = 0;
     validArrayList.forEach([&counter](String item) {
         counter++;
+        return true;
     });
     assertEquals(4, counter);
 }

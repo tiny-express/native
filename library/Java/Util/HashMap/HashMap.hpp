@@ -426,9 +426,11 @@ namespace Java {
 			 *
 			 * @param action
 			 */
-            void forEach(const std::function<void(const Key&, const Value&)> &action) const {
+            void forEach(const std::function<boolean(Key, Value)> &action) const {
                 for (auto &pair : this->original) {
-                    action(pair.first, pair.second);
+                    if (!action(pair.first, pair.second)) {
+                        break;
+                    }
                 }
 			}
 

@@ -246,9 +246,11 @@ namespace Java {
 			 *
 			 * @param action
 			 */
-			void forEach(const std::function<void(E)> &action) {
+			void forEach(const std::function<boolean(E)> &action) {
                 for (var &item : this->original) {
-                    action(item);
+                    if (!action(item)) {
+                        break;
+                    }
                 }
 			}
 

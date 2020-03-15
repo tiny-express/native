@@ -186,7 +186,7 @@ namespace Java {
 						 *
 						 * @param callback
 						 */
-						void forEach(const std::function<void(Node<E>* node)> &callback) {
+						void forEach(const std::function<boolean(Node<E>* node)> &callback) {
                             ArrayList<Node<E>*> nodes;
                             var node = this->first;
                             while (hasNext(node)) {
