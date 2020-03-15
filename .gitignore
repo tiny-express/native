@@ -30,4 +30,5 @@ build
 libbenchmark.gcno
 gradle*
 unit_test.sh
-examples/Application/Main/main
+examples/**/*/main
+
