@@ -47,7 +47,7 @@ static int binarySearchByKey(TYPE array[],\
 }
 
 #define COPY_OF(TYPE); \
-static Array<TYPE> copyOf(Array<TYPE> original,\
+static Array<TYPE> copyOf(const Array<TYPE> &original,\
                             int newLength) {\
     return copyOfOrigin(original, newLength, NULL);\
 }
@@ -84,7 +84,6 @@ static int hashCode(Array<TYPE> array) {\
     if (array.length == 0) {\
         return 0;\
     }\
-\
     int result = 1;\
     for (TYPE element : array) {\
         result = 31 * result + element;\
@@ -146,7 +145,7 @@ namespace Java {
             static int binarySearchByIndex(Object *array,
                                            int fromIndex,
                                            int toIndex,
-                                           Object key) {
+                                           const Object &key) {
                 return -1;
             }
 
@@ -578,9 +577,9 @@ namespace Java {
             }
 
             template<typename Type, typename AnotherType>
-            static Array<Type> copyOfOrigin(Array<Type> original,
+            static Array<Type> copyOfOrigin(const Array<Type> &original,
                                             int newLength,
-                                            AnotherType padding) {
+                                            const AnotherType &padding) {
                 Array<Type> result;
 
                 int copyLength = Math::min(original.length, newLength);
@@ -646,7 +645,6 @@ namespace Java {
                 for (int index = fromIndex; index <= toIndex; ++index) {
                     (*array)[index] = value;
                 }
-                return;
             }
         };
     }

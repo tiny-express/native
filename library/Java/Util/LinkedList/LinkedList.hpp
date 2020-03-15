@@ -46,19 +46,15 @@ namespace Java {
 				class Node {
 				public:
 						E element;
+						long id;
 						Node<E> *previous = nullptr;
 						Node<E> *next = nullptr;
-						
-						Node(Node<E> *previous2, const E &element, Node<E> *next2) {
-							this->element = element;
-							this->previous = previous2;
-							this->next = next2;
-						}
-						
-						Node(const Node<E> &target) {
-							this->element = target.element;
-							this->next = target.next;
-							this->previous = target.previous;
+
+						Node(Node<E> *previous, const E &element, Node<E> *next) {
+                            this->id = (intptr_t) std::addressof(*this);
+						    this->element = element;
+							this->previous = previous;
+							this->next = next;
 						}
 				};
 				
@@ -74,13 +70,12 @@ namespace Java {
 						Node<E> *first = nullptr;
 						Node<E> *last = nullptr;
 						int nodeSize = 0;
-				
-				public:
+
+                public:
 						/**
 						 * LinkedList default constructor
 						 */
-						LinkedList() {
-						}
+						LinkedList() = default;
 						
 						/**
 						 * LinkedList with std::initializer_list
@@ -92,15 +87,7 @@ namespace Java {
 								this->add(item);
 							}
 						}
-						
-						/**
-						 * LinkedList constructor with Collection<E>
-						 *
-						 * @param c
-						 */
-						LinkedList(Collection<E> c) {
-						}
-						
+
 						/**
 						 * LinkedList destructor
 						 */
@@ -127,9 +114,10 @@ namespace Java {
 						 * @param element
 						 */
 						void add(int index, const E &element) {
-							Node<E> *temp = node0(index);
-							Node<E> *newNode = new Node<E>(temp->previous, element, temp);
-							temp->previous->next = newNode;
+							var temporaryNode = findNodeByIndex(index);
+							if (temporaryNode != nullptr && temporaryNode->previous != nullptr) {
+                                temporaryNode->previous->next = new Node<E>(temporaryNode->previous, element, temporaryNode);
+							}
 						}
 						
 						/**
@@ -159,7 +147,6 @@ namespace Java {
 						 */
 						void addLast(const E &element) {
 							linkLast(element);
-							return;
 						}
 						
 						/**
@@ -167,8 +154,7 @@ namespace Java {
 						 */
 						void clear() {
 							int nodeSize = this->nodeSize;
-							int index;
-							for (index = 0; index < nodeSize; ++index) {
+							for (var index = 0; index < nodeSize; index++) {
 								remove();
 							}
 						}
@@ -185,13 +171,31 @@ namespace Java {
 						 * @return boolean
 						 */
 						boolean contains(const E &element) const {
-							Node<E> *node = node1(element);
-							if (node == NULL) {
-								return false;
-							}
-							return true;
+                            var node = this->first;
+                            while (node->next != nullptr) {
+                                if (element == node->element) {
+                                    return true;
+                                }
+                                node = node->next;
+                            }
+							return false;
 						}
-						
+
+						/**
+						 * Foreach linked list
+						 *
+						 * @param callback
+						 */
+						void forEach(const std::function<void(const Node<E> &node)> &callback) {
+                            ArrayList<Node<E>> nodes;
+                            var node = this->first;
+                            while (hasNext(node)) {
+                                nodes.add(*node);
+                                node = node->next;
+                            }
+                            nodes.forEach(callback);
+						}
+
 						/**
 						 * Don't support this method
 						 */
@@ -216,7 +220,7 @@ namespace Java {
 							if (index < 0 || index > this->nodeSize - 1) {
 								throw IndexOutOfBoundsException("Index is out of bounds!");
 							}
-							return node0(index)->element;
+							return findNodeByIndex(index)->element;
 						}
 						
 						/**
@@ -225,7 +229,7 @@ namespace Java {
 						 * @return E
 						 */
 						E getFirst() {
-							if (this->first == NULL) {
+							if (this->first == nullptr) {
 								throw NoSuchElementException();
 							}
 							return this->first->element;
@@ -237,7 +241,7 @@ namespace Java {
 						 * @return E
 						 */
 						E getLast() {
-							if (this->last == NULL) {
+							if (this->last == nullptr) {
 								throw NoSuchElementException();
 							}
 							return this->last->element;
@@ -251,13 +255,13 @@ namespace Java {
 						 * @return int
 						 */
 						int indexOf(const E &element) const {
-							Node<E> *temp = this->first;
+							Node<E> *temporary = this->first;
 							int index;
 							for (index = 0; index < this->nodeSize; ++index) {
-								if (temp->element == element) {
+								if (temporary->element == element) {
 									return index;
 								}
-								temp = temp->next;
+								temporary = temporary->next;
 							}
 							return -1;
 						}
@@ -270,13 +274,13 @@ namespace Java {
 						 * @return int
 						 */
 						int lastIndexOf(const E &element) const {
-							Node<E> *temp = this->last;
+							Node<E> *temporary = this->last;
 							int index;
 							for (index = 0; index < this->nodeSize; ++index) {
-								if (temp->element == element) {
+								if (temporary->element == element) {
 									return index;
 								}
-								temp = temp->previous;
+								temporary = temporary->previous;
 							}
 							return -1;
 						}
@@ -348,14 +352,14 @@ namespace Java {
 						/**
 						 * Retrieves and removes the head (first element) of this list.
 						 *
-						 * @return
+						 * @return E
 						 */
 						E poll() {
 							return unlinkFirst();
 						}
 						
 						/**
-						 * Retrieves and removes the first element of this list, or throw an exception if this->first is NULL
+						 * Retrieves and removes the first element of this list, or throw an exception if this->first is nullptr
 						 *
 						 * @return E
 						 */
@@ -364,7 +368,7 @@ namespace Java {
 						}
 						
 						/**
-						 * Retrieves and removes the last element of this list, or throw an exception if this->last is NULL
+						 * Retrieves and removes the last element of this list, or throw an exception if this->last is nullptr
 						 *
 						 * @return E
 						 */
@@ -375,7 +379,7 @@ namespace Java {
 						/**
 						 * Pops an element from the stack represented by this list.
 						 *
-						 * @return
+						 * @return E
 						 */
 						E pop() {
 							return unlinkFirst();
@@ -400,38 +404,57 @@ namespace Java {
 						}
 						
 						/**
-						 * Don't support this method, use boolean remove(E e) instead
-						 */
-//			E remove(int index) {
-//				Node<E> *nodeIndex = node0(index);
-//				Node<E> *temp = nodeIndex;
-//				temp->previous = nodeIndex->next;
-//
-//				E element = nodeIndex->element;
-//				delete ( nodeIndex );
-//
-//				return element;
-//			}
-						
-						/**
-						 * Remove a specific element
+						 * Remove a specific index
 						 *
 						 * @param element e
 						 * @return boolean
 						 */
-						boolean remove(const E &element) {
-							Node<E> *nodeIndex = node1(element);
-							
-							if (nodeIndex == NULL) {
-								return false;
-							}
-							
-							Node<E> *temp = nodeIndex;
-							temp->previous = nodeIndex->next;
-							
-							deleteNode(nodeIndex);
-							return true;
+						boolean remove(int index) {
+                            return removeNode(findNodeByIndex(index));
 						}
+
+                        /**
+                         * Remove a specific node
+                         *
+                         * @param element e
+                         * @return boolean
+                         */
+                        boolean remove(const Node<E> &node) {
+                            return removeNode(findNodeById(node.id));
+                        }
+
+                        /**
+                         * Remove middle node and link previous with next node
+                         *
+                         * @param node
+                         * @return
+                         */
+                        boolean removeNode(Node<E> *node) {
+                            if (node == nullptr) {
+                                return false;
+                            }
+
+                            var previousNode = node->previous;
+                            var nextNode = node->next;
+
+                            // Link left node and right node
+                            if (previousNode == nullptr) {
+                                this->first = nextNode;
+                            } else {
+                                previousNode->next = nextNode;
+                            }
+
+                            if (nextNode == nullptr) {
+                                this->last = previousNode;
+                            } else {
+                                nextNode->previous = previousNode;
+                            }
+
+                            // Remove middle node
+                            deleteNode(node);
+
+                            return true;
+                        }
 						
 						/**
 						 * Remove first element
@@ -468,14 +491,13 @@ namespace Java {
 						 * @return
 						 */
 						boolean removeFirstOccurrence(const E &element) {
-							Node<E> *temp = this->first;
-							
+							var temporary = this->first;
 							int index;
 							for (index = 0; index < this->nodeSize; ++index) {
-								if (temp->element == element) {
+								if (temporary->element == element) {
 									return remove(index);
 								}
-								temp = temp->next;
+								temporary = temporary->next;
 							}
 							return false;
 						}
@@ -486,15 +508,14 @@ namespace Java {
 						 * @param element
 						 * @return boolean
 						 */
-						boolean removeLastOccurrrence(const E &element) {
-							Node<E> *temp = this->last;
-							
+						boolean removeLastOccurrence(const E &element) {
+							var temporary = this->last;
 							int index;
 							for (index = this->nodeSize; index > 0; ++index) {
-								if (temp->element == element) {
+								if (temporary->element == element) {
 									return remove(index);
 								}
-								temp = temp->previous;
+								temporary = temporary->previous;
 							}
 							return false;
 						}
@@ -507,10 +528,9 @@ namespace Java {
 						 * @return E
 						 */
 						E set(int index, E &element) {
-							Node<E> *temp = node0(index);
-							
-							temp->element = element;
-							return temp->element;
+							var temporary = findNodeByIndex(index);
+							temporary->element = element;
+							return temporary->element;
 						}
 						
 						/**
@@ -539,19 +559,32 @@ namespace Java {
 						 */
 //			Array<E> toArray(Array<E> a);
 						
-						/**
-						 * Don't support this method
-						 */
-//			boolean equals(const Object &o);
-				
+
+                    String toString() {
+                        var node = this->first;
+                        String serializeStr = "*";
+                        while (hasNext(node)) {
+                            if (node->previous != nullptr) {
+                                serializeStr += String("[") + String::valueOf(node->previous->element) + String("]");
+                            }
+                            serializeStr += String::valueOf(node->element) + String("");
+                            if (node->next != nullptr) {
+                                serializeStr += String("[") + String::valueOf(node->next->element) + String("]");
+                            }
+                            serializeStr += "-->";
+                            node = node->next;
+                        }
+                        return serializeStr;
+                    }
+
 				private:
 						void linkFirst(const E &e) {
-							Node<E> *node = new Node<E>(NULL, e, this->first);
-							
+							var node = new Node<E>(nullptr, e, this->first);
+
 							Node<E> *first = this->first;
 							this->first = node;
 							
-							if (this->last == NULL) {
+							if (this->last == nullptr) {
 								this->last = node;
 							} else {
 								first->previous = node;
@@ -561,78 +594,82 @@ namespace Java {
 						}
 						
 						void linkLast(const E &e) {
-							Node<E> *node = new Node<E>(this->last, e, NULL);
-							
-							Node<E> *last = this->last;
-							this->last = node;
-							
-							if (this->first == NULL) {
-								this->first = node;
+							var last = this->last;
+
+							this->last = new Node<E>(this->last, e, nullptr);
+
+							if (this->first == nullptr) {
+								this->first = this->last;
 							} else {
-								last->next = node;
+								last->next = this->last;
 							}
-							
+
 							this->nodeSize++;
 						}
-						
-						Node<E> *node0(int index) {
+
+						Node<E> *findNodeByIndex(int index) {
 							if (index < 0 || index >= this->nodeSize) {
-							
+							    throw IndexOutOfBoundsException();
 							}
-							
-							Node<E> *temp = this->first;
-							int _index;
-							for (_index = 1; _index < index; ++_index) {
-								temp = temp->next;
-							}
-							return temp;
+							int currentIndex = 0;
+                            var node = this->first;
+                            while (hasNext(node)) {
+                                if (currentIndex == index) {
+                                    return node;
+                                }
+                                currentIndex++;
+                                node = node->next;
+                            }
+                            return nullptr;
 						}
-						
-						Node<E> *node1(const E &element) const {
-							Node<E> *temp = this->first;
-							int index;
-							for (index = 0; index < this->nodeSize; ++index) {
-								if (temp->element == element) {
-									return temp;
-								}
-								temp = temp->next;
-							}
-							
-							return NULL;
-						}
-						
+
+                        Node<E> *findNodeById(long id) {
+                            var node = this->first;
+                            while (hasNext(node)) {
+                                if (node->id == id) {
+                                    return node;
+                                }
+                                node = node->next;
+                            }
+                            return nullptr;
+                        }
+
 						E unlinkFirst() {
-							if (this->first == NULL) {
+							if (this->first == nullptr) {
 								throw NoSuchElementException();
 							}
 							
-							Node<E> *temp = this->first;
-							this->first = temp->next;
+							Node<E> *temporary = this->first;
+							this->first = temporary->next;
 							
-							E element = temp->element;
-							deleteNode(temp);
+							E element = temporary->element;
+							deleteNode(temporary);
 							
 							return element;
 						}
 						
 						E unlinkLast() {
-							if (this->last == NULL) {
+							if (this->last == nullptr) {
 								throw NoSuchElementException();
 							}
 							
-							Node<E> *temp = this->last;
-							this->last = temp->previous;
+							var temporary = this->last;
+							this->last = temporary->previous;
 							
-							E element = temp->element;
+							E element = temporary->element;
 							
-							deleteNode(temp);
+							deleteNode(temporary);
 							return element;
 						}
 						
 						void deleteNode(Node<E> *node) {
-							delete ( node );
-							this->nodeSize--;
+                            delete node;
+                            this->nodeSize--;
 						}
+
+						boolean hasNext(Node<E> *node) {
+                            return node != nullptr;
+                        }
 				};
 		}
 }

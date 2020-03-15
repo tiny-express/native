@@ -42,7 +42,7 @@ namespace Java {
                     boolean detached = false;
                     String name;
                     unsigned long tid = 0;
-                    Runnable *target = NULL;
+                    Runnable *target = nullptr;
                     Semaphore semaphoreObject;
                     std::thread threadObject;
                     std::mutex mutexObject;

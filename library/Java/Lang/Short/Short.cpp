@@ -59,7 +59,7 @@ Short::Short(const Short &shortNumber) {
 }
 
 Short::~Short() {
-	if (this->originalString != NULL) {
+	if (this->originalString != nullptr) {
 		free(this->originalString);
 	}
 }

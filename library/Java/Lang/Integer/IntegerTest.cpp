@@ -650,7 +650,7 @@ TEST (JavaLangInteger, Equals) {
 
 // // Cast all case of input a string of type decimal number
 // stringInput = (String) "";
-// expectedResult = ; // NULL string
+// expectedResult = ; // nullptr string
 // actualResult = Integer:getInteger(stringInput);
 // assertEquals(expectedResult.intValue(), actualResult.intValue());
 
@@ -777,7 +777,7 @@ TEST (JavaLangInteger, Equals) {
 
 // // Cast all case of input a string of type decimal number
 // stringInput = (String) "";
-// expectedResult = 9999; // NULL string
+// expectedResult = 9999; // nullptr string
 // actualResult = Integer:getInteger(stringInput, 9999);
 // assertEquals(expectedResult.intValue(), actualResult.intValue());
 
@@ -904,7 +904,7 @@ TEST (JavaLangInteger, Equals) {
 
 // // Cast all case of input a string of type decimal number
 // stringInput = (String) "";
-// expectedResult = 9999; // NULL string
+// expectedResult = 9999; // nullptr string
 // actualResult = Integer:getInteger(stringInput, (Integer) 9999);
 // assertEquals(expectedResult.intValue(), actualResult.intValue());
 

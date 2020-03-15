@@ -33,7 +33,7 @@ TEST (JavaLangCharacter, Constructor) {
 	// Create variable to test CharacterConstructor.
 	Character variableTestConstructor;
 	
-	// Test NULL value
+	// Test nullptr value
 	assertTrue(variableTestConstructor.charValue() == '\0');
 	
 	// Test valid case
@@ -76,7 +76,7 @@ TEST (JavaLangCharacter, CharValue) {
 	// Create variable to test Character::charValue().
 	Character variableTestCharValue;
 	
-	// Test NULL value
+	// Test nullptr value
 	assertTrue(variableTestCharValue.charValue() == '\0');
 	
 	// Test valid case
