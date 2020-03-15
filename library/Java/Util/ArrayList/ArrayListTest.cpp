@@ -172,7 +172,7 @@ TEST (JavaUtilArrayList, ForEach) {
 
     ArrayList<String> validArrayList = {"String", "String", "Integer", "String"};
     int counter = 0;
-    validArrayList.forEach([&counter](const String &item) {
+    validArrayList.forEach([&counter](String item) {
         counter++;
     });
     assertEquals(4, counter);

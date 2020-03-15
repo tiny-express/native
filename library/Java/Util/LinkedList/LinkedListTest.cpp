@@ -169,20 +169,32 @@ TEST (JavaUtilLinkedList, RemoveByNode) {
     linkedList.add(10);
     linkedList.add(15);
     assertEquals(5, linkedList.size());
-    linkedList.forEach([&](const Node<long> &node) {
-        assertTrue(linkedList.remove(node));
+    linkedList.forEach([&](Node<long> *node) {
+        assertTrue(linkedList.remove(*node));
     });
     assertEquals(0, linkedList.size());
 
+    // Test data manipulation
     linkedList.add(1);
     linkedList.add(2);
     assertEquals(2, linkedList.size());
 
-    linkedList.forEach([&](const Node<long> &node) {
-        assertTrue(linkedList.remove(node));
+    linkedList.forEach([&](Node<long> *node) {
+        assertTrue(linkedList.remove(*node));
     });
-
     assertEquals(0, linkedList.size());
+
+    // Test writable data
+    linkedList.add(4);
+    linkedList.add(5);
+    linkedList.forEach([](Node<long> *node) {
+        node->element = 3;
+    });
+    var sum = 0;
+    linkedList.forEach([&sum](Node<long> *node) {
+        sum += node->element;
+    });
+    assertEquals(sum, 6);
 }
 
 TEST (JavaUtilLinkedList, Size) {
