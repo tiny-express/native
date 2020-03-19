@@ -39,21 +39,6 @@ TEST (JavaUtilLinkedList, Add) {
 	assertEquals(24, linkedList.getLast());
 }
 
-TEST(JavaUtilLinkedList, Contains) {
-	// Given valid linked list to test contains of a element inside list
-	LinkedList<char> linkedList;
-	linkedList.add('6');
-	linkedList.add('#');
-	linkedList.add('f');
-	linkedList.add(';');
-	
-	char expectedValue = '#';
-	assertTrue(linkedList.contains(expectedValue));
-	
-	char unexpectedValue = '5';
-	assertFalse(linkedList.contains(unexpectedValue));
-}
-
 TEST (JavaUtilLinkedList, GetFirst) {
 	// Given list of strings - Return first element
 	LinkedList<String> linkedList;
@@ -160,8 +145,7 @@ TEST (JavaUtilLinkedList, RemoveByIndex) {
     assertEquals(10, linkedList.get(2));
 }
 
-TEST (JavaUtilLinkedList, RemoveByNode) {
-    // Given valid linked list to test remove(), remove..()
+TEST (JavaUtilLinkedList, ForEachRemoveNode) {
     LinkedList<long> linkedList;
     linkedList.add(3);
     linkedList.add(5);
@@ -201,24 +185,41 @@ TEST (JavaUtilLinkedList, RemoveByNode) {
     assertEquals(sum, 6);
 }
 
-TEST (JavaUtilLinkedList, GetNodeById) {
-    LinkedList<long> linkedList;
-    linkedList.add(3);
-    linkedList.add(5);
-    linkedList.add(9);
-    linkedList.add(10);
-    linkedList.add(15);
-    assertEquals(5, linkedList.size());
+TEST (JavaUtilLinkedList, ForRange) {
+    // Readable for range
+    {
+        LinkedList<String> linkedList;
+        linkedList.add("Hello");
+        linkedList.add("World");
+        assertEquals(2, linkedList.size());
+        String actual = "";
+        for (Node<String> *node : linkedList) {
+            actual += node->element;
+        }
+        assertEquals("HelloWorld", actual);
+    }
 
-    linkedList.forEach([&](Node<long> *node) {
-        assertEquals(linkedList.getNode(node->id)->id, node->id);
-        return true;
-    });
+    // Writable for range
+    {
+        LinkedList<String> linkedList;
+        linkedList.add("Hello");
+        linkedList.add("World");
+        assertEquals(2, linkedList.size());
+        String actual = "";
+        for (Node<String> *node : linkedList) {
+            node->element = "Test";
+        }
+        for (Node<String> *node : linkedList) {
+            actual += node->element;
+        }
+        assertEquals("TestTest", actual);
+    }
 }
+
 
 TEST (JavaUtilLinkedList, Size) {
 	// Given empty linked list - Return size of list is zero
-	LinkedList<int> linkedList;
+	LinkedList<Integer> linkedList;
 	assertEquals(0, linkedList.size());
 	
 	// Append two elements to linked list - Return two elements

@@ -68,8 +68,7 @@ namespace Java {
 			/**
 			 * Destructor HashMap
 			 */
-			~HashMap() {
-			}
+			~HashMap() = default;
 
 		public:
 			/**
