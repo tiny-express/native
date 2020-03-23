@@ -88,7 +88,6 @@ String::String(const Array<byte> &byteArray) {
 
 String::String(const String &target) {
 	this->original = target.original;
-	this->hash = target.hash;
 }
 
 String::String(const StringBuilder &stringBuilder) {
