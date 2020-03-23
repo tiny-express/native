@@ -60,10 +60,6 @@ String::String() = default;
 
 String::~String() = default;
 
-String::String(std::nullptr_t aNullptr) {
-    this->original = "";
-}
-
 String::String(string original, int length) {
 	this->original = std::string(original, original + (size_t) length);
 }
@@ -88,7 +84,6 @@ String::String(const Array<byte> &byteArray) {
 
 String::String(const String &target) {
 	this->original = target.original;
-	this->hash = target.hash;
 }
 
 String::String(const StringBuilder &stringBuilder) {

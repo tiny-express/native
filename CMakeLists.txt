@@ -63,7 +63,7 @@ endif ()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-multichar -Wno-unused-result")
 
 file(GLOB_RECURSE SOURCES_CPP
-        library/**/*.cpp
+        library/**/*.*pp
         library/**/*.c
         )
 

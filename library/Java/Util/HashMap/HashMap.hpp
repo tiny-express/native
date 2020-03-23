@@ -33,26 +33,26 @@
 #include "../Set/Set.hpp"
 
 namespace Java {
-	namespace Util {
-		template<class Key, class Value>
+    namespace Util {
+
+		template<class K, class V>
 		class HashMap :
 				public AbstractMap,
-				public virtual Map<Key, Value>,
+				public virtual Map<K, V>,
 				public virtual Cloneable,
 				public virtual Serializable {
 
 		private:
-			std::unordered_map<Key, Value> original;
+			std::unordered_map<K, V> original;
 			String backup;
-			typedef typename std::unordered_map<Key, Value>::iterator IteratorType;
-			typedef typename std::unordered_map<Key, Value>::const_iterator ConstIteratorType;
+			typedef typename std::unordered_map<K, V>::iterator IteratorType;
+			typedef typename std::unordered_map<K, V>::const_iterator ConstIteratorType;
 
 		public:
 			/**
 			 * Constructs an empty HashMap
 			 */
-			HashMap() {
-			}
+			HashMap() = default;
 
 			/**
 			 * Constructs a new HashMap with the same
@@ -61,7 +61,7 @@ namespace Java {
 			 * @param target  	the map whose mappings
 			 * 					are to be placed in this map
 			 */
-			HashMap(const HashMap<Key, Value> &target) {
+			HashMap(const HashMap<K, V> &target) {
 				this->putAll(target);
 			}
 
@@ -108,15 +108,13 @@ namespace Java {
 			 * @return  true if equal
 			 *          false if not equal
 			 */
-			boolean equals(const HashMap<Key, Value> &anotherHashMap) {
-
+			boolean equals(const HashMap<K, V> &anotherHashMap) {
 				if (this->size() != anotherHashMap.size()) {
 					return false;
 				}
 
-				for (auto const &thisElement : this->original) {
-					Value anotherValue = anotherHashMap.get(thisElement.first);
-
+				for (var const &thisElement : this->original) {
+					V anotherValue = anotherHashMap.get(thisElement.first);
 					if (thisElement.second != anotherValue) {
 						return false;
 					}
@@ -125,117 +123,14 @@ namespace Java {
 				return true;
 			}
 
-			// TODO(thoangminh): We will support this method later
-			/**
-			 * Returns the hash code value for this map.  The hash code of a map is
-			 * defined to be the sum of the hash codes of each entry in the map's
-			 * entrySet view.  This ensures that m1.equals(m2)
-			 * implies that m1.hashCode() == m2.hashCode() for any two maps
-			 * m1 and m2, as required by the general contract of
-			 * Object.
-			 *
-			 * This implementation iterates over entrySet(), calling
-			 * Map.Entry hashCode() on each element (entry) in the
-			 * set, and adding up the results.
-			 *
-			 * @return 	int the hash code value for this map
-			 */
-			int hashCode();
-
-			/**
-			 * Returns a Set view of the keys contained in this map.
-			 * The set is backed by the map, so changes to the map are
-			 * reflected in the set, and vice-versa.
-			 *
-			 * If the map is modified
-			 * while an iteration over the set is in progress (except through
-			 * the iterator's own remove operation), the results of
-			 * the iteration are undefined.
-			 *
-			 * The set supports element removal,
-			 * which removes the corresponding mapping from the map, via the
-			 * Iterator.remove, Set.remove,
-			 * removeAll, retainAll, and clear
-			 * operations.
-			 *
-			 * It does not support the add or addAll
-			 * operations.
-			 *
-			 * @return a set view of the keys contained in this map
-			 */
-//			Set<Key> keySet() {
-//				Set<Key> resultKeySet;
-//				return (resultKeySet = keySet) == null ? (keySet = new KeySet()) : resultKeySet;
-//			}
-
-			/**
-			 * If the specified key is not already associated
-			 * with a value or is associated with null,
-			 * associates iteratorToString with the given non-null value.
-			 *
-			 * @param 	key 		key with which the resulting value is to be associated
-			 *
-			 * @param 	value 		the non-null value to be merged with the
-			 * 						existing value associated with the key or,
-			 * 						if no existing value or a null value
-			 * 						is associated with the key, to be associated with the key
-			 *
-			 * @param 	BiFunction 	remappingFunction - the function to recompute
-			 * 						a value if present
-			 * @return 	Value 		the new value associated with the specified key,
-			 * 						or null if no value is associated with the key
-			 */
-//			Value merge(Key key, Value value,
-//					   BiFunction <void(Value, Value, Value&)> remappingFunction) {
-//                Value oldValue = this->get(key);
-//                Value nullValue;
-//                Value newValue;
-//
-//                if (oldValue != nullValue) {
-//                    remappingFunction(oldValue, value, newValue);
-//                    this->replace(key, newValue);
-//
-//                    return newValue;
-//                }
-//
-//				return nullValue;
-//			}
-
 			/**
 			 * Reset to initial default state.
 			 * Called by clone and readObject.
 			 */
 			void reinitialize() {
-				std::unordered_map<Key, Value> newMap;
+				std::unordered_map<K, V> newMap;
 				this->original = newMap;
 			}
-
-			/**
-			 * Returns a {Collection} view of the values contained in this map.
-			 * The collection is backed by the map, so changes to the map are
-			 * reflected in the collection, and vice-versa.  If the map is
-			 *
-			 * modified while an iteration over the collection is in progress
-			 * (except through the iterator's own remove operation),
-			 * the results of the iteration are undefined.  The collection
-			 *
-			 * supports element removal, which removes the corresponding
-			 * mapping from the map, via the Iterator.remove,
-			 * Collection.remove, removeAll,
-			 * retainAll and clear operations.  It does not
-			 * support the add or addAll operations.
-			 *
-			 * @return a view of the values contained in this map
-			 */
-//			Collection<Value> values() {
-//				Collection<Value> vs;
-//				return (vs = values) == null ? (values = new Values()) : vs;
-//			}
-//
-//			final class Values extends AbstractCollection<Value> {
-//				public final int size() {
-//					return size;
-//				}
 
 			/**
 			 * Removes all of the mappings from this map.
@@ -249,16 +144,16 @@ namespace Java {
 			 * Returns a shallow copy of this HashMap instance:
 			 * the keys and values themselves are not cloned.
 			 *
-			 * @return HashMap<Key, Value>
+			 * @return HashMap<K, V>
 			 */
 			/***
 			 * Returns a shallow copy of this HashMap instance:
 			 * the keys and values themselves are not cloned.
 			 *
-			 * @return HashMap<Key, Value>
+			 * @return HashMap<K, V>
 			 */
-			HashMap<Key, Value> clone() const {
-				HashMap<Key, Value> result;
+			HashMap<K, V> clone() const {
+				HashMap<K, V> result;
 				for (auto const &element : this->original) {
 					result.put(element.first, element.second);
 				}
@@ -273,15 +168,15 @@ namespace Java {
 			 *
 			 * @param 	BiFunction 	remappingFunction - the function to compute a value
 			 *
-			 * @return 	Value 		the new value associated with the specified key,
+			 * @return 	V 		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-//			Value compute (Key key,
-//                          BiFunction<void (Key, Value, Value&)>
+//			V compute (K key,
+//                          BiFunction<void (K, V, V&)>
 //                          remappingFunction) {
-//                Value oldValue = this->get(key);
-//                Value nullValue;
-//                Value newValue;
+//                V oldValue = this->get(key);
+//                V nullValue;
+//                V newValue;
 //
 //                if (oldValue != nullValue) {
 //                    remappingFunction(key, oldValue, newValue);
@@ -310,16 +205,16 @@ namespace Java {
 			 *
 			 * @param 	Function 	mappingFunction - the function to compute a value
 			 *
-			 * @return 	Value 		the current (existing or computed) value
+			 * @return 	V 		the current (existing or computed) value
 			 * 						associated with the specified key,
 			 * 						or null if the computed value is null
 			 */
-//			Value computeIfAbsent (Key key,
-//                                BiFunction<void (Key , Value, Value&)>
+//			V computeIfAbsent (K key,
+//                                BiFunction<void (K , V, V&)>
 //                                mappingFunction) {
-//                Value oldValue = this->get(key);
-//                Value nullValue;
-//                Value newValue;
+//                V oldValue = this->get(key);
+//                V nullValue;
+//                V newValue;
 //
 //                if (oldValue != nullValue) {
 //                    return oldValue;
@@ -343,15 +238,15 @@ namespace Java {
 			 *
 			 * @param 	BiFunction 	remappingFunction - the function to compute a value
 			 *
-			 * @return 	Value  		the new value associated with the specified key,
+			 * @return 	V  		the new value associated with the specified key,
 			 * 						or null if none
 			 */
-//            Value computeIfPresent (Key key,
-//                                  BiFunction<void (Key , Value, Value&)>
+//            V computeIfPresent (K key,
+//                                  BiFunction<void (K , V, V&)>
 //                                  mappingFunction) {
-//                Value oldValue = this->get(key);
-//                Value nullValue;
-//                Value newValue;
+//                V oldValue = this->get(key);
+//                V nullValue;
+//                V newValue;
 //
 //                if (oldValue == nullValue) {
 //                    return nullValue;
@@ -381,7 +276,7 @@ namespace Java {
 			 * @return 	true  		if this map contains a mapping for the specified key.
 			 * 			false 		otherwise
 			 */
-			boolean containsKey(const Key &key) const {
+			boolean containsKey(const K &key) const {
 				return this->original.find(key) != this->original.end();
 			}
 
@@ -393,7 +288,7 @@ namespace Java {
 			 * @return 	true  		if this map maps one or more keys to the specified value
 			 *  		false 		otherwise
 			 */
-			boolean containsValue(const Value &value) const {
+			boolean containsValue(const V &value) const {
 				for (auto const &pair : this->original) {
 					if (pair.second == value) {
 						return true;
@@ -407,11 +302,11 @@ namespace Java {
 			 *
 			 * @return a set view of the mappings contained in this map
 			 */
-			Set<class Map<Key, Value>::Entry> entrySet() {
-				Set<class Map<Key, Value>::Entry> entrySet;
+			Set<class Map<K, V>::Entry> entrySet() {
+				Set<class Map<K, V>::Entry> entrySet;
 
 				for (auto const &pair : this->original) {
-					class Map<Key, Value>::Entry entry(pair.first, pair.second);
+					class Map<K, V>::Entry entry(pair.first, pair.second);
 					entrySet.add(entry);
 				}
 
@@ -425,7 +320,7 @@ namespace Java {
 			 *
 			 * @param action
 			 */
-            void forEach(const std::function<boolean(Key, Value)> &action) const {
+            void forEach(const std::function<boolean(K, V)> &action) const {
                 for (auto &pair : this->original) {
                     if (!action(pair.first, pair.second)) {
                         break;
@@ -439,15 +334,15 @@ namespace Java {
 			 *
 			 * @param 	key 			the key whose associated value is to be returned
 			 *
-			 * @return 	Value value 	the value to which the specified key is mapped,
+			 * @return 	V value 	the value to which the specified key is mapped,
 			 * 							or default if no mapping with key
 			 */
-			Value get(const Key &key) const {
+			V get(const K &key) const {
 				auto const iteratorToString = this->original.find(key);
 				if (iteratorToString == this->original.end()) {
 					// Default value if could not found
 					// Prevent null pointer reference
-					Value value;
+					V value;
 				    return value;
 				}
 				return iteratorToString->second;
@@ -461,12 +356,12 @@ namespace Java {
 			 *
 			 * @param 	defaultValue 	the default mapping of the key
 			 *
-			 * @return 	Value 			the value to which the specified key is mapped,
+			 * @return 	V 			the value to which the specified key is mapped,
 			 * 							or defaultValue if this map contains no mapping
 			 * 							for the key
 			 */
-			Value getOrDefault(const Key &key, const Value &defaultValue) const {
-				Value result;
+			V getOrDefault(const K &key, const V &defaultValue) const {
+				V result;
 				auto const iteratorToString = this->original.find(key);
 
 				if (iteratorToString == this->original.end()) {
@@ -495,16 +390,16 @@ namespace Java {
 			 * @param key
 			 * @param value
 			 */
-			void put(const Key &key, const Value &value) {
-				this->original.insert(std::pair<Key, Value>(key, value));
+			void put(const K &key, const V &value) {
+				this->original.insert(std::pair<K, V>(key, value));
 			}
 
 			/**
 			 * Copies all of the mappings from the specified map to this map.
 			 *
-			 * @param const hashMap<Key, Value> &map
+			 * @param const hashMap<K, V> &map
 			 */
-			void putAll(const HashMap<Key, Value> &map) {
+			void putAll(const HashMap<K, V> &map) {
 				for (auto const &element: map) {
 				    this->put(element.first, element.second);
 				}
@@ -518,14 +413,14 @@ namespace Java {
 			 *
 			 * @param 	value 	value to be associated with the specified key
 			 *
-			 * @return 	Value	the previous value associated with the specified key,
+			 * @return 	V	the previous value associated with the specified key,
 			 * 					or null if there was no mapping for the key.
 			 * 					(A null return can also indicate
 			 * 					that the map previously associated null with the key,
 			 * 					if the implementation supports null values.)
 			 */
-			Value putIfAbsent(const Key &key, const Value &value) {
-				Value result;
+			V putIfAbsent(const K &key, const V &value) {
+				V result;
 				auto const iteratorFind = this->original.find(key);
 
 				if (iteratorFind == this->original.end()) {
@@ -543,13 +438,13 @@ namespace Java {
 			 *
 			 * @param 	key 	key whose mapping is to be removed from the map
 			 *
-			 * @return 	Value 	the previous value associated with key,
+			 * @return 	V 	the previous value associated with key,
 			 * 					or null if there was no mapping for key.
 			 * 					(A null return can also indicate that the map
 			 * 					previously associated null with key.)
 			 */
-			Value remove(const Key &key) {
-				Value result;
+			V remove(const K &key) {
+				V result;
 				auto const iteratorToString = this->original.find(key);
 
 				if (iteratorToString == this->original.end()) {
@@ -572,7 +467,7 @@ namespace Java {
 			 * @return 	true  		if the value was removed
 			 * 			false 		if otherwise
 			 */
-			boolean remove(const Key &key, const Value &value) {
+			boolean remove(const K &key, const V &value) {
 				auto const iteratorToString = this->original.find(key);
 
 				if (iteratorToString == this->original.end()
@@ -592,14 +487,14 @@ namespace Java {
 			 *
 			 * @param 	value 	value to be associated with the specified key
 			 *
-			 * @return 	Value 	the previous value associated with the specified key,
+			 * @return 	V 	the previous value associated with the specified key,
 			 * 					or null if there was no mapping for the key.
 			 * 					(A null return can also indicate that the map
 			 * 					previously associated null with the key,
 			 * 					if the implementation supports null values.)
 			 */
-			Value replace(const Key &key, const Value &value) {
-				Value result;
+			V replace(const K &key, const V &value) {
+				V result;
 				auto const iteratorToString = this->original.find(key);
 
 				if (iteratorToString == this->original.end()) {
@@ -624,10 +519,10 @@ namespace Java {
 			 * @return 	true  		if the value was replaced
 			 * 			false 		if otherwise
 			 */
-			boolean replace(const Key &key,
-			                const Value &oldValue,
-			                const Value &newValue) {
-				Value result;
+			boolean replace(const K &key,
+			                const V &oldValue,
+			                const V &newValue) {
+				V result;
 				auto const iteratorToString = this->original.find(key);
 
 				if (iteratorToString == this->original.end()
@@ -641,19 +536,6 @@ namespace Java {
 			}
 
 			/**
-			 * Replace all the value base on the function
-			 *
-			 * @param function
-			 */
-//			void replaceAll(BiFunction<void(Key, Value, Value&)> function) {
-//                for (auto &element: this->original) {
-//                    Key key = element.first;
-//                    Value value = element.second;
-//                    function(key, value, element.second);
-//                }
-//            }
-
-			/**
 			 * Returns the number of key-value mappings in this map.
 			 *
 			 * @return int
@@ -661,13 +543,6 @@ namespace Java {
 			long size() const {
 				return this->original.size();
 			}
-
-			// TODO(thoangminh): We will support after finishing class Collection
-			/**
-			 * Returns a Collection view of the values contained in this map
-			 * @return Collection<Value> - a view of the values contained in this map
-			 */
-//			Collection<Value> values();
 
 			/**
 			 * Return a presentation of all key/value in this object
@@ -684,30 +559,30 @@ namespace Java {
 				String commaAndSpace = ", ";
 				String colonAndSpace = ": ";
 				String endString = "}";
-				String appendKeyString;
+				String appendKString;
 				String appendValueString;
 
 				boolean keyIsString = false;
 				boolean valueIsString = false;
 
-				if (std::is_same<Key, String>::value) {
+				if (std::is_same<K, String>::value) {
 					keyIsString = true;
 				}
 
-				if (std::is_same<Value, String>::value) {
+				if (std::is_same<V, String>::value) {
 					valueIsString = true;
 				}
 
 				long hashMapSize = this->size();
 				long hashMapCounter = 0;
 
-				for (auto it = this->original.begin(); it != this->original.end(); ++it) {
+				for (var it = this->original.begin(); it != this->original.end(); ++it) {
 					hashMapCounter += 1;
 
 					// Concat key string
-					appendKeyString = it->first.toString();
+					appendKString = it->first.toString();
 					if (keyIsString) {
-						appendKeyString = String("\"") + appendKeyString + String("\"");
+						appendKString = String("\"") + appendKString + String("\"");
 					}
 
 					appendValueString = it->second.toString();
@@ -727,64 +602,12 @@ namespace Java {
 						appendValueString += commaAndSpace;
 					}
 
-					this->backup += appendKeyString + colonAndSpace + appendValueString;
+					this->backup += appendKString + colonAndSpace + appendValueString;
 				}
 
 				this->backup += endString;
 				return this->backup;
 			}
-
-//        private:
-//            // TODO(anhnt): Need String support unicode for unicode character
-//            /**
-//             * Replace escape sequence by raw string of
-//             * that sequence to using in Json
-//             *
-//             * @param stringToReplace
-//             * @return a String with add escape sequence replaced
-//             */
-//            String replaceEscapeSequence(const String stringToReplace) {
-//                int index = 0;
-//                String replacementString;
-//                String result;
-//
-//                while (index < stringToReplace.length()) {
-//                    int charAtIndex = stringToReplace.charAt(index);
-//
-//                    switch (charAtIndex) {
-//                        case '\"':
-//                            replacementString = R"(\")";
-//                            break;
-//                        case '\b':
-//                            replacementString = R"(\b)";
-//                            break;
-//                        case '\f':
-//                            replacementString = R"(\f)";
-//                            break;
-//                        case '\n':
-//                            replacementString = R"(\n)";
-//                            break;
-//                        case '\r':
-//                            replacementString = R"(\r)";
-//                            break;
-//                        case '\t':
-//                            replacementString = R"(\t)";
-//                            break;
-//                        case '\\':
-//                            replacementString = R"(\\)";
-//                            break;
-//                        default:
-//                            string charAtIndexString = stringFromChar(charAtIndex);
-//                            replacementString = charAtIndexString;
-//                            free(charAtIndexString);
-//                    }
-//
-//                    result += replacementString;
-//                    index++;
-//                }
-//
-//                return result;
-//            }
 		};
 	}  // namespace Util
 }  // namespace Java
