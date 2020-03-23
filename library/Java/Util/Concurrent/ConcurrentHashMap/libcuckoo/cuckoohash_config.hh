@@ -1,3 +1,6 @@
+// Copyright (C) 2013, Carnegie Mellon University and Intel Corporation
+//  Licensed under the Apache License, Version 2.0 (the "License");
+
 /** \file */
 
 #ifndef _CUCKOOHASH_CONFIG_HH

@@ -1,3 +1,5 @@
+// Copyright (C) 2013, Carnegie Mellon University and Intel Corporation
+//  Licensed under the Apache License, Version 2.0 (the "License");
 /** \file */
 
 #ifndef _CUCKOOHASH_MAP_HH
@@ -47,7 +49,7 @@ namespace libcuckoo {
             class Allocator = std::allocator<std::pair<const Key, T>>,
             std::size_t SLOT_PER_BUCKET = DEFAULT_SLOT_PER_BUCKET>
     class cuckoohash_map {
-    private:
+    protected:
         // Type of the partial key
         using partial_t = uint8_t;
 
@@ -690,7 +692,7 @@ namespace libcuckoo {
 
         /**@}*/
 
-    private:
+    protected:
         // Constructor helpers
 
         void add_locks_from_other(const cuckoohash_map &other) {
@@ -831,7 +833,7 @@ namespace libcuckoo {
             bool &is_migrated() noexcept { return is_migrated_; }
             bool is_migrated() const noexcept { return is_migrated_; }
 
-        private:
+        protected:
             std::atomic_flag lock_;
             counter_type elem_counter_;
             bool is_migrated_;
@@ -879,7 +881,7 @@ namespace libcuckoo {
 
             size_type i1, i2;
 
-        private:
+        protected:
             LockManager first_manager_, second_manager_;
         };
 
@@ -1578,7 +1580,7 @@ namespace libcuckoo {
 
             bool full() const { return last_ == MAX_CUCKOO_COUNT; }
 
-        private:
+        protected:
             // The size of the BFS queue. It holds just enough elements to fulfill a
             // MAX_BFS_PATH_LEN search for two starting buckets, with no circular
             // wrapping-around. For one bucket, this is the geometric sum
@@ -2318,7 +2320,7 @@ namespace libcuckoo {
                     return old;
                 }
 
-            private:
+            protected:
                 iterator(buckets_t &buckets, size_type index, size_type slot) noexcept
                         : const_iterator(buckets, index, slot) {}
 
@@ -2658,7 +2660,7 @@ namespace libcuckoo {
 
             /**@}*/
 
-        private:
+        protected:
             // The constructor locks the entire table. We keep this constructor private
             // (but expose it to the cuckoohash_map class), since we don't want users
             // calling it. We also complete any remaining rehashing in the table, so

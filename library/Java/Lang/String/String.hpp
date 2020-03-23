@@ -105,12 +105,6 @@ namespace Java {
              */
             String();
 
-            /**
-             * Support null pointer initialization
-             * @param aNullptr
-             */
-            String(std::nullptr_t aNullptr);
-
 			/**
              * Initializes a newly created String object
              * so that it represents the same sequence of characters as the argument.
@@ -140,7 +134,7 @@ namespace Java {
              *
              * @param charArray
              */
-             String(const Array<char> &charArray);
+			String(const Array<char> &charArray);
 
 			/**
              * Allocates a new String that contains the sequence
@@ -243,8 +237,16 @@ namespace Java {
              *
              * @param original
              */
+            inline String(nullptr_t target) {
+            }
+
+            /**
+             * Construct a new String from specific string
+             *
+             * @param original
+             */
             inline String(string target) {
-               this->original = std::string(target);
+                this->original = std::string(target);
             }
 
             /**

@@ -39,7 +39,7 @@
 #include "Util/Collection/Collection.hpp"
 #include "Util/Collections/Collections.hpp"
 #include "Util/Comparator/Comparator.hpp"
-#include "Util/Concurrent/Semaphore/Semaphore.hpp"
+#include "Util/Concurrent/Concurrent.hpp"
 #include "Util/Currency/Currency.hpp"
 #include "Util/Date/Date.hpp"
 #include "Util/EnumMap/EnumMap.hpp"

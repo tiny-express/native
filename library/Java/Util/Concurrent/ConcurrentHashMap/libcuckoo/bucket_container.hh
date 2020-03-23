@@ -1,3 +1,6 @@
+// Copyright (C) 2013, Carnegie Mellon University and Intel Corporation
+//  Licensed under the Apache License, Version 2.0 (the "License");
+
 #ifndef BUCKET_CONTAINER_H
 #define BUCKET_CONTAINER_H
 

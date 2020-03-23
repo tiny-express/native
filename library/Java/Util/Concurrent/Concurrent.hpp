@@ -24,49 +24,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_HPP
-#define NATIVE_JAVA_UTIL_HPP
+#ifndef NATIVE_JAVA_UTIL_CONCURRENT_HPP
+#define NATIVE_JAVA_UTIL_CONCURRENT_HPP
 
-#include "Util/AbstractCollection/AbstractCollection.hpp"
-#include "Util/AbstractList/AbstractList.hpp"
-#include "Util/AbstractMap/AbstractMap.hpp"
-#include "Util/AbstractSet/AbstractSet.hpp"
-#include "Util/ArrayList/ArrayList.hpp"
-#include "Util/Arrays/Arrays.hpp"
-#include "Util/Base64/Base64.hpp"
-#include "Util/BitSet/BitSet.hpp"
-#include "Util/Calendar/Calendar.hpp"
-#include "Util/Collection/Collection.hpp"
-#include "Util/Collections/Collections.hpp"
-#include "Util/Comparator/Comparator.hpp"
-#include "Util/Concurrent/Semaphore/Semaphore.hpp"
-#include "Util/Currency/Currency.hpp"
-#include "Util/Date/Date.hpp"
-#include "Util/EnumMap/EnumMap.hpp"
-#include "Util/EnumSet/EnumSet.hpp"
-#include "Util/HashMap/HashMap.hpp"
-#include "Util/HashSet/HashSet.hpp"
-#include "Util/Iterator/Iterator.hpp"
-#include "Util/LinkedHashSet/LinkedHashSet.hpp"
-#include "Util/LinkedList/LinkedList.hpp"
-#include "Util/List/List.hpp"
-#include "Util/Map/Map.hpp"
-#include "Util/Observable/Observable.hpp"
-#include "Util/PriorityQueue/PriorityQueue.hpp"
-#include "Util/Queue/Queue.hpp"
-#include "Util/Random/Random.hpp"
-#include "Util/Scanner/Scanner.hpp"
-#include "Util/Set/Set.hpp"
-#include "Util/SimpleTimeZone/SimpleTimeZone.hpp"
-#include "Util/Spliterator/Spliterator.hpp"
-#include "Util/Stack/Stack.hpp"
-#include "Util/Timer/Timer.hpp"
-#include "Util/TimerTask/TimerTask.hpp"
-#include "Util/TimeZone/TimeZone.hpp"
-#include "Util/TreeSet/TreeSet.hpp"
-#include "Util/UUID/UUID.hpp"
-#include "Util/Vector/Vector.hpp"
+#include "ConcurrentHashMap/ConcurrentHashMap.hpp"
+#include "Semaphore/Semaphore.hpp"
 
-#include "Util/Function.hpp"
-
-#endif // NATIVE_JAVA_UTIL_HPP
+#endif // NATIVE_JAVA_UTIL_CONCURRENT_HPP
