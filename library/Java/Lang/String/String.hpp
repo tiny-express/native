@@ -897,11 +897,18 @@ namespace Java {
             String trim();
 
             /**
-            * Return C String
+            * Return C compatible string
             *
             * @return a String contain value of this String
             */
             string toCharPointer() const;
+
+            /**
+            * Return C++ compatible string
+            *
+            * @return a String contain value of this String
+            */
+            std::string toSTLString() const;
 
 			/**
              * Return a String a string contain value of this String

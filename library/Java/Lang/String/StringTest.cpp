@@ -904,9 +904,14 @@ TEST(JavaLangString, toCharPointer){
     int index;
     char* ptrToText = text.toCharPointer();
     for(index = 0; index < text.length() ; index++) {
-
         assertEquals(text[index], *(ptrToText + index));
     }
+}
+
+TEST(JavaLangString, toSTLString) {
+    String text = "Hello World";
+    std::string stlString  = text.toSTLString();
+    assertEquals(text, stlString);
 }
 
 TEST (JavaLangString, ToLowerCase) {

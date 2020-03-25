@@ -440,7 +440,11 @@ Array<char> String::toCharArray() const {
 }
 
 string String::toCharPointer() const {
-	return (char *) this->original.c_str();
+	return (char*) this->original.c_str();
+}
+
+std::string String::toSTLString() const {
+    return this->original;
 }
 
 String String::toString() const {
