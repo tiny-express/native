@@ -30,7 +30,7 @@
 using namespace Java::Lang;
 using namespace Java::Util::Concurrent;
 
-TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Constructor) {
+TEST (JavaUtilConcurrentConcurrentHashMap, Constructor) {
 	String expected;
 	String actual;
 
@@ -56,7 +56,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Constructor) {
 	assertEquals(hashMap.get("sample"), container.get("sample"));
 }
 
-TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Clear) {
+TEST (JavaUtilConcurrentConcurrentHashMap, Clear) {
 	// Given valid hashMap to test clear()
 	ConcurrentHashMap<Long, Integer> hashMap;
 	hashMap.put((long) 100, 25);
@@ -67,7 +67,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Clear) {
 	assertEquals(0, hashMap.size());
 }
 
-TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Clone) {
+TEST (JavaUtilConcurrentConcurrentHashMap, Clone) {
 //	String actualKey;
 //	String expected;
 //	String actual;
@@ -96,7 +96,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Clone) {
 //	assertTrue(actual.isEmpty());
 }
 
-TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, ContainsKey) {
+TEST (JavaUtilConcurrentConcurrentHashMap, ContainsKey) {
 	boolean actual;
 
 	// Create a ConcurrentHashMap to test
@@ -114,24 +114,24 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, ContainsKey) {
 	assertFalse(actual);
 }
 
-TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, ContainsValue) {
-//	boolean actual;
-//
-//	// Create a ConcurrentHashMap to test
-//	ConcurrentHashMap<String, Double> hashMap;
-//	hashMap.put("15.3", 15.3);
-//	hashMap.put("30.111", 30.111);
-//
-//	// Valid key
-//	actual = hashMap.containsValue(15.3);
-//	assertTrue(actual);
-//
-//	// Invalid key
-//	actual = hashMap.containsValue(30.22);
-//	assertFalse(actual);
+TEST (JavaUtilConcurrentConcurrentHashMap, ContainsValue) {
+	boolean actual;
+
+	// Create a ConcurrentHashMap to test
+	ConcurrentHashMap<String, Double> hashMap;
+	hashMap.put("15.3", 15.3);
+	hashMap.put("30.111", 30.111);
+
+	// Valid key
+	actual = hashMap.containsValue(15.3);
+	assertTrue(actual);
+
+	// Invalid key
+	actual = hashMap.containsValue(30.22);
+	assertFalse(actual);
 }
 
-TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, EntrySet) {
+TEST (JavaUtilConcurrentConcurrentHashMap, EntrySet) {
 //	ConcurrentHashMap<String, String> hashMap;
 //	int index = 1;
 //	for (index; index <= 100; index++) {
@@ -158,35 +158,35 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, EntrySet) {
 //	}
 }
 
-TEST(JavaUtilConcurrentConcurrentConcurrentHashMap, ForEach) {
-//    ConcurrentHashMap<String, String> hashMap;
-//    int index = 1;
-//    for (index; index <= 100; index++) {
-//        hashMap.put("Key " + String::valueOf(index),
-//                    "Value " + String::valueOf(index));
-//    }
-//    int counter = 0;
-//    hashMap.forEach([&counter](String, String) {
-//        counter += 1;
-//        return true;
-//    });
-//
-//    // Make sure foreach is working
-//    assertEquals(100, counter);
-//
-//    ConcurrentHashMap<String, String *> hashMapStringPointer;
-//    hashMapStringPointer.put("test1", new String("test1"));
-//    hashMapStringPointer.put("test2", new String("test1"));
-//    hashMapStringPointer.put("test3", new String("test1"));
-//    hashMapStringPointer.forEach([&counter](String key, String *value) {
-//        assertEquals("test1", value->toString());
-//        String *stringValue = value;
-//        delete stringValue;
-//        return true;
-//    });
+TEST(JavaUtilConcurrentConcurrentHashMap, ForEach) {
+    ConcurrentHashMap<String, String> hashMap;
+    int index = 1;
+    for (index; index <= 100; index++) {
+        hashMap.put("Key " + String::valueOf(index),
+                    "Value " + String::valueOf(index));
+    }
+    int counter = 0;
+    hashMap.forEach([&counter](String, String) {
+        counter += 1;
+        return true;
+    });
+
+    // Make sure foreach is working
+    assertEquals(100, counter);
+
+    ConcurrentHashMap<String, String *> hashMapStringPointer;
+    hashMapStringPointer.put("test1", new String("test1"));
+    hashMapStringPointer.put("test2", new String("test1"));
+    hashMapStringPointer.put("test3", new String("test1"));
+    hashMapStringPointer.forEach([&counter](String key, String *value) {
+        assertEquals("test1", value->toString());
+        String *stringValue = value;
+        delete stringValue;
+        return true;
+    });
 }
 
-TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Get) {
+TEST (JavaUtilConcurrentConcurrentHashMap, Get) {
 	String expected;
 	String actual;
 
@@ -204,7 +204,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Get) {
 	assertTrue(actual.isEmpty());
 }
 
-TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, IsEmpty) {
+TEST (JavaUtilConcurrentConcurrentHashMap, IsEmpty) {
 	// Create a ConcurrentHashMap to test
 	ConcurrentHashMap<String, Float> hashMap;
 
@@ -217,7 +217,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, IsEmpty) {
 	assertFalse(hashMap.isEmpty());
 }
 
-TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
+TEST (JavaUtilConcurrentConcurrentHashMap, Put) {
 	String expected;
 	String actual;
 
@@ -241,7 +241,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 	assertEquals(expected.toString(), actual.toString());
 }
 //
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, PutAll) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, PutAll) {
 //	// Create a ConcurrentHashMap to test
 //	ConcurrentHashMap<String, String> hashMap;
 //	hashMap.put("some string", "Value of Key1");
@@ -279,7 +279,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //	assertTrue(actual.isEmpty());
 //}
 //
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, PutIfAbsent) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, PutIfAbsent) {
 //	String actualKey;
 //	String expected;
 //	String actual;
@@ -313,7 +313,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //	assertEquals(expected.toString(), actual.toString());
 //}
 //
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, RemoveKey) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, RemoveKey) {
 //	// Create a ConcurrentHashMap to test
 //	ConcurrentHashMap<String, String> hashMap;
 //	hashMap.put("Key1", "!@#!@#");
@@ -345,7 +345,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //    assertEquals(expected, isSucceedRemove);
 //}
 //
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, RemoveKeyValue) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, RemoveKeyValue) {
 //	// Create a ConcurrentHashMap to test
 //	ConcurrentHashMap<String, String> hashMap;
 //	hashMap.put("Key1", "Value of Key1");
@@ -368,7 +368,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //	assertTrue(isSucceedRemove);
 //}
 //
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, ReplaceKeyValue) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, ReplaceKeyValue) {
 //	// Create a ConcurrentHashMap to test to test
 //	ConcurrentHashMap<String, String> hashMap;
 //	hashMap.put("Key1", "value");
@@ -399,7 +399,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //
 //}
 ////
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, ReplaceKeyOldValueNewValue) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, ReplaceKeyOldValueNewValue) {
 //	// Create a ConcurrentHashMap to test to test
 //	ConcurrentHashMap<String, String> hashMap;
 //	hashMap.put("Key1", "Value of Key1");
@@ -439,7 +439,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //	assertEquals(oldValue.toString(), actual.toString());
 //}
 //
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Size) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, Size) {
 //	// Create a ConcurrentHashMap to test
 //	ConcurrentHashMap<Double, String> hashMap;
 //	hashMap.put(15.22222, "15.22222");
@@ -453,7 +453,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //	assertEquals(3, hashMap.size());
 //}
 //
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Equals) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, Equals) {
 //	// Create a ConcurrentHashMap
 //	ConcurrentHashMap<String, String> hashMap;
 //	hashMap.put("Key1", "Value of Key1");
@@ -487,7 +487,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //	assertFalse(hashMap.equals(differentSizeConcurrentHashMap));
 //}
 //
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, ToString) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, ToString) {
 //	// Given some valid key/value to test toString()
 //	ConcurrentHashMap<String, String> hashMap;
 //	hashMap.put("key1", "value1");
@@ -521,7 +521,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //	assertEquals(expected, hashMapOfConcurrentHashMap.toString());
 //}
 //
-//TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Reinitialize) {
+//TEST (JavaUtilConcurrentConcurrentHashMap, Reinitialize) {
 //	// Create a ConcurrentHashMap
 //	ConcurrentHashMap<String, String> hashMap;
 //	hashMap.put("Key1", "Value of Key1");
@@ -536,7 +536,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //	assertEquals("{}", hashMap.toString());
 //}
 //
-//TEST(JavaUtilConcurrentConcurrentConcurrentHashMap, ReplaceAll) {
+//TEST(JavaUtilConcurrentConcurrentHashMap, ReplaceAll) {
 //    /* Test ConcurrentHashMap<String, Integer> */
 //        // Create a ConcurrentHashMap
 //    ConcurrentHashMap<String, Integer> hashMap;
@@ -576,7 +576,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //    assertEquals("2 New value", anotherConcurrentHashMap.get("key2").toString());
 //}
 
-//TEST(JavaUtilConcurrentConcurrentConcurrentHashMap, Merge) {
+//TEST(JavaUtilConcurrentConcurrentHashMap, Merge) {
 //    /* Test ConcurrentHashMap<String, Integer> */
 //        // Create a ConcurrentHashMap
 //    ConcurrentHashMap<String, Integer> hashMap;
@@ -644,7 +644,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //    assertEquals("", resultMergeNonExistentKeyAnotherConcurrentHashMap.toString());
 //}
 //
-//TEST(JavaUtilConcurrentConcurrentConcurrentHashMap, Compute) {
+//TEST(JavaUtilConcurrentConcurrentHashMap, Compute) {
 //	/* Test ConcurrentHashMap<String, Integer> */
 //	    // Create a ConcurrentHashMap
 //	ConcurrentHashMap<String, Integer> hashMap;
@@ -731,7 +731,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //    assertEquals("", resultComputeKey1AnotherConcurrentHashMapNullFunction.toString());
 //}
 //
-//TEST(JavaUtilConcurrentConcurrentConcurrentHashMap, ComputeIfAbsent) {
+//TEST(JavaUtilConcurrentConcurrentHashMap, ComputeIfAbsent) {
 //    /* Test ConcurrentHashMap<String, Integer> */
 //        // Create a ConcurrentHashMap
 //    ConcurrentHashMap<String, Integer> hashMap;
@@ -781,7 +781,7 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //    assertEquals(10, resultComputeIfAbsentDefaultValueConcurrentHashMap.intValue());
 //}
 //
-//TEST(JavaUtilConcurrentConcurrentConcurrentHashMap, ComputeIfPresent) {
+//TEST(JavaUtilConcurrentConcurrentHashMap, ComputeIfPresent) {
 //    /* Test ConcurrentHashMap<String, Integer> */
 //        // Create a ConcurrentHashMap
 //    ConcurrentHashMap<String, Integer> hashMap;
@@ -844,21 +844,4 @@ TEST (JavaUtilConcurrentConcurrentConcurrentHashMap, Put) {
 //    assertEquals(0, hashMap.get("key3").intValue());
 //    assertEquals(2, hashMap.size());
 //    assertEquals(0, resultComputeIfPresentDefaultValueConcurrentHashMap.intValue());
-//}
-//
-//TEST(JavaUtilConcurrentConcurrentConcurrentHashMap, ForEach) {
-//    /* Test ConcurrentHashMap<String, Integer> */
-//        // Create a ConcurrentHashMap
-//    ConcurrentHashMap<String, Integer> hashMap;
-//    hashMap.put("key1", 1);
-//    hashMap.put("key2", 2);
-//    Integer result;
-//
-//        // Create function
-//    std::function<void(String, Integer)> function = [] (String key, Integer value) {
-//            printf("TEST(JavaUtilConcurrentConcurrentConcurrentHashMap, ForEach) is OK");
-//    };
-//
-//        // foreach
-//    hashMap.forEach(function);
 //}

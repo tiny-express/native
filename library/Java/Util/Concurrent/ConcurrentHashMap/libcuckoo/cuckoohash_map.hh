@@ -678,7 +678,7 @@ namespace libcuckoo {
          * Removes all elements in the table, calling their destructors.
          */
         void clear() {
-            auto all_locks_manager = lock_all(normal_mode());
+            lock_all(normal_mode());
             cuckoo_clear();
         }
 

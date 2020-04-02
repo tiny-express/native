@@ -33,9 +33,6 @@
 #include "../../LinkedList/LinkedList.hpp"
 
 using namespace Java::Lang;
-using namespace libcuckoo;
-
-#define InternalHashMap cuckoohash_map<K, V>
 
 namespace Java {
     namespace Util {
@@ -46,12 +43,12 @@ namespace Java {
                     public AbstractMap,
                     public virtual Map<K, V>,
                     public virtual Cloneable,
-                    public virtual Serializable,
-                    public InternalHashMap {
+                    public virtual Serializable {
 
             private:
-                typedef typename InternalHashMap::locked_table::iterator IteratorType;
-                typedef typename InternalHashMap::locked_table::const_iterator ConstIteratorType;
+                libcuckoo::cuckoohash_map<K, V> original;
+                typedef typename libcuckoo::cuckoohash_map<K, V>::locked_table::iterator IteratorType;
+                typedef typename libcuckoo::cuckoohash_map<K, V>::locked_table::const_iterator ConstIteratorType;
 
             public:
                 /**
@@ -67,7 +64,7 @@ namespace Java {
                  * 					are to be placed in this map
                  */
                 ConcurrentHashMap(const ConcurrentHashMap <K, V> &target) {
-                    InternalHashMap::operator=(target);
+                    original = target.original;
                 }
 
                 /**
@@ -75,35 +72,15 @@ namespace Java {
                  */
                 ~ConcurrentHashMap() = default;
 
-                /**
-                 * @return begin iterator of this object
-                 */
-                IteratorType begin() {
-                    return InternalHashMap::lock_table().begin();
-                }
-
-                /**
-                 * @return const begin iterator of this object
-                 */
-                ConstIteratorType begin() const {
-                    return InternalHashMap::lock_table().cbegin();
-                }
-
-                /**
-                 * @return end iterator of this object
-                 */
-                IteratorType end() {
-                    return InternalHashMap::lock_table().end();
-                }
-
-                /**
-                 * @return const end iterator of this object
-                 */
-                ConstIteratorType end() const {
-                     return InternalHashMap::lock_table().cend();
-                }
-
             public:
+                IteratorType begin() {
+                    return original.lock_table().begin();
+                }
+
+                IteratorType end() {
+                    return original.lock_table().end();
+                }
+
                 /**
                  * Compares the anotherHashMap
                  * with this map for equality.
@@ -113,7 +90,7 @@ namespace Java {
                  *          false if not equal
                  */
                 boolean equals(const ConcurrentHashMap <K, V> &anotherHashMap) {
-                    if (InternalHashMap::size() != anotherHashMap.size()) {
+                    if (original.size() != anotherHashMap.size()) {
                         return false;
                     }
                     for (var const &thisElement : this) {
@@ -130,7 +107,7 @@ namespace Java {
                  * Called by clone and readObject.
                  */
                 void reinitialize() {
-                    InternalHashMap::clear();
+                    original.clear();
                 }
 
                 /**
@@ -138,7 +115,7 @@ namespace Java {
                  * The map will be empty after this call returns.
                  */
                 void clear() {
-                    InternalHashMap::clear();
+                    original.clear();
                 }
 
                 /***
@@ -279,7 +256,7 @@ namespace Java {
                  */
                 boolean containsKey(const K &key) const {
                     try {
-                        InternalHashMap::find(key);
+                        original.find(key);
                         return true;
                     } catch (std::out_of_range &e) {
                         return false;
@@ -294,13 +271,16 @@ namespace Java {
                  * @return 	true  		if this map maps one or more keys to the specified value
                  *  		false 		otherwise
                  */
-                boolean containsValue(const V &value) const {
-//                    for (auto pair : *this) {
-//                        if (pair.second == value) {
-//                            return true;
-//                        }
-//                    }
-                    return false;
+                boolean containsValue(const V &value) {
+                    boolean contain = false;
+                    forEach([value, &contain](K key, V val) {
+                        if (value == val) {
+                            contain = true;
+                            return false;
+                       }
+                        return true;
+                    });
+                    return contain;
                 }
 
                 /**
@@ -325,17 +305,21 @@ namespace Java {
                  *
                  * @param action
                  */
-//                void forEach(const std::function<boolean(K, V)> &action) const {
-//                    for (auto &pair : this->original) {
-//                        if (!action(pair.first, pair.second)) {
-//                            break;
-//                        }
-//                    }
-//                }
+                void forEach(const std::function<boolean(K, V)> &action) {
+                    var lockTable = original.lock_table();
+                    auto it = lockTable.begin();
+                    var tableSize = lockTable.size();
+                    for (size_t i = 0; i < tableSize; ++i) {
+                        if (!action((*it).first, (*it).second)) {
+                            break;
+                        }
+                        it++;
+                    }
+                }
 
                 boolean find(const K &key) const {
                     try {
-                        InternalHashMap::find(key);
+                        original.find(key);
                         return true;
                     } catch (std::out_of_range &exception) {
                         return false;
@@ -353,7 +337,7 @@ namespace Java {
                  */
                 V get(const K &key) const {
                     try {
-                        var value = InternalHashMap::find(key);
+                        var value = original.find(key);
                         return value;
                     } catch (std::out_of_range &exception) {
                         V v;
@@ -375,7 +359,7 @@ namespace Java {
                  */
                 V getOrDefault(const K &key, const V &defaultValue) const {
                     try {
-                        return InternalHashMap::find(key);
+                        return original.find(key);
                     } catch (std::out_of_range &e) {
                         return defaultValue;
                     }
@@ -399,7 +383,7 @@ namespace Java {
                  * @param value
                  */
                 void put(const K &key, const V &value) {
-                    InternalHashMap::insert_or_assign(key, value);
+                    original.insert_or_assign(key, value);
                 }
 
                 /**
@@ -418,7 +402,7 @@ namespace Java {
                  */
                 V putIfAbsent(const K &key, const V &value) {
                     try {
-                        value = InternalHashMap::find(key);
+                        value = original.find(key);
                     } catch (std::out_of_range &e) {
                         this->put(key, value);
                     }
@@ -438,8 +422,8 @@ namespace Java {
                 V remove(const K &key) {
                     V v;
                     try {
-                        v = InternalHashMap::find(key);
-                        InternalHashMap::erase(key);
+                        v = original.find(key);
+                        original.erase(key);
                     } catch (std::out_of_range &e) {
                         // Nothing to do
                     }
@@ -458,9 +442,9 @@ namespace Java {
                  */
                 boolean remove(const K &key, const V &value) {
                     try {
-                        var v = InternalHashMap::find(key);
+                        var v = original.find(key);
                         if (v == value) {
-                            InternalHashMap::erase(key);
+                            original.erase(key);
                             return true;
                         }
                     } catch (std::out_of_range &e) {
@@ -484,15 +468,12 @@ namespace Java {
                  */
                 V replace(const K &key, const V &value) {
                     V result;
-                    auto const iteratorToString = InternalHashMap::find(key);
-
+                    auto const iteratorToString = original.find(key);
                     if (iteratorToString == this->end()) {
                         return result;
                     }
-
                     result = iteratorToString->second;
                     this->put(key, value);
-
                     return result;
                 }
 
@@ -512,15 +493,12 @@ namespace Java {
                                 const V &oldValue,
                                 const V &newValue) {
                     V result;
-                    auto const iteratorToString = InternalHashMap::find(key);
-
+                    auto const iteratorToString = original.find(key);
                     if (iteratorToString == this->end()
                         || iteratorToString->second != oldValue) {
                         return false;
                     }
-
                     this->put(key, newValue);
-
                     return true;
                 }
 
@@ -530,7 +508,7 @@ namespace Java {
                  * @return int
                  */
                 long size() const {
-                    return InternalHashMap::size();
+                    return original.size();
                 }
             };
         } // namespace Concurrent
