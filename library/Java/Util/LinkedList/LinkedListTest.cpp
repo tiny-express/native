@@ -216,7 +216,6 @@ TEST (JavaUtilLinkedList, ForRange) {
     }
 }
 
-
 TEST (JavaUtilLinkedList, Size) {
 	// Given empty linked list - Return size of list is zero
 	LinkedList<Integer> linkedList;
@@ -226,4 +225,19 @@ TEST (JavaUtilLinkedList, Size) {
 	linkedList.add(25);
 	linkedList.add(25);
 	assertEquals(2, linkedList.size());
+}
+
+TEST (JavaUtilLinkedList, PushPop) {
+    LinkedList<int> linkedList;
+
+    linkedList.push(2);
+    linkedList.push(3);
+    linkedList.push(4);
+    linkedList.push(5);
+
+    assertEquals(4, linkedList.size());
+    assertEquals(2, linkedList.pop());
+    assertEquals(3, linkedList.pop());
+    assertEquals(4, linkedList.pop());
+    assertEquals(5, linkedList.pop());
 }

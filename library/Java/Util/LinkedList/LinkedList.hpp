@@ -31,7 +31,7 @@
 #include "../AbstractSequentialList/AbstractSequentialList.hpp"
 #include "../Collection/Collection.hpp"
 #include "../Deque/Deque.hpp"
-#include "../List/List.hpp"
+#include "../ArrayList/ArrayList.hpp"
 #include "../Queue/Queue.hpp"
 #include "../../Lang/Exception/Exception.hpp"
 #include "../../Lang/IndexOutOfBoundsException/IndexOutOfBoundsException.hpp"
@@ -310,7 +310,7 @@ namespace Java {
                      * @param element
                      */
                     void push(const E &element) {
-                        this->original.push_back(element);
+                        this->original.push_back(new Node<E>(element));
                     }
 
                     /**
