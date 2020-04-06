@@ -32,16 +32,16 @@
 
 using namespace Java::Security;
 
-MessageDigest MessageDigest::getInstance(String algorithm) {
+MessageDigest MessageDigest::getInstance(const String &algorithm) {
     if (algorithm == "MD5") {
         MessageDigestSpi* spi = new MD5MessageDigest();
         return MessageDigest(spi, algorithm);
-    } else if (algorithm == "SHA1") {
+    }
+    if (algorithm == "SHA1") {
         MessageDigestSpi* spi = new SHA1MessageDigest();
         return MessageDigest(spi, algorithm);
-    } else {
-        throw NoSuchAlgorithmException(algorithm + (string) " not found");
     }
+    throw NoSuchAlgorithmException(algorithm + (string) " not found");
 }
 
 MessageDigest::~MessageDigest() {
@@ -59,10 +59,12 @@ int MessageDigest::getDigestLength() {
 }
 
 int MessageDigest::digest(byte buf[], int len) {
-    if (buf == nullptr)
+    if (buf == nullptr) {
         throw InterruptedException("No output buffer given");
-    if (len < engineGetDigestLength())
+    }
+    if (len < engineGetDigestLength()) {
         throw InterruptedException("Output buffer too small");
+    }
     return engineDigest(buf, len);
 }
 
@@ -71,12 +73,14 @@ void MessageDigest::reset() {
 }
 
 void MessageDigest::update(const byte input[], int len) {
-    if (input == nullptr || len == 0)
+    if (input == nullptr || len == 0) {
         throw InterruptedException("No input buffer given");
+    }
     engineUpdate(input, len);
+    throw NoSuchAlgorithmException(algorithm + (string) " not found");
 }
 
-MessageDigest::MessageDigest(MessageDigestSpi *spi, String algorithm) {
+MessageDigest::MessageDigest(MessageDigestSpi *spi, const String &algorithm) {
     this->spi = spi;
     this->algorithm = algorithm;
 }

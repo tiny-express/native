@@ -36,7 +36,7 @@ namespace Java {
     namespace Security {
         class MessageDigest : public MessageDigestSpi {
         public:
-            static MessageDigest getInstance(String algorithm);
+            static MessageDigest getInstance(const String &algorithm);
 
             ~MessageDigest();
 
@@ -54,7 +54,7 @@ namespace Java {
             MessageDigestSpi* spi;
             String algorithm;
 
-            MessageDigest(MessageDigestSpi* spi, String algorithm);
+            MessageDigest(MessageDigestSpi* spi, const String &algorithm);
 
             int engineDigest(byte buffer[], int len) override;
 

@@ -28,7 +28,6 @@
 #define NATIVE_TYPE_HPP
 
 #define DO_NOT_FOUND -1
-#define MAX_STRING_LENGTH 100000
 
 #ifdef WIN
 #define boolean bool
