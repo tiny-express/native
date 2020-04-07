@@ -227,17 +227,46 @@ TEST (JavaUtilLinkedList, Size) {
 	assertEquals(2, linkedList.size());
 }
 
-TEST (JavaUtilLinkedList, PushPop) {
+TEST (JavaUtilLinkedList, FIFOPushPop) {
     LinkedList<int> linkedList;
+    linkedList.add(2);
+    linkedList.add(3);
+    linkedList.add(4);
+    linkedList.add(5);
 
-    linkedList.push(2);
-    linkedList.push(3);
-    linkedList.push(4);
-    linkedList.push(5);
-
-    assertEquals(4, linkedList.size());
+    linkedList.push(1);
+    linkedList.push(0);
+    assertEquals(6, linkedList.size());
+    assertEquals(0, linkedList.pop());
+    assertEquals(1, linkedList.pop());
     assertEquals(2, linkedList.pop());
     assertEquals(3, linkedList.pop());
-    assertEquals(4, linkedList.pop());
-    assertEquals(5, linkedList.pop());
+    assertEquals(2, linkedList.size());
+}
+
+TEST (JavaUtilLinkedList, FILOPollFirstPollLast) {
+    LinkedList<int> linkedList;
+
+    linkedList.add(2);
+    linkedList.add(3);
+    linkedList.add(4);
+    linkedList.add(5);
+
+    assertEquals(4, linkedList.size());
+    {
+        assertEquals(2, linkedList.poll());
+        assertEquals(3, linkedList.size());
+    }
+    {
+        assertEquals(3, linkedList.poll());
+        assertEquals(2, linkedList.size());
+    }
+    {
+        assertEquals(4, linkedList.poll());
+        assertEquals(1, linkedList.size());
+    }
+    {
+        assertEquals(5, linkedList.poll());
+        assertEquals(0, linkedList.size());
+    }
 }

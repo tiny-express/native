@@ -310,7 +310,7 @@ namespace Java {
                      * @param element
                      */
                     void push(const E &element) {
-                        this->original.push_back(new Node<E>(element));
+                        this->original.push_front(new Node<E>(element));
                     }
 
                     /**

@@ -44,10 +44,9 @@ TEST(JavaSecurity, Constructor) {
         String result;
         try {
             MessageDigest md = MessageDigest::getInstance("MDx");
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException &e) {
             result = e.getMessage();
         }
-
         assertEquals(expect.toString(), result.toString());
     }
 }

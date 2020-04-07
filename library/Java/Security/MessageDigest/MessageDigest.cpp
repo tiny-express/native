@@ -77,7 +77,6 @@ void MessageDigest::update(const byte input[], int len) {
         throw InterruptedException("No input buffer given");
     }
     engineUpdate(input, len);
-    throw NoSuchAlgorithmException(algorithm + (string) " not found");
 }
 
 MessageDigest::MessageDigest(MessageDigestSpi *spi, const String &algorithm) {
