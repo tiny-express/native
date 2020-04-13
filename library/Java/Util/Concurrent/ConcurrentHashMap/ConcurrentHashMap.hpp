@@ -24,8 +24,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef NATIVE_JAVA_UTIL_CONCURRENT_CONCURRENT_HASH_MAP_CONCURRENT_HASH_MAP_HPP
-#define NATIVE_JAVA_UTIL_CONCURRENT_CONCURRENT_HASH_MAP_CONCURRENT_HASH_MAP_HPP
+#ifndef NATIVE_JAVA_UTIL_CONCURRENT_CONCURRENT_HASH_MAP_HPP
+#define NATIVE_JAVA_UTIL_CONCURRENT_CONCURRENT_HASH_MAP_HPP
 
 #include "../../../Lang/String/String.hpp"
 #include "../../HashMap/HashMap.hpp"
@@ -40,7 +40,7 @@ namespace Java {
 
             template<class K, class V>
             class ConcurrentHashMap :
-                    public AbstractMap,
+                    public virtual AbstractMap,
                     public virtual Map<K, V>,
                     public virtual Cloneable,
                     public virtual Serializable {
@@ -515,4 +515,4 @@ namespace Java {
     } // namespace Util
 } // namespace Java
 
-#endif // NATIVE_JAVA_UTIL_CONCURRENT_CONCURRENT_HASH_MAP_CONCURRENT_HASH_MAP_HPP
+#endif // NATIVE_JAVA_UTIL_CONCURRENT_CONCURRENT_HASH_MAP_HPP

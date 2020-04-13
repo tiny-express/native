@@ -48,14 +48,14 @@ namespace Java {
 						 * @param e
 						 * @return boolean
 						 */
-						virtual boolean add(E &element) = 0;
+						virtual boolean add(const E &element) = 0;
 						
 						/**
 						 * Add a Collection element to this collection
 						 * @param c
 						 * @return boealn
 						 */
-//			virtual boolean addAll(Collection<E> &c) = 0;//FIXME: should to implement foreach first
+			            // virtual boolean addAll(Collection<E> &c) = 0;
 						
 						/**
 						 * Clear all element inside this collection
@@ -68,7 +68,7 @@ namespace Java {
 						 * @param o
 						 * @return boolean
 						 */
-						virtual boolean contains(E &element) = 0;
+						virtual boolean contains(const E &element) = 0;
 						
 						/**
 						 * Search for a Collection of object, return true if all element inside <c> occurs inside this collection
@@ -82,7 +82,7 @@ namespace Java {
 						 * @param o
 						 * @return boolean
 						 */
-						virtual boolean equals(const Object &object) = 0;
+						virtual boolean equals(const E &object) = 0;
 						
 						/**
 						 * Make a hashcode through this virtual address on memory

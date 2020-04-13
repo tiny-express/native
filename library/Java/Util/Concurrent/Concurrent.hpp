@@ -27,7 +27,9 @@
 #ifndef NATIVE_JAVA_UTIL_CONCURRENT_HPP
 #define NATIVE_JAVA_UTIL_CONCURRENT_HPP
 
+#include "ConcurrentLinkedQueue/ConcurrentLinkedQueue.hpp"
 #include "ConcurrentHashMap/ConcurrentHashMap.hpp"
+#include "LinkedBlockingQueue/LinkedBlockingQueue.hpp"
 #include "Semaphore/Semaphore.hpp"
 
 #endif // NATIVE_JAVA_UTIL_CONCURRENT_HPP

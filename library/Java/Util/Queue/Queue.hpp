@@ -30,25 +30,57 @@
 #include "../../Lang.hpp"
 #include "../Collection/Collection.hpp"
 
-using namespace Java::Util;
-
 namespace Java {
 		namespace Util {
-				
 				template <typename E>
 				class Queue : public Collection<E> {
-				private:
-						Queue();
-						~Queue();
-				
 				protected:
-						virtual boolean add(E &e) = 0; ///Inserts the specified element into this queue
-						virtual boolean offer(E &e) = 0; ///Inserts the specified element into this queue
-						virtual E peek() const = 0; ///Retrieves, but does not remove, the head of this queue, or returns nullptr if this queue is empty.
-						virtual E poll() = 0; ///Retrieves and removes the head of this queue, or returns nullptr if this queue is empty.
-						virtual E remove() = 0; ///Retrieves and removes the head of this queue
+				        /**
+				         *  Inserts the specified element into this queue if it is possible to do
+				         *  so immediately without violating capacity restrictions,
+				         *  returning true upon success and throwing an IllegalStateException
+				         *  if no space is currently available.
+				         * @param e
+				         * @return  boolean
+				         */
+						virtual boolean add(const E &e) = 0;
+
+						/**
+						 * Retrieves, but does not remove, the head of this queue.
+						 * @return E
+						 */
+						virtual E element()  = 0;
+
+						/**
+						 * Inserts the specified element into this queue i
+						 * f it is possible to do so immediately without violating capacity restrictions.
+						 *
+						 * @param e
+						 * @return boolean
+						 */
+						virtual boolean offer(const E &e) = 0;
+
+						/**
+						 * Retrieves, but does not remove, the head of this queue,
+						 * or throw exception if this queue is empty.
+						 * @return  E
+						 */
+						virtual E peek() const = 0;
+
+						/**
+						 * Retrieves and removes the head of this queue, or
+						 * throw exception if this queue is empty.
+						 * @return  E
+						 */
+						virtual E poll() = 0;
+
+						/**
+						 * Retrieves and removes the head of this queue
+						 * @return E
+						 */
+						virtual E remove() = 0;
 				};
-		}
-}
+		} // namespace Util
+} // namespace Java
 
 #endif // NATIVE_JAVA_UTIL_QUEUE_HPP
