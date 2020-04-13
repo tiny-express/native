@@ -30,7 +30,7 @@
 #include "../../../Util/Collection/Collection.hpp"
 #include "../../../Lang/Iterable/Iterable.hpp"
 #include "../../Queue/Queue.hpp"
-#include "concurrentqueue.h"
+#include "concurrentqueue.hpp"
 
 using namespace Java::Lang;
 

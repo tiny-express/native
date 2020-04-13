@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "../ConcurrentLinkedQueue/concurrentqueue.h"
-#include "lightweightsemaphore.h"
+#include "../ConcurrentLinkedQueue/concurrentqueue.hpp"
+#include "lightweightsemaphore.hpp"
 
 #include <type_traits>
 #include <cerrno>
