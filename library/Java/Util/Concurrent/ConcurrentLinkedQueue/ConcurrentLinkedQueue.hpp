@@ -75,7 +75,7 @@ namespace Java {
                 }
 
                 E remove() {
-                    return true;
+                    throw UnsupportedOperationException();
                 }
 
                 void clear() {
