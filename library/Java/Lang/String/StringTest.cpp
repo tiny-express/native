@@ -137,6 +137,10 @@ TEST (JavaLangString, Constructor) {
     stringBuilder.append((String) "builder");
     String stringFromBuilder = String(stringBuilder);
     assertEquals("teststringbuilder", stringFromBuilder);
+
+    // Given a string with specific length
+    String stringWithSpecificLength("hello", 5);
+    assertEquals(5, stringWithSpecificLength.length());
 }
 
 TEST (JavaLangString, NullPointer) {
@@ -547,9 +551,9 @@ TEST (JavaLangString, LastIndexOf) {
         result = validString.lastIndexOf(subString);
         assertEquals(28, result);
 
-        // Test false with wrong subString
+        // Test false with wrong subString then return not found
         result = validString.lastIndexOf(wrongString);
-        assertEquals(DO_NOT_FOUND, result);
+        assertEquals(-1, result);
     }
 
     {

@@ -64,6 +64,10 @@ String::String(string original, int length) {
 	this->original = std::string(original, original + (size_t) length);
 }
 
+String::String(const_string original, int length) {
+    this->original = std::string(original, original + (size_t) length);
+}
+
 String::String(const Array<char> &charArray) {
 	this->original.clear();
 	this->original.shrink_to_fit();
@@ -223,15 +227,13 @@ int String::indexOf(int character) const {
 		result[0] = target;
 		result[1] = '\0';
 		pointerHolder = result;
-
 	}
 	std::size_t found = this->original.find(pointerHolder);
 	free(pointerHolder);
 	if (found != std::string::npos) {
 		return (int) found;
-	} else {
-		return DO_NOT_FOUND;
 	}
+	return -1;
 }
 
 int String::indexOf(int character, int fromIndex) const {
@@ -258,9 +260,8 @@ int String::indexOf(const String &subString) const {
 	std::size_t found = this->original.find(subString.original);
 	if (found != std::string::npos) {
 		return (int) found;
-	} else {
-		return -1;
 	}
+	return -1;
 }
 
 int String::indexOf(const String &subString, int fromIndex) const {
@@ -277,9 +278,8 @@ int String::indexOf(const String &subString, int fromIndex) const {
 	std::size_t found = stringFromIndex.find(subString.original);
 	if (found != std::string::npos) {
 		return (int) (found + fromIndex);
-	} else {
-		return -1;
 	}
+	return -1;
 }
 
 boolean String::isEmpty() const {
@@ -320,7 +320,7 @@ int String::lastIndexOf(const String &subString) const {
 	std::reverse(currentReversedString.begin(), currentReversedString.end());
 	std::size_t found = currentReversedString.find(reversedString.original);
 	if (found == std::string::npos) {
-		return DO_NOT_FOUND;
+		return -1;
 	}
 	return ((int) this->original.size() - (int) (found + subString.original.size()));
 }
@@ -343,7 +343,7 @@ int String::lastIndexOf(const String &subString, int fromIndex) const {
 	std::string reversedString = subString.toCharPointer();
 	std::reverse(reversedString.begin(), reversedString.end());
 	auto result = (int) subStringFromIndex.find(reversedString);
-	if (result == DO_NOT_FOUND) {
+	if (result == -1) {
 		return result;
 	}
 

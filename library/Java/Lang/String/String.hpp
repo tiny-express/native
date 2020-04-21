@@ -275,6 +275,14 @@ namespace Java {
              */
             String(string target, int length);
 
+            /**
+             * Construct a new String from char array with specific length
+             *
+             * @param original
+             * @param length
+             */
+            String(const_string target, int length);
+
 			/**
              * Destructor
              */
