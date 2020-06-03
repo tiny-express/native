@@ -514,6 +514,11 @@ String String::valueOf(long longValue) {
 	return result;
 }
 
+String String::valueOf(long long longValue) {
+    String result = std::to_string(longValue);
+    return result;
+}
+
 String String::valueOf(float floatValue) {
 	string pointerHolder;
 	asprintf(&pointerHolder, "%g", floatValue);
@@ -729,6 +734,16 @@ String String::print(const String &format, long value) {
 		result = String(buffer, length);
 	}
 	return result;
+}
+
+String String::print(const String &format, long long value) {
+    String result;
+    char buffer[DEFAULT_BUFFER_LENGTH] = {0};
+    const int length = snprintf(buffer, sizeof(buffer), format.toCharPointer(), value);
+    if (length > 0) {
+        result = String(buffer, length);
+    }
+    return result;
 }
 
 String String::print(const String &format, unsigned short value) {

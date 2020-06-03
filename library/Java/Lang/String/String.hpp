@@ -991,6 +991,14 @@ namespace Java {
             static String valueOf(long longValue);
 
             /**
+             * Returns the String representation of the long long argument.
+             *
+             * @param longValue
+             * @return a String representation of the long long argument.
+             */
+            static String valueOf(long long longValue);
+
+            /**
              * Returns the String representation of the float argument.
              *
              * @param floatValue
@@ -1279,6 +1287,8 @@ namespace Java {
             static String print(const String &format, int value);
 
             static String print(const String &format, long value);
+
+            static String print(const String &format, long long value);
 
             static String print(const String &format, unsigned short value);
 
