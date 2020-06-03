@@ -141,6 +141,20 @@ TEST (JavaLangString, Constructor) {
     // Given a string with specific length
     String stringWithSpecificLength("hello", 5);
     assertEquals(5, stringWithSpecificLength.length());
+
+    // Support type casting
+    {
+        String hello = "hello world";
+        assertEquals("hello world", (char*) hello);
+    }
+    {
+        String hello = "hello world";
+        assertEquals("hello world", (const char*) hello);
+    }
+    {
+        String hello = "hello world";
+        assertEquals("hello world", (std::string) hello);
+    }
 }
 
 TEST (JavaLangString, NullPointer) {

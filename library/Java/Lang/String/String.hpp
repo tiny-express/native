@@ -1144,6 +1144,18 @@ namespace Java {
             inline size_t operator()(const String &target) const {
                 return std::hash<std::string>{}(target.toCharPointer());
             }
+
+            inline explicit operator const char*() const {
+                return (const char*) original.data();
+            }
+
+            inline explicit operator char*() const {
+                return (char*) original.data();
+            }
+
+            inline operator std::string() const {
+                return original;
+            }
         public:
             /**
              * Format string
