@@ -1040,6 +1040,11 @@ TEST (JavaLangString, ValueOf) {
     String valueOfLong = String::valueOf(givenLongNumber);
     assertEquals("12345678893", valueOfLong.toString());
 
+    // Value of long long number
+    long long givenLongLongNumber = 12123123123123312;
+    String valueOfLongLong = String::valueOf(givenLongLongNumber);
+    assertEquals("12123123123123312", valueOfLongLong.toString());
+
     // Value of float number
     auto givenFloatNumber = (float) 5.68;
     String valueOfFloat = String::valueOf(givenFloatNumber);
@@ -1389,6 +1394,16 @@ TEST (JavaLangString, Format) {
             String result = String::format(format);
         } catch (InterruptedException &e) {
             assertEquals("Missing arguments.", e.getMessage());
+        }
+    }
+
+    {
+        try {
+            long long value = 12123123123123312;
+            String result = String::format("-%llu-", value);
+            assertEquals("-12123123123123312-", result);
+        } catch (InterruptedException &e) {
+            assertFail();
         }
     }
 
