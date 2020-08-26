@@ -1022,7 +1022,7 @@ namespace Java {
              * @return a String contain value of this String and target String
              */
             inline String operator+(string target) {
-                return this->original.append(target);
+                return this->original + target;
             }
 
             /**

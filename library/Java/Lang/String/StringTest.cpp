@@ -1057,6 +1057,16 @@ TEST (JavaLangString, ValueOf) {
 }
 
 TEST (JavaLangString, OperatorPlusStringObject) {
+    // Given string concatenate with character string but not return result
+    String text1 = "hello";
+    text1 + "world";
+    assertEquals("hello", text1);
+
+    // Given string concatenate with string but not return result
+    String text2 = "world";
+    text1 + text2;
+    assertEquals("hello", text1);
+
     // Given two strings and concatenate them - Return string
     String textPlus1 = "Hello ";
     String textPlus2 = "World";
