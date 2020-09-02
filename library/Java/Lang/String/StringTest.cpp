@@ -950,6 +950,7 @@ TEST (JavaLangString, ToUpperCase) {
     {
         String textPlus = "Hello HELLO Hello ";
         String result = textPlus.toUpperCase();
+        assertEquals("Hello HELLO Hello ", textPlus);
         assertEquals("HELLO HELLO HELLO ", result);
     }
 
@@ -964,13 +965,14 @@ TEST (JavaLangString, Trim) {
     {
         String textPlus = " Hello HELLO Hello ";
         String result = textPlus.trim();
-        assertEquals("Hello HELLO Hello", result.toString());
+        assertEquals(" Hello HELLO Hello ", textPlus);
+        assertEquals("Hello HELLO Hello", result);
     }
 
     {
         String unicodeString = "                 đây là tiếng việt   ";
         String result = unicodeString.trim();
-        assertEquals("đây là tiếng việt", result.toString());
+        assertEquals("đây là tiếng việt", result);
     }
 
     {

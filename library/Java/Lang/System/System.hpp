@@ -42,7 +42,7 @@ namespace Java {
 						public:
 								template <typename T>
 								static void print(const T &target) {
-									std::cout << target;
+									std::cout << target << std::flush;
 								}
 								
 								template <typename T>

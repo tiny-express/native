@@ -462,12 +462,10 @@ String String::toUpperCase() {
 String String::trim() {
 	size_t first = this->original.find_first_not_of(' ');
 	if (std::string::npos == first) {
-		this->original = "";
-		return *this;
+		return "";
 	}
 	size_t last = this->original.find_last_not_of(' ');
-	this->original = this->original.substr(first, (last - first + 1));
-	return *this;
+	return this->original.substr(first, (last - first + 1));
 }
 
 String String::valueOf(boolean target) {
@@ -558,12 +556,6 @@ String String::subString(int beginIndex, int endIndex) const {
 }
 
 boolean String::contentEquals(const CharSequence &charSequence) {
-	// TODO (anhnt) instanceof return false
-/*    if (instanceof<StringBuffer>(&charSequence)) {
-        std::mutex mutex;
-        std::lock_guard<std::mutex> guard(mutex);
-        return strcmp(this->original, charSequence.toString()) == 0;
-    }*/
 	return strcmp(this->original.c_str(), charSequence.toString().toCharPointer()) == 0;
 }
 
@@ -603,7 +595,7 @@ boolean String::regionMatches(int thisOffset,
 boolean String::regionMatches(boolean ignoreCase, int thisOffset,
                               const String &otherString, int otherOffset, int len) {
 	String thisString = this->subString(thisOffset, thisOffset + len);
-	auto subString = otherString.subString(otherOffset, otherOffset + len);
+	var subString = otherString.subString(otherOffset, otherOffset + len);
 	if (ignoreCase) {
 		return thisString.compareToIgnoreCase(subString) == 0;
 	}
