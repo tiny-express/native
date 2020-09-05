@@ -61,9 +61,10 @@ namespace Java {
 						virtual int hashCode() const;
 						static boolean parseBoolean(const_string target);
 						String toString() const;
-						static String toString(const boolean &target);
+						static String toString(boolean target);
 						static Boolean valueOf(boolean target);
-						static boolean valueOf(const_string target);
+						static Boolean valueOf(const_string target);
+						static Boolean valueOf(const String &target);
 						Boolean operator=(const Boolean &target);
 						
 						friend std::ostream &operator<<(std::ostream &os, const Boolean &target) {

@@ -155,7 +155,7 @@ String Boolean::toString() const {
  * @param target
  * @return String
  */
-String Boolean::toString(const boolean &target) {
+String Boolean::toString(boolean target) {
 	if (target) {
 		return (string) "true";
 	}
@@ -178,8 +178,18 @@ Boolean Boolean::valueOf(boolean target) {
  * @param target
  * @return boolean
  */
-boolean Boolean::valueOf(const_string target) {
+Boolean Boolean::valueOf(const_string target) {
 	return Boolean::parseBoolean(target);
+}
+
+/**
+ * Returns a Boolean with a value represented by the specified string.
+ *
+ * @param target
+ * @return boolean
+ */
+Boolean Boolean::valueOf(const String &target) {
+	return Boolean::parseBoolean(target.toCharPointer());
 }
 
 /**

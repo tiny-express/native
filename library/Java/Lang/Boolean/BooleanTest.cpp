@@ -161,14 +161,16 @@ TEST (JavaLangBoolean, ToString) {
 
 TEST (JavaLangBoolean, StaticValueOf) {
     // Give two value boolean (true - true) - Should equal
-    boolean expect = true;
-    boolean result = Boolean::valueOf("True");
-    assertEquals(expect, result);
+    assertTrue(Boolean::valueOf("True").booleanValue());
 
     // Give two value boolean (false - false) - Should equal
-    expect = false;
-    result = Boolean::valueOf("False");
-    assertEquals(expect, result);
+    assertFalse(Boolean::valueOf("False").booleanValue());
+
+    String trueBooleanValue = "true";
+    assertTrue(Boolean::valueOf(trueBooleanValue).booleanValue());
+
+    String falseBooleanValue = "false";
+    assertFalse(Boolean::valueOf(falseBooleanValue).booleanValue());
 }
 
 TEST (JavaLangBoolean, ValueOf) {
