@@ -246,7 +246,9 @@ namespace Java {
              * @param original
              */
             inline String(string target) {
-                this->original = std::string(target);
+                if (target != nullptr) {
+                    this->original = std::string(target);   
+                }
             }
 
             /**
@@ -255,7 +257,9 @@ namespace Java {
              * @param target
              */
             inline String(const_string target) {
-                this->original = std::string(target);
+                if (target != nullptr) {
+                    this->original = std::string(target);
+                }
             }
 
 			/**

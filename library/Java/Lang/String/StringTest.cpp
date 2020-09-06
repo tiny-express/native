@@ -36,8 +36,12 @@ using namespace Java::Util;
 
 TEST (JavaLangString, Constructor) {
     // Give nullptr for String constructor
-    String nullString;
-    assertEquals("", nullString.toString());
+    String nullptrString(nullptr);
+    assertEquals("", nullptrString.toString());
+
+    // Give empty for String constructor
+    String emptyString;
+    assertEquals("", emptyString.toString());
 
     // Given value for String constructor and assign value - Return string
     String simpleStringConstructor = "Hello world";
