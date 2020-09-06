@@ -37,15 +37,15 @@ using namespace Java::Util;
 TEST (JavaLangString, Constructor) {
     // Give nullptr for String constructor
     String nullptrString(nullptr);
-    assertEquals("", nullptrString.toString());
+    assertEquals("", nullptrString);
 
     // Give empty for String constructor
     String emptyString;
-    assertEquals("", emptyString.toString());
+    assertEquals("", emptyString);
 
     // Given value for String constructor and assign value - Return string
     String simpleStringConstructor = "Hello world";
-    assertEquals("Hello world", simpleStringConstructor.toString());
+    assertEquals("Hello world", simpleStringConstructor);
 
     // Constructor with unicode string (utf-8)
     {
@@ -55,30 +55,30 @@ TEST (JavaLangString, Constructor) {
 
     // Given empty value for String constructor and assign value - Return string
     String stringConstructor = simpleStringConstructor;
-    assertEquals("Hello world", stringConstructor.toString());
+    assertEquals("Hello world", stringConstructor);
 
     // Given constant string value for String constructor
     String stringConstStringConstructor("Hello world");
-    assertEquals("Hello world", stringConstructor.toString());
+    assertEquals("Hello world", stringConstructor);
 
     // Given String value for String constructor
     String objectString = "Hello world";
     String stringStringConstructor = objectString;
-    assertEquals("Hello world", stringConstructor.toString());
+    assertEquals("Hello world", stringConstructor);
 
     // Given constant string for String constructor - Return string
     String normalString = "Hello world";
-    assertEquals("Hello world", normalString.toString());
+    assertEquals("Hello world", normalString);
 
     // Given a char Array
     Array<char> charArray = { 'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd' };
 
     String arrayConstructor(charArray);
-    assertEquals("Hello world", arrayConstructor.toString());
+    assertEquals("Hello world", arrayConstructor);
     assertEquals(charArray.length, arrayConstructor.length());
 
     String subArrayConstructor(charArray, 6, 5);
-    assertEquals("world", subArrayConstructor.toString());
+    assertEquals("world", subArrayConstructor);
     assertEquals(5, subArrayConstructor.length());
 
     try {
@@ -105,7 +105,7 @@ TEST (JavaLangString, Constructor) {
     assertEquals(charArray.length, arrayConstructor.length());
 
     String subByteArrayConstructor(byteArray, 6, 5);
-    assertEquals("world", subByteArrayConstructor.toString());
+    assertEquals("world", subByteArrayConstructor);
     assertEquals(5, subByteArrayConstructor.length());
 
     try {
@@ -161,7 +161,7 @@ TEST (JavaLangString, Constructor) {
     }
 }
 
-TEST (JavaLangString, NullPointer) {
+TEST (JavaLangString, NullPointerAssignment) {
     // Given a null pointer
     // Length of this string is zero
     // Avoid memory access error
