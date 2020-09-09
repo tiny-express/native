@@ -920,6 +920,11 @@ TEST (JavaLangString, ToLowerCase) {
         String result = unicodeString.toLowerCase();
         assertEquals("đây là tiếng việt", result);
     }
+
+    {
+        String word = "Hello";
+        assertTrue(word.toLowerCase() == "hello");
+    }
 }
 
 TEST (JavaLangString, ToUpperCase) {
