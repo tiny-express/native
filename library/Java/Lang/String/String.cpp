@@ -159,12 +159,11 @@ int String::compareToIgnoreCase(const String &anotherString) const {
 	return strcasecmp(this->original.c_str(), anotherString.original.c_str());
 }
 
-String String::concat(const String &target) {
-	this->original += target.original;
-	return *this;
+String String::concat(const String &target) const {
+    return this->original + target.original;
 }
 
-boolean String::contains(const CharSequence &charSequence) {
+boolean String::contains(const CharSequence &charSequence) const {
 	std::size_t found = this->original.find(charSequence.toString().toCharPointer());
 	if (found != std::string::npos) {
 		return true;
@@ -173,7 +172,7 @@ boolean String::contains(const CharSequence &charSequence) {
 	}
 }
 
-boolean String::contains(const std::string &input) {
+boolean String::contains(const std::string &input) const {
 	std::size_t found = this->original.find(input.c_str());
 	if (found != std::string::npos) {
 		return true;
@@ -286,7 +285,7 @@ boolean String::isEmpty() const {
 	return (boolean) this->original.empty();
 }
 
-int String::lastIndexOf(int character) {
+int String::lastIndexOf(int character) const {
 	int index = 0;
 	for (index = (int) this->original.size() - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) character) {
@@ -296,7 +295,7 @@ int String::lastIndexOf(int character) {
 	return -1;
 }
 
-int String::lastIndexOf(int character, int fromIndex) {
+int String::lastIndexOf(int character, int fromIndex) const {
 	if (fromIndex < 0) {
 		return -1;
 	}
@@ -451,15 +450,15 @@ String String::toString() const {
 	return *this;
 }
 
-String String::toLowerCase() {
+String String::toLowerCase() const {
 	return toLower(this->original);
 }
 
-String String::toUpperCase() {
+String String::toUpperCase() const {
 	return toUpper(this->original);
 }
 
-String String::trim() {
+String String::trim() const {
 	size_t first = this->original.find_first_not_of(' ');
 	if (std::string::npos == first) {
 		return "";
@@ -555,7 +554,7 @@ String String::subString(int beginIndex, int endIndex) const {
 	return result;
 }
 
-boolean String::contentEquals(const CharSequence &charSequence) {
+boolean String::contentEquals(const CharSequence &charSequence) const {
 	return strcmp(this->original.c_str(), charSequence.toString().toCharPointer()) == 0;
 }
 
@@ -567,11 +566,11 @@ String String::copyValueOf(const Array<char> &charArray, int offset, int count) 
 	return String(charArray, offset, count);
 }
 
-boolean String::equalsIgnoreCase(const String &anotherString) {
+boolean String::equalsIgnoreCase(const String &anotherString) const {
 	return this->compareToIgnoreCase(anotherString) == 0;
 }
 
-boolean String::equalsIgnoreCase(string anotherString) {
+boolean String::equalsIgnoreCase(string anotherString) const {
     String str = anotherString;
     return this->compareToIgnoreCase(str) == 0;
 }
@@ -588,12 +587,12 @@ long String::hashCode() const {
 }
 
 boolean String::regionMatches(int thisOffset,
-                              const String &otherString, int otherOffset, int len) {
+                              const String &otherString, int otherOffset, int len) const {
 	return this->regionMatches(false, thisOffset, otherString, otherOffset, len);
 }
 
 boolean String::regionMatches(boolean ignoreCase, int thisOffset,
-                              const String &otherString, int otherOffset, int len) {
+                              const String &otherString, int otherOffset, int len) const {
 	String thisString = this->subString(thisOffset, thisOffset + len);
 	var subString = otherString.subString(otherOffset, otherOffset + len);
 	if (ignoreCase) {
@@ -602,7 +601,7 @@ boolean String::regionMatches(boolean ignoreCase, int thisOffset,
 	return thisString.compareTo(subString) == 0;
 }
 
-void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, int destinationBegin) {
+void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, int destinationBegin) const {
 	if (sourceBegin < 0) {
 		throw StringIndexOutOfBoundsException(sourceBegin);
 	}
