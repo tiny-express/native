@@ -405,8 +405,18 @@ namespace Java {
              * @param charSequence
              * @return boolean
              */
-	        boolean contains(const std::string &input) const;
-	  
+	        boolean contains(const String &input) const;
+
+	        /**
+	         * Compares this string to the specified CharSequence.
+	         * The result is true if and only if this String represents
+	         * the same sequence of char values as the specified sequence.
+	         * Note that if the CharSequence is a StringBuffer then
+	         * the method synchronizes on it.
+	         *
+	         * @param charSequence
+	         * @return boolean
+	         */
             boolean contentEquals(const CharSequence &charSequence) const;
 
 			/**
@@ -450,13 +460,7 @@ namespace Java {
              * @return true if the given object represents a String equivalent
              * to this string, false otherwise
              */
-            template<class T>
-            boolean equals(const T &anObject) const {
-                if (instanceof<String>(anObject)) {
-                    return std::string(this->original.c_str()).compare(anObject.toString().toCharPointer()) == 0;
-                }
-                return false;
-            }
+            boolean equals(const String &string) const;
 
 			/**
              * Compares this String to another String, ignoring case considerations.
@@ -466,15 +470,6 @@ namespace Java {
              * to this string, false otherwise, ignoring case considerations
              */
 			boolean equalsIgnoreCase(const String &anotherString) const;
-
-            /**
-             * Compares this String to another String, ignoring case considerations.
-             *
-             * @param anotherString
-             * @return true if the given object represents a String equivalent
-             * to this string, false otherwise, ignoring case considerations
-             */
-            boolean equalsIgnoreCase(string anotherString) const;
 
             /**
              * String hash code

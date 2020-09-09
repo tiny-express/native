@@ -189,34 +189,6 @@ TEST (JavaLangString, GetSize) {
     assertEquals(0, nullText.getSize());
 }
 
-TEST (JavaLangString, Equals) {
-    // Given two String objects with same value - Return they should equal
-    String stringEqual1 = "Hello World";
-    String stringEqual2 = "Hello World";
-    assertTrue(instanceof<String>(stringEqual1));
-    assertTrue(stringEqual1.equals(stringEqual2));
-    assertTrue(stringEqual1 == stringEqual2);
-
-    // Compare with another String object - Return they are not equal
-    String stringEqual3 = "Food Tiny";
-    assertTrue(!stringEqual1.equals(stringEqual3));
-    assertTrue(stringEqual1 != stringEqual3);
-
-    // Compare unicode strings with same value
-    {
-        String unicodeString1 = "đây là tiếng anh";
-        String unicodeString2 = "đây là tiếng anh";
-        assertTrue(unicodeString1 == unicodeString2);
-    }
-
-    // Compare unicode strings with different value
-    {
-        String unicodeString1 = "đây là tiếng anh";
-        String unicodeString2 = "đây là tiếng việt";
-        assertTrue(unicodeString1 != unicodeString2);
-    }
-}
-
 TEST (JavaLangString, CharAt) {
     // Given a string - Return first position is exist
     String text = "Hello World";
@@ -1104,25 +1076,17 @@ TEST (JavaLangString, OperatorPlusStringDataType) {
     assertEquals("Food Tiny", foodTiny.toString());
 }
 
-TEST (JavaLangString, OperatorPlusConstantStringDataType) {
-    String input = "Food";
-    String result = input + String("tiny");
-    String expected = "Foodtiny";
-    assertTrue(expected.equals(result));
-
-    String input1 = "Hello";
-    String result1 = input1 + String("");
-    String expected1 = "Hello";
-    assertTrue(expected1.equals(result1));
-
-    String input2 = "";
-    String result2 = input2 + String("World");
-    String expected2 = "World";
-    assertTrue(expected2.equals(result2));
-
-    String helloWorld = "Hello World";
-    assertTrue(helloWorld == "Hello World");
-    assertTrue(helloWorld != "hello World");
+TEST (JavaLangString, Equals) {
+    {
+        String test1 = "tiếng việt";
+        assertTrue(test1.equals("tiếng việt"));
+        assertFalse(test1.equals("tiếng anh"));
+    }
+    {
+        String test2 = "tiếng việt";
+        assertTrue(test2 == "tiếng việt");
+        assertFalse(test2 == "tiếng anh");
+    }
 }
 
 TEST(JavaLangString, OperatorPlusConstantString) {

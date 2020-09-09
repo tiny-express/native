@@ -34,14 +34,24 @@ using namespace Java::Lang;
 
 std::wstring multiByteStringToWideString(const std::string &input) {
     setlocale(LC_CTYPE, "");
-	std::wstring_convert<std::codecvt_utf8<wchar_t> > convertToWstring;
-	return convertToWstring.from_bytes(input.c_str());
+    try {
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> convertToWstring;
+        return convertToWstring.from_bytes(input.c_str());
+    } catch (std::exception &exception) {
+        std::wstring emptyString;
+        return emptyString;
+    }
 }
 
 std::string wideStringToMultiByteString(const std::wstring &input) {
     setlocale(LC_CTYPE, "");
-	std::wstring_convert<std::codecvt_utf8<wchar_t> > convertToString;
-	return convertToString.to_bytes(input.c_str());
+    try {
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> convertToString;
+        return convertToString.to_bytes(input.c_str());
+    } catch (std::exception &exception) {
+        std::string emptyString;
+        return emptyString;
+    }
 }
 
 std::string toUpper(const std::string &input) {
@@ -172,8 +182,8 @@ boolean String::contains(const CharSequence &charSequence) const {
 	}
 }
 
-boolean String::contains(const std::string &input) const {
-	std::size_t found = this->original.find(input.c_str());
+boolean String::contains(const String &input) const {
+	std::size_t found = this->original.find(input.toSTLString());
 	if (found != std::string::npos) {
 		return true;
 	} else {
@@ -566,13 +576,12 @@ String String::copyValueOf(const Array<char> &charArray, int offset, int count) 
 	return String(charArray, offset, count);
 }
 
-boolean String::equalsIgnoreCase(const String &anotherString) const {
-	return this->compareToIgnoreCase(anotherString) == 0;
+boolean String::equals(const String &anotherString) const {
+    return this->original == anotherString.original;
 }
 
-boolean String::equalsIgnoreCase(string anotherString) const {
-    String str = anotherString;
-    return this->compareToIgnoreCase(str) == 0;
+boolean String::equalsIgnoreCase(const String &anotherString) const {
+	return this->compareToIgnoreCase(anotherString) == 0;
 }
 
 long String::hashCode() const {
