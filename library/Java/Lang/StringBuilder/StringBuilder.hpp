@@ -326,7 +326,7 @@ namespace Java {
 						 * @return char
 						 * @throw IndexOutOfBoundsException - if index is negative or greater than or equal to length()
 						 */
-                        char charAt(int index) const;
+                        char charAt(int index) const override;
                         
                         /**
 						 * Returns the character (Unicode code point) at the specified index.

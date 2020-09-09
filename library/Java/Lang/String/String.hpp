@@ -927,7 +927,7 @@ namespace Java {
              *
              * @return a String contain value of this String
              */
-            String toString() const;
+            String toString() const override;
 
 			/**
              * Returns the String representation of the boolean argument.
