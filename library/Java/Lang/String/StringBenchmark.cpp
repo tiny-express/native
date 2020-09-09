@@ -152,7 +152,7 @@ void Asprintf(benchmark::State& state) {
             "%%%% %s dog %s %%d";
 
     while (state.KeepRunning()) {
-        char* result = nullptr;
+        string result = nullptr;
         asprintf(&result,
                  format,
                  intValue,

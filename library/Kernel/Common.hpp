@@ -117,9 +117,9 @@ inline void *allocateMemory(void *currentPointer, size_t newCapacity) {
  * String copy
  *
  * @param target
- * @return char*
+ * @return string
  */
-inline char *stringCopy(const char *target) {
+inline string stringCopy(const_string target) {
     return strdup(target);
 }
 

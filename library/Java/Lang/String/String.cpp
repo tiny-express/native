@@ -223,7 +223,7 @@ int String::indexOf(int character) const {
 	if (target == '\0') {
 		pointerHolder = strdup("");
 	} else {
-		auto *result = (char *) calloc(2, sizeof(char));
+		auto *result = (string) calloc(2, sizeof(char));
 		result[0] = target;
 		result[1] = '\0';
 		pointerHolder = result;
@@ -440,7 +440,7 @@ Array<char> String::toCharArray() const {
 }
 
 string String::toCharPointer() const {
-	return (char*) this->original.c_str();
+	return (string) this->original.c_str();
 }
 
 std::string String::toSTLString() const {
@@ -480,7 +480,7 @@ String String::valueOf(char charValue) {
 	if (charValue == '\0') {
 		pointerHolder = stringCopy("");
 	} else {
-		auto *result = (char *) calloc(2, sizeof(char));
+		auto *result = (string) calloc(2, sizeof(char));
 		result[0] = charValue;
 		result[1] = '\0';
 		pointerHolder = result;
@@ -632,9 +632,9 @@ void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, 
 }
 
 String String::replace(const CharSequence &target, const CharSequence &replacement) const {
-	if ((char *) target.toString().toCharPointer() == nullptr ||
-	    (char *) replacement.toString().toCharPointer() == nullptr ||
-	    (char *) this->toString().toCharPointer() == nullptr) {
+	if ((string) target.toString().toCharPointer() == nullptr ||
+	    (string) replacement.toString().toCharPointer() == nullptr ||
+	    (string) this->toString().toCharPointer() == nullptr) {
 		return "";
 	}
 	size_t pos = 0;
@@ -788,7 +788,7 @@ String String::print(const String &format, float value) {
 	return result;
 }
 
-String String::print(const String &format, char *value) {
+String String::print(const String &format, string value) {
 	String result;
 	auto buffer = (string) calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
 	int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toCharPointer(), value);
@@ -804,7 +804,7 @@ String String::print(const String &format, char *value) {
 	return result;
 }
 
-String String::print(const String &format, const char *value) {
+String String::print(const String &format, const_string value) {
 	String result;
 	auto buffer = (string) calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
 	int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toCharPointer(), value);

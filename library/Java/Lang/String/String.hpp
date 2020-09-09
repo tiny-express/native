@@ -963,7 +963,7 @@ namespace Java {
             static String valueOf(const String &stringValue);
 
             /**
-             * Returns the String representation of the const string argument.
+             * Returns the String representation of the const_string argument.
              *
              * @param stringValue
              * @return a String containing stringValue.
@@ -1157,12 +1157,12 @@ namespace Java {
                 return std::hash<std::string>{}(target.toCharPointer());
             }
 
-            inline explicit operator const char*() const {
-                return (const char*) original.data();
+            inline explicit operator const_string() const {
+                return (const_string) original.data();
             }
 
-            inline explicit operator char*() const {
-                return (char*) original.data();
+            inline explicit operator string() const {
+                return (string) original.data();
             }
 
             inline operator std::string() const {
@@ -1304,9 +1304,9 @@ namespace Java {
 
             static String print(const String &format, float value);
 
-            static String print(const String &format, char* value);
+            static String print(const String &format, string value);
 
-            static String print(const String &format, const char* value);
+            static String print(const String &format, const_string value);
 
             static String print(const String &format, Boolean value);
 

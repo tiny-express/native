@@ -149,11 +149,11 @@ TEST (JavaLangString, Constructor) {
     // Support type casting
     {
         String hello = "hello world";
-        assertEquals("hello world", (char*) hello);
+        assertEquals("hello world", (string) hello);
     }
     {
         String hello = "hello world";
-        assertEquals("hello world", (const char*) hello);
+        assertEquals("hello world", (const_string) hello);
     }
     {
         String hello = "hello world";
@@ -924,7 +924,7 @@ TEST(JavaLangString, toCharArray){
 TEST(JavaLangString, toCharPointer){
     String text = "Hello World";
     int index;
-    char* ptrToText = text.toCharPointer();
+    string ptrToText = text.toCharPointer();
     for(index = 0; index < text.length() ; index++) {
         assertEquals(text[index], *(ptrToText + index));
     }
