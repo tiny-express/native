@@ -571,11 +571,6 @@ boolean String::equalsIgnoreCase(const String &anotherString) {
 	return this->compareToIgnoreCase(anotherString) == 0;
 }
 
-boolean String::equalsIgnoreCase(string anotherString) {
-    String str = anotherString;
-    return this->compareToIgnoreCase(str) == 0;
-}
-
 long String::hashCode() const {
 	int hashCode = this->hash;
 	if (hashCode == 0 && this->original.size() > 0) {

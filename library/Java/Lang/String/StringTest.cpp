@@ -425,13 +425,20 @@ TEST (JavaLangString, EndsWith) {
 }
 
 TEST (JavaLangString, EqualIgnoreCase) {
-    String smallerString = "because";
-    String greaterString = "hello";
-    String greaterUpperCase = "HELLO";
-
-    assertFalse(greaterString.equalsIgnoreCase(smallerString));
-    assertTrue(greaterString.equalsIgnoreCase(greaterUpperCase));
-    assertFalse(smallerString.equalsIgnoreCase(greaterString));
+    {
+        String smallerString = "because";
+        String greaterString = "hello";
+        String greaterUpperCase = "HELLO";
+        assertFalse(greaterString.equalsIgnoreCase(smallerString));
+        assertTrue(greaterString.equalsIgnoreCase(greaterUpperCase));
+        assertFalse(smallerString.equalsIgnoreCase(greaterString));
+    }
+    {
+        String greaterString = "HELLO";
+        assertTrue(greaterString.equalsIgnoreCase("hello"));
+        assertTrue(greaterString.equalsIgnoreCase("heLlo"));
+        assertFalse(greaterString.equalsIgnoreCase("world"));
+    }
 }
 
 TEST (JavaLangString, GetBytes) {

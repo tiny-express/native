@@ -405,8 +405,7 @@ namespace Java {
              * @param charSequence
              * @return boolean
              */
-
-	    boolean contains(const std::string &input);
+	        boolean contains(const std::string &input);
 	  
             boolean contentEquals(const CharSequence &charSequence);
 
@@ -467,15 +466,6 @@ namespace Java {
              * to this string, false otherwise, ignoring case considerations
              */
 			boolean equalsIgnoreCase(const String &anotherString);
-
-            /**
-             * Compares this String to another String, ignoring case considerations.
-             *
-             * @param anotherString
-             * @return true if the given object represents a String equivalent
-             * to this string, false otherwise, ignoring case considerations
-             */
-            boolean equalsIgnoreCase(string anotherString);
 
             /**
              * String hash code
@@ -1019,15 +1009,6 @@ namespace Java {
             static String valueOf(double doubleValue);
 
         public:
-            /**
-             * Add two String
-             *
-             * @param target
-             * @return a String contain value of this String and target String
-             */
-            inline String operator+(string target) {
-                return this->original + target;
-            }
 
             /**
              * Add two String
