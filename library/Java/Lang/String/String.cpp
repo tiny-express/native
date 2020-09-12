@@ -34,14 +34,24 @@ using namespace Java::Lang;
 
 std::wstring multiByteStringToWideString(const std::string &input) {
     setlocale(LC_CTYPE, "");
-	std::wstring_convert<std::codecvt_utf8<wchar_t> > convertToWstring;
-	return convertToWstring.from_bytes(input.c_str());
+    try {
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> convertToWstring;
+        return convertToWstring.from_bytes(input.c_str());
+    } catch (std::exception &exception) {
+        std::wstring emptyString;
+        return emptyString;
+    }
 }
 
 std::string wideStringToMultiByteString(const std::wstring &input) {
     setlocale(LC_CTYPE, "");
-	std::wstring_convert<std::codecvt_utf8<wchar_t> > convertToString;
-	return convertToString.to_bytes(input.c_str());
+    try {
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> convertToString;
+        return convertToString.to_bytes(input.c_str());
+    } catch (std::exception &exception) {
+        std::string emptyString;
+        return emptyString;
+    }
 }
 
 std::string toUpper(const std::string &input) {
@@ -159,12 +169,11 @@ int String::compareToIgnoreCase(const String &anotherString) const {
 	return strcasecmp(this->original.c_str(), anotherString.original.c_str());
 }
 
-String String::concat(const String &target) {
-	this->original += target.original;
-	return *this;
+String String::concat(const String &target) const {
+    return this->original + target.original;
 }
 
-boolean String::contains(const CharSequence &charSequence) {
+boolean String::contains(const CharSequence &charSequence) const {
 	std::size_t found = this->original.find(charSequence.toString().toCharPointer());
 	if (found != std::string::npos) {
 		return true;
@@ -173,8 +182,8 @@ boolean String::contains(const CharSequence &charSequence) {
 	}
 }
 
-boolean String::contains(const std::string &input) {
-	std::size_t found = this->original.find(input.c_str());
+boolean String::contains(const String &input) const {
+	std::size_t found = this->original.find(input.toSTLString());
 	if (found != std::string::npos) {
 		return true;
 	} else {
@@ -223,7 +232,7 @@ int String::indexOf(int character) const {
 	if (target == '\0') {
 		pointerHolder = strdup("");
 	} else {
-		auto *result = (char *) calloc(2, sizeof(char));
+		auto *result = (string) calloc(2, sizeof(char));
 		result[0] = target;
 		result[1] = '\0';
 		pointerHolder = result;
@@ -286,7 +295,7 @@ boolean String::isEmpty() const {
 	return (boolean) this->original.empty();
 }
 
-int String::lastIndexOf(int character) {
+int String::lastIndexOf(int character) const {
 	int index = 0;
 	for (index = (int) this->original.size() - 1; index >= 0; index--) {
 		if (this->charAt(index) == (char) character) {
@@ -296,7 +305,7 @@ int String::lastIndexOf(int character) {
 	return -1;
 }
 
-int String::lastIndexOf(int character, int fromIndex) {
+int String::lastIndexOf(int character, int fromIndex) const {
 	if (fromIndex < 0) {
 		return -1;
 	}
@@ -440,7 +449,7 @@ Array<char> String::toCharArray() const {
 }
 
 string String::toCharPointer() const {
-	return (char*) this->original.c_str();
+	return (string) this->original.c_str();
 }
 
 std::string String::toSTLString() const {
@@ -451,15 +460,15 @@ String String::toString() const {
 	return *this;
 }
 
-String String::toLowerCase() {
+String String::toLowerCase() const {
 	return toLower(this->original);
 }
 
-String String::toUpperCase() {
+String String::toUpperCase() const {
 	return toUpper(this->original);
 }
 
-String String::trim() {
+String String::trim() const {
 	size_t first = this->original.find_first_not_of(' ');
 	if (std::string::npos == first) {
 		return "";
@@ -480,7 +489,7 @@ String String::valueOf(char charValue) {
 	if (charValue == '\0') {
 		pointerHolder = stringCopy("");
 	} else {
-		auto *result = (char *) calloc(2, sizeof(char));
+		auto *result = (string) calloc(2, sizeof(char));
 		result[0] = charValue;
 		result[1] = '\0';
 		pointerHolder = result;
@@ -555,7 +564,7 @@ String String::subString(int beginIndex, int endIndex) const {
 	return result;
 }
 
-boolean String::contentEquals(const CharSequence &charSequence) {
+boolean String::contentEquals(const CharSequence &charSequence) const {
 	return strcmp(this->original.c_str(), charSequence.toString().toCharPointer()) == 0;
 }
 
@@ -567,7 +576,11 @@ String String::copyValueOf(const Array<char> &charArray, int offset, int count) 
 	return String(charArray, offset, count);
 }
 
-boolean String::equalsIgnoreCase(const String &anotherString) {
+boolean String::equals(const String &anotherString) const {
+    return this->original == anotherString.original;
+}
+
+boolean String::equalsIgnoreCase(const String &anotherString) const {
 	return this->compareToIgnoreCase(anotherString) == 0;
 }
 
@@ -583,12 +596,12 @@ long String::hashCode() const {
 }
 
 boolean String::regionMatches(int thisOffset,
-                              const String &otherString, int otherOffset, int len) {
+                              const String &otherString, int otherOffset, int len) const {
 	return this->regionMatches(false, thisOffset, otherString, otherOffset, len);
 }
 
 boolean String::regionMatches(boolean ignoreCase, int thisOffset,
-                              const String &otherString, int otherOffset, int len) {
+                              const String &otherString, int otherOffset, int len) const {
 	String thisString = this->subString(thisOffset, thisOffset + len);
 	var subString = otherString.subString(otherOffset, otherOffset + len);
 	if (ignoreCase) {
@@ -597,7 +610,7 @@ boolean String::regionMatches(boolean ignoreCase, int thisOffset,
 	return thisString.compareTo(subString) == 0;
 }
 
-void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, int destinationBegin) {
+void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, int destinationBegin) const {
 	if (sourceBegin < 0) {
 		throw StringIndexOutOfBoundsException(sourceBegin);
 	}
@@ -627,9 +640,9 @@ void String::getChars(int sourceBegin, int sourceEnd, Array<char> &destination, 
 }
 
 String String::replace(const CharSequence &target, const CharSequence &replacement) const {
-	if ((char *) target.toString().toCharPointer() == nullptr ||
-	    (char *) replacement.toString().toCharPointer() == nullptr ||
-	    (char *) this->toString().toCharPointer() == nullptr) {
+	if ((string) target.toString().toCharPointer() == nullptr ||
+	    (string) replacement.toString().toCharPointer() == nullptr ||
+	    (string) this->toString().toCharPointer() == nullptr) {
 		return "";
 	}
 	size_t pos = 0;
@@ -783,7 +796,7 @@ String String::print(const String &format, float value) {
 	return result;
 }
 
-String String::print(const String &format, char *value) {
+String String::print(const String &format, string value) {
 	String result;
 	auto buffer = (string) calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
 	int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toCharPointer(), value);
@@ -799,7 +812,7 @@ String String::print(const String &format, char *value) {
 	return result;
 }
 
-String String::print(const String &format, const char *value) {
+String String::print(const String &format, const_string value) {
 	String result;
 	auto buffer = (string) calloc(DEFAULT_BUFFER_LENGTH, sizeof(char));
 	int length = snprintf(buffer, DEFAULT_BUFFER_LENGTH, format.toCharPointer(), value);

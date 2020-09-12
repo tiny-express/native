@@ -88,7 +88,7 @@ public:
 			this->length = original.size();
 		}
 		
-		Array(char **charPointerArray) {
+		Array(string *charPointerArray) {
 			int index = 0;
 			while (charPointerArray[index] != nullptr) {
 				original.push_back(charPointerArray[ index ]);
@@ -213,7 +213,7 @@ Java::Lang::String IntegerToHexString(int inputInt);
  * @param argument
  * @return int
  */
-int ApplicationTest(int argc, const char **argv);
+int ApplicationTest(int argc, const_string *argv);
 
 /**
  * Application starting point
@@ -223,6 +223,6 @@ int ApplicationTest(int argc, const char **argv);
  * @param argument
  * @return int
  */
-int Application(void (*program)(Array <Java::Lang::String>), int argc, char **argv);
+int Application(void (*program)(Array <Java::Lang::String>), int argc, string *argv);
 
 #endif// NATIVE_KERNEL_JAVA_HPP

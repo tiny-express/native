@@ -26,6 +26,6 @@
 
 #include "../library.hpp"
 
-int main(int argc, const char *argv[]) {
+int main(int argc, const_string argv[]) {
 	return ApplicationTest(argc, argv);
 }

@@ -58,7 +58,7 @@ void SHA1_Init(SHA_CTX *ctx) {
 }
 
 void SHA1_Update(SHA_CTX *ctx, const void *_dataIn, int len) {
-    const unsigned char *dataIn = (unsigned char *)_dataIn;
+    const unsigned char* dataIn = (unsigned char*)_dataIn;
     int i;
 
     /* Read the data into W and process blocks as they get full

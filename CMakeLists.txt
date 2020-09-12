@@ -80,14 +80,14 @@ foreach (test_cpp_file ${TESTS_CPP})
     list(REMOVE_ITEM SOURCES_CPP ${test_cpp_file})
 endforeach ()
 
-# Remove all benchmark files
-foreach (benchmark_cpp_file ${BENCHMARK_CPP})
-    list(REMOVE_ITEM SOURCES_CPP ${benchmark_cpp_file})
+foreach (test_cpp_file ${BENCHMARK_CPP})
+    list(REMOVE_ITEM SOURCES_CPP ${test_cpp_file})
 endforeach ()
 
 # Create native library for static linking
 add_library(${PROJECT_NAME} SHARED ${SOURCES_CPP})
 add_library(${PROJECT_NAME}_static STATIC ${SOURCES_CPP})
+add_executable(${PROJECT_NAME}_test ${TESTS_CPP} ${SOURCES_CPP} misc/UnitTest.cpp)
 
 # Link library for OSX and other platform
 # Darwin platform no need to link realtime library (-lrt)

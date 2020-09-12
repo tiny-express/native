@@ -121,12 +121,12 @@ TEST (JavaLang, ArrayConstructorWithSize) {
 
 TEST (JavaLang, ArrayConstructor) {
 	// Give an Array use constructor with contain size then assert size - Should equal
-	char *stringArray[3] = {
-		(char *) "hello",
-		(char *) "world",
+	string stringArray[3] = {
+		(string) "hello",
+		(string) "world",
 		nullptr
 	};
-	char **stringList = (char **) stringArray;
+	string *stringList = (string *) stringArray;
 	Array<String> arrayString = stringList;
 	assertEquals(2, arrayString.length);
 }

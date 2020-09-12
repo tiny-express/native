@@ -387,7 +387,7 @@ namespace Java {
              * @param target
              * @return String
              */
-            String concat(const String &target);
+            String concat(const String &target) const;
 
 			/**
              * Find substring inside this String
@@ -395,7 +395,7 @@ namespace Java {
              * @param charSequence
              * @return String
              */
-            boolean contains(const CharSequence &charSequence);
+            boolean contains(const CharSequence &charSequence) const;
 
 			/**
              * Compares this String to the specified CharSequence.
@@ -405,9 +405,19 @@ namespace Java {
              * @param charSequence
              * @return boolean
              */
-	        boolean contains(const std::string &input);
-	  
-            boolean contentEquals(const CharSequence &charSequence);
+	        boolean contains(const String &input) const;
+
+	        /**
+	         * Compares this string to the specified CharSequence.
+	         * The result is true if and only if this String represents
+	         * the same sequence of char values as the specified sequence.
+	         * Note that if the CharSequence is a StringBuffer then
+	         * the method synchronizes on it.
+	         *
+	         * @param charSequence
+	         * @return boolean
+	         */
+            boolean contentEquals(const CharSequence &charSequence) const;
 
 			/**
              * Returns the String representation of the char array argument.
@@ -450,13 +460,7 @@ namespace Java {
              * @return true if the given object represents a String equivalent
              * to this string, false otherwise
              */
-            template<class T>
-            boolean equals(const T &anObject) const {
-                if (instanceof<String>(anObject)) {
-                    return std::string(this->original.c_str()).compare(anObject.toString().toCharPointer()) == 0;
-                }
-                return false;
-            }
+            boolean equals(const String &string) const;
 
 			/**
              * Compares this String to another String, ignoring case considerations.
@@ -465,7 +469,7 @@ namespace Java {
              * @return true if the given object represents a String equivalent
              * to this string, false otherwise, ignoring case considerations
              */
-			boolean equalsIgnoreCase(const String &anotherString);
+			boolean equalsIgnoreCase(const String &anotherString) const;
 
             /**
              * String hash code
@@ -522,7 +526,7 @@ namespace Java {
              * destinationBegin + (srcEnd - srcBegin) is larger than destination.length
              */
 			void getChars(int sourceBegin, int sourceEnd,
-			        Array<char> &destination, int destinationBegin);
+			        Array<char> &destination, int destinationBegin) const;
 
 			/**
              * Get char to String
@@ -616,7 +620,7 @@ namespace Java {
              * @return index of the last occurrence of the specified character,
              * or -1 if the character does not occur.
              */
-            int lastIndexOf(int character);
+            int lastIndexOf(int character) const;
 
 			/**
              * Returns the index within this string of the last occurrence
@@ -628,7 +632,7 @@ namespace Java {
              * @return index of the last occurrence of the specified character,
              * or -1 if the character does not occur.
              */
-            int lastIndexOf(int character, int fromIndex);
+            int lastIndexOf(int character, int fromIndex) const;
 
 			/**
              * Returns the index within this string of the last occurrence
@@ -702,7 +706,7 @@ namespace Java {
              * matches the specified subregion of the String argument; false otherwise.
              */
 			boolean regionMatches(int thisOffset,
-								  const String& otherString, int otherOffset, int len);
+								  const String& otherString, int otherOffset, int len) const;
 
 			/**
              * Tests if two string regions are equal.
@@ -717,7 +721,7 @@ namespace Java {
              * Whether the matching is exact or case insensitive depends on the ignoreCase argument.
              */
 			boolean regionMatches(boolean ignoreCase, int thisOffset,
-								  const String &otherString, int otherOffset, int len);
+								  const String &otherString, int otherOffset, int len) const;
 
 			/**
              * Returns a string resulting from replacing all occurrences
@@ -860,7 +864,7 @@ namespace Java {
              *
              * @return the String, converted to lowercase.
              */
-            String toLowerCase();
+            String toLowerCase() const;
 
             /**
              * Converts all of the characters in this String to lower case using the rules of the given Locale.
@@ -877,7 +881,7 @@ namespace Java {
              *
              * @return the String, converted to uppercase.
              */
-            String toUpperCase();
+            String toUpperCase() const;
 
             /**
             * Converts all of the characters in this String to upper case
@@ -896,7 +900,7 @@ namespace Java {
              *
              * @return a String with leading and trailing whitespace removed.
              */
-            String trim();
+            String trim() const;
 
             /**
             * Return C compatible string
@@ -917,7 +921,7 @@ namespace Java {
              *
              * @return a String contain value of this String
              */
-            String toString() const;
+            String toString() const override;
 
 			/**
              * Returns the String representation of the boolean argument.
@@ -953,7 +957,7 @@ namespace Java {
             static String valueOf(const String &stringValue);
 
             /**
-             * Returns the String representation of the const string argument.
+             * Returns the String representation of the const_string argument.
              *
              * @param stringValue
              * @return a String containing stringValue.
@@ -1138,12 +1142,12 @@ namespace Java {
                 return std::hash<std::string>{}(target.toCharPointer());
             }
 
-            inline explicit operator const char*() const {
-                return (const char*) original.data();
+            inline explicit operator const_string() const {
+                return (const_string) original.data();
             }
 
-            inline explicit operator char*() const {
-                return (char*) original.data();
+            inline explicit operator string() const {
+                return (string) original.data();
             }
 
             inline operator std::string() const {
@@ -1285,9 +1289,9 @@ namespace Java {
 
             static String print(const String &format, float value);
 
-            static String print(const String &format, char* value);
+            static String print(const String &format, string value);
 
-            static String print(const String &format, const char* value);
+            static String print(const String &format, const_string value);
 
             static String print(const String &format, Boolean value);
 

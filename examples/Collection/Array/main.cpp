@@ -1,12 +1,12 @@
 #include "../../../library.hpp"
 
 void ArrayAssignment() {
-	char *stringSequence[3] = {
-		(char*) "string1",
-		(char*) "string2",
+	string stringSequence[3] = {
+		(string) "string1",
+		(string) "string2",
 	        '\0'
 	};
-	Array<String> array = (char**) stringSequence;
+	Array<String> array = (string*) stringSequence;
 	System::out::println(array.length);
 }
 

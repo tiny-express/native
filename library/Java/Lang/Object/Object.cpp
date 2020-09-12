@@ -35,11 +35,11 @@ Java::Lang::String IntegerToHexString(int inputInt) {
 	return Java::Lang::Integer::toHexString(inputInt);
 }
 
-int ApplicationTest(int argc, const char **argv) {
+int ApplicationTest(int argc, const_string *argv) {
 	return ctest_main(argc, argv);
 }
 
-int Application(void (*program)(Array <String>), int argc, char **argv) {
+int Application(void (*program)(Array <String>), int argc, string *argv) {
 	try {
 		Array <String> args;
 		int argumentIndex;
