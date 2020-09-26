@@ -31,40 +31,51 @@ using namespace Java::Lang;
 using namespace Java::Util;
 
 TEST (JavaUtilHashMap, Constructor) {
-	String expected;
-	String actual;
+	{
+		String expected;
+		String actual;
 
-	// Test default constructor
-	HashMap<String, String> emptyHashMap;
+		// Test default constructor
+		HashMap<String, String> emptyHashMap;
 
-	// Make sure emptyHashMap is empty
-	assertTrue(emptyHashMap.isEmpty());
+		// Make sure emptyHashMap is empty
+		assertTrue(emptyHashMap.isEmpty());
 
-	// Test copy constructor
-	HashMap<String, String> container;
-	container.put("sample", "here");
-	container.put("key", "value");
-	
-	HashMap<String, String> hashMap = container;
+		// Test copy constructor
+		HashMap<String, String> container;
+		container.put("sample", "here");
+		container.put("key", "value");
+		
+		HashMap<String, String> hashMap = container;
 
-	// Test valid size()
-	assertEquals(2, hashMap.size());
-	assertFalse(hashMap.isEmpty());
+		// Test valid size()
+		assertEquals(2, hashMap.size());
+		assertFalse(hashMap.isEmpty());
 
-	// Test valid data between hashMap and container
-	expected = container.get("sample");
-	actual = hashMap.get("sample");
-	
-	assertFalse(expected.isEmpty());
-	assertFalse(actual.isEmpty());
-	assertEquals(expected.toString(), actual.toString());
-	
-	expected = container.get("key");
-	actual = hashMap.get("key");
-	
-	assertFalse(expected.isEmpty());
-	assertFalse(actual.isEmpty());
-	assertEquals(expected.toString(), actual.toString());
+		// Test valid data between hashMap and container
+		expected = container.get("sample");
+		actual = hashMap.get("sample");
+		
+		assertFalse(expected.isEmpty());
+		assertFalse(actual.isEmpty());
+		assertEquals(expected.toString(), actual.toString());
+		
+		expected = container.get("key");
+		actual = hashMap.get("key");
+		
+		assertFalse(expected.isEmpty());
+		assertFalse(actual.isEmpty());
+		assertEquals(expected.toString(), actual.toString());
+	}
+	{
+		HashMap<String, String> hashMapString = {
+			{"username", "loint"},
+			{"password", "secret"}
+		};
+		assertEquals(2, hashMapString.size());
+		assertEquals("loint", hashMapString.get("username"));
+		assertEquals("secret", hashMapString.get("password"));
+	}
 }
 
 TEST (JavaUtilHashMap, Clear) {

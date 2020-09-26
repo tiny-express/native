@@ -66,6 +66,15 @@ namespace Java {
 			}
 
 			/**
+			 * Support hash map initialization with tuple style
+			 */
+			HashMap(const std::initializer_list<std::tuple<K, V>> &items) {
+				for (std::tuple<K, V> item : items) {
+					this->put(std::get<0>(item), std::get<1>(item));
+				}
+			}
+
+			/**
 			 * Destructor HashMap
 			 */
 			~HashMap() = default;
